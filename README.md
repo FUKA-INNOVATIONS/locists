@@ -1,5 +1,5 @@
 # Locists - WBMA final project
-Members:Fuwad Kalhori, David Fallow, Maiju Himberg, Marko Seppänen
+Members: Fuwad Kalhori, David Fallow, Maiju Himberg and Marko Seppänen
 
 Locists is a social media app centered around connecting users within the cities they live, users can make friends and share the bars/events they enjoy going to, posts can also benefit tourists who visit the city.
 
