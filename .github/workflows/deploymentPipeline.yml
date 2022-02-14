@@ -1,0 +1,39 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize ]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    # 1. if check ensures that the step is executed only
+    # when the code is being merged or pushed to the main branch
+    # When a pull request is merged, the name of the event is somehow paradoxically push.
+    # 2. Skip deployment if commit message contains #skip
+    steps:
+      # The uses keyword tells the workflow to run a specific action
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run lint
+
+      # Todo: test app - name: test run: npm run test
+      # Todo: - name: Deploy to expo
+
+      # Increase the version when a pull request is merged into the main branch
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: "patch"
