@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import UserStorage from './src/utils/userStorage';
 import UserStorageContext from './src/context/UserStorageContext';
 
-import Main from './src/components/Main';
+import Main from './src/views/Main';
 
 // Create new instance of the storage
 const userDataStorage = new UserStorage();

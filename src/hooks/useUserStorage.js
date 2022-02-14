@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import UserStorageContext
-  from '../context/UserDataLocalStorageContext';
+  from '../context/UserStorageContext';
 
 const useUserStorage = () => {
   return useContext( UserStorageContext );

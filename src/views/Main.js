@@ -1,9 +1,12 @@
 import { View, Text, StyleSheet } from 'react-native';
 
+import Register from '../components/Register'
+
 const Main = () => {
   return (
       <View style={styles.container}>
         <Text>Hello</Text>
+        <Register />
       </View>
   );
 };
