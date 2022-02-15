@@ -1,20 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import UserStorage from './src/utils/userStorage';
+import UserStorageContext from './src/context/UserStorageContext';
+
+import Main from './src/views/Main';
+
+// Create new instance of the storage
+const userDataStorage = new UserStorage();
+
 
 export default function App() {
   return (
-      <View style={ styles.container }>
-        <Text>Open up App.js to start working on your app!</Text>
+      <>
+        <UserStorageContext.Provider value={userDataStorage}>
+          <Main />
+        </UserStorageContext.Provider>
         <StatusBar style="auto"/>
-      </View>
+      </>
   );
 }
 
-const styles = StyleSheet.create( {
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-} );

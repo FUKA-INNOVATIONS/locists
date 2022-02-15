@@ -30,6 +30,16 @@ const theme = {
     normal: '400',
     bold: '700',
   },
+  input: {
+    width: 300,
+    backgroundColor: '#ffffff',
+    padding: 10
+  },
+  inputContainer: {
+    borderColor: 'eee',
+    borderWidth: 1,
+    // height: 70,
+  }
 };
 
 export default theme;
