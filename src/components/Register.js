@@ -32,7 +32,7 @@ const RegisterSchema = Yup.object().shape( {
       required( 'Required' ),
 } );
 
-export const Register = props => {
+const Register = props => {
   const { register, loading, error } = useUser();
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm( {
@@ -63,102 +63,104 @@ export const Register = props => {
   };
 
   return (
-      <View>
-        <Text>
-          Register
-        </Text>
+      <KeyboardAvoidingView>
+        <View>
+          <Text>
+            Register
+          </Text>
 
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="Username"
-                  />
-              ) }
-              name="username"
-          />
-          { errors.username && <Text>{ errors.username.message }</Text> }
+          <View style={ theme.inputContainer }>
+            <Controller
+                control={ control }
+                render={ ( { field: { onChange, onBlur, value } } ) => (
+                    <TextInput
+                        style={ theme.input }
+                        onBlur={ onBlur }
+                        onChangeText={ onChange }
+                        value={ value }
+                        placeholder="Username"
+                    />
+                ) }
+                name="username"
+            />
+            { errors.username && <Text>{ errors.username.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+                control={ control }
+                render={ ( { field: { onChange, onBlur, value } } ) => (
+                    <TextInput
+                        style={ theme.input }
+                        onBlur={ onBlur }
+                        onChangeText={ onChange }
+                        value={ value }
+                        placeholder="email"
+                    />
+                ) }
+                name="email"
+            />
+            { errors.email && <Text>{ errors.email.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+                control={ control }
+                render={ ( { field: { onChange, onBlur, value } } ) => (
+                    <TextInput
+                        style={ theme.input }
+                        onBlur={ onBlur }
+                        onChangeText={ onChange }
+                        value={ value }
+                        placeholder="Password"
+                    />
+                ) }
+                name="password"
+            />
+            { errors.password && <Text>{ errors.password.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+                control={ control }
+                render={ ( { field: { onChange, onBlur, value } } ) => (
+                    <TextInput
+                        style={ theme.input }
+                        onBlur={ onBlur }
+                        onChangeText={ onChange }
+                        value={ value }
+                        placeholder="Password confirmation"
+                    />
+                ) }
+                name="passwordConfirm"
+            />
+            { errors.passwordConfirm &&
+            <Text>{ errors.passwordConfirm.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+                control={ control }
+                render={ ( { field: { onChange, onBlur, value } } ) => (
+                    <TextInput
+                        style={ theme.input }
+                        onBlur={ onBlur }
+                        onChangeText={ onChange }
+                        value={ value }
+                        placeholder="Full name"
+                    />
+                ) }
+                name="fullName"
+            />
+            { errors.fullName && <Text>{ errors.fullName.message }</Text> }
+          </View>
+
+
+          <Button title="Register" onPress={ handleSubmit( onSubmit ) }/>
+          {/*console.log(errors)*/ }
+
         </View>
-
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="email"
-                  />
-              ) }
-              name="email"
-          />
-          { errors.email && <Text>{ errors.email.message }</Text> }
-        </View>
-
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="Password"
-                  />
-              ) }
-              name="password"
-          />
-          { errors.password && <Text>{ errors.password.message }</Text> }
-        </View>
-
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="Password confirmation"
-                  />
-              ) }
-              name="passwordConfirm"
-          />
-          { errors.passwordConfirm &&
-          <Text>{ errors.passwordConfirm.message }</Text> }
-        </View>
-
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="Full name"
-                  />
-              ) }
-              name="fullName"
-          />
-          { errors.fullName && <Text>{ errors.fullName.message }</Text> }
-        </View>
-
-
-        <Button title="Submit" onPress={ handleSubmit( onSubmit ) }/>
-        {/*console.log(errors)*/ }
-
-      </View>
+      </KeyboardAvoidingView>
   );
 };
 
