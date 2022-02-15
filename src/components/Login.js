@@ -1,11 +1,8 @@
-import React from 'react';
 import {
   View,
   Text,
   TextInput,
   Button,
-  StyleSheet,
-  KeyboardAvoidingView,
   Alert,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
@@ -24,7 +21,7 @@ const LoginSchema = Yup.object().shape( {
 
 const Login = props => {
   const { login } = useUser();
-  const { control, handleSubmit, formState: { errors }, reset } = useForm( {
+  const { control, handleSubmit, formState: { errors } } = useForm( {
     defaultValues: {
       username: '',
       password: '',

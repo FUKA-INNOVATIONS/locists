@@ -38,7 +38,7 @@ const theme = {
   inputContainer: {
     borderColor: 'eee',
     borderWidth: 1,
-    //height: 70,
+    // height: 70,
   }
 };
 

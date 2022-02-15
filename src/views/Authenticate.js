@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { useState } from 'react';
+import { View } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 
 import theme from '../theme';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import useUserStorage from '../hooks/useUserStorage';
+// import useUserStorage from '../hooks/useUserStorage';
 
 const Authenticate = props => {
-  const [ isLoggedIn, setIsLoggedIn ] = useState( false );
-  const [ token, setToken ] = useState( null );
+  // const [ isLoggedIn, setIsLoggedIn ] = useState( false );
+  // const [ token, setToken ] = useState( null );
   const [ activeView, setActiveView ] = useState( 'signIn' );
-  const userStorage = useUserStorage();
+  // const userStorage = useUserStorage();
 
   /*
    * Check if user is already logged in
    * I user is logged in, Redirect user to profile page
    * */
-  /*useEffect( () => {
+  /* useEffect( () => {
     console.log( isLoggedIn );
     const checkIsLoggedIn = async () => {
       console.log( await userStorage.getToken() );
@@ -35,13 +35,13 @@ const Authenticate = props => {
       //Alert.alert( 'You are not logged in' );
     }
 
-  } );*/
+  } ); */
 
   const viewOptions = [
     {
       label: 'Sign in',
       value: { view: 'signIn' },
-      //imageIcon: images.feminino //images.feminino = require('./path_to/assets/img/feminino.png')
+      // imageIcon: images.feminino //images.feminino = require('./path_to/assets/img/feminino.png')
     },
     {
       label: 'Register',

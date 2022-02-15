@@ -1,9 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-import Register from '../components/Register'
-import Login from '../components/Login';
-import useUserStorage from '../hooks/useUserStorage';
-import { useEffect } from 'react';
 import Authenticate from './Authenticate';
 
 const Main = () => {

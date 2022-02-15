@@ -1,12 +1,9 @@
-import React from 'react';
 import {
   View,
   Text,
   TextInput,
   Button,
-  StyleSheet,
   KeyboardAvoidingView,
-  Alert,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -35,7 +32,7 @@ const RegisterSchema = Yup.object().shape( {
 const Register = props => {
   const { register, loading, error } = useUser();
 
-  const { control, handleSubmit, formState: { errors }, reset } = useForm( {
+  const { control, handleSubmit, formState: { errors } } = useForm( {
     defaultValues: {
       username: '',
       password: '',
@@ -157,7 +154,6 @@ const Register = props => {
 
 
           <Button title="Register" onPress={ handleSubmit( onSubmit ) }/>
-          {/*console.log(errors)*/ }
 
         </View>
       </KeyboardAvoidingView>
