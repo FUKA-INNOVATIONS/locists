@@ -139,6 +139,15 @@ class UserStorage {
     }
   }
 
+  // Log out
+  async logout() {
+    try {
+      await AsyncStorage.clear();
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
 }
 
 export default UserStorage;
