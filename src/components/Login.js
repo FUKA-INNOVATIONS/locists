@@ -16,10 +16,10 @@ const LoginSchema = Yup.object().shape( {
   username: Yup.string().
       required( 'Username is required' ),
   password: Yup.string().
-      required( 'Password is resuired' ),
+      required( 'Password is required' ),
 } );
 
-const Login = props => {
+const Login = ( { navigation } ) => {
   const { login } = useUser();
   const { control, handleSubmit, formState: { errors } } = useForm( {
     defaultValues: {
@@ -34,12 +34,14 @@ const Login = props => {
 
     if ( loginResponse.token ) {
       // User login succeeded
-      console.log('login succeeded')
-      Alert.alert('Login Succeeded', 'Do you want to login?')
+      console.log( 'login succeeded' );
+      // Redirect to home screen
+      navigation.navigate('Home')
     } else {
       // User login failed
-      console.log('login failed')
-      Alert.alert('Login failed', 'Please check your credentials and try again')
+      console.log( 'login failed' );
+      Alert.alert( 'Login failed',
+          'Please check your credentials and try again' );
     }
   };
 

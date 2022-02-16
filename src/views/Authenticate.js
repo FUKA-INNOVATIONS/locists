@@ -1,41 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 
 import theme from '../theme';
 import Login from '../components/Login';
 import Register from '../components/Register';
-// import useUserStorage from '../hooks/useUserStorage';
+import useUserStorage from '../hooks/useUserStorage';
 
-const Authenticate = props => {
-  // const [ isLoggedIn, setIsLoggedIn ] = useState( false );
-  // const [ token, setToken ] = useState( null );
+const Authenticate = ( { navigation } ) => {
+  const [ isLoggedIn, setIsLoggedIn ] = useState( false );
+  const [ token, setToken ] = useState( null );
   const [ activeView, setActiveView ] = useState( 'signIn' );
-  // const userStorage = useUserStorage();
-
-  /*
-   * Check if user is already logged in
-   * I user is logged in, Redirect user to profile page
-   * */
-  /* useEffect( () => {
-    console.log( isLoggedIn );
-    const checkIsLoggedIn = async () => {
-      console.log( await userStorage.getToken() );
-      return await userStorage.getToken();
-    };
-
-    const token = checkIsLoggedIn();
-
-    if ( token !== null ) {
-      console.log( 'User is logged in' );
-      //Alert.alert( 'You are logged in' );
-      setToken(token)
-    } else {
-      console.log( 'User is not logged in' );
-      //Alert.alert( 'You are not logged in' );
-    }
-
-  } ); */
+  const userStorage = useUserStorage();
 
   const viewOptions = [
     {
@@ -62,7 +38,8 @@ const Authenticate = props => {
             onPress={ value => setView( value.view ) }
         />
 
-        { activeView === 'signIn' ? <Login/> : <Register/> }
+        { activeView === 'signIn' ? <Login navigation={ navigation }/> :
+            <Register/> }
       </View>
 
   )
