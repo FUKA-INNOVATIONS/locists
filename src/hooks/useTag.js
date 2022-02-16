@@ -13,7 +13,7 @@ const useTag = () => {
         };
 
         try {
-            const tag = await axios.post( URL, {} ,options);
+            await axios.post( URL, {} ,options);
             // return tag.data;
         } catch ( error ) {
             console.log( 'post tag error', error);
