@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
-import Svg, { Circle } from "react-native-svg";
 
 const Post = ({postMedia}) => {
 

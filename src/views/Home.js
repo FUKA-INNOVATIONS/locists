@@ -1,7 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from "react-native";
-import {TextInput} from "react-native-web";
-import Post from "../components/Post";
+import { View } from "react-native";
 import HomeList from "../components/HomeList";
 
 const Home = () => {
@@ -13,13 +11,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create( {
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        marginTop: 100,
-    },
-} );
