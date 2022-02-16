@@ -8,11 +8,7 @@ import Register from '../components/Register';
 // import useUserStorage from '../hooks/useUserStorage';
 
 const Authenticate = ( { navigation } ) => {
-  // const [ isLoggedIn, setIsLoggedIn ] = useState( false );
-  // const [ token, setToken ] = useState( null );
   const [ activeView, setActiveView ] = useState( 'signIn' );
-  // const userStorage = useUserStorage();
-
   const viewOptions = [
     {
       label: 'Sign in',
