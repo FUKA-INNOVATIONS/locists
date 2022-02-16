@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 
 import theme from '../theme';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import useUserStorage from '../hooks/useUserStorage';
+// import useUserStorage from '../hooks/useUserStorage';
 
 const Authenticate = ( { navigation } ) => {
-  const [ isLoggedIn, setIsLoggedIn ] = useState( false );
-  const [ token, setToken ] = useState( null );
+  // const [ isLoggedIn, setIsLoggedIn ] = useState( false );
+  // const [ token, setToken ] = useState( null );
   const [ activeView, setActiveView ] = useState( 'signIn' );
-  const userStorage = useUserStorage();
+  // const userStorage = useUserStorage();
 
   const viewOptions = [
     {

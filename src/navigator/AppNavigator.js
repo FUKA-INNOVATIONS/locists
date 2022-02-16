@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -72,7 +72,7 @@ const AuthenticationStackScreen = () => {
   // TODO: Store isLoggedIn in local storage
   const [ isLogged, setIsLogged ] = useState( false );
   const userStorage = useUserStorage();
-  const token = userStorage.getToken().then( token => token && setIsLogged(true));
+  userStorage.getToken().then( token => token && setIsLogged(true));
 
   return (
       <AuthenticationStack.Navigator initialRouteName={ isLogged ? 'Account' : 'Authenticate' }>
@@ -114,6 +114,7 @@ const AppNavigator = () => {
         >
           <BottomTab.Screen name={ 'HomeTab' } component={ HomeStackScreen }/>
           <BottomTab.Screen name={ 'EventTab' } component={ EventStackScreen }/>
+          <BottomTab.Screen name={'CreateTab'} component={CreateStackScreen} />
           <BottomTab.Screen name={ 'AuthenticationTab' }
                             component={ AuthenticationStackScreen }/>
         </BottomTab.Navigator>

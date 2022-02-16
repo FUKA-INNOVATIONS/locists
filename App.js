@@ -5,7 +5,7 @@ import UserStorageContext from './src/context/UserStorageContext';
 
 import AppNavigator from './src/navigator/AppNavigator';
 
-import Main from './src/views/Main';
+
 
 // Create new instance of the storage
 const userDataStorage = new UserStorage();
