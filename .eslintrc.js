@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    "react/prop-types": ["error", { "ignore": ["navigation"] }] // fix 'navigation' is missing in props validation
   },
 };

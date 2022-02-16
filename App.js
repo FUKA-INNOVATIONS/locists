@@ -3,7 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import UserStorage from './src/utils/userStorage';
 import UserStorageContext from './src/context/UserStorageContext';
 
-import Main from './src/views/Main';
+import AppNavigator from './src/navigator/AppNavigator';
+
+
 
 // Create new instance of the storage
 const userDataStorage = new UserStorage();
@@ -13,9 +15,11 @@ export default function App() {
   return (
       <>
         <UserStorageContext.Provider value={userDataStorage}>
-          <Main />
+          {/* <Main /> */}
+          { <AppNavigator /> }
         </UserStorageContext.Provider>
         <StatusBar style="auto"/>
+
       </>
   );
 }
