@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from '../views/Home';
-import AccountScreen from '../views/Account'
+import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
 
 import useAuthStorage from '../hooks/useAuthStorage';
@@ -24,15 +24,24 @@ const CreateStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
+import AuthStorageContext from '../context/AuthStorageContext';
+
 const HomeStackScreen = () => {
   return (
-      <HomeStack.Navigator>
-        <HomeStack.Screen name={ 'Home' } component={ HomeScreen }/>
-        <HomeStack.Screen name={ 'SinglePostHomeStack' }
-                          component={ SinglePostScreen }/>
-        <HomeStack.Screen name={ 'SingleEvenHomeStack' }
-                          component={ SingleEventScreen }/>
-      </HomeStack.Navigator>
+      <AuthStorageContext.Consumer>
+        {value => {
+          console.log('status in homestackscreen: ',value)
+          return (
+              <HomeStack.Navigator>
+                <HomeStack.Screen userStatus={value.isLogged} name={ 'Home' } component={ HomeScreen }/>
+                <HomeStack.Screen name={ 'SinglePostHomeStack' }
+                                  component={ SinglePostScreen }/>
+                <HomeStack.Screen name={ 'SingleEvenHomeStack' }
+                                  component={ SingleEventScreen }/>
+              </HomeStack.Navigator>
+          )
+        }}
+      </AuthStorageContext.Consumer>
   );
 };
 
@@ -64,21 +73,24 @@ const AuthenticationStackScreen = () => {
   // eslint-disable-next-line
   const viewIsFocused = useIsFocused();
   /* useEffect( () => {
-    console.log( 'Login view focused' );
-  }, [ viewIsFocused ] ); */
+   console.log( 'Login view focused' );
+   }, [ viewIsFocused ] ); */
 
   return (
-      <AuthenticationStack.Navigator
-          initialRouteName={ isLogged ? 'Account' : 'Authenticate' }>
-        { !isLogged && <AuthenticationStack.Screen name={ 'Authenticate' }
-                                                   component={ AuthenticateScreen }/> }
-        { isLogged && <AuthenticationStack.Screen name={ 'Account' }
-                                                  component={ AccountScreen }/> }
+      <AuthenticationStack.Navigator>
+        { !isLogged ? (
+            <>
+              <AuthenticationStack.Screen name={ 'Authenticate' } component={ AuthenticateScreen }/>
+            </>
+        ) : (
+            <AuthenticationStack.Screen name={ 'Account' } component={ AccountScreen }/>
+        )
+        }
       </AuthenticationStack.Navigator>
   );
 };
 
-const AppNavigator = () => {
+const AppNavigator = ( { userStatus } ) => {
   return (
       <NavigationContainer>
         <BottomTab.Navigator

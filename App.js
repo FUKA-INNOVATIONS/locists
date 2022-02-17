@@ -19,7 +19,13 @@ export default function App() {
       <>
           <AuthStorageContext.Provider value={ authStorage }>
             <UserStorageContext.Provider value={userDataStorage}>
-              { <AppNavigator/> }
+              <AuthStorageContext.Consumer>
+                {({isLogged}) => {
+                  return (
+                      <AppNavigator userStatus={isLogged}/>
+                  )
+                }}
+              </AuthStorageContext.Consumer>
             </UserStorageContext.Provider>
           </AuthStorageContext.Provider>
           <StatusBar style="auto"/>
