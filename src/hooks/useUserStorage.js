@@ -1,10 +1,9 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 
-import UserStorageContext
-  from '../context/UserStorageContext';
+import UserStorageContext from '../context/UserStorageContext'
 
 const useUserStorage = () => {
-  return useContext( UserStorageContext );
-};
+  return useContext(UserStorageContext)
+}
 
-export default useUserStorage;
+export default useUserStorage

@@ -1,5 +1,4 @@
-import useUserStorage from '../hooks/useUserStorage';
-
+import useUserStorage from '../hooks/useUserStorage'
 
 export const isLoggedIn = async () => {
   const userStorage = useUserStorage()
