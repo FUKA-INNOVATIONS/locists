@@ -2,7 +2,7 @@ import { View, Text, FlatList } from 'react-native';
 import Event from '../components/Event';
 
 const SingleEvent = ( { navigation, route } ) => {
-  const { eventId } = route.params;
+  const { eventId} = route.params;
   const dummyEvents = [
     {
       typePost: false,
