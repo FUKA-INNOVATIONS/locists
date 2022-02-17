@@ -36,7 +36,7 @@ const Login = ( { navigation } ) => {
       // User login succeeded
       console.log( 'login succeeded' );
       // Redirect to home screen
-      navigation.navigate('Home')
+      navigation.navigate( 'Home' );
     } else {
       // User login failed
       console.log( 'login failed' );

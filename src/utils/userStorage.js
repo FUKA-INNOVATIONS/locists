@@ -6,28 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class UserStorage {
 
-  // Get the access token from the storage
-  async getToken() {
-    try {
-      const token = await AsyncStorage.getItem( 'token' );
-      if ( token !== null ) {
-        // value previously stored
-        return token;
-      }
-    } catch ( e ) {
-      // error reading value
-    }
-  }
-
-  // Store token
-  async setToken(token) {
-    try {
-      await AsyncStorage.setItem( 'token', token );
-    } catch ( e ) {
-      // saving error
-    }
-  }
-
   // Store username
   async setUsername(username) {
     try {
@@ -136,15 +114,6 @@ class UserStorage {
       }
     } catch ( e ) {
       // error reading value
-    }
-  }
-
-  // Log out
-  async logout() {
-    try {
-      await AsyncStorage.clear();
-    } catch(error) {
-      console.log(error)
     }
   }
 

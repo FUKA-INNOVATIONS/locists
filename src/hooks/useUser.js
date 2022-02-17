@@ -4,10 +4,12 @@ import axios from 'axios';
 // TODO: use appId
 import { baseUrl } from '../../config';
 
+import useAuthStorage from './useAuthStorage';
 import useUserStorage from './useUserStorage';
 
 const useUser = () => {
-  const userStorage = useUserStorage();
+  const authStorage = useAuthStorage();
+  const userStorage = useUserStorage()
   const [ loading, setLoading ] = useState( false );
   const [ error, setError ] = useState( null );
 
@@ -44,7 +46,6 @@ const useUser = () => {
 
   // Authenticate and login user
   const login = async ( loginCredentials ) => {
-    // const loginCredentials= {username: 'Ddddd', password: 'Ggggg'}
     const URL = `${ baseUrl }login`;
     const options = {
       headers: {
@@ -62,7 +63,7 @@ const useUser = () => {
 
       if ( token ) {
         console.log( 'login succeeded' );
-        await userStorage.setToken( token );
+        await authStorage.setToken( token );
         await userStorage.setId( user.user_id );
         await userStorage.setUsername( user.username );
         await userStorage.setEmail( user.email );
