@@ -1,33 +1,29 @@
-import { View, Text, FlatList } from 'react-native';
+import { View, Text } from 'react-native';
 import Event from '../components/Event';
+import useMedia from '../hooks/useMedia';
+import { useEffect } from 'react';
 
 const SingleEvent = ( { navigation, route } ) => {
-  const { eventId} = route.params;
-  const dummyEvents = [
-    {
-      typePost: false,
-      photo: false,
-      title: 'event',
-      description: 'testing events in home page',
-      attendees: 5,
-      id: 3,
-    },
-    {
-      typePost: false,
-      photo: true,
-      title: 'event',
-      description: 'testing events in home page',
-      attendees: 5,
-      id: 4,
-    },
-  ];
+  const { eventId } = route.params;
+  const { getMediaById, singleMedia, loadingSingleMedia } = useMedia();
+
+  useEffect(async() => {
+    await getMediaById(eventId)
+  }, [eventId])
+
+  if(loadingSingleMedia) return <View><Text>Loading..</Text></View>
+
+  // const EventHeader = () => <Text>Event header</Text>;
+  // const ItemSeparator = () => <Text>----------------------</Text>;
+  // const EmptyListMessage = () => <Text>No events </Text>;
+  // const ListFooter = () => <Text>Footer</Text>;
+
+
 
   return (
-      <FlatList
-          data={dummyEvents}
-          renderItem={(item) => <Event eventMedia={item}/>}
-          keyExtractor={item => item.id }
-          />
+      <>
+        {singleMedia !== undefined && <Event key={'ww'} eventDetails={singleMedia}/>}
+      </>
   );
 };
 

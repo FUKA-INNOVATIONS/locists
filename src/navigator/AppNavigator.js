@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import { NavigationContainer, useIsFocused, useFocusEffect } from '@react-navigation/native';
+import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -10,11 +10,11 @@ import AuthenticateScreen from '../views/Authenticate';
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import AuthStorageContext from '../context/AuthStorageContext';
+import SingleEventScreen from '../views/SingleEvent'
 
 // Dummy screens, will be replaced with real ones
 const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
   view</Text></View>;
-import SingleEventScreen from '../views/SingleEvent'
 const EventListScreen = () => <View><Text>Event list view</Text></View>;
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
 const CreatePostScreen = () => <View><Text>Create post view</Text></View>;
@@ -69,8 +69,8 @@ const AuthenticationStackScreen = () => {
   // TODO: Store isLoggedIn in local storage
   const authStorage = useAuthStorage();
   const isLogged = authStorage.isLogged;
-  // eslint-disable-next-line
   // TODO: test useFocusEffect
+  // eslint-disable-next-line
   const viewIsFocused = useIsFocused();
   /* useEffect( () => {
    console.log( 'Login view focused' );
