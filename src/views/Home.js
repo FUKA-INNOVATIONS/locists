@@ -3,7 +3,7 @@ import HomeList from '../components/HomeList';
 
 import AuthStorageContext from '../context/AuthStorageContext';
 
-const Home = ( props ) => {
+const Home = ( {navigation} ) => {
   return (
       <AuthStorageContext.Consumer>
         { value => {
@@ -12,7 +12,7 @@ const Home = ( props ) => {
                 <Text>You are: { value.isLogged
                     ? 'logged in'
                     : 'logged out' }</Text>
-                <HomeList/>
+                <HomeList navigation={navigation}/>
               </View>
           );
         } }

@@ -2,6 +2,8 @@ import {View, Image, Text, StyleSheet} from "react-native";
 
 const Event = ({eventMedia}) => {
 
+    //console.log('event', eventMedia)
+
     return (
         <View style={styles.event}>
             <View style={styles.text}>
