@@ -2,11 +2,7 @@ module.exports = {
   env: {
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'standard',
-    'prettier',
-  ],
+  extends: ['plugin:react/recommended', 'standard', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -14,12 +10,10 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 0,
   },
-};
+}
