@@ -9,6 +9,7 @@ import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
 
 import useAuthStorage from '../hooks/useAuthStorage';
+import AuthStorageContext from '../context/AuthStorageContext';
 
 // Dummy screens, will be replaced with real ones
 const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
@@ -23,8 +24,6 @@ const EventStack = createNativeStackNavigator();
 const CreateStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
-
-import AuthStorageContext from '../context/AuthStorageContext';
 
 const HomeStackScreen = () => {
   return (
