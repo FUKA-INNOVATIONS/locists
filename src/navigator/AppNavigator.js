@@ -8,9 +8,10 @@ import HomeScreen from '../views/Home';
 import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
 
+
 import useAuthStorage from '../hooks/useAuthStorage';
 import AuthStorageContext from '../context/AuthStorageContext';
-import SingleEventScreen from '../views/SingleEvent'
+
 
 // Dummy screens, will be replaced with real ones
 const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
