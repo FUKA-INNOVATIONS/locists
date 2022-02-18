@@ -45,7 +45,7 @@ const HomeList = ( { navigation } ) => {
 
   const postPressHandler = ( postId ) => {
       console.log( 'post pressed' );
-      navigation.navigate( 'SinglePost', { postId: postId } );
+      navigation.navigate( 'SinglePostHomeStack', { postId: postId } );
   };
 
   const EmptyListMessage = () => <Text>No events </Text>;
