@@ -8,20 +8,19 @@ import HomeScreen from '../views/Home';
 import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
 import SingleEventScreen from '../views/SingleEvent'
+import SinglePostScreen from '../views/SinglePost'
+import ExploreScreen from "../views/Explore";
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import AuthStorageContext from '../context/AuthStorageContext';
 
 
 // Dummy screens, will be replaced with real ones
-const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
-  view</Text></View>;
-const EventListScreen = () => <View><Text>Event list view</Text></View>;
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
 const CreatePostScreen = () => <View><Text>Create post view</Text></View>;
 
 const HomeStack = createNativeStackNavigator();
-const EventStack = createNativeStackNavigator();
+const ExploreStack = createNativeStackNavigator();
 const CreateStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -45,13 +44,15 @@ const HomeStackScreen = () => {
   );
 };
 
-const EventStackScreen = () => {
+const ExploreStackScreen = () => {
   return (
-      <EventStack.Navigator>
-        <EventStack.Screen name={ 'EventList' } component={ EventListScreen }/>
-        <EventStack.Screen name={ 'SingleEvent' }
+      <ExploreStack.Navigator>
+        <ExploreStack.Screen name={ 'Explore' } component={ ExploreScreen }/>
+        <ExploreStack.Screen name={ 'SingleEvent' }
                            component={ SingleEventScreen }/>
-      </EventStack.Navigator>
+          <ExploreStack.Screen name={ 'SinglePost' }
+                             component={ SinglePostScreen }/>
+      </ExploreStack.Navigator>
   );
 };
 
@@ -120,7 +121,7 @@ const AppNavigator = ( { userStatus } ) => {
             } ) }
         >
           <BottomTab.Screen name={ 'HomeTab' } component={ HomeStackScreen }/>
-          <BottomTab.Screen name={ 'EventTab' } component={ EventStackScreen }/>
+          <BottomTab.Screen name={ 'ExploreTab' } component={ ExploreStackScreen }/>
           <BottomTab.Screen name={ 'CreateTab' }
                             component={ CreateStackScreen }/>
           <BottomTab.Screen name={ 'AuthenticationTab' }
