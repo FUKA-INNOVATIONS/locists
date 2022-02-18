@@ -8,10 +8,11 @@ on:
 jobs:
   deploy_branch_preview:
     name: Deploy Branch Preview
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 16.x
       - uses: expo/expo-github-action@v7
