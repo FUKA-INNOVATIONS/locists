@@ -1,9 +1,7 @@
 import { View } from 'react-native';
 import ExploreList from "../components/ExploreList";
 
-import useMedia from '../hooks/useMedia';
-import React, { useEffect, useState } from 'react';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useState } from 'react';
 import SwitchSelector from "react-native-switch-selector";
 import theme from "../theme";
 

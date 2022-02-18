@@ -3,7 +3,7 @@ import Event from './Event';
 import {View, Text, FlatList, Pressable} from 'react-native';
 
 import useMedia from '../hooks/useMedia';
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {useIsFocused} from "@react-navigation/native";
 
 
