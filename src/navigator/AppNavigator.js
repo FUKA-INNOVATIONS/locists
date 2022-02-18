@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from '../views/Home';
+import Explore from '../views/Explore';
 import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
 
@@ -15,7 +16,7 @@ import AuthStorageContext from '../context/AuthStorageContext';
 const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
   view</Text></View>;
 import SingleEventScreen from '../views/SingleEvent'
-const EventListScreen = () => <View><Text>Event list view</Text></View>;
+//const EventListScreen = () => <View><Text>Event list view</Text></View>;
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
 const CreatePostScreen = () => <View><Text>Create post view</Text></View>;
 
@@ -47,7 +48,7 @@ const HomeStackScreen = () => {
 const EventStackScreen = () => {
   return (
       <EventStack.Navigator>
-        <EventStack.Screen name={ 'EventList' } component={ EventListScreen }/>
+        <EventStack.Screen name={ 'EventList' } component={ Explore }/>
         <EventStack.Screen name={ 'SingleEvent' }
                            component={ SingleEventScreen }/>
       </EventStack.Navigator>
