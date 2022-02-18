@@ -1,6 +1,9 @@
 name: Deploy Branch Preview
 # test
-on: [pull_request]
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize ]
 
 jobs:
   deploy_branch_preview:
