@@ -1,7 +1,7 @@
-import { View, Text } from 'react-native';
-import HomeList from '../components/HomeList';
+import { View, Text } from 'react-native'
+import HomeList from '../components/HomeList'
 
-import AuthStorageContext from '../context/AuthStorageContext';
+import AuthStorageContext from '../context/AuthStorageContext'
 
 const Home = ( {navigation} ) => {
   return (
@@ -20,4 +20,4 @@ const Home = ( {navigation} ) => {
   );
 };
 
-export default Home;
+export default Home

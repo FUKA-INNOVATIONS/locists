@@ -1,5 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const userStatusContext = React.createContext({isLogged: false});
+const userStatusContext = React.createContext({ isLogged: false })
 
-export { userStatusContext };
+export { userStatusContext }
