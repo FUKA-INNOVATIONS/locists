@@ -1,6 +1,6 @@
 import Post from './Post';
 import Event from './Event';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, Pressable} from 'react-native';
 
 import useMedia from '../hooks/useMedia';
 import React, { useEffect, useState } from 'react';
@@ -13,8 +13,8 @@ const ExploreList = ( {navigation, explore} ) => {
     const viewIsFocused = useIsFocused();
 
     console.log('explore', explore);
-    // console.log('POSTS: ', posts)
-    // console.log('EVENTS: ', events)
+    console.log('POSTS: ', posts)
+    console.log('EVENTS: ', events)
 
     useEffect( async () => {
         await getEvents();
@@ -32,6 +32,12 @@ const ExploreList = ( {navigation, explore} ) => {
         );
     }
 
+    const eventPressHandler = ( eventId ) => {
+        console.log( 'event pressed' );
+        navigation.navigate( 'SingleEvent', { eventId: eventId } );
+    };
+
+
     return (
         <FlatList
             data={ explore === 'events' ? events : posts}
@@ -42,7 +48,9 @@ const ExploreList = ( {navigation, explore} ) => {
                         <Post
                             postMedia={ item }/>
                         :
-                        <Event eventMedia={ item }/>
+                        <Pressable onPress={ () => eventPressHandler( item.file_id ) }>
+                            <Event eventDetails={ item }/>
+                        </Pressable>
                 )
             }}
         />

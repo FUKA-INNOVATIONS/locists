@@ -16,7 +16,6 @@ import SingleEventScreen from '../views/SingleEvent'
 // Dummy screens, will be replaced with real ones
 const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
   view</Text></View>;
-import SingleEventScreen from '../views/SingleEvent'
 //const EventListScreen = () => <View><Text>Event list view</Text></View>;
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
 const CreatePostScreen = () => <View><Text>Create post view</Text></View>;

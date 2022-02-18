@@ -33,7 +33,7 @@ const Explore = ( {navigation} ) => {
                 initial={ 0 }
                 onPress={ value => setView( value.explore ) }
             />
-            <ExploreList explore={ explore }/>
+            <ExploreList navigation={navigation} explore={ explore }/>
         </View>
     );
 };
