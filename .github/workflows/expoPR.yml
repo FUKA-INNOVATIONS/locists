@@ -23,6 +23,9 @@ jobs:
       - name: 📦 Install dependencies
         run: npm install
 
+      - name: install expo updates
+        run: npm install expo-updates
+
       - name: 🚀 Publish preview
         run: expo publish --non-interactive --release-channel=pr-${{ github.event.number }}
 
