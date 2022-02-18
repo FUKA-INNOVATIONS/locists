@@ -9,8 +9,8 @@ const Home = ( {navigation} ) => {
         { value => {
           return (
               <View style={ { marginTop: 50, marginHorizontal: 10 } }>
-                <Text>You are: { value.isLogged
-                    ? 'logged in'
+                <Text>You are  { value.isLogged
+                      ? 'logged in'
                     : 'logged out' }</Text>
                 <HomeList navigation={navigation}/>
               </View>
