@@ -7,7 +7,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from '../views/Home';
 import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
-
+import SingleEventScreen from '../views/SingleEvent'
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import AuthStorageContext from '../context/AuthStorageContext';

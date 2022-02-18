@@ -1,11 +1,9 @@
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
-import Event from '../components/Event';
+import { View, Text, FlatList } from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 
 import SingleEventHeader from '../components/SingleEventHeader';
 import Comment from '../components/Comment';
-import {uploadsUrl} from '../../config'
 
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params;
@@ -46,9 +44,3 @@ const SingleEvent = ( { navigation, route } ) => {
 };
 
 export default SingleEvent;
-
-const styles = StyleSheet.create( {
-  header: {
-    // maxHeight: 500
-  },
-} );

@@ -13,8 +13,6 @@ const Event = ( { eventDetails } ) => {
     );
   }
 
-  //console.log( eventDetails.filename );
-
   return (
       <View style={ styles.event }>
         <View style={ styles.text }>
