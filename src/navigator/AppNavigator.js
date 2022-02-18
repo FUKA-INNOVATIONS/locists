@@ -124,7 +124,7 @@ const AppNavigator = ( { userStatus } ) => {
             } ) }
         >
           <BottomTab.Screen name={ 'HomeTab' } component={ HomeStackScreen }/>
-          <BottomTab.Screen name={ 'EventTab' } component={ ExploreStackScreen }/>
+          <BottomTab.Screen name={ 'ExploreTab' } component={ ExploreStackScreen }/>
           <BottomTab.Screen name={ 'CreateTab' }
                             component={ CreateStackScreen }/>
           <BottomTab.Screen name={ 'AuthenticationTab' }
