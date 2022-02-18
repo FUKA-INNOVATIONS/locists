@@ -37,7 +37,7 @@ const Event = ( { eventDetails } ) => {
 
 export default Event;
 
-const styles = StyleSheet.create( {
+const styles = StyleSheet.create({
   event: {
     flex: 1,
     flexDirection: 'row',
@@ -56,3 +56,4 @@ const styles = StyleSheet.create( {
     bottom: 0,
   },
 } );
+

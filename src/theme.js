@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform } from 'react-native'
 // Add Dimensions
 // Testing the pipeline
 
@@ -20,11 +20,11 @@ const theme = {
     subheading: 16,
   },
   fonts: {
-    main: Platform.select( {
+    main: Platform.select({
       ios: 'Arial',
       android: 'Roboto',
       default: 'System',
-    } ),
+    }),
   },
   fontWeights: {
     normal: '400',
@@ -33,13 +33,13 @@ const theme = {
   input: {
     width: 300,
     backgroundColor: '#ffffff',
-    padding: 10
+    padding: 10,
   },
   inputContainer: {
     borderColor: 'eee',
     borderWidth: 1,
     // height: 70,
-  }
-};
+  },
+}
 
-export default theme;
+export default theme

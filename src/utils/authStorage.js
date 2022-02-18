@@ -1,13 +1,12 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 /*
  * Handling authentication
  * */
 
 class AuthStorage {
-
   constructor() {
-    this.isLogged = false;
+    this.isLogged = false
   }
 
   getStatus() {
@@ -25,14 +24,14 @@ class AuthStorage {
   // Get the access token from the storage
   async getToken() {
     try {
-      const token = await AsyncStorage.getItem( 'token' );
-      if ( token !== null ) {
+      const token = await AsyncStorage.getItem('token')
+      if (token !== null) {
         // value previously stored
-        return token;
+        return token
       } else {
         return null
       }
-    } catch ( e ) {
+    } catch (e) {
       console.log(e)
     }
   }
@@ -40,9 +39,9 @@ class AuthStorage {
   // Store token and login user
   async setToken(token) {
     try {
-      await AsyncStorage.setItem( 'token', token );
+      await AsyncStorage.setItem('token', token)
       this.isLogged = true
-    } catch ( e ) {
+    } catch (e) {
       console.log(e)
     }
   }
@@ -50,14 +49,12 @@ class AuthStorage {
   // Log out
   async logout() {
     try {
-      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('token')
       this.isLogged = false
-    } catch(error) {
+    } catch (error) {
       console.log(error)
     }
   }
-
 }
 
-export default AuthStorage;
-
+export default AuthStorage
