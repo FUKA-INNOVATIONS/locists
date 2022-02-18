@@ -1,75 +1,70 @@
-import { FlatList } from 'react-native'
-import Post from './Post'
-import Event from './Event'
+import { FlatList, Pressable, View, Text } from 'react-native';
+import Post from './Post';
+import Event from './Event';
 
-const HomeList = () => {
-  const dummyData = [
-    {
-      typePost: true,
-      photo: true,
-      title: 'test',
-      description: 'this is a test of how the card will look',
-      likes: 50,
-      comments: 4,
-      id: 1,
-    },
-    {
-      typePost: true,
-      photo: false,
-      title: 'test',
-      description: 'this is a test of how the card will look',
-      likes: 33,
-      comments: 7,
-      id: 2,
-    },
-    {
-      typePost: false,
-      photo: false,
-      title: 'event',
-      description: 'testing events in home page',
-      attendees: 5,
-      id: 3,
-    },
-    {
-      typePost: false,
-      photo: true,
-      title: 'event',
-      description: 'testing events in home page',
-      attendees: 5,
-      id: 4,
-    },
-    {
-      typePost: true,
-      photo: true,
-      title: 'test',
-      description: 'this is a test of how the card will look',
-      likes: 50,
-      comments: 4,
-      id: 5,
-    },
-    {
-      typePost: true,
-      photo: false,
-      title: 'test',
-      description: 'this is a test of how the card will look',
-      likes: 33,
-      comments: 7,
-      id: 6,
-    },
-  ]
+import useMedia from '../hooks/useMedia';
+import { useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+
+const HomeList = ( { navigation } ) => {
+  // const { getEvents, events, loadingEvents } = useMedia();
+  // const { getPosts, posts, loadingPosts } = useMedia();
+  const { getAllMedia, allMedia, loadingAllMedia } = useMedia();
+  const viewIsFocused = useIsFocused();
+
+  useEffect( async () => {
+    // await getEvents();
+    // await getPosts();
+    await getAllMedia();
+    // setPostsAndEventsMix(previousState => [...previousState, posts, events])
+  }, [ viewIsFocused ] );
+
+  // TODO: find a better solution
+  /* if ( posts !== undefined && events !== undefined ) {
+    events.map( event => mixed.push( event ) );
+    posts.map( post => mixed.push( post ) );
+  } */
+
+  // TODO: Add a spinner icon
+  // Display loading spinner icon while loading
+  if ( loadingAllMedia ) {
+    return (
+        <View>
+          <Text>
+            Loading..
+          </Text>
+        </View>
+    );
+  }
+
+  // Move user to single event view when tapping event card
+  const eventPressHandler = ( eventId ) => {
+    console.log( 'event pressed' );
+    navigation.navigate( 'SingleEvent', { eventId: eventId } );
+  };
+
+  const EmptyListMessage = () => <Text>No events </Text>;
+
   return (
-    <FlatList
-      data={dummyData}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => {
-        return item.typePost ? (
-          <Post postMedia={item} />
-        ) : (
-          <Event eventMedia={item} />
-        )
-      }}
-    />
-  )
-}
+      <FlatList
+          data={ allMedia }
+          ListEmptyComponent={EmptyListMessage}
+          keyExtractor={ ( item ) => item.file_id }
+          renderItem={ ( { item } ) => {
+            return (
+                item.tag === 'locists_post' ?
+                    <Post
+                        postMedia={ item }/>
+                    :
+                    <Pressable
+                        onPress={ () => eventPressHandler( item.file_id ) }>
+                      <Event eventDetails={ item }/>
+                    </Pressable>
+            );
+          }
+          }
+      />
+  );
+};
 
-export default HomeList
+export default HomeList;

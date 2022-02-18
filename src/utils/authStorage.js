@@ -9,7 +9,7 @@ class AuthStorage {
     this.isLogged = false
   }
 
-  /* getStatus() {
+  getStatus() {
     return this.isLogged
   }
 
@@ -19,7 +19,7 @@ class AuthStorage {
 
   setStatusAsLoggedOut()  {
     this.isLogged = false
-  } */
+  }
 
   // Get the access token from the storage
   async getToken() {
