@@ -43,6 +43,11 @@ const HomeList = ( { navigation } ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } );
   };
 
+  const postPressHandler = ( postId ) => {
+      console.log( 'post pressed' );
+      navigation.navigate( 'SinglePost', { postId: postId } );
+  };
+
   const EmptyListMessage = () => <Text>No events </Text>;
 
   return (
@@ -53,8 +58,10 @@ const HomeList = ( { navigation } ) => {
           renderItem={ ( { item } ) => {
             return (
                 item.tag === 'locists_post' ?
-                    <Post
-                        postMedia={ item }/>
+                    <Pressable
+                        onPress={ () => postPressHandler( item.file_id ) }>
+                        <Post postMedia={ item }/>
+                    </Pressable>
                     :
                     <Pressable
                         onPress={ () => eventPressHandler( item.file_id ) }>

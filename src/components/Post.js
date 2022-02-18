@@ -1,14 +1,17 @@
 import { StyleSheet, View, Image, Text } from "react-native";
+import {uploadsUrl} from "../../config";
 
 const Post = ({postMedia}) => {
+    console.log(postMedia);
 
     return (
         <View style={styles.info}>
-            {
-                postMedia.photo &&
+
+            {postMedia.filename &&
                 <Image
-                    source={{uri:"http://placekitten.com/200/300"}}
-                    style={{width: 100, height: 100}}
+                    // TODO: use thumbnails when ever possible
+                    source={ { uri: uploadsUrl + postMedia.filename } }
+                    style={ { width: 100, height: 100 } }
                 />
             }
             <View style={styles.allText}>

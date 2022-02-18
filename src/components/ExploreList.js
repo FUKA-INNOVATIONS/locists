@@ -37,6 +37,10 @@ const ExploreList = ( {navigation, explore} ) => {
         navigation.navigate( 'SingleEvent', { eventId: eventId } );
     };
 
+    const postPressHandler = ( postId ) => {
+        console.log( 'post pressed' );
+        navigation.navigate( 'SinglePost', { postId: postId } );
+    };
 
     return (
         <FlatList
@@ -45,8 +49,10 @@ const ExploreList = ( {navigation, explore} ) => {
             renderItem={ ( { item } ) => {
                 return (
                     explore === 'posts' ?
-                        <Post
-                            postMedia={ item }/>
+                        <Pressable
+                            onPress={ () => postPressHandler( item.file_id ) }>
+                            <Post postMedia={ item }/>
+                        </Pressable>
                         :
                         <Pressable onPress={ () => eventPressHandler( item.file_id ) }>
                             <Event eventDetails={ item }/>

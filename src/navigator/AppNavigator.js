@@ -1,27 +1,29 @@
 import { View, Text } from 'react-native';
-import { NavigationContainer, useIsFocused } from '@react-navigation/native';
+import { NavigationContainer, useIsFocused, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from '../views/Home';
-import Explore from '../views/Explore';
 import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
+import Explore from "../views/Explore";
+
+import SingleEventScreen from '../views/SingleEvent'
+import SinglePostScreen from '../views/SinglePost'
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import AuthStorageContext from '../context/AuthStorageContext';
-import SingleEventScreen from '../views/SingleEvent'
 
 // Dummy screens, will be replaced with real ones
-const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
-  view</Text></View>;
-//const EventListScreen = () => <View><Text>Event list view</Text></View>;
+ //const SinglePostScreen = ( { navigation } ) => <View><Text>Single post
+   //view</Text></View>;
+
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
 const CreatePostScreen = () => <View><Text>Create post view</Text></View>;
 
 const HomeStack = createNativeStackNavigator();
-const EventStack = createNativeStackNavigator();
+const ExploreStack = createNativeStackNavigator();
 const CreateStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -34,10 +36,10 @@ const HomeStackScreen = () => {
           return (
               <HomeStack.Navigator>
                 <HomeStack.Screen userStatus={value.isLogged} name={ 'Home' } component={ HomeScreen }/>
-                <HomeStack.Screen name={ 'SinglePostHomeStack' }
-                                  component={ SinglePostScreen }/>
                 <HomeStack.Screen name={ 'SingleEvent' }
                                   component={ SingleEventScreen }/>
+                  <HomeStack.Screen name={ 'SinglePost' }
+                                    component={ SinglePostScreen }/>
               </HomeStack.Navigator>
           )
         }}
@@ -45,13 +47,15 @@ const HomeStackScreen = () => {
   );
 };
 
-const EventStackScreen = () => {
+const ExploreStackScreen = () => {
   return (
-      <EventStack.Navigator>
-        <EventStack.Screen name={ 'EventList' } component={ Explore }/>
-        <EventStack.Screen name={ 'SingleEvent' }
+      <ExploreStack.Navigator>
+        <ExploreStack.Screen name={ 'Explore' } component={ Explore }/>
+        <ExploreStack.Screen name={ 'SingleEvent' }
                            component={ SingleEventScreen }/>
-      </EventStack.Navigator>
+          <ExploreStack.Screen name={ 'SinglePost' }
+                             component={ SinglePostScreen }/>
+      </ExploreStack.Navigator>
   );
 };
 
@@ -70,8 +74,8 @@ const AuthenticationStackScreen = () => {
   // TODO: Store isLoggedIn in local storage
   const authStorage = useAuthStorage();
   const isLogged = authStorage.isLogged;
-  // TODO: test useFocusEffect
   // eslint-disable-next-line
+  // TODO: test useFocusEffect
   const viewIsFocused = useIsFocused();
   /* useEffect( () => {
    console.log( 'Login view focused' );
@@ -120,7 +124,7 @@ const AppNavigator = ( { userStatus } ) => {
             } ) }
         >
           <BottomTab.Screen name={ 'HomeTab' } component={ HomeStackScreen }/>
-          <BottomTab.Screen name={ 'EventTab' } component={ EventStackScreen }/>
+          <BottomTab.Screen name={ 'EventTab' } component={ ExploreStackScreen }/>
           <BottomTab.Screen name={ 'CreateTab' }
                             component={ CreateStackScreen }/>
           <BottomTab.Screen name={ 'AuthenticationTab' }

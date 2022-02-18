@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params;
   const { getMediaById, singleMedia, loadingSingleMedia } = useMedia();
-  console.log('after clicking', eventId);
+
   useEffect(async() => {
     await getMediaById(eventId)
   }, [eventId])
