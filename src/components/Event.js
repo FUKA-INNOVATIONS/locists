@@ -1,50 +1,60 @@
-import {View, Image, Text, StyleSheet} from "react-native";
+import { View, Image, Text, StyleSheet } from 'react-native';
+import { uploadsUrl } from '../../config';
 
-const Event = ({eventMedia}) => {
+const Event = ( { eventDetails } ) => {
 
-    //console.log('event', eventMedia)
-
+  if ( eventDetails === null ) {
     return (
-        <View style={styles.event}>
-            <View style={styles.text}>
-                <Text>{eventMedia.title}</Text>
-                <Text numberOfLines={2}>{eventMedia.description}</Text>
+        <View>
+          <Text>
+            Loading...
+          </Text>
+        </View>
+    );
+  }
 
-                <View style={styles.attendees}>
-                    <Text>likes: {eventMedia.attendees}</Text>
-                    <Text>Host:</Text>
-                </View>
+  console.log( eventDetails.filename );
 
-            </View>
+  return (
+      <View style={ styles.event }>
+        <View style={ styles.text }>
+          <Text>{ eventDetails.title }</Text>
+          <Text numberOfLines={ 2 }>{ eventDetails.description }</Text>
 
-
-            <Image
-                source={{uri:"http://placekitten.com/200/300"}}
-                style={{width: 100, height: 100}}
-            />
+          <View style={ styles.attendees }>
+            <Text>likes: { eventDetails.attendees }</Text>
+            <Text>Host:</Text>
+          </View>
         </View>
 
-    )
-}
+        <Image
+            // TODO: use thumbnails when ever possible
+            source={ { uri: uploadsUrl + eventDetails.filename } }
+            style={ { width: 100, height: 100 } }
+        />
+      </View>
+
+  );
+};
 
 export default Event;
 
-const styles = StyleSheet.create({
-    event: {
-        flex: 1,
-        flexDirection: "row",
-        width: '100%',
-        borderWidth: 2,
-        borderRadius: 10,
-        padding: 10,
-        position: "relative",
-    },
-    text: {
-        width: '70%',
-    },
-    attendees: {
-        flexDirection: "row",
-        position: "absolute",
-        bottom: 0,
-    }
-});
+const styles = StyleSheet.create( {
+  event: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+    borderWidth: 2,
+    borderRadius: 10,
+    padding: 10,
+    position: 'relative',
+  },
+  text: {
+    width: '70%',
+  },
+  attendees: {
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+  },
+} );
