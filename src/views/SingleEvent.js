@@ -1,30 +1,54 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import Event from '../components/Event';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 
+import SingleEventHeader from '../components/SingleEventHeader';
+import Comment from '../components/Comment';
+import {uploadsUrl} from '../../config'
+
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params;
   const { getMediaById, singleMedia, loadingSingleMedia } = useMedia();
+  const {
+    getSingleMediaComments,
+    singleMediaComments,
+    loadingSingleMediaComments,
+  } = useMedia();
 
-  useEffect(async() => {
-    await getMediaById(eventId)
-  }, [eventId])
+  useEffect( async () => {
+    await getMediaById( eventId );
+    await getSingleMediaComments( eventId );
+  }, [ eventId ] );
 
-  if(loadingSingleMedia) return <View><Text>Loading..</Text></View>
+  if ( loadingSingleMedia ) return <View><Text>Loading media
+    details..</Text></View>;
+  if ( loadingSingleMediaComments ) return <View><Text>Loading media
+    comments..</Text></View>;
 
   // const EventHeader = () => <Text>Event header</Text>;
   // const ItemSeparator = () => <Text>----------------------</Text>;
-  // const EmptyListMessage = () => <Text>No events </Text>;
+  const EmptyListMessage = () => <Text>No comments </Text>;
   // const ListFooter = () => <Text>Footer</Text>;
 
 
 
+
   return (
-      <>
-        {singleMedia !== undefined && <Event key={'ww'} eventDetails={singleMedia}/>}
-      </>
+      <FlatList
+          data={ singleMediaComments }
+          ListEmptyComponent={ EmptyListMessage }
+          ListHeaderComponent={ <SingleEventHeader eventDetails={ singleMedia } /> }
+          keyExtractor={ (  item  ) => item.comment_id }
+          renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
+      />
   );
 };
 
 export default SingleEvent;
+
+const styles = StyleSheet.create( {
+  header: {
+    // maxHeight: 500
+  },
+} );

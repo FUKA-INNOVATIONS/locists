@@ -3,25 +3,27 @@ import axios from 'axios';
 
 import { baseUrl, eventTag, postTag } from '../../config';
 
-
 const useMedia = () => {
   const [ loadingEvents, setLoadingEvents ] = useState( false );
   const [ loadingPosts, setLoadingPosts ] = useState( false );
   const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
   const [ loadingAllMedia, setLoadingAllMedia ] = useState( false );
+  const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(
+      false );
 
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
   const [ singleMedia, setSingleMedia ] = useState();
   const [ allMedia, setAllMedia ] = useState();
+  const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
-    setLoadingAllMedia(true);
+    setLoadingAllMedia( true );
     const events = await getEvents();
     const posts = await getPosts();
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
-    setLoadingAllMedia(false);
+    setLoadingAllMedia( false );
   };
 
   const getEvents = async () => {
@@ -62,19 +64,35 @@ const useMedia = () => {
     }
   };
 
+  const getSingleMediaComments = async ( mediaId ) => {
+    const URL = `${ baseUrl }comments/file/${mediaId}`;
+    try {
+      setSingleLoadingMediaComments( true );
+      const comments = await axios.get( URL );
+      setSingleMediaComments( comments.data );
+      // console.log('comments in hook', comments.data)
+      setSingleLoadingMediaComments( false );
+    } catch ( e ) {
+      console.log( e );
+    }
+  };
+
   return {
     getEvents,
     getPosts,
     getMediaById,
     getAllMedia,
+    getSingleMediaComments,
     events,
     posts,
     allMedia,
     singleMedia,
+    singleMediaComments,
     loadingEvents,
     loadingPosts,
     loadingSingleMedia,
     loadingAllMedia,
+    loadingSingleMediaComments,
   };
 
 };
