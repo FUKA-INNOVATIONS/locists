@@ -47,20 +47,13 @@ const Register = (props) => {
 
   // Submit registration form with given data
   const onSubmit = async (data) => {
-    console.log('Registration onSubmit called')
-
     // Register user
-    console.log('1 loading:', await loading)
     const registeredUser = await register(
       data.username,
       data.password,
       data.email,
       data.fullName
     )
-
-    console.log('2 loading:', loading)
-    console.log('registeredUser: ', registeredUser)
-    console.log('error: ', error)
   }
 
   return (

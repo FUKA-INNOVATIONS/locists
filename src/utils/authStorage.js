@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /*
  * Handling authentication
@@ -6,55 +6,49 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class AuthStorage {
   constructor() {
-    this.isLogged = false
-  }
-
-  getStatus() {
-    return this.isLogged
-  }
-
-  setStatusAsLogged()  {
-    this.isLogged = true
-  }
-
-  setStatusAsLoggedOut()  {
-    this.isLogged = false
+    this.isLogged = false;
+    this.user = {};
   }
 
   // Get the access token from the storage
   async getToken() {
     try {
-      const token = await AsyncStorage.getItem('token')
-      if (token !== null) {
+      const token = await AsyncStorage.getItem( 'token' );
+      if ( token !== null ) {
         // value previously stored
-        return token
+        return token;
       } else {
-        return null
+        return null;
       }
-    } catch (e) {
-      console.log(e)
+    } catch ( e ) {
+      console.log( e );
     }
   }
 
   // Store token and login user
-  async setToken(token) {
+  async setToken( token ) {
     try {
-      await AsyncStorage.setItem('token', token)
-      this.isLogged = true
-    } catch (e) {
-      console.log(e)
+      await AsyncStorage.setItem( 'token', token );
+    } catch ( e ) {
+      console.log( e );
     }
+  }
+
+  login(user) {
+    this.isLogged = true;
+    this.user = user;
   }
 
   // Log out
   async logout() {
     try {
-      await AsyncStorage.removeItem('token')
-      this.isLogged = false
-    } catch (error) {
-      console.log(error)
+      await AsyncStorage.removeItem( 'token' );
+      this.isLogged = false;
+      this.user = {};
+    } catch ( error ) {
+      console.log( error );
     }
   }
 }
 
-export default AuthStorage
+export default AuthStorage;

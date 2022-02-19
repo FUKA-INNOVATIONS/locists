@@ -13,7 +13,6 @@ const SinglePost = ( { navigation, route } ) => {
 
     if(loadingSingleMedia) return <View><Text>Loading..</Text></View>
 
-    console.log(singleMedia);
     return (
         <>
             { singleMedia !== undefined && <Post postMedia={ singleMedia }/> }

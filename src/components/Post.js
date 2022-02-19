@@ -2,8 +2,6 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import {uploadsUrl} from "../../config";
 
 const Post = ({postMedia}) => {
-    console.log(postMedia);
-
     return (
         <View style={styles.info}>
 

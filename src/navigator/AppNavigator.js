@@ -7,13 +7,12 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from '../views/Home';
 import AccountScreen from '../views/Account';
 import AuthenticateScreen from '../views/Authenticate';
-import SingleEventScreen from '../views/SingleEvent'
-import SinglePostScreen from '../views/SinglePost'
-import ExploreScreen from "../views/Explore";
+import SingleEventScreen from '../views/SingleEvent';
+import SinglePostScreen from '../views/SinglePost';
+import ExploreScreen from '../views/Explore';
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import AuthStorageContext from '../context/AuthStorageContext';
-
 
 // Dummy screens, will be replaced with real ones
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
@@ -27,20 +26,14 @@ const BottomTab = createBottomTabNavigator();
 
 const HomeStackScreen = () => {
   return (
-      <AuthStorageContext.Consumer>
-        {value => {
-          console.log('status in homestackscreen: ',value)
-          return (
-              <HomeStack.Navigator>
-                <HomeStack.Screen userStatus={value.isLogged} name={ 'Home' } component={ HomeScreen }/>
-                <HomeStack.Screen name={ 'SinglePostHomeStack' }
-                                  component={ SinglePostScreen }/>
-                <HomeStack.Screen name={ 'SingleEvent' }
-                                  component={ SingleEventScreen }/>
-              </HomeStack.Navigator>
-          )
-        }}
-      </AuthStorageContext.Consumer>
+      <HomeStack.Navigator>
+        <HomeStack.Screen name={ 'Home' }
+                          component={ HomeScreen }/>
+        <HomeStack.Screen name={ 'SinglePostHomeStack' }
+                          component={ SinglePostScreen }/>
+        <HomeStack.Screen name={ 'SingleEvent' }
+                          component={ SingleEventScreen }/>
+      </HomeStack.Navigator>
   );
 };
 
@@ -49,8 +42,8 @@ const ExploreStackScreen = () => {
       <ExploreStack.Navigator>
         <ExploreStack.Screen name={ 'Explore' } component={ ExploreScreen }/>
         <ExploreStack.Screen name={ 'SingleEvent' }
-                           component={ SingleEventScreen }/>
-          <ExploreStack.Screen name={ 'SinglePost' }
+                             component={ SingleEventScreen }/>
+        <ExploreStack.Screen name={ 'SinglePost' }
                              component={ SinglePostScreen }/>
       </ExploreStack.Navigator>
   );
@@ -82,10 +75,12 @@ const AuthenticationStackScreen = () => {
       <AuthenticationStack.Navigator>
         { !isLogged ? (
             <>
-              <AuthenticationStack.Screen name={ 'Authenticate' } component={ AuthenticateScreen }/>
+              <AuthenticationStack.Screen name={ 'Authenticate' }
+                                          component={ AuthenticateScreen }/>
             </>
         ) : (
-            <AuthenticationStack.Screen name={ 'Account' } component={ AccountScreen }/>
+            <AuthenticationStack.Screen name={ 'Account' }
+                                        component={ AccountScreen }/>
         )
         }
       </AuthenticationStack.Navigator>
@@ -94,7 +89,9 @@ const AuthenticationStackScreen = () => {
 
 const AppNavigator = ( { userStatus } ) => {
   return (
-      <NavigationContainer>
+      <NavigationContainer
+
+      >
         <BottomTab.Navigator
             screenOptions={ ( { route } ) => ( {
               headerShown: false,
@@ -121,7 +118,8 @@ const AppNavigator = ( { userStatus } ) => {
             } ) }
         >
           <BottomTab.Screen name={ 'HomeTab' } component={ HomeStackScreen }/>
-          <BottomTab.Screen name={ 'ExploreTab' } component={ ExploreStackScreen }/>
+          <BottomTab.Screen name={ 'ExploreTab' }
+                            component={ ExploreStackScreen }/>
           <BottomTab.Screen name={ 'CreateTab' }
                             component={ CreateStackScreen }/>
           <BottomTab.Screen name={ 'AuthenticationTab' }

@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import { View } from 'react-native'
-import SwitchSelector from 'react-native-switch-selector'
+import { useState } from 'react';
+import { View } from 'react-native';
+import SwitchSelector from 'react-native-switch-selector';
 
-import theme from '../theme'
-import Login from '../components/Login'
-import Register from '../components/Register'
+import theme from '../theme';
+import Login from '../components/Login';
+import Register from '../components/Register';
 // import useUserStorage from '../hooks/useUserStorage';
 
-const Authenticate = ({ navigation }) => {
-  const [activeView, setActiveView] = useState('signIn')
+const Authenticate = ( { navigation } ) => {
+  const [ activeView, setActiveView ] = useState( 'signIn' );
   const viewOptions = [
     {
       label: 'Sign in',
@@ -19,28 +19,28 @@ const Authenticate = ({ navigation }) => {
       label: 'Register',
       value: { view: 'register' },
     },
-  ]
-  const setView = (view) => {
-    setActiveView(view)
-  }
+  ];
+  const setView = ( view ) => {
+    setActiveView( view );
+  };
 
   return (
-    <View>
-      <SwitchSelector
-        textColor={theme.colors.textPrimary}
-        buttonColor={theme.colors.primary}
-        options={viewOptions}
-        initial={0}
-        onPress={(value) => setView(value.view)}
-      />
+      <View>
+        <SwitchSelector
+            textColor={ theme.colors.textPrimary }
+            buttonColor={ theme.colors.primary }
+            options={ viewOptions }
+            initial={ 0 }
+            onPress={ ( value ) => setView( value.view ) }
+        />
 
-      {activeView === 'signIn' ? (
-        <Login navigation={navigation} />
-      ) : (
-        <Register />
-      )}
-    </View>
-  )
-}
+        { activeView === 'signIn' ? (
+            <Login navigation={ navigation }/>
+        ) : (
+            <Register/>
+        ) }
+      </View>
+  );
+};
 
-export default Authenticate
+export default Authenticate;

@@ -1,23 +1,22 @@
-import { View, Text } from 'react-native'
-import HomeList from '../components/HomeList'
+import { View, Text } from 'react-native';
+import HomeList from '../components/HomeList';
+import { useContext, useEffect, useState } from 'react';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import AuthStorageContext from '../context/AuthStorageContext';
+import useAuthStorage from '../hooks/useAuthStorage';
 
-import AuthStorageContext from '../context/AuthStorageContext'
+const Home = ( { navigation } ) => {
+  const { isLogged, user } = useAuthStorage();
+  const viewFocused = useIsFocused()
 
-const Home = ( {navigation} ) => {
+  console.log(isLogged, user)
+
   return (
-      <AuthStorageContext.Consumer>
-        { value => {
-          return (
-              <View style={ { marginTop: 50, marginHorizontal: 10 } }>
-                <Text>You are  { value.isLogged
-                      ? 'logged in'
-                    : 'logged out' }</Text>
-                <HomeList navigation={navigation}/>
-              </View>
-          );
-        } }
-      </AuthStorageContext.Consumer>
+      <View style={ { marginTop: 50, marginHorizontal: 10 } }>
+        <Text>You are logged { isLogged ? 'in' : 'out' }</Text>
+        <HomeList/>
+      </View>
   );
 };
 
-export default Home
+export default Home;

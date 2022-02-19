@@ -63,14 +63,7 @@ const useUser = () => {
       if (token) {
         console.log('login succeeded')
         await authStorage.setToken(token)
-        await userStorage.setId(user.user_id)
-        await userStorage.setUsername(user.username)
-        await userStorage.setEmail(user.email)
-        await userStorage.setFullName(user.full_name)
-        await userStorage.setAccountCreated(user.time_created)
-      } else {
-        // User login failed
-        // console.log('login failed')
+        authStorage.login(user)
       }
 
       return loginResponse.data

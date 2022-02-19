@@ -12,14 +12,9 @@ const ExploreList = ( {navigation, explore} ) => {
     const { getPosts, posts, loadingPosts } = useMedia();
     const viewIsFocused = useIsFocused();
 
-    console.log('explore', explore);
-    console.log('POSTS: ', posts)
-    console.log('EVENTS: ', events)
-
     useEffect( async () => {
         await getEvents();
         await getPosts();
-        // setPostsAndEventsMix(previousState => [...previousState, posts, events])
     }, [ viewIsFocused ] );
 
     if ( loadingEvents || loadingPosts ) {
@@ -33,12 +28,10 @@ const ExploreList = ( {navigation, explore} ) => {
     }
 
     const eventPressHandler = ( eventId ) => {
-        console.log( 'event pressed' );
         navigation.navigate( 'SingleEvent', { eventId: eventId } );
     };
 
     const postPressHandler = ( postId ) => {
-        console.log( 'post pressed' );
         navigation.navigate( 'SinglePost', { postId: postId } );
     };
 
