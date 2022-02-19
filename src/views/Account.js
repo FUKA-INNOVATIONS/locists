@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Button, Text, View } from 'react-native'
 
 import useAuthStorage from '../hooks/useAuthStorage'
@@ -7,7 +6,7 @@ const Account = ({ navigation }) => {
   const authStorage = useAuthStorage()
 
   const logoutHandler = async () => {
-    await authStorage.logout().then(navigation.navigate('Home'))
+    await authStorage.logout().then(navigation.navigate('Explore'))
   }
   return (
     <View>

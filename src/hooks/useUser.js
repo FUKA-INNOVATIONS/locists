@@ -3,7 +3,6 @@ import axios from 'axios'
 
 // TODO: use appId
 import { baseUrl } from '../../config'
-
 import useAuthStorage from './useAuthStorage'
 
 const useUser = () => {
