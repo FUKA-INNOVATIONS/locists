@@ -5,11 +5,9 @@ import axios from 'axios'
 import { baseUrl } from '../../config'
 
 import useAuthStorage from './useAuthStorage'
-import useUserStorage from './useUserStorage'
 
 const useUser = () => {
   const authStorage = useAuthStorage()
-  const userStorage = useUserStorage()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -57,7 +55,7 @@ const useUser = () => {
       const { token, user } = loginResponse.data
 
       /*
-       * If user login succeeded, store user data in local storage
+       * If user login succeeded, store token in device and userData in app state
        * */
 
       if (token) {

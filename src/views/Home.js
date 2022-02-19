@@ -7,6 +7,7 @@ import useAuthStorage from '../hooks/useAuthStorage';
 
 const Home = ( { navigation } ) => {
   const { isLogged, user } = useAuthStorage();
+  // workaround to re-render view
   const viewFocused = useIsFocused()
 
   console.log(isLogged, user)
@@ -14,7 +15,7 @@ const Home = ( { navigation } ) => {
   return (
       <View style={ { marginTop: 50, marginHorizontal: 10 } }>
         <Text>You are logged { isLogged ? 'in' : 'out' }</Text>
-        <HomeList/>
+        <HomeList navigation={navigation}/>
       </View>
   );
 };
