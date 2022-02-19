@@ -12,7 +12,6 @@ import SinglePostScreen from '../views/SinglePost';
 import ExploreScreen from '../views/Explore';
 
 import useAuthStorage from '../hooks/useAuthStorage';
-import AuthStorageContext from '../context/AuthStorageContext';
 
 // Dummy screens, will be replaced with real ones
 const CreateEventScreen = () => <View><Text>Create event view</Text></View>;

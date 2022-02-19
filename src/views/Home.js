@@ -6,6 +6,7 @@ import useAuthStorage from '../hooks/useAuthStorage';
 const Home = ( { navigation } ) => {
   const { isLogged } = useAuthStorage();
   // workaround to force re-render this component
+  // eslint-disable-next-line
   const viewFocused = useIsFocused();
 
   console.log( 'user in app state', useAuthStorage() );
