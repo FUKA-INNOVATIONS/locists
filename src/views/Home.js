@@ -1,23 +1,22 @@
-import { View, Text } from 'react-native'
-import HomeList from '../components/HomeList'
+import { View, Text } from 'react-native';
+import HomeList from '../components/HomeList';
+import { useIsFocused } from '@react-navigation/native';
+import useAuthStorage from '../hooks/useAuthStorage';
 
-import AuthStorageContext from '../context/AuthStorageContext'
+const Home = ( { navigation } ) => {
+  const { isLogged } = useAuthStorage();
+  // workaround to force re-render this component
+  // eslint-disable-next-line
+  const viewFocused = useIsFocused();
 
-const Home = ( {navigation} ) => {
+  console.log( 'user in app state', useAuthStorage() );
+
   return (
-      <AuthStorageContext.Consumer>
-        { value => {
-          return (
-              <View style={ { marginTop: 50, marginHorizontal: 10 } }>
-                <Text>You are  { value.isLogged
-                      ? 'logged in'
-                    : 'logged out' }</Text>
-                <HomeList navigation={navigation}/>
-              </View>
-          );
-        } }
-      </AuthStorageContext.Consumer>
+      <View style={ { marginTop: 50, marginHorizontal: 10 } }>
+        <Text>You are logged { isLogged ? 'in' : 'out' }</Text>
+        <HomeList navigation={ navigation }/>
+      </View>
   );
 };
 
-export default Home
+export default Home;

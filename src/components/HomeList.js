@@ -39,12 +39,10 @@ const HomeList = ( { navigation } ) => {
 
   // Move user to single event view when tapping event card
   const eventPressHandler = ( eventId ) => {
-    console.log( 'event pressed' );
     navigation.navigate( 'SingleEvent', { eventId: eventId } );
   };
 
   const postPressHandler = ( postId ) => {
-      console.log( 'post pressed' );
       navigation.navigate( 'SinglePostHomeStack', { postId: postId } );
   };
 

@@ -1,26 +1,21 @@
-import { useEffect, useState } from 'react'
 import { Button, Text, View } from 'react-native'
 
 import useAuthStorage from '../hooks/useAuthStorage'
-import useUserStorage from '../hooks/useUserStorage'
 
 const Account = ({ navigation }) => {
   const authStorage = useAuthStorage()
-  const userStorage = useUserStorage()
-  const [userData, setUserData] = useState({})
-
-  useEffect(async () => {
-    const username = await userStorage.getUsername().then()
-    setUserData({ ...userData, username })
-  })
 
   const logoutHandler = async () => {
-    await authStorage.logout().then(navigation.navigate('Home'))
+    await authStorage.logout().then(navigation.navigate('Explore'))
   }
   return (
     <View>
       <Text>User status: {authStorage.isLogged && 'logged in'}</Text>
-      <Text>Username: {userData.username}</Text>
+      <Text>Username: {authStorage.user.username}</Text>
+      <Text>Email: {authStorage.user.email}</Text>
+      <Text>User id: {authStorage.user.user_id}</Text>
+      <Text>Full name: {authStorage.user.full_name}</Text>
+      <Text>Joined: {authStorage.user.time_created}</Text>
       <Button title={'Log out'} onPress={logoutHandler} />
     </View>
   )
