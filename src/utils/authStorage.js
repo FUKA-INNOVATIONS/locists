@@ -15,7 +15,6 @@ class AuthStorage {
     try {
       const token = await AsyncStorage.getItem( 'token' );
       if ( token !== null ) {
-        // value previously stored
         return token;
       } else {
         return null;

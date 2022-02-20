@@ -15,7 +15,6 @@ const Account = ({ navigation }) => {
       <Text>Email: {authStorage.user.email}</Text>
       <Text>User id: {authStorage.user.user_id}</Text>
       <Text>Full name: {authStorage.user.full_name}</Text>
-      <Text>Joined: {authStorage.user.time_created}</Text>
       <Button title={'Log out'} onPress={logoutHandler} />
     </View>
   )
