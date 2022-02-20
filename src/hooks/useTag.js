@@ -34,4 +34,4 @@ const useTag = () => {
   return { postTag, getFilesByAppId }
 }
 
-export default useTag()
+export default useTag;

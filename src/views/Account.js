@@ -1,21 +1,24 @@
 import { Button, Text, View } from 'react-native'
 
 import useAuthStorage from '../hooks/useAuthStorage'
+import UploadMedia from '../components/UploadMedia';
 
 const Account = ({ navigation }) => {
-  const authStorage = useAuthStorage()
+  const {user, isLogged} = useAuthStorage()
+  const authStorage = useAuthStorage();
 
   const logoutHandler = async () => {
     await authStorage.logout().then(navigation.navigate('Explore'))
   }
   return (
     <View>
-      <Text>User status: {authStorage.isLogged && 'logged in'}</Text>
-      <Text>Username: {authStorage.user.username}</Text>
-      <Text>Email: {authStorage.user.email}</Text>
-      <Text>User id: {authStorage.user.user_id}</Text>
-      <Text>Full name: {authStorage.user.full_name}</Text>
+      <Text>User status: {isLogged && 'logged in'}</Text>
+      <Text>Username: {user.username}</Text>
+      <Text>Email: {user.email}</Text>
+      <Text>User id: {user.user_id}</Text>
+      <Text>Full name: {user.full_name}</Text>
       <Button title={'Log out'} onPress={logoutHandler} />
+      <UploadMedia mediaType={'profileImage'} ussername={user.username} />
     </View>
   )
 }

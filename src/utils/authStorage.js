@@ -8,6 +8,7 @@ class AuthStorage {
   constructor() {
     this.isLogged = false;
     this.user = {};
+    this.token = null;
   }
 
   // Get the access token from the storage
@@ -28,14 +29,16 @@ class AuthStorage {
   async setToken( token ) {
     try {
       await AsyncStorage.setItem( 'token', token );
+      this.token = token;
     } catch ( e ) {
       console.log( e );
     }
   }
 
-  login(user) {
+  login(user, token) {
     this.isLogged = true;
     this.user = user;
+    this.token = token;
   }
 
   // Log out
@@ -44,6 +47,7 @@ class AuthStorage {
       await AsyncStorage.removeItem( 'token' );
       this.isLogged = false;
       this.user = {};
+      this.token = null;
     } catch ( error ) {
       console.log( error );
     }
