@@ -1,5 +1,6 @@
 const doFetch = async (url, options = {}) => {
   try {
+    // eslint-disable-next-line
     const response = await fetch(url, options);
     const json = await response.json();
     if (response.ok) {

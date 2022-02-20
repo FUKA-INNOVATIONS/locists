@@ -10,7 +10,7 @@ import useTag from '../hooks/useTag';
 import { profileImgTag } from '../../config';
 
 const UploadMedia = ( { mediaType } ) => {
-  const { postTag, getFilesByTag } = useTag()
+  const { postTag } = useTag()
   const { uploadMedia, loadingMediaUpload } = useMedia();
   const [ image, setImage ] = useState(
       'https://place-hold.it/300x200&text=Choose' );
@@ -23,8 +23,6 @@ const UploadMedia = ( { mediaType } ) => {
         return () => reset();
       }, [] ),
   );
-
-  const formData = new FormData();
 
   const {
     control,
@@ -71,6 +69,7 @@ const UploadMedia = ( { mediaType } ) => {
       return;
     }
 
+    // eslint-disable-next-line
     const formData = new FormData();
     formData.append( 'title', data.title );
     formData.append( 'description', mediaDescription );
@@ -163,7 +162,6 @@ const UploadMedia = ( { mediaType } ) => {
             </View>
           </View>
       );
-      break;
     default:
       return (
           <View></View>

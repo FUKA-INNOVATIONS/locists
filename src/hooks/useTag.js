@@ -4,7 +4,6 @@ import doFetch from '../utils/doFetch';
 
 const useTag = () => {
   const postTag = async (tagData, token) => {
-    const URL = `${baseUrl}tags`
     const options = {
       method: 'POST',
       headers: {

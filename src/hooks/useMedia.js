@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import doFetch from '../utils/doFetch';
-import { baseUrl, eventTag, postTag, profileImgTag } from '../../config';
+import { baseUrl, eventTag, postTag } from '../../config';
 
 const useMedia = () => {
   const [ loadingEvents, setLoadingEvents ] = useState( false );
