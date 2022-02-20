@@ -80,11 +80,12 @@ const useMedia = () => {
 
   const uploadMedia = async ( formData, token ) => {
     console.log( 'uploadMedia hook' );
+    // console.log( 'formData in uploadMedia hook', formData);
     setLoadingMediaUpload( true );
-    console.log( 'token in uploadMedia hook', token );
-    console.log( 'formData in uploadMedia hook', formData );
+    // console.log( 'token in uploadMedia hook', token );
+    // console.log( 'formData in uploadMedia hook', formData );
     const options = {
-      method: 'POST',
+      // method: 'POST',
       headers: {
         'x-access-token': token,
         'Content-Type': 'multipart/form-data',
@@ -92,9 +93,16 @@ const useMedia = () => {
       body: formData,
     };
 
-    const result = await axios.post( mediaUrl, formData, options );
-    // result && setLoadingSingleMedia( false );
-    //return result;
+
+    try {
+      const result = await axios.post(mediaUrl,formData, options)
+      console.log('Result uploadMedia hook', result)
+      result && setLoadingSingleMedia( false );
+      return result;
+    } catch ( e ) {
+      console.log(e.message)
+    }
+
   };
 
   return {

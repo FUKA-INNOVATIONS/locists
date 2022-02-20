@@ -3,9 +3,7 @@ import useMedia from '../hooks/useMedia';
 import { useCallback, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
-import { useFocusEffect } from '@react-navigation/native';
-import { appId } from '../../config';
-import useTag from '../hooks/useTag';
+
 import useAuthStorage from '../hooks/useAuthStorage';
 
 const UploadMedia = ( { mediaType } ) => {
@@ -14,7 +12,6 @@ const UploadMedia = ( { mediaType } ) => {
       'https://place-hold.it/300x200&text=Choose' );
   const [ imageSelected, setImageSelected ] = useState( false );
   const [ type, setType ] = useState( 'image' );
-  const { postTag } = useTag();
   const { user, token } = useAuthStorage();
 
   /*useFocusEffect(
@@ -24,7 +21,6 @@ const UploadMedia = ( { mediaType } ) => {
   );*/
 
   const formData = new FormData();
-  console.log( formData );
 
   const {
     control,
@@ -38,7 +34,7 @@ const UploadMedia = ( { mediaType } ) => {
     },
   } );
 
-   console.log('FORM ERRORS: ', errors)
+   // console.log('FORM ERRORS: ', errors)
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -57,7 +53,7 @@ const UploadMedia = ( { mediaType } ) => {
 
   const onSubmit = async ( data ) => {
 
-    console.log('onSubmit')
+    console.log('uploadMedia onSubmit')
 
     const mediaDescription = {
       mediaType,
@@ -81,16 +77,10 @@ const UploadMedia = ( { mediaType } ) => {
       name: filename,
       type: type + '/' + fileExtension,
     } );
-    console.log('data', data)
-    console.log('formData in upload.js', formData);
-    try {
-      console.log('/////try upload')
-      const response = await uploadMedia( formData, token );
-      //console.log( 'upload response', response );
-    } catch ( error ) {
-      // You should notify the user about problems here
-      console.log( 'onSubmit upload image problem' );
-    }
+
+    const response = await uploadMedia( formData, token );
+    // console.log('upload res in onSubmit', response)
+
   };
 
   const reset = () => {

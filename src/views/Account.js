@@ -8,7 +8,7 @@ const Account = ({ navigation }) => {
   const authStorage = useAuthStorage();
 
   const logoutHandler = async () => {
-    await authStorage.logout().then(navigation.navigate('Explore'))
+    await authStorage.logout().then(navigation.navigate('Home'))
   }
   return (
     <View>
