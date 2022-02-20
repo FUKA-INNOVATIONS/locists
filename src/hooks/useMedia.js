@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-
+import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag, mediaUrl } from '../../config';
 
 const useMedia = () => {
@@ -79,11 +79,10 @@ const useMedia = () => {
   };
 
   const uploadMedia = async ( formData, token ) => {
-    console.log( 'uploadMedia hook' );
+   /* console.log( 'uploadMedia hook' );
     // console.log( 'formData in uploadMedia hook', formData);
     setLoadingMediaUpload( true );
     // console.log( 'token in uploadMedia hook', token );
-    // console.log( 'formData in uploadMedia hook', formData );
     const options = {
       // method: 'POST',
       headers: {
@@ -101,7 +100,29 @@ const useMedia = () => {
       return result;
     } catch ( e ) {
       console.log(e.message)
+    }*/
+
+
+
+    setLoadingMediaUpload(true);
+    const options = {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'multipart/form-data',
+      },
+      body: formData,
+    };
+
+    try {
+      const result = await doFetch(baseUrl + 'media', options);
+      console.log('url', baseUrl)
+      result && setLoadingMediaUpload(false);
+      return result;
+    } catch ( e ) {
+      console.log(e.message)
     }
+
 
   };
 

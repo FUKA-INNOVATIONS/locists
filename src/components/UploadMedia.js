@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 
 import useAuthStorage from '../hooks/useAuthStorage';
+import { useFocusEffect } from '@react-navigation/native';
 
 const UploadMedia = ( { mediaType } ) => {
   const { uploadMedia, loadingMediaUpload } = useMedia();
@@ -14,11 +15,11 @@ const UploadMedia = ( { mediaType } ) => {
   const [ type, setType ] = useState( 'image' );
   const { user, token } = useAuthStorage();
 
-  /*useFocusEffect(
+  useFocusEffect(
       useCallback( () => {
         return () => reset();
       }, [] ),
-  );*/
+  );
 
   const formData = new FormData();
 
@@ -34,7 +35,7 @@ const UploadMedia = ( { mediaType } ) => {
     },
   } );
 
-   // console.log('FORM ERRORS: ', errors)
+  // console.log('FORM ERRORS: ', errors)
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -53,13 +54,14 @@ const UploadMedia = ( { mediaType } ) => {
 
   const onSubmit = async ( data ) => {
 
-    console.log('uploadMedia onSubmit')
+    console.log( 'uploadMedia onSubmit' );
 
-    const mediaDescription = {
+    let mediaDescription = {
       mediaType,
       owner: user.username,
       description: data.description,
     };
+    mediaDescription = JSON.stringify( mediaDescription );
 
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' );
@@ -78,8 +80,9 @@ const UploadMedia = ( { mediaType } ) => {
       type: type + '/' + fileExtension,
     } );
 
+    // console.log('token in submitMedia ', token)
     const response = await uploadMedia( formData, token );
-    // console.log('upload res in onSubmit', response)
+    console.log('upload res in onSubmit', response)
 
   };
 
