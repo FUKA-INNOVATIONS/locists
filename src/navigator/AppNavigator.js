@@ -86,11 +86,9 @@ const AuthenticationStackScreen = () => {
   );
 };
 
-const AppNavigator = ( { userStatus } ) => {
+const AppNavigator = () => {
   return (
-      <NavigationContainer
-
-      >
+      <NavigationContainer>
         <BottomTab.Navigator
             screenOptions={ ( { route } ) => ( {
               headerShown: false,
