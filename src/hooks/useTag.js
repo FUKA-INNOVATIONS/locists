@@ -1,20 +1,21 @@
 import axios from 'axios'
 import { baseUrl } from '../../config'
+import doFetch from '../utils/doFetch';
 
 const useTag = () => {
   const postTag = async (tagData, token) => {
     const URL = `${baseUrl}tags`
     const options = {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': token,
       },
       body: JSON.stringify(tagData),
-    }
+    };
 
     try {
-      await axios.post(URL, {}, options)
-      // return tag.data;
+      return await doFetch(baseUrl + 'tags/', options);
     } catch (error) {
       console.log('post tag error', error)
       return error
@@ -31,7 +32,11 @@ const useTag = () => {
     }
   }
 
-  return { postTag, getFilesByAppId }
+  const getFilesByTag = async (tag) => {
+    return await doFetch(baseUrl + 'tags/' + tag);
+  };
+
+  return { postTag, getFilesByAppId, getFilesByTag }
 }
 
 export default useTag;

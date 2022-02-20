@@ -6,8 +6,11 @@ import * as ImagePicker from 'expo-image-picker';
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
+import useTag from '../hooks/useTag';
+import { profileImgTag } from '../../config';
 
 const UploadMedia = ( { mediaType } ) => {
+  const { postTag, getFilesByTag } = useTag()
   const { uploadMedia, loadingMediaUpload } = useMedia();
   const [ image, setImage ] = useState(
       'https://place-hold.it/300x200&text=Choose' );
@@ -81,7 +84,17 @@ const UploadMedia = ( { mediaType } ) => {
     } );
 
     // console.log('token in submitMedia ', token)
+    // Upload media
     const response = await uploadMedia( formData, token );
+    // Create new tag and associate it with uploaded media
+    const tagResponse = await postTag(
+        {
+          file_id: response.file_id,
+          tag: `${profileImgTag}_${user.username}`,
+        },
+        token
+    );
+    console.log('new tag res in onSubmit', tagResponse)
     console.log('upload res in onSubmit', response)
 
   };
