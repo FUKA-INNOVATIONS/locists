@@ -54,7 +54,7 @@ const UploadMedia = ( { mediaType } ) => {
 
   const onSubmit = async ( data ) => {
 
-    console.log( 'uploadMedia onSubmit' );
+    // console.log( 'uploadMedia onSubmit' );
 
     let mediaDescription = {
       mediaType,
@@ -70,7 +70,7 @@ const UploadMedia = ( { mediaType } ) => {
 
     const formData = new FormData();
     formData.append( 'title', data.title );
-    formData.append( 'description', data.description );
+    formData.append( 'description', mediaDescription );
     const filename = image.split( '/' ).pop();
     let fileExtension = filename.split( '.' ).pop();
     fileExtension = fileExtension === 'jpg' ? 'jpeg' : fileExtension;
@@ -123,7 +123,7 @@ const UploadMedia = ( { mediaType } ) => {
               <Controller
                   control={ control }
                   rules={ {
-                    required: true,
+                    // required: false,
                   } }
                   render={ ( { field: { onChange, onBlur, value } } ) => (
                       <TextInput
