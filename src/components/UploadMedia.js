@@ -89,7 +89,7 @@ const UploadMedia = ( { mediaType } ) => {
     const tagResponse = await postTag(
         {
           file_id: response.file_id,
-          tag: `${profileImgTag}_${user.username}`,
+          tag: `avatar_${user.user_id}`,
         },
         token
     );
