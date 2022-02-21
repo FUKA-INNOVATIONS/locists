@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import UploadMedia from '../components/UploadMedia';
 import fetchAvatar from '../utils/fetchAvatar';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Account = ( { navigation } ) => {
   const { user, isLogged } = useAuthStorage();
   const authStorage = useAuthStorage();
   const [ avatar, setAvatar ] = useState( null );
 
-  fetchAvatar( user.user_id ).then( url => setAvatar( url ) );
+  useFocusEffect(
+      useCallback( () => {
+        return () => fetchAvatar( user.user_id ).
+            then( url => setAvatar( url ) );
+      } ),
+  );
 
   const logoutHandler = async () => {
     await authStorage.logout().then( navigation.navigate( 'Home' ) );
@@ -17,7 +23,8 @@ const Account = ( { navigation } ) => {
 
   return (
       <View>
-        <Image source={ { uri: avatar } } style={{width: 100, height: 100 }} />
+        <Image source={ { uri: avatar } }
+               style={ { width: 100, height: 100 } }/>
         <Text>User status: { isLogged && 'logged in' }</Text>
         <Text>Username: { user.username }</Text>
         <Text>Email: { user.email }</Text>

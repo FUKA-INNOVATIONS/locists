@@ -68,6 +68,8 @@ const UploadMedia = ( { mediaType } ) => {
       return;
     }
 
+    // TODO: Handle too big image case
+
     // eslint-disable-next-line
     const formData = new FormData();
     formData.append( 'title', data.title );
@@ -116,7 +118,7 @@ const UploadMedia = ( { mediaType } ) => {
               <Controller
                   control={ control }
                   rules={ {
-                    required: true,
+                    required: false,
                   } }
                   render={ ( { field: { onChange, onBlur, value } } ) => (
                       <TextInput
