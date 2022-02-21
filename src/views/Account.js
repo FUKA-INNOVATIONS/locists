@@ -3,7 +3,6 @@ import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import UploadMedia from '../components/UploadMedia';
 import fetchAvatar from '../utils/fetchAvatar';
-import {uploadsUrl} from '../../config';
 
 const Account = ( { navigation } ) => {
   const { user, isLogged } = useAuthStorage();

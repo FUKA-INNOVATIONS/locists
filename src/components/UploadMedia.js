@@ -7,7 +7,6 @@ import * as ImagePicker from 'expo-image-picker';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import useTag from '../hooks/useTag';
-import { profileImgTag } from '../../config';
 
 const UploadMedia = ( { mediaType } ) => {
   const { postTag } = useTag()
