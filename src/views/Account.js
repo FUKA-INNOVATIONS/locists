@@ -14,7 +14,7 @@ const Account = ( { navigation } ) => {
       useCallback( () => {
         return () => fetchAvatar( user.user_id ).
             then( url => setAvatar( url ) );
-      } ),
+      }, [] ),
   );
 
   const logoutHandler = async () => {
