@@ -6,19 +6,18 @@ import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import useTag from '../hooks/useTag';
 import UploadAvatar from './UploadAvatar';
+import UploadEvent from './uploadEvent';
 
 const UploadMedia = ( { mediaType } ) => {
   const { user, token } = useAuthStorage();
-  const { postTag } = useTag()
+  const { postTag } = useTag();
   const { uploadMedia, loadingMediaUpload } = useMedia();
 
   /* useFocusEffect(
-      useCallback( () => {
-        return () => reset();
-      }, [] ),
-  ); */
-
-
+   useCallback( () => {
+   return () => reset();
+   }, [] ),
+   ); */
 
   const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
     mediaDescription = JSON.stringify( mediaDescription );
@@ -45,29 +44,37 @@ const UploadMedia = ( { mediaType } ) => {
     const response = await uploadMedia( formData, token );
 
     // Create new tag and associate it with uploaded media
+
+    let tag = '';
+    switch ( mediaType ) {
+      case 'avatar':
+        tag = `avatar_${ user.user_id }`;
+        break;
+      case 'event':
+        tag = 'locists_event'
+        break;
+      case 'post':
+        tag = 'locists_post'
+    }
+
     const tagResponse = await postTag(
         {
           file_id: response.file_id,
-          tag: `avatar_${user.user_id}`,
+          tag,
         },
-        token
+        token,
     );
-    console.log('new tag res in onSubmit', tagResponse)
-    console.log('upload res in onSubmit', response)
+
+    console.log( 'new tag res in onSubmit', tagResponse );
+    console.log( 'upload res in onSubmit', response );
   };
-
-
 
   switch ( mediaType ) {
     case 'avatar':
-      return <UploadAvatar onSubmit={onSubmit} />
+      return <UploadAvatar onSubmit={ onSubmit }/>;
 
-    case 'post':
-      return (
-          <View>
-
-          </View>
-      );
+    case 'event':
+      return <UploadEvent onSubmit={ onSubmit }/>;
     default:
       return (
           <View>

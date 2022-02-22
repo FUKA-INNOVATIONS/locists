@@ -10,11 +10,11 @@ import AuthenticateScreen from '../views/Authenticate';
 import SingleEventScreen from '../views/SingleEvent';
 import SinglePostScreen from '../views/SinglePost';
 import ExploreScreen from '../views/Explore';
+import CreateEventScreen from '../views/CreateEvent'
 
 import useAuthStorage from '../hooks/useAuthStorage';
 
 // Dummy screens, will be replaced with real ones
-const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
 const CreatePostScreen = () => <View><Text>Create post view</Text></View>;
 
 const HomeStack = createNativeStackNavigator();
