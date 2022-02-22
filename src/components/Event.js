@@ -2,6 +2,9 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { uploadsUrl } from '../../config';
 
 const Event = ( { eventDetails } ) => {
+  let description = eventDetails.description;
+  description = JSON.parse(description)
+  console.log(description)
 
   if ( eventDetails === null ) {
     return (
@@ -16,9 +19,10 @@ const Event = ( { eventDetails } ) => {
   return (
       <View style={ styles.event }>
         <View style={ styles.text }>
-          <Text>{ eventDetails.title }</Text>
-          <Text numberOfLines={ 2 }>{ eventDetails.description }</Text>
-
+          <Text>{ description.name }</Text>
+          <Text numberOfLines={ 2 }>{ description.location }</Text>
+          <Text>{ description.date }</Text>
+          <Text>{ description.price } €</Text>
           <View style={ styles.attendees }>
             <Text>likes: { eventDetails.attendees }</Text>
             <Text>Host:</Text>
