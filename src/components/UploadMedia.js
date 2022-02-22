@@ -7,72 +7,42 @@ import * as ImagePicker from 'expo-image-picker';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import useTag from '../hooks/useTag';
+import useDevice from '../hooks/useDevice';
+import UploadAvatar from './UploadAvatar';
 
 const UploadMedia = ( { mediaType } ) => {
+  const { user, token } = useAuthStorage();
   const { postTag } = useTag()
   const { uploadMedia, loadingMediaUpload } = useMedia();
-  const [ image, setImage ] = useState(
-      'https://place-hold.it/300x200&text=Choose' );
-  const [ imageSelected, setImageSelected ] = useState( false );
-  const [ type, setType ] = useState( 'image' );
-  const { user, token } = useAuthStorage();
 
-  useFocusEffect(
+  /* useFocusEffect(
       useCallback( () => {
         return () => reset();
       }, [] ),
-  );
+  ); */
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm( {
-    defaultValues: {
-      title: '',
-      description: '',
-    },
-  } );
 
-  // console.log('FORM ERRORS: ', errors)
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    const result = await ImagePicker.launchImageLibraryAsync( {
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      quality: 0.5,
-    } );
-    console.log( 'picked img: ', result );
-    if ( !result.cancelled ) {
-      setImage( result.uri );
-      setImageSelected( true );
-      setType( result.type );
-    }
-  };
-
-  const onSubmit = async ( data ) => {
-
+  const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
+    console.log( 'desc onSubmit', mediaDescription );
     // console.log( 'uploadMedia onSubmit' );
 
-    let mediaDescription = {
+    /* const mediaDescription = {
       mediaType,
-      owner: user.username,
+      owner: user.user_id,
       description: data.description,
-    };
-    mediaDescription = JSON.stringify( mediaDescription );
+    }; */
 
+    mediaDescription = JSON.stringify( mediaDescription );
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' );
       return;
     }
-
     // TODO: Handle too big image case
 
     // eslint-disable-next-line
     const formData = new FormData();
-    formData.append( 'title', data.title );
+    // formData.append( 'title', data.title );
     formData.append( 'description', mediaDescription );
     const filename = image.split( '/' ).pop();
     let fileExtension = filename.split( '.' ).pop();
@@ -80,7 +50,7 @@ const UploadMedia = ( { mediaType } ) => {
     formData.append( 'file', {
       uri: image,
       name: filename,
-      type: type + '/' + fileExtension,
+      type: mediaDescription.fileType + '/' + fileExtension,
     } );
 
     // console.log('token in submitMedia ', token)
@@ -99,73 +69,23 @@ const UploadMedia = ( { mediaType } ) => {
 
   };
 
-  const reset = () => {
-    setImage( 'https://place-hold.it/300x200&text=Choose' );
-    setImageSelected( false );
-    setValue( 'title', '' );
-    setValue( 'description', '' );
-    setType( 'image' );
-  };
+
 
   switch ( mediaType ) {
-    case 'profileImage':
+    case 'avatar':
+      return <UploadAvatar onSubmit={onSubmit} />
+
+    case 'post':
       return (
           <View>
-            <Text>Upload profile image</Text>
-            <Image source={ { uri: image } }
-                   style={ { width: 200, height: 200, borderRadius: 100 } }/>
-            <View>
-              <Controller
-                  control={ control }
-                  rules={ {
-                    required: false,
-                  } }
-                  render={ ( { field: { onChange, onBlur, value } } ) => (
-                      <TextInput
-                          onBlur={ onBlur }
-                          onChangeText={ onChange }
-                          value={ value }
-                          autoCapitalize="none"
-                          placeholder="Title"
-                          errorMessage={ errors.title && 'This is required.' }
-                      />
-                  ) }
-                  name="title"
-              />
 
-              <Controller
-                  control={ control }
-                  rules={ {
-                    // required: false,
-                  } }
-                  render={ ( { field: { onChange, onBlur, value } } ) => (
-                      <TextInput
-                          onBlur={ onBlur }
-                          onChangeText={ onChange }
-                          value={ value }
-                          autoCapitalize="none"
-                          placeholder="Description"
-                          errorMessage={ errors.description &&
-                          'This is required.' }
-                      />
-                  ) }
-                  name="description"
-              />
-
-              <Button title="Choose image" onPress={ pickImage }/>
-              <Button
-                  disabled={ !imageSelected }
-                  loading={ loadingMediaUpload }
-                  title="Upload"
-                  onPress={ handleSubmit( onSubmit ) }
-              />
-              <Button title="Reset form" onPress={ reset }/>
-            </View>
           </View>
       );
     default:
       return (
-          <View></View>
+          <View>
+
+          </View>
       );
   }
 };

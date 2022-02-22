@@ -31,7 +31,7 @@ const Account = ( { navigation } ) => {
         <Text>User id: { user.user_id }</Text>
         <Text>Full name: { user.full_name }</Text>
         <Button title={ 'Log out' } onPress={ logoutHandler }/>
-        <UploadMedia mediaType={ 'profileImage' } ussername={ user.username }/>
+        <UploadMedia mediaType={ 'avatar' } ussername={ user.username }/>
       </View>
   );
 };
