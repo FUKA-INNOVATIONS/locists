@@ -1,5 +1,5 @@
-import { Button, Image, Text, TextInput, View } from 'react-native';
-import { Controller, useForm } from 'react-hook-form';
+import { Button, Image, Text, View } from 'react-native';
+import { useForm } from 'react-hook-form';
 import useDevice from '../hooks/useDevice';
 import useMedia from '../hooks/useMedia';
 import useAuthStorage from '../hooks/useAuthStorage';
@@ -16,14 +16,15 @@ const UploadAvatar = props => {
     setType,
     pickImage,
   } = useDevice();
-  const { uploadMedia, loadingMediaUpload } = useMedia();
+  const { loadingMediaUpload } = useMedia();
 
-  let mediaDescription = {
+  const mediaDescription = {
     mediaType: 'avatar',
     owner: user.user_id,
     fileType: type
   };
 
+  // eslint-disable-next-line
   const { control, handleSubmit, formState: { errors }, setValue } = useForm( {
     defaultValues: {},
   } );

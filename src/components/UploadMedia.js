@@ -1,9 +1,7 @@
-import { View, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import useMedia from '../hooks/useMedia';
-import { useCallback, useState } from 'react';
 
 import useAuthStorage from '../hooks/useAuthStorage';
-import { useFocusEffect } from '@react-navigation/native';
 import useTag from '../hooks/useTag';
 import UploadAvatar from './UploadAvatar';
 import UploadEvent from './uploadEvent';
@@ -13,7 +11,7 @@ import UploadPost from './uploadPost';
 const UploadMedia = ( { mediaType } ) => {
   const { user, token } = useAuthStorage();
   const { createTag } = useTag();
-  const { uploadMedia, loadingMediaUpload } = useMedia();
+  const { uploadMedia } = useMedia();
 
   /* useFocusEffect(
    useCallback( () => {

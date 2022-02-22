@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -49,9 +48,9 @@ const ExploreStackScreen = () => {
 const CreateStackScreen = () => {
   return (
       <CreateStack.Navigator>
-        <CreateStack.Screen name={ 'CreatePost' }
-                            component={ CreatePostScreen }/>
         <CreateStack.Screen name={ 'CreateEvent' }
+                            component={ CreatePostScreen }/>
+        <CreateStack.Screen name={ 'CreatePost' }
                             component={ CreateEventScreen }/>
       </CreateStack.Navigator>
   );

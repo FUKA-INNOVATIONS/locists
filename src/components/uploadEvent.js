@@ -27,7 +27,7 @@ const UploadEvent = props => {
     setType,
     pickImage,
   } = useDevice();
-  const { uploadMedia, loadingMediaUpload } = useMedia();
+  const { loadingMediaUpload } = useMedia();
 
   const EventSchema = Yup.object().shape( {
     location: Yup.string().
@@ -54,14 +54,13 @@ const UploadEvent = props => {
     control,
     handleSubmit,
     formState: { errors },
-    setValue,
     reset,
     getValues,
   } = useForm( {
      resolver: yupResolver( EventSchema ), mode: 'onBlur',
   } );
 
-  let mediaDescription = {
+  const mediaDescription = {
     mediaType: 'event',
     owner: user.user_id,
     fileType: type,

@@ -6,7 +6,6 @@ import useMedia from '../hooks/useMedia';
 import useAuthStorage from '../hooks/useAuthStorage';
 import theme from '../theme';
 import { yupResolver } from '@hookform/resolvers/yup';
-import dummyImage from '../../assets/dummy_image.gif';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 
@@ -21,14 +20,13 @@ const UploadPost = props => {
 
   const {
     image,
-    setImage,
     imageSelected,
     setImageSelected,
     type,
     setType,
     pickImage,
   } = useDevice();
-  const { uploadMedia, loadingMediaUpload } = useMedia();
+  const { loadingMediaUpload } = useMedia();
 
   const PostSchema = Yup.object().shape( {
     location: Yup.string().
@@ -46,14 +44,13 @@ const UploadPost = props => {
     control,
     handleSubmit,
     formState: { errors },
-    setValue,
     reset,
     getValues,
   } = useForm( {
     resolver: yupResolver( PostSchema ), mode: 'onBlur',
   } );
 
-  let mediaDescription = {
+  const mediaDescription = {
     mediaType: 'post',
     owner: user.user_id,
     fileType: type,
@@ -73,8 +70,6 @@ const UploadPost = props => {
   * */
   const dummyImage = require( '../../assets/dummy_image.gif' );
   !imageSelected && setImageSelected( dummyImage );
-
-  console.log('dummyImage: ', dummyImage === imageSelected)
 
   return (
       <>
