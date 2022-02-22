@@ -17,7 +17,7 @@ const Home = ( { navigation } ) => {
     if ( token ) {
       const user = await getUserByToken( token );
       if ( user.id !== null ) {
-        authStorage.login( user );
+        authStorage.login( user, token );
       }
     }
   } );

@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -10,12 +9,10 @@ import AuthenticateScreen from '../views/Authenticate';
 import SingleEventScreen from '../views/SingleEvent';
 import SinglePostScreen from '../views/SinglePost';
 import ExploreScreen from '../views/Explore';
+import CreateEventScreen from '../views/CreateEvent'
+import CreatePostScreen from '../views/createPost'
 
 import useAuthStorage from '../hooks/useAuthStorage';
-
-// Dummy screens, will be replaced with real ones
-const CreateEventScreen = () => <View><Text>Create event view</Text></View>;
-const CreatePostScreen = () => <View><Text>Create post view</Text></View>;
 
 const HomeStack = createNativeStackNavigator();
 const ExploreStack = createNativeStackNavigator();
@@ -52,9 +49,9 @@ const CreateStackScreen = () => {
   return (
       <CreateStack.Navigator>
         <CreateStack.Screen name={ 'CreateEvent' }
-                            component={ CreateEventScreen }/>
-        <CreateStack.Screen name={ 'CreatePost' }
                             component={ CreatePostScreen }/>
+        <CreateStack.Screen name={ 'CreatePost' }
+                            component={ CreateEventScreen }/>
       </CreateStack.Navigator>
   );
 };

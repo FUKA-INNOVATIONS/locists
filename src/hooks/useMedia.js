@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-
+import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
 
 const useMedia = () => {
@@ -10,6 +10,7 @@ const useMedia = () => {
   const [ loadingAllMedia, setLoadingAllMedia ] = useState( false );
   const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(
       false );
+  const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
 
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
@@ -65,7 +66,7 @@ const useMedia = () => {
   };
 
   const getSingleMediaComments = async ( mediaId ) => {
-    const URL = `${ baseUrl }comments/file/${mediaId}`;
+    const URL = `${ baseUrl }comments/file/${ mediaId }`;
     try {
       setSingleLoadingMediaComments( true );
       const comments = await axios.get( URL );
@@ -77,12 +78,39 @@ const useMedia = () => {
     }
   };
 
+  const uploadMedia = async ( formData, token ) => {
+   // console.log( 'uploadMedia hook' );
+    // console.log( 'formData in uploadMedia hook', formData);
+    setLoadingMediaUpload( true );
+    // console.log( 'token in uploadMedia hook', token );
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'multipart/form-data',
+      },
+      body: formData,
+    };
+
+    try {
+      const result = await doFetch(baseUrl + 'media', options);
+      console.log('url', baseUrl)
+      result && setLoadingMediaUpload(false);
+      return result;
+    } catch ( e ) {
+      console.log(e.message)
+    }
+
+  };
+
   return {
     getEvents,
     getPosts,
     getMediaById,
     getAllMedia,
     getSingleMediaComments,
+    uploadMedia,
     events,
     posts,
     allMedia,
@@ -93,6 +121,7 @@ const useMedia = () => {
     loadingSingleMedia,
     loadingAllMedia,
     loadingSingleMediaComments,
+    loadingMediaUpload,
   };
 
 };
