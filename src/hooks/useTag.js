@@ -3,7 +3,7 @@ import { baseUrl } from '../../config'
 import doFetch from '../utils/doFetch';
 
 const useTag = () => {
-  const postTag = async (tagData, token) => {
+  const createTag = async (tagData, token) => {
     const options = {
       method: 'POST',
       headers: {
@@ -35,7 +35,7 @@ const useTag = () => {
     return await doFetch(baseUrl + 'tags/' + tag);
   };
 
-  return { postTag, getFilesByAppId, getFilesByTag }
+  return { createTag, getFilesByAppId, getFilesByTag }
 }
 
 export default useTag;

@@ -6,17 +6,18 @@ import useMedia from '../hooks/useMedia';
 import useAuthStorage from '../hooks/useAuthStorage';
 import theme from '../theme';
 import { yupResolver } from '@hookform/resolvers/yup';
+import dummyImage from '../../assets/dummy_image.gif';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 
-const UploadEvent = props => {
+const UploadPost = props => {
   const { user } = useAuthStorage();
 
   useFocusEffect(
-      useCallback( () => {
-        return () => resetAll();
-      }, [] ),
-  );
+   useCallback( () => {
+   return () => resetAll();
+   }, [] ),
+   );
 
   const {
     image,
@@ -29,25 +30,16 @@ const UploadEvent = props => {
   } = useDevice();
   const { uploadMedia, loadingMediaUpload } = useMedia();
 
-  const EventSchema = Yup.object().shape( {
+  const PostSchema = Yup.object().shape( {
     location: Yup.string().
         min( 5, 'Too Short!' ).
         max( 20, 'Too Long!' ).
         required( 'Location is required: 5-20 characters' ),
-    name: Yup.string().
-        min( 5, 'Too Short!' ).
-        max( 15, 'Too Long!' ).
-        required( 'Name is required: 5-15 characters' ),
-    date: Yup.string().
-        min( 5, 'Too Short!' ).
-        max( 15, 'Too Long!' ).
-        required( 'Name is required: format => 13.3.2022' ),
     description: Yup.string().
         min( 25, 'Too Short!' ).
         max( 250, 'Too Long!' ).
         required( 'Description is required: 25-250 characters' ),
-    price: Yup.number().
-        required( 'Price is required in number format' ),
+
   } );
 
   const {
@@ -58,32 +50,41 @@ const UploadEvent = props => {
     reset,
     getValues,
   } = useForm( {
-     resolver: yupResolver( EventSchema ), mode: 'onBlur',
+    resolver: yupResolver( PostSchema ), mode: 'onBlur',
   } );
 
   let mediaDescription = {
-    mediaType: 'event',
+    mediaType: 'post',
     owner: user.user_id,
     fileType: type,
     location: getValues().location,
-    name: getValues().name,
-    date: getValues().date,
     description: getValues().description,
-    price: getValues().price,
   };
 
   const resetAll = () => {
     reset();
-    setImage( 'https://place-hold.it/300x200&text=Choose' );
-    setImageSelected( false );
+    setImageSelected( dummyImage );
     setType( 'image' );
   };
 
+
+  /*
+  * Upload dummy image if user doesnt select and image
+  * */
+  const dummyImage = require( '../../assets/dummy_image.gif' );
+  !imageSelected && setImageSelected( dummyImage );
+
+  console.log('dummyImage: ', dummyImage === imageSelected)
+
   return (
       <>
-        <Text>Create new event</Text>
-        <Image source={ { uri: image } }
-               style={ { width: 200, height: 200, borderRadius: 100 } }/>
+        <Text>Create new post</Text>
+        { dummyImage !== imageSelected && <Image source={ { uri: image } }
+                                  style={ {
+                                    width: 200,
+                                    height: 200,
+                                    borderRadius: 100,
+                                  } }/> }
         <Button title="Choose image" onPress={ pickImage }/>
         <View>
 
@@ -104,39 +105,6 @@ const UploadEvent = props => {
             { errors.location && <Text>{ errors.location.message }</Text> }
           </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Event name"
-                    />
-                ) }
-                name="name"
-            />
-            { errors.name && <Text>{ errors.name.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Date & time"
-                    />
-                ) }
-                name="date"
-            />
-            { errors.date && <Text>{ errors.date.message }</Text> }
-          </View>
 
           <View style={ theme.inputContainer }>
             <Controller
@@ -149,7 +117,7 @@ const UploadEvent = props => {
                         onBlur={ onBlur }
                         onChangeText={ onChange }
                         value={ value }
-                        placeholder="Event description"
+                        placeholder="Enter post text here.."
                     />
                 ) }
                 name="description"
@@ -158,31 +126,14 @@ const UploadEvent = props => {
             <Text>{ errors.description.message }</Text> }
           </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Price"
-                    />
-                ) }
-                name="price"
-            />
-            { errors.price && <Text>{ errors.price.message }</Text> }
-          </View>
-
 
           <Button
               disabled={ !imageSelected }
               loading={ loadingMediaUpload }
-              title="Create event"
+              title="Create post"
               onPress={ handleSubmit(
                   data => props.onSubmit( data, mediaDescription, imageSelected,
-                      image ) ) }
+                      image, setImageSelected ) ) }
           />
           <Button title="Reset form" onPress={ resetAll }/>
         </View>
@@ -190,4 +141,4 @@ const UploadEvent = props => {
   );
 };
 
-export default UploadEvent;
+export default UploadPost;

@@ -7,10 +7,12 @@ import { useFocusEffect } from '@react-navigation/native';
 import useTag from '../hooks/useTag';
 import UploadAvatar from './UploadAvatar';
 import UploadEvent from './uploadEvent';
+import { postTag, eventTag } from '../../config';
+import UploadPost from './uploadPost';
 
 const UploadMedia = ( { mediaType } ) => {
   const { user, token } = useAuthStorage();
-  const { postTag } = useTag();
+  const { createTag } = useTag();
   const { uploadMedia, loadingMediaUpload } = useMedia();
 
   /* useFocusEffect(
@@ -21,6 +23,7 @@ const UploadMedia = ( { mediaType } ) => {
 
   const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
     mediaDescription = JSON.stringify( mediaDescription );
+
 
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' );
@@ -51,13 +54,13 @@ const UploadMedia = ( { mediaType } ) => {
         tag = `avatar_${ user.user_id }`;
         break;
       case 'event':
-        tag = 'locists_event'
+        tag = eventTag;
         break;
       case 'post':
-        tag = 'locists_post'
+        tag = postTag;
     }
 
-    const tagResponse = await postTag(
+    const tagResponse = await createTag(
         {
           file_id: response.file_id,
           tag,
@@ -76,11 +79,7 @@ const UploadMedia = ( { mediaType } ) => {
     case 'event':
       return <UploadEvent onSubmit={ onSubmit }/>;
     default:
-      return (
-          <View>
-
-          </View>
-      );
+      return <UploadPost onSubmit={ onSubmit }/>;
   }
 };
 
