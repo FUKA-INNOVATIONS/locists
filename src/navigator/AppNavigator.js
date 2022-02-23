@@ -9,10 +9,12 @@ import AuthenticateScreen from '../views/Authenticate';
 import SingleEventScreen from '../views/SingleEvent';
 import SinglePostScreen from '../views/SinglePost';
 import ExploreScreen from '../views/Explore';
-import CreateEventScreen from '../views/CreateEvent'
-import CreatePostScreen from '../views/createPost'
+import CreateEventScreen from '../views/CreateEvent';
+import CreatePostScreen from '../views/createPost';
+import SettingsScreen from '../views/Settings';
 
 import useAuthStorage from '../hooks/useAuthStorage';
+import TabBar from "../components/nav/TabBar";
 
 const HomeStack = createNativeStackNavigator();
 const ExploreStack = createNativeStackNavigator();
@@ -83,41 +85,40 @@ const AuthenticationStackScreen = () => {
   );
 };
 
-const AppNavigator = () => {
+const AppNavigator = (props) => {
   return (
       <NavigationContainer>
-        <BottomTab.Navigator
+        <BottomTab.Navigator tabBar={(props) => <TabBar {...props}/>}
             screenOptions={ ( { route } ) => ( {
-              headerShown: false,
-              tabBarIcon: ( { focused, color, size } ) => {
-                let iconName;
-
-                switch ( route.name ) {
-                  case 'HomeTab':
-                    iconName = focused
-                        ? 'ios-information-circle'
-                        : 'ios-information-circle-outline';
-                    break;
-                  case 'AccountTab':
-                    iconName = focused ? 'ios-list' : 'ios-list';
-                    break;
-                }
-
-                // You can return any component that you like here!
-                return <Ionicons name={ iconName } size={ size }
-                                 color={ color }/>;
-              },
-              tabBarActiveTintColor: 'tomato',
-              tabBarInactiveTintColor: 'gray',
-            } ) }
+              headerShown: false,}
+                )}
         >
-          <BottomTab.Screen name={ 'HomeTab' } component={ HomeStackScreen }/>
-          <BottomTab.Screen name={ 'ExploreTab' }
-                            component={ ExploreStackScreen }/>
-          <BottomTab.Screen name={ 'CreateTab' }
-                            component={ CreateStackScreen }/>
-          <BottomTab.Screen name={ 'AuthenticationTab' }
-                            component={ AuthenticationStackScreen }/>
+          <BottomTab.Screen
+              // TODO Name "Home" conflicts with another screen
+              name={ 'Feed' }
+              component={ HomeStackScreen }
+              initialParams={{ icon: 'home' }}
+          />
+          <BottomTab.Screen
+              name={ 'Explore' }
+              component={ ExploreStackScreen }
+              initialParams={{ icon: 'earth' }}
+          />
+          <BottomTab.Screen
+              name={ 'Create' }
+              component={ CreateStackScreen }
+              initialParams={{ icon: 'pluscircleo' }}
+          />
+          <BottomTab.Screen
+              name={ 'Sign In' }
+              component={ AuthenticationStackScreen }
+              initialParams={{ icon: 'user' }}
+          />
+            <BottomTab.Screen
+                name={ 'Settings' }
+                component={ SettingsScreen }
+                initialParams={{ icon: 'setting' }}
+            />
         </BottomTab.Navigator>
       </NavigationContainer>
   );
