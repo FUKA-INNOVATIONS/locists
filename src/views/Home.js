@@ -6,7 +6,7 @@ import useUser from '../hooks/useUser';
 import { useEffect } from 'react';
 
 const Home = ( { navigation } ) => {
-  const { token, getToken, getUserByToken } = useUser();
+  const { token, getToken, getUserByToken, loginWithToken } = useUser();
   const authStorage = useAuthStorage();
   // eslint-disable-next-line
   const viewFocused = useIsFocused(); // workaround to force re-render this component
@@ -14,12 +14,14 @@ const Home = ( { navigation } ) => {
 
   useEffect( async () => {
     await getToken();
-    if ( token ) {
+    await loginWithToken(token);
+    /* if ( token ) {
       const user = await getUserByToken( token );
       if ( user.id !== null ) {
-        authStorage.login( user, token );
+        authStorage.login( user );
+        loginWithToken(token)
       }
-    }
+    } */
   } );
 
   return (

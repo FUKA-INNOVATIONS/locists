@@ -6,9 +6,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class AuthStorage {
   constructor() {
-    this.isLogged = false;
+    // this.isLogged = false;
     this.user = {};
-    this.token = null;
+    // this.token = null;
+    // this.avatar = null;
   }
 
   // Get the access token from the storage
@@ -29,25 +30,27 @@ class AuthStorage {
   async setToken( token ) {
     try {
       await AsyncStorage.setItem( 'token', token );
-      this.token = token;
+      this.user.token = token;
     } catch ( e ) {
       console.log( e );
     }
   }
 
-  login(user, token) {
-    this.isLogged = true;
-    this.user = user;
-    this.token = token;
+  login(user) {
+    // this.user.isLogged = true;
+    // this.user = {...user, user};
+    // this.token = token;
+    this.user = user
+    console.log('USER', user)
   }
 
   // Log out
   async logout() {
     try {
       await AsyncStorage.removeItem( 'token' );
-      this.isLogged = false;
+      // this.isLogged = false;
       this.user = {};
-      this.token = null;
+      // this.token = null;
     } catch ( error ) {
       console.log( error );
     }

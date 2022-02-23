@@ -7,7 +7,7 @@ const useMedia = () => {
   const [ loadingEvents, setLoadingEvents ] = useState( false );
   const [ loadingPosts, setLoadingPosts ] = useState( false );
   const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
-  const [ loadingAllMedia, setLoadingAllMedia ] = useState( false );
+  const [ loading, setLoading ] = useState( false );
   const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(
       false );
   const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
@@ -19,12 +19,12 @@ const useMedia = () => {
   const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
-    setLoadingAllMedia( true );
+    setLoading( true );
     const events = await getEvents();
     const posts = await getPosts();
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
-    setLoadingAllMedia( false );
+    setLoading( false );
   };
 
   const getEvents = async () => {
@@ -95,7 +95,7 @@ const useMedia = () => {
 
     try {
       const result = await doFetch(baseUrl + 'media', options);
-      console.log('url', baseUrl)
+      // console.log('url', baseUrl)
       result && setLoadingMediaUpload(false);
       return result;
     } catch ( e ) {
@@ -119,7 +119,7 @@ const useMedia = () => {
     loadingEvents,
     loadingPosts,
     loadingSingleMedia,
-    loadingAllMedia,
+    loading,
     loadingSingleMediaComments,
     loadingMediaUpload,
   };

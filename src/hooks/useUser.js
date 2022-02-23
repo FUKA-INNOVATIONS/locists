@@ -2,8 +2,9 @@ import { useState } from 'react';
 import axios from 'axios';
 
 // TODO: use appId
-import { baseUrl } from '../../config';
+import { baseUrl, uploadsUrl } from '../../config';
 import useAuthStorage from './useAuthStorage';
+import useTag from './useTag';
 
 const useUser = () => {
   const authStorage = useAuthStorage();
@@ -55,12 +56,18 @@ const useUser = () => {
       const { token, user } = loginResponse.data;
 
       /*
-       * If user login succeeded, store token in device and userData in app state
+       * If user login succeeded,
+       * store token in device
+       * userData and avatar link in app state
        * */
 
       if ( token ) {
         console.log( 'login succeeded' );
         await authStorage.setToken( token );
+
+        const avatar = await fetchAvatar( user.user_id );
+        user.avatar = avatar;
+
         authStorage.login( user );
       }
 
@@ -70,6 +77,34 @@ const useUser = () => {
       setError( error );
       return error;
     }
+  };
+
+  /*
+   * Fetch and return user avatar link
+   * */
+  const fetchAvatar = async ( userId ) => {
+    const { getFilesByTag } = useTag();
+    try {
+      const avatarArray = await getFilesByTag( 'avatar_' + userId );
+      const avatar = avatarArray.pop();
+      // console.log('avatar', avatar)
+      authStorage.user.avatar = uploadsUrl + avatar.filename;
+      return uploadsUrl + avatar.filename;
+    } catch ( error ) {
+      console.error( error.message );
+    }
+  };
+
+  const loginWithToken = async ( token ) => {
+    const user = await getUserByToken( token );
+    if ( user ) {
+      const avatar = await fetchAvatar( user.user_id );
+      user.isLogged = true;
+      user.avatar = avatar;
+      user.token = token;
+      authStorage.login( user );
+    }
+
   };
 
   // Get currently logged in user's details
@@ -85,7 +120,7 @@ const useUser = () => {
   const getToken = async () => {
     try {
       const token = await authStorage.getToken();
-      setToken(token);
+      setToken( token );
     } catch ( e ) {
       console.log( e );
     }
@@ -94,17 +129,17 @@ const useUser = () => {
   // Get user details by id
   const getUserById = async () => {};
 
-  const getUserByToken = async (token) => {
+  const getUserByToken = async ( token ) => {
     const URL = `${ baseUrl }users/user`;
     const options = {
       method: 'GET',
-      headers: {'x-access-token': token},
+      headers: { 'x-access-token': token },
     };
     try {
-      const user = await axios.get(URL, options);
-      return user.data
+      const user = await axios.get( URL, options );
+      return user.data;
     } catch ( e ) {
-      console.log(e)
+      console.log( e );
     }
   };
 
@@ -119,6 +154,8 @@ const useUser = () => {
     getUserById,
     modifyUser,
     getUserByToken,
+    fetchAvatar,
+    loginWithToken,
     loading,
     error,
     token,

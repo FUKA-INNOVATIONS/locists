@@ -28,16 +28,13 @@ const Login = ({ navigation }) => {
   const onSubmit = async (data) => {
     const loginResponse = await login(data)
 
-    if (loginResponse.token) {
-      // User login succeeded
-      console.log('login succeeded')
-      // Redirect to home screen
-      navigation.navigate('Home')
-    } else {
-      // User login failed
+    /* if (loginResponse.token) {
+      console.log('login succeeded')  // User login succeeded
+      navigation.navigate('Home')     // Redirect to home screen
+    } else {  // User login failed
       console.log('login failed')
       Alert.alert('Login failed', 'Please check your credentials and try again')
-    }
+    } */
   }
 
   return (
