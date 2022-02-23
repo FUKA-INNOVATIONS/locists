@@ -1,33 +1,21 @@
 import { FlatList, Pressable, View, Text } from 'react-native';
 import Post from './Post';
 import Event from './Event';
-
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 const HomeList = ( { navigation } ) => {
-  // const { getEvents, events, loadingEvents } = useMedia();
-  // const { getPosts, posts, loadingPosts } = useMedia();
-  const { getAllMedia, allMedia, loadingAllMedia } = useMedia();
+  const { getAllMedia, allMedia, loading } = useMedia();
   const viewIsFocused = useIsFocused();
 
   useEffect( async () => {
-    // await getEvents();
-    // await getPosts();
     await getAllMedia();
-    // setPostsAndEventsMix(previousState => [...previousState, posts, events])
   }, [ viewIsFocused ] );
-
-  // TODO: find a better solution
-  /* if ( posts !== undefined && events !== undefined ) {
-    events.map( event => mixed.push( event ) );
-    posts.map( post => mixed.push( post ) );
-  } */
 
   // TODO: Add a spinner icon
   // Display loading spinner icon while loading
-  if ( loadingAllMedia ) {
+  if ( loading ) {
     return (
         <View>
           <Text>

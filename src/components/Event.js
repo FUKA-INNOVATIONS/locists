@@ -4,7 +4,6 @@ import { uploadsUrl } from '../../config';
 const Event = ( { eventDetails } ) => {
   let description = eventDetails.description;
   description = JSON.parse(description)
-  console.log(description)
 
   if ( eventDetails === null ) {
     return (

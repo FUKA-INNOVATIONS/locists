@@ -2,30 +2,38 @@ import { useCallback, useState } from 'react';
 import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import UploadMedia from '../components/UploadMedia';
-import fetchAvatar from '../utils/fetchAvatar';
 import { useFocusEffect } from '@react-navigation/native';
 
 const Account = ( { navigation } ) => {
-  const { user, isLogged } = useAuthStorage();
+  const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
-  const [ avatar, setAvatar ] = useState( null );
+  const [ update, setUpdate ] = useState( false );
+
+  const logoutHandler = async () => {
+    await authStorage.logout();
+    setUpdate( true );
+  };
+
+  /*  If user is logged in
+   *   Hide Authentication view and move to Account view
+   * */
 
   useFocusEffect(
       useCallback( () => {
-        return () => fetchAvatar( user.user_id ).
-            then( url => setAvatar( url ) );
-      }, [] ),
+        return () => {
+          user.isLogged && navigation.navigate( 'HomeTab', {Scree: 'Home'} );
+          setUpdate( false );
+        };
+      }, [ update ] ),
   );
-
-  const logoutHandler = async () => {
-    await authStorage.logout().then( navigation.navigate( 'Home' ) );
-  };
 
   return (
       <View>
-        <Image source={ { uri: avatar } }
-               style={ { width: 100, height: 100 } }/>
-        <Text>User status: { isLogged && 'logged in' }</Text>
+        { user.avatar ? <Image source={ { uri: user.avatar } }
+                               style={ { width: 100, height: 100 } }/>
+            : <Text>You don't own an avatar</Text> // eslint-disable-line
+        }
+        <Text>User status: { user.isLogged && 'logged in' }</Text>
         <Text>Username: { user.username }</Text>
         <Text>Email: { user.email }</Text>
         <Text>User id: { user.user_id }</Text>

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import axios from 'axios';
 
 // TODO: use appId
-import { baseUrl } from '../../config';
+import { baseUrl, uploadsUrl } from '../../config';
 import useAuthStorage from './useAuthStorage';
+import useTag from './useTag';
 
 const useUser = () => {
   const authStorage = useAuthStorage();
@@ -14,12 +15,11 @@ const useUser = () => {
   // Create new user account
   const register = async ( username, password, email, fullName ) => {
     setLoading( true );
-
     const newUser = {
       username,
       password,
       email,
-      full_name: `${ fullName } and more..`,
+      full_name: fullName,
     };
 
     const URL = `${ baseUrl }users`;
@@ -41,6 +41,16 @@ const useUser = () => {
     }
   };
 
+  const isUsernameAvailable = async ( username ) => {
+    const URL = `${ baseUrl }users/username/${ username }`;
+    try {
+      const available = await axios.get( URL );
+      return available.data;
+    } catch ( e ) {
+      console.log( 'error in isUsernameAvailable', e );
+    }
+  };
+
   // Authenticate and login user
   const login = async ( loginCredentials ) => {
     const URL = `${ baseUrl }login`;
@@ -55,21 +65,55 @@ const useUser = () => {
       const { token, user } = loginResponse.data;
 
       /*
-       * If user login succeeded, store token in device and userData in app state
+       * If user login succeeded,
+       * store token in device
+       * userData and avatar link in app state -> user obj
        * */
 
       if ( token ) {
         console.log( 'login succeeded' );
         await authStorage.setToken( token );
+        user.avatar = await fetchAvatar( user.user_id );
+        user.isLogged = true;
         authStorage.login( user );
       }
-
       return loginResponse.data;
     } catch ( error ) {
       console.log( 'login error in hook', error );
       setError( error );
       return error;
     }
+  };
+
+  /*
+   * Fetch and return user avatar link
+   * */
+  const fetchAvatar = async ( userId ) => {
+    const { getFilesByTag } = useTag();
+    try {
+      const avatarArray = await getFilesByTag( 'avatar_' + userId );
+      const avatar = avatarArray.pop();
+      if ( avatar !== undefined ) {
+        authStorage.user.avatar = uploadsUrl + avatar.filename;
+        return uploadsUrl + avatar.filename;
+      }
+    } catch ( error ) {
+      console.error( error.message );
+    }
+  };
+
+  const loginWithToken = async ( token ) => {
+    if ( token ) {
+      const user = await getUserByToken( token );
+      if ( user ) {
+        const avatar = await fetchAvatar( user.user_id );
+        user.isLogged = true;
+        user.avatar = avatar;
+        user.token = token;
+        authStorage.login( user );
+      }
+    }
+    return null;
   };
 
   // Get currently logged in user's details
@@ -85,7 +129,8 @@ const useUser = () => {
   const getToken = async () => {
     try {
       const token = await authStorage.getToken();
-      setToken(token);
+      setToken( token );
+      return token;
     } catch ( e ) {
       console.log( e );
     }
@@ -94,17 +139,17 @@ const useUser = () => {
   // Get user details by id
   const getUserById = async () => {};
 
-  const getUserByToken = async (token) => {
+  const getUserByToken = async ( token ) => {
     const URL = `${ baseUrl }users/user`;
     const options = {
       method: 'GET',
-      headers: {'x-access-token': token},
+      headers: { 'x-access-token': token },
     };
     try {
-      const user = await axios.get(URL, options);
-      return user.data
+      const user = await axios.get( URL, options );
+      return user.data;
     } catch ( e ) {
-      console.log(e)
+      console.log( e );
     }
   };
 
@@ -119,7 +164,11 @@ const useUser = () => {
     getUserById,
     modifyUser,
     getUserByToken,
+    fetchAvatar,
+    loginWithToken,
+    isUsernameAvailable,
     loading,
+    setLoading,
     error,
     token,
   };

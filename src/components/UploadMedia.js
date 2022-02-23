@@ -9,7 +9,7 @@ import { postTag, eventTag } from '../../config';
 import UploadPost from './uploadPost';
 
 const UploadMedia = ( { mediaType } ) => {
-  const { user, token } = useAuthStorage();
+  const { user } = useAuthStorage();
   const { createTag } = useTag();
   const { uploadMedia } = useMedia();
 
@@ -21,7 +21,6 @@ const UploadMedia = ( { mediaType } ) => {
 
   const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
     mediaDescription = JSON.stringify( mediaDescription );
-
 
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' );
@@ -42,7 +41,7 @@ const UploadMedia = ( { mediaType } ) => {
     } );
 
     // Upload media
-    const response = await uploadMedia( formData, token );
+    const response = await uploadMedia( formData, user.token );
 
     // Create new tag and associate it with uploaded media
 
@@ -63,7 +62,7 @@ const UploadMedia = ( { mediaType } ) => {
           file_id: response.file_id,
           tag,
         },
-        token,
+        user.token,
     );
 
     console.log( 'new tag res in onSubmit', tagResponse );
