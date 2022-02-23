@@ -5,7 +5,6 @@ import SwitchSelector from 'react-native-switch-selector';
 import theme from '../theme';
 import Login from '../components/Login';
 import Register from '../components/Register';
-// import useUserStorage from '../hooks/useUserStorage';
 
 const Authenticate = ( { navigation } ) => {
   const [ activeView, setActiveView ] = useState( 'signIn' );
@@ -20,6 +19,7 @@ const Authenticate = ( { navigation } ) => {
       value: { view: 'register' },
     },
   ];
+
   const setView = ( view ) => {
     setActiveView( view );
   };
