@@ -3,10 +3,10 @@ import HomeList from '../components/HomeList';
 import { useIsFocused } from '@react-navigation/native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import useUser from '../hooks/useUser';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Home = ( { navigation } ) => {
-  const { token, getToken, getUserByToken, loginWithToken } = useUser();
+  const { token, getToken, loginWithToken } = useUser();
   const authStorage = useAuthStorage();
   // eslint-disable-next-line
   const viewFocused = useIsFocused(); // workaround to force re-render this component
@@ -15,13 +15,6 @@ const Home = ( { navigation } ) => {
   useEffect( async () => {
     await getToken();
     await loginWithToken(token);
-    /* if ( token ) {
-      const user = await getUserByToken( token );
-      if ( user.id !== null ) {
-        authStorage.login( user );
-        loginWithToken(token)
-      }
-    } */
   } );
 
   return (

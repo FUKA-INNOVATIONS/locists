@@ -15,7 +15,6 @@ const useUser = () => {
   // Create new user account
   const register = async ( username, password, email, fullName ) => {
     setLoading( true );
-
     const newUser = {
       username,
       password,
@@ -104,7 +103,6 @@ const useUser = () => {
       user.token = token;
       authStorage.login( user );
     }
-
   };
 
   // Get currently logged in user's details
@@ -157,6 +155,7 @@ const useUser = () => {
     fetchAvatar,
     loginWithToken,
     loading,
+    setLoading,
     error,
     token,
   };
