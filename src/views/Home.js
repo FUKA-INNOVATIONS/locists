@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
 import HomeList from '../components/HomeList';
-import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import useUser from '../hooks/useUser';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import theme from '../theme';
+import fetchAvatar from '../utils/fetchAvatar';
 
 const Home = ( { navigation } ) => {
   const { token, getToken, getUserByToken } = useUser();
@@ -16,17 +18,32 @@ const Home = ( { navigation } ) => {
     await getToken();
     if ( token ) {
       const user = await getUserByToken( token );
-      if ( user.id !== null ) {
+      if ( user.user_id !== null ) {
         authStorage.login( user, token );
       }
     }
   } );
 
+  /* useFocusEffect(
+      useCallback( () => {
+        return async () => {
+          await getToken();
+          if ( token ) {
+            const user = await getUserByToken( token );
+            if ( user.id !== null ) {
+              authStorage.login( user, token );
+            }
+          }
+        };
+      }, [] ),
+  ); */
+
   return (
-      <View style={ { marginTop: 50, marginHorizontal: 10 } }>
-        <Text>You are logged { authStorage.isLogged ? 'in' : 'out' }</Text>
-        <HomeList navigation={ navigation }/>
-      </View>
+
+          <View style={ { ...theme.mainPadding } }>
+            <HomeList navigation={ navigation }/>
+          </View>
+
   );
 };
 

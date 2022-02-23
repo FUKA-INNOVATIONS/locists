@@ -2,14 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 
 // TODO: use appId
-import { baseUrl } from '../../config';
+import { baseUrl, uploadsUrl } from '../../config';
 import useAuthStorage from './useAuthStorage';
+import useTag from './useTag';
 
 const useUser = () => {
   const authStorage = useAuthStorage();
   const [ loading, setLoading ] = useState( false );
   const [ error, setError ] = useState( null );
   const [ token, setToken ] = useState( null );
+  const [ avatar, setAvatar ] = useState();
 
   // Create new user account
   const register = async ( username, password, email, fullName ) => {
@@ -85,7 +87,7 @@ const useUser = () => {
   const getToken = async () => {
     try {
       const token = await authStorage.getToken();
-      setToken(token);
+      setToken( token );
     } catch ( e ) {
       console.log( e );
     }
@@ -94,17 +96,30 @@ const useUser = () => {
   // Get user details by id
   const getUserById = async () => {};
 
-  const getUserByToken = async (token) => {
+  const getUserByToken = async ( token ) => {
     const URL = `${ baseUrl }users/user`;
     const options = {
       method: 'GET',
-      headers: {'x-access-token': token},
+      headers: { 'x-access-token': token },
     };
     try {
-      const user = await axios.get(URL, options);
-      return user.data
+      const user = await axios.get( URL, options );
+      return user.data;
     } catch ( e ) {
-      console.log(e)
+      console.log( e );
+    }
+  };
+
+  const fetchAvatar = async ( userId ) => {
+    const { getFilesByTag } = useTag();
+    try {
+      const avatarArray = await getFilesByTag( 'avatar_' + userId );
+      const avatar = avatarArray.pop();
+      setAvatar(avatar);
+      // console.log( 'avatar', avatar );
+      return uploadsUrl + avatar.filename;
+    } catch ( error ) {
+      console.error( error.message );
     }
   };
 
@@ -119,9 +134,11 @@ const useUser = () => {
     getUserById,
     modifyUser,
     getUserByToken,
+    fetchAvatar,
     loading,
     error,
     token,
+    avatar,
   };
 };
 

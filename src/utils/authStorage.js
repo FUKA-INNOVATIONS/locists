@@ -9,6 +9,7 @@ class AuthStorage {
     this.isLogged = false;
     this.user = {};
     this.token = null;
+    this.avatar = null;
   }
 
   // Get the access token from the storage
@@ -39,6 +40,7 @@ class AuthStorage {
     this.isLogged = true;
     this.user = user;
     this.token = token;
+    this.avatar = user.avatar;
   }
 
   // Log out
@@ -48,6 +50,7 @@ class AuthStorage {
       this.isLogged = false;
       this.user = {};
       this.token = null;
+      this.avatar = null;
     } catch ( error ) {
       console.log( error );
     }
