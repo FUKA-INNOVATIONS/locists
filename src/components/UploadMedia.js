@@ -22,7 +22,6 @@ const UploadMedia = ( { mediaType } ) => {
   const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
     mediaDescription = JSON.stringify( mediaDescription );
 
-
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' );
       return;

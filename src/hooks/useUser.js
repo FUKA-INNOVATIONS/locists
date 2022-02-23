@@ -93,7 +93,6 @@ const useUser = () => {
     try {
       const avatarArray = await getFilesByTag( 'avatar_' + userId );
       const avatar = avatarArray.pop();
-      console.log( 'avatar', avatar );
       if ( avatar !== undefined ) {
         authStorage.user.avatar = uploadsUrl + avatar.filename;
         return uploadsUrl + avatar.filename;

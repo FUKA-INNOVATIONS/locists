@@ -35,7 +35,7 @@ class AuthStorage {
 
   login( user ) {
     this.user = user;
-    console.log( 'app state login', user );
+    console.log( 'User obj (authStorage.login())', user );
   }
 
   // Log out
