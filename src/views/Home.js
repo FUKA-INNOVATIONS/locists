@@ -1,7 +1,5 @@
 import { View } from 'react-native';
 import HomeList from '../components/HomeList';
-import { useIsFocused } from '@react-navigation/native';
-import useAuthStorage from '../hooks/useAuthStorage';
 import useUser from '../hooks/useUser';
 import { useEffect } from 'react';
 

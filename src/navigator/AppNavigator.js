@@ -13,7 +13,6 @@ import CreateEventScreen from '../views/CreateEvent'
 import CreatePostScreen from '../views/createPost'
 
 import useAuthStorage from '../hooks/useAuthStorage';
-import { useEffect } from 'react';
 
 const HomeStack = createNativeStackNavigator();
 const ExploreStack = createNativeStackNavigator();

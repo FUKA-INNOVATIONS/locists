@@ -75,11 +75,11 @@ const Register = ( { navigation } ) => {
      * */
 
     if ( registeredUser.user_id ) {
-      // Alert.alert('Registration succeeded');
-      const loginCredentials = {
+
+      /* const loginCredentials = {
         username: data.username,
         password: data.password,
-      };
+      }; */
 
       const loginResponse = await login(data)
       if (loginResponse.token) {
