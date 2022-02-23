@@ -21,7 +21,7 @@ const Account = ( { navigation } ) => {
   useFocusEffect(
       useCallback( () => {
         return () => {
-          user.isLogged && navigation.navigate( 'HomeTab', {Scree: 'Home'} );
+          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
           setUpdate( false );
         };
       }, [ update ] ),
