@@ -92,13 +92,15 @@ const useUser = () => {
   };
 
   const loginWithToken = async ( token ) => {
-    const user = await getUserByToken( token );
-    if ( user ) {
-      const avatar = await fetchAvatar( user.user_id );
-      user.isLogged = true;
-      user.avatar = avatar;
-      user.token = token;
-      authStorage.login( user );
+    if (token) {
+      const user = await getUserByToken( token );
+      if ( user ) {
+        const avatar = await fetchAvatar( user.user_id );
+        user.isLogged = true;
+        user.avatar = avatar;
+        user.token = token;
+        authStorage.login( user );
+      }
     }
     return null;
   };
