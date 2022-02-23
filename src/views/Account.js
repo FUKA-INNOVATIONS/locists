@@ -1,18 +1,30 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import UploadMedia from '../components/UploadMedia';
 import fetchAvatar from '../utils/fetchAvatar';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
-  const [ avatar, setAvatar ] = useState( null );
+  const viewIsFocused = useIsFocused();
+  const [update, setUpdate] = useState(false)
 
   const logoutHandler = async () => {
     await authStorage.logout();
+    setUpdate(true)
   };
+
+  useFocusEffect(
+      useCallback( () => {
+        return () => {
+          user.isLogged && navigation.navigate('Account');
+          setUpdate(false);
+        };
+      }, [update] ),
+  );
+
 
   return (
       <View>
