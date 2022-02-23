@@ -16,6 +16,10 @@ const Account = ( { navigation } ) => {
     setUpdate(true)
   };
 
+  /*  If user is logged in
+  *   Hide Authentication view and move to Account view
+  * */
+
   useFocusEffect(
       useCallback( () => {
         return () => {
