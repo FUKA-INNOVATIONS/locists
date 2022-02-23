@@ -9,31 +9,32 @@ const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
   const viewIsFocused = useIsFocused();
-  const [update, setUpdate] = useState(false)
+  const [ update, setUpdate ] = useState( false );
 
   const logoutHandler = async () => {
     await authStorage.logout();
-    setUpdate(true)
+    setUpdate( true );
   };
 
   /*  If user is logged in
-  *   Hide Authentication view and move to Account view
-  * */
+   *   Hide Authentication view and move to Account view
+   * */
 
   useFocusEffect(
       useCallback( () => {
         return () => {
-          user.isLogged && navigation.navigate('Account');
-          setUpdate(false);
+          user.isLogged && navigation.navigate( 'HomeTab', {Scree: 'Home'} );
+          setUpdate( false );
         };
-      }, [update] ),
+      }, [ update ] ),
   );
-
 
   return (
       <View>
-        <Image source={ { uri: user.avatar } }
-               style={ { width: 100, height: 100 } }/>
+        { user.avatar ? <Image source={ { uri: user.avatar } }
+                               style={ { width: 100, height: 100 } }/>
+            : <Text>You don't own an avatar</Text>
+        }
         <Text>User status: { user.isLogged && 'logged in' }</Text>
         <Text>Username: { user.username }</Text>
         <Text>Email: { user.email }</Text>

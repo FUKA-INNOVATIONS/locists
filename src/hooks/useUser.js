@@ -19,7 +19,7 @@ const useUser = () => {
       username,
       password,
       email,
-      full_name: `${ fullName } and more..`,
+      full_name: fullName,
     };
 
     const URL = `${ baseUrl }users`;
@@ -38,6 +38,16 @@ const useUser = () => {
       setLoading( false );
       console.log( 'register error', error );
       return error;
+    }
+  };
+
+  const isUsernameAvailable = async ( username ) => {
+    const URL = `${ baseUrl }users/username/${ username }`;
+    try {
+      const available = await axios.get( URL );
+      return available.data;
+    } catch ( e ) {
+      console.log( 'error in isUsernameAvailable', e );
     }
   };
 
@@ -83,16 +93,18 @@ const useUser = () => {
     try {
       const avatarArray = await getFilesByTag( 'avatar_' + userId );
       const avatar = avatarArray.pop();
-      // console.log('avatar', avatar)
-      authStorage.user.avatar = uploadsUrl + avatar.filename;
-      return uploadsUrl + avatar.filename;
+      console.log( 'avatar', avatar );
+      if ( avatar !== undefined ) {
+        authStorage.user.avatar = uploadsUrl + avatar.filename;
+        return uploadsUrl + avatar.filename;
+      }
     } catch ( error ) {
       console.error( error.message );
     }
   };
 
   const loginWithToken = async ( token ) => {
-    if (token) {
+    if ( token ) {
       const user = await getUserByToken( token );
       if ( user ) {
         const avatar = await fetchAvatar( user.user_id );
@@ -155,6 +167,7 @@ const useUser = () => {
     getUserByToken,
     fetchAvatar,
     loginWithToken,
+    isUsernameAvailable,
     loading,
     setLoading,
     error,

@@ -37,7 +37,7 @@ const Authenticate = ( { navigation } ) => {
         { activeView === 'signIn' ? (
             <Login navigation={ navigation }/>
         ) : (
-            <Register/>
+            <Register navigation={ navigation }/>
         ) }
       </View>
   );

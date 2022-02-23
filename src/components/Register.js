@@ -3,7 +3,7 @@ import {
   Text,
   TextInput,
   Button,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, Alert,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -27,9 +27,9 @@ const RegisterSchema = Yup.object().shape( {
   fullName: Yup.string().required( 'Required' ),
 } );
 
-const Register = ( props ) => {
+const Register = ( { navigation } ) => {
   // eslint-disable-next-line
-  const { register, loading, error } = useUser();
+  const { isUsernameAvailable, register, login, loading, error } = useUser();
 
   const {
     control,
@@ -48,13 +48,50 @@ const Register = ( props ) => {
 
   // Submit registration form with given data
   const onSubmit = async ( data ) => {
-    // Register user
+    // Check, is username available ?
+    const { available } = await isUsernameAvailable( data.username );
+    !available && Alert.alert( 'Username is not available',
+        'Please choose another cool username and try again' );
+
+    // Username is available, Register user
+
     const registeredUser = await register(
         data.username,
         data.password,
         data.email,
         data.fullName,
     );
+
+    /*
+     * Registration failed, alert user
+     * */
+
+    if ( !registeredUser.user_id ) {
+      Alert.alert( 'Registration failed' );
+    }
+
+    /*
+     * Registration succeeded, login user
+     * */
+
+    if ( registeredUser.user_id ) {
+      // Alert.alert('Registration succeeded');
+      const loginCredentials = {
+        username: data.username,
+        password: data.password,
+      };
+
+      const loginResponse = await login(data)
+      if (loginResponse.token) {
+        console.log('login succeeded')  // User login succeeded
+        navigation.navigate('Home')     // Redirect to home screen
+      } else {  // User login failed
+        console.log('login failed')
+        Alert.alert('Login failed', 'Please check your credentials and try again')
+      }
+
+    }
+
     console.log( 'registeredUser Register.js: ', registeredUser );
   };
 
