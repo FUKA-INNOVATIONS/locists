@@ -57,9 +57,7 @@ const CreateStackScreen = () => {
 };
 
 const AuthenticationStackScreen = () => {
-  // TODO: Store isLoggedIn in local storage
-  const authStorage = useAuthStorage();
-  const isLogged = authStorage.isLogged;
+  const {user} = useAuthStorage();
   // TODO: test useFocusEffect
   // eslint-disable-next-line
   const viewIsFocused = useIsFocused();
@@ -69,7 +67,7 @@ const AuthenticationStackScreen = () => {
 
   return (
       <AuthenticationStack.Navigator>
-        { !isLogged ? (
+        { !user.isLogged ? (
             <>
               <AuthenticationStack.Screen name={ 'Authenticate' }
                                           component={ AuthenticateScreen }/>

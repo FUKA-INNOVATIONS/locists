@@ -57,19 +57,16 @@ const useUser = () => {
       /*
        * If user login succeeded,
        * store token in device
-       * userData and avatar link in app state
+       * userData and avatar link in app state -> user obj
        * */
 
       if ( token ) {
         console.log( 'login succeeded' );
         await authStorage.setToken( token );
-
-        const avatar = await fetchAvatar( user.user_id );
-        user.avatar = avatar;
-
+        user.avatar = await fetchAvatar( user.user_id );
+        user.isLogged = true;
         authStorage.login( user );
       }
-
       return loginResponse.data;
     } catch ( error ) {
       console.log( 'login error in hook', error );
