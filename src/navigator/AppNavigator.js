@@ -61,10 +61,10 @@ const AuthenticationStackScreen = () => {
   const {user} = useAuthStorage();
   // TODO: test useFocusEffect
   // eslint-disable-next-line
-  const viewIsFocused = useIsFocused();
+  /* const viewIsFocused = useIsFocused();
   useEffect( () => {
    console.log( 'Login view focused' );
-   }, [ viewIsFocused ] );
+   }, [ viewIsFocused ] ); */
 
   return (
       <AuthenticationStack.Navigator>

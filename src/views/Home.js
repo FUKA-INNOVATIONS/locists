@@ -6,20 +6,20 @@ import useUser from '../hooks/useUser';
 import { useEffect, useState } from 'react';
 
 const Home = ( { navigation } ) => {
-  const { token, getToken, loginWithToken } = useUser();
-  const authStorage = useAuthStorage();
+  const { getToken, loginWithToken } = useUser();
+  const {user} = useAuthStorage();
   // eslint-disable-next-line
   const viewFocused = useIsFocused(); // workaround to force re-render this component
   console.log( 'user in app state', useAuthStorage() );
 
   useEffect( async () => {
-    await getToken();
-    await loginWithToken(token);
+    const tokenInDevice = await getToken();
+    await loginWithToken(tokenInDevice);
   } );
 
   return (
       <View style={ { marginTop: 50, marginHorizontal: 10 } }>
-        <Text>You are logged { authStorage.isLogged ? 'in' : 'out' }</Text>
+        <Text>You are logged { user.isLogged ? 'in' : 'out' }</Text>
         <HomeList navigation={ navigation }/>
       </View>
   );

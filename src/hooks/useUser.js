@@ -100,6 +100,7 @@ const useUser = () => {
       user.token = token;
       authStorage.login( user );
     }
+    return null;
   };
 
   // Get currently logged in user's details
@@ -116,6 +117,7 @@ const useUser = () => {
     try {
       const token = await authStorage.getToken();
       setToken( token );
+      return token;
     } catch ( e ) {
       console.log( e );
     }
