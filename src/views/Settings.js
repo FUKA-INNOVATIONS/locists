@@ -1,5 +1,4 @@
 import { View, Text } from 'react-native';
-import HomeList from "../components/HomeList";
 
 const Settings = ( { navigation } ) => {
 
