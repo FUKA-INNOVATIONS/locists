@@ -9,7 +9,7 @@ import { postTag, eventTag } from '../../config';
 import UploadPost from './uploadPost';
 import { useState } from 'react';
 
-const UploadMedia = ( { mediaType } ) => {
+const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage();
   const { createTag } = useTag();
   const { uploadMedia } = useMedia();
@@ -43,7 +43,7 @@ const UploadMedia = ( { mediaType } ) => {
     } );
 
     // Upload media
-    const response = await uploadMedia( formData, user.token );
+    const fileResponse = await uploadMedia( formData, user.token );
 
     // Create new tag and associate it with uploaded media
 
@@ -61,14 +61,22 @@ const UploadMedia = ( { mediaType } ) => {
 
     const tagResponse = await createTag(
         {
-          file_id: response.file_id,
+          file_id: fileResponse.file_id,
           tag,
         },
         user.token,
     );
-
     console.log( 'new tag res in onSubmit', tagResponse );
-    console.log( 'upload res in onSubmit', response );
+    console.log( 'upload res in onSubmit', fileResponse );
+
+    /*
+    * Upload succeeded, close modal
+    * */
+
+    if (fileResponse && tagResponse) {
+      navigation.goBack();
+    }
+
   };
 
   if ( loading ) {
