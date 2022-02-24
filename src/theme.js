@@ -1,6 +1,8 @@
-import { Platform } from 'react-native'
+import { Platform, Dimensions } from 'react-native'
 // Add Dimensions
 // Testing the pipeline
+
+const {width} = Dimensions.get('screen');
 
 const theme = {
   colors: {
@@ -40,6 +42,51 @@ const theme = {
     borderWidth: 1,
     // height: 70,
   },
+
+  mediaTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+
+  // Event List Styles
+  event: {
+    marginHorizontal: 10,
+    flex: 1,
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderRadius: 12,
+    backgroundColor: '#E9D6DB',
+  },
+  eventInfo: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingLeft: 5,
+  },
+  eventAttend: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    borderWidth: 0,
+    width: width/3,
+  },
+  eventImage: {
+    width: 135,
+    height: 135,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+
+  // Post List Styles
+  post: {
+    marginHorizontal: 10,
+    flex: 1,
+    alignSelf: 'center',
+  },
+  postImage: {
+    width: width-20,
+  }
+
 }
 
 export default theme

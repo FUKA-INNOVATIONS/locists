@@ -12,7 +12,7 @@ const Home = ( { navigation } ) => {
   } );
 
   return (
-      <View style={ { marginHorizontal: 10 } }>
+      <View>
         <HomeList navigation={ navigation }/>
       </View>
   );

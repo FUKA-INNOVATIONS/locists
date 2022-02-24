@@ -1,9 +1,24 @@
 import { StyleSheet, View, Image, Text } from "react-native";
 import {uploadsUrl} from "../../config";
+import theme from "../theme";
 
 const Post = ({postMedia}) => {
     return (
-        <View style={styles.info}>
+        <>
+            <View style={{marginLeft: 20}}>
+                {
+                    // Todo add user avatar here
+                }
+                <Text>Username</Text>
+            </View>
+            <View style={theme.post}>
+                <Image
+                    source={ { uri: uploadsUrl + postMedia.filename } }
+                    style={ theme.postImage }
+                />
+            </View>
+        </>
+        /*<View style={styles.info}>
 
             {postMedia.filename &&
                 <Image
@@ -22,7 +37,7 @@ const Post = ({postMedia}) => {
                 <Text>comments: {postMedia.comments}</Text>
             </View>
             </View>
-        </View>
+        </View>*/
     )
 }
 

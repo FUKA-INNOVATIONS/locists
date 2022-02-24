@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import ExploreList from "../components/ExploreList";
 
 import { useState } from 'react';
@@ -23,7 +23,7 @@ const Explore = ( {navigation} ) => {
     };
 
     return (
-        <View>
+        <View style={{paddingBottom: 90}}>
             <SwitchSelector
                 textColor={ theme.colors.textPrimary }
                 buttonColor={ theme.colors.primary }
