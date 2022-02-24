@@ -4,13 +4,12 @@ import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
 
 const useMedia = () => {
-  const [ loadingEvents, setLoadingEvents ] = useState( false );
-  const [ loadingPosts, setLoadingPosts ] = useState( false );
-  const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
+  // const [ loadingEvents, setLoadingEvents ] = useState( false );
+  // const [ loadingPosts, setLoadingPosts ] = useState( false );
+  // const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
   const [ loading, setLoading ] = useState( false );
-  const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(
-      false );
-  const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
+  // const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(false );
+  // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
 
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
@@ -19,21 +18,21 @@ const useMedia = () => {
   const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
-    setLoading( true );
+    // setLoading( true );
     const events = await getEvents();
     const posts = await getPosts();
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
-    setLoading( false );
+    // setLoading( false );
   };
 
   const getEvents = async () => {
     const URL = `${ baseUrl }tags/${ eventTag }`;
     try {
-      setLoadingEvents( true );
+      // setLoading( true );
       const events = await axios.get( URL );
       setEvents( events.data );
-      setLoadingEvents( false );
+      // setLoading( false );
       return events.data;
     } catch ( e ) {
       console.log( e );
@@ -43,10 +42,10 @@ const useMedia = () => {
   const getPosts = async () => {
     const URL = `${ baseUrl }tags/${ postTag }`;
     try {
-      setLoadingEvents( true );
+      // setLoading( true );
       const posts = await axios.get( URL );
       setPosts( posts.data );
-      setLoadingPosts( false );
+      // setLoading( false );
       return posts.data;
     } catch ( e ) {
       console.log( e );
@@ -56,10 +55,10 @@ const useMedia = () => {
   const getMediaById = async ( mediaId ) => {
     const URL = `${ baseUrl }media/${ mediaId }`;
     try {
-      setLoadingSingleMedia( true );
+      // setLoading( true );
       const singleMedia = await axios.get( URL );
       setSingleMedia( singleMedia.data );
-      setLoadingSingleMedia( false );
+      // setLoading( false );
     } catch ( e ) {
       console.log( e );
     }
@@ -68,11 +67,11 @@ const useMedia = () => {
   const getSingleMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
     try {
-      setSingleLoadingMediaComments( true );
+      // setLoading( true );
       const comments = await axios.get( URL );
       setSingleMediaComments( comments.data );
       // console.log('comments in hook', comments.data)
-      setSingleLoadingMediaComments( false );
+      // setLoading( false );
     } catch ( e ) {
       console.log( e );
     }
@@ -81,7 +80,6 @@ const useMedia = () => {
   const uploadMedia = async ( formData, token ) => {
    // console.log( 'uploadMedia hook' );
     // console.log( 'formData in uploadMedia hook', formData);
-    setLoadingMediaUpload( true );
     // console.log( 'token in uploadMedia hook', token );
 
     const options = {
@@ -94,9 +92,10 @@ const useMedia = () => {
     };
 
     try {
+      // setLoading(true);
       const result = await doFetch(baseUrl + 'media', options);
       // console.log('url', baseUrl)
-      result && setLoadingMediaUpload(false);
+      // result && setLoading(false);
       return result;
     } catch ( e ) {
       console.log(e.message)
@@ -116,12 +115,12 @@ const useMedia = () => {
     allMedia,
     singleMedia,
     singleMediaComments,
-    loadingEvents,
-    loadingPosts,
-    loadingSingleMedia,
+    // loadingEvents,
+    // loadingPosts,
+    // loadingSingleMedia,
     loading,
-    loadingSingleMediaComments,
-    loadingMediaUpload,
+    // loadingSingleMediaComments,
+    // loadingMediaUpload,
   };
 
 };
