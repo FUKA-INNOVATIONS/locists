@@ -29,7 +29,7 @@ const RegisterSchema = Yup.object().shape( {
 
 const Register = ( { navigation } ) => {
   // eslint-disable-next-line
-  const { isUsernameAvailable, register, login, loading, error } = useUser();
+  const { isUsernameAvailable, register, login } = useUser();
 
   const {
     control,

@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { Alert, View, Text } from 'react-native';
 import useMedia from '../hooks/useMedia';
 
 import useAuthStorage from '../hooks/useAuthStorage';
@@ -7,11 +7,13 @@ import UploadAvatar from './UploadAvatar';
 import UploadEvent from './uploadEvent';
 import { postTag, eventTag } from '../../config';
 import UploadPost from './uploadPost';
+import { useState } from 'react';
 
 const UploadMedia = ( { mediaType } ) => {
   const { user } = useAuthStorage();
   const { createTag } = useTag();
   const { uploadMedia } = useMedia();
+  const [ loading, setLoading ] = useState( false );
 
   /* useFocusEffect(
    useCallback( () => {
@@ -41,6 +43,7 @@ const UploadMedia = ( { mediaType } ) => {
     } );
 
     // Upload media
+    setLoading( true );
     const response = await uploadMedia( formData, user.token );
 
     // Create new tag and associate it with uploaded media
@@ -64,10 +67,17 @@ const UploadMedia = ( { mediaType } ) => {
         },
         user.token,
     );
+    setLoading( false );
 
     console.log( 'new tag res in onSubmit', tagResponse );
     console.log( 'upload res in onSubmit', response );
   };
+
+  if ( loading ) {
+    return (
+        <View><Text>Loading..</Text></View>
+    );
+  }
 
   switch ( mediaType ) {
     case 'avatar':

@@ -10,7 +10,7 @@ const Account = ( { navigation } ) => {
 
   const logoutHandler = async () => {
     await authStorage.logout();
-    setUpdate( true );
+    // setUpdate( true );
   };
 
   /*  If user is logged in
@@ -20,8 +20,8 @@ const Account = ( { navigation } ) => {
   useFocusEffect(
       useCallback( () => {
         return () => {
-          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
-          setUpdate( false );
+          // user.isLogged && navigation.navigate( 'AccountTab', {Screen: 'Account'} );
+          // setUpdate( false );
         };
       }, [ update ] ),
   );

@@ -2,15 +2,18 @@ import { FlatList, Pressable, View, Text } from 'react-native';
 import Post from './Post';
 import Event from './Event';
 import useMedia from '../hooks/useMedia';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 const HomeList = ( { navigation } ) => {
-  const { getAllMedia, allMedia, loading } = useMedia();
+  const { getAllMedia, allMedia } = useMedia();
   const viewIsFocused = useIsFocused();
+  const [ loading, setLoading ] = useState(false);
 
   useEffect( async () => {
+    setLoading(true);
     await getAllMedia();
+    setLoading(false);
   }, [ viewIsFocused ] );
 
   // TODO: Add a spinner icon
