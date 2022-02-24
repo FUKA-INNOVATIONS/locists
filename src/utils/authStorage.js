@@ -39,10 +39,7 @@ class AuthStorage {
   }
 
   updateState( newState ) {
-    this.user = {
-      ...this.user,
-      ...newState,
-    };
+    this.user = newState
   }
 
   // Log out
