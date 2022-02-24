@@ -74,7 +74,13 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     * */
 
     if (fileResponse && tagResponse) {
+      // TODO: close modal:
+      // Alert.alert(`${mediaType.toUpperCase()} uploaded!`)
       navigation.goBack();
+    }
+
+    if (!fileResponse || !tagResponse ) {
+      Alert.alert('Sorry', `Something went wrong and ${mediaType} creation failed\n please check media file size!`)
     }
 
   };

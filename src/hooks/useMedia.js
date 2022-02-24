@@ -98,7 +98,8 @@ const useMedia = () => {
       // result && setLoading(false);
       return result;
     } catch ( e ) {
-      console.log(e.message)
+      console.log('error in uploadMedia hook', e.message);
+      return false;
     }
 
   };

@@ -8,7 +8,7 @@ const CreateEvent = ( { navigation } ) => {
   return (
       <>
         <Button title={ 'Close' } onPress={ onModalCloseHandler }/>
-        <UploadMedia mediaType={ 'event' }/>
+        <UploadMedia mediaType={ 'event' } navigation={ navigation }/>
       </>
   );
 };

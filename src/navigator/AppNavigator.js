@@ -57,9 +57,9 @@ const CreateStackScreen = () => {
       <CreateStack.Navigator>
         <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
           <CreateStack.Screen name={ 'CreatePost' }
-                              component={ CreatePostScreen }/>
-          <CreateStack.Screen name={ 'CreateEvent' }
                               component={ CreateEventScreen }/>
+          <CreateStack.Screen name={ 'CreateEvent' }
+                              component={ CreatePostScreen }/>
         </CreateStack.Group>
       </CreateStack.Navigator>
   );
