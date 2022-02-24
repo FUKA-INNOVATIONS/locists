@@ -1,18 +1,15 @@
-import { useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import { View, Text, Button, TextInput, Alert } from 'react-native';
+import { View, Button, TextInput, Alert } from 'react-native';
 import useUser from '../hooks/useUser';
 import useAuthStorage from '../hooks/useAuthStorage';
 import theme from '../theme';
 import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+
 import UploadMedia from '../components/UploadMedia';
 
 const Settings = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
-  const { getUserByToken, modifyUser, isUsernameAvailable } = useUser();
+  const { modifyUser, isUsernameAvailable } = useUser();
 
   const onModalCloseHandler = () => {
     navigation.goBack();
