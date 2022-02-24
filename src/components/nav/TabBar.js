@@ -5,7 +5,7 @@ import {useState} from "react";
 const {width} = Dimensions.get('screen');
 
 const TabBar = ({state, navigation}) => {
-    const [selected, setSelected] = useState('Feed');
+    const [selected, setSelected] = useState('HomeTab');
     const {routes} = state;
 
     // Active/inactive color of icons

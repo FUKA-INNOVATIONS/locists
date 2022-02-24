@@ -20,7 +20,7 @@ const Event = ( { eventDetails } ) => {
 
   return (
       <>
-          <View style={{marginLeft: 20}}>
+          <View style={{marginLeft: 15}}>
               {
                   // Todo add user avatar here
               }

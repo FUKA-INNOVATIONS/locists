@@ -51,11 +51,13 @@ const theme = {
 
   // Event List Styles
   event: {
+    marginBottom: 10,
     marginHorizontal: 10,
     flex: 1,
     flexDirection: 'row',
     borderWidth: 1,
     borderRadius: 12,
+    borderTopLeftRadius: 0,
     backgroundColor: '#E9D6DB',
   },
   eventInfo: {
@@ -79,13 +81,35 @@ const theme = {
 
   // Post List Styles
   post: {
+    marginBottom: 10,
     marginHorizontal: 10,
     flex: 1,
     alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 11,
+    backgroundColor: '#E9D6DB',
   },
   postImage: {
     width: width-20,
-  }
+    height: undefined,
+    aspectRatio: 1.4,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  postInfo: {
+    paddingLeft: 5,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
+  postText: {
+    marginVertical: 5,
+    width: '80%',
+  },
+  postExtra: {
+    paddingRight: 5,
+  },
 
 }
 

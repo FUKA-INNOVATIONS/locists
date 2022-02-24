@@ -2,36 +2,55 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import {uploadsUrl} from "../../config";
 import theme from "../theme";
 
+import { AntDesign } from '@expo/vector-icons';
+
 const Post = ({postMedia}) => {
+
+    let description = postMedia.description;
+    description = JSON.parse(description);
+    console.log('xxxxxxxxxxxx', description);
+
     return (
         <>
             <View style={{marginLeft: 20}}>
                 {
                     // Todo add user avatar here
                 }
-                <Text>Username</Text>
+                <Text>{description.owner}</Text>
             </View>
+
             <View style={theme.post}>
-                <Image
-                    source={ { uri: uploadsUrl + postMedia.filename } }
-                    style={ theme.postImage }
-                />
+                {
+                    // TODO check if post has image, display post without image if not present
+                }
+                {postMedia.filename &&
+                    <Image
+                        source={ { uri: uploadsUrl + postMedia.filename } }
+                        style={ theme.postImage }
+                    />
+                }
+
+                <View style={theme.postInfo}>
+                    <View style={theme.postText}>
+                        <Text>{description.description}</Text>
+                    </View>
+
+                    <View style={theme.postExtra}>
+                        <Text>
+                            0
+                            <AntDesign name="like2" size={24} color="black" />
+                        </Text>
+
+                        <Text>
+                            0
+                            <AntDesign name="message1" size={24} color="black" />
+                        </Text>
+                    </View>
+                </View>
             </View>
         </>
         /*<View style={styles.info}>
-
-            {postMedia.filename &&
-                <Image
-                    // TODO: use thumbnails when ever possible
-                    source={ { uri: uploadsUrl + postMedia.filename } }
-                    style={ { width: 100, height: 100 } }
-                />
-            }
             <View style={styles.allText}>
-            <View style={styles.text}>
-                <Text>{postMedia.title}</Text>
-                <Text>{postMedia.description}</Text>
-            </View>
             <View style={styles.rates}>
                 <Text>likes: {postMedia.likes}</Text>
                 <Text>comments: {postMedia.comments}</Text>

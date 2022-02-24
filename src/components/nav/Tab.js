@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 const Tab = ({color, tab, onPress, icon}) => {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
-            { tab.name === 'Create' ?
+            { tab.name === 'CreateTab' ?
                 (
                     // TODO create custom plus button component (with lottie animation?)
                     icon && <AntDesign name={icon} size={30} color={color} style={styles.create} />

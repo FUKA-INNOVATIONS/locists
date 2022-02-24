@@ -104,27 +104,27 @@ const AppNavigator = ( props ) => {
         >
           <BottomTab.Screen
               // TODO Name "Home" conflicts with another screen
-              name={ 'Feed' }
+              name={ 'HomeTab' }
               component={ HomeStackScreen }
               initialParams={ { icon: 'home' } }
           />
           <BottomTab.Screen
-              name={ 'Explore' }
+              name={ 'ExploreTab' }
               component={ ExploreStackScreen }
               initialParams={ { icon: 'earth' } }
           />
           <BottomTab.Screen
-              name={ 'Create' }
+              name={ 'CreateTab' }
               component={ CreateStackScreen }
               initialParams={ { icon: 'pluscircleo' } }
           />
           <BottomTab.Screen
-              name={ 'Sign In' }
+              name={ 'SignTab' }
               component={ AuthenticationStackScreen }
               initialParams={ { icon: 'user' } }
           />
           <BottomTab.Screen
-              name={ 'Settings' }
+              name={ 'SettingsTab' }
               component={ SettingsScreen }
               initialParams={ { icon: 'setting' } }
           />
