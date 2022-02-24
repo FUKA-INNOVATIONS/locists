@@ -1,9 +1,15 @@
 import UploadMedia from '../components/UploadMedia';
+import { Button } from 'react-native';
 
-const CreatePost = props => {
+const CreatePost = ( { navigation } ) => {
+  const onModalCloseHandler = () => {
+    navigation.goBack();
+  };
+
   return (
       <>
-        <UploadMedia mediaType={'post'} />
+        <Button title={'Go back'} onPress={onModalCloseHandler} />
+        <UploadMedia mediaType={ 'post' }/>
       </>
   );
 };

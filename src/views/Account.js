@@ -21,7 +21,7 @@ const Account = ( { navigation } ) => {
   useFocusEffect(
       useCallback( () => {
         return () => {
-          user.isLogged && navigation.navigate( 'HomeTab', {Scree: 'Home'} );
+          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
           setUpdate( false );
         };
       }, [ update ] ),
@@ -29,6 +29,7 @@ const Account = ( { navigation } ) => {
 
   return (
       <View>
+        <Button title={'Modify your account details'} onPress={() => navigation.navigate('ModifyAccount')} />
         { user.avatar ? <Image source={ { uri: user.avatar } }
                                style={ { width: 100, height: 100 } }/>
             : <Text>You don't own an avatar</Text> // eslint-disable-line

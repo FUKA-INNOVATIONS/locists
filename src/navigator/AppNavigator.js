@@ -13,7 +13,7 @@ import CreatePostScreen from '../views/createPost';
 import SettingsScreen from '../views/Settings';
 
 import useAuthStorage from '../hooks/useAuthStorage';
-import TabBar from "../components/nav/TabBar";
+import TabBar from '../components/nav/TabBar';
 
 const HomeStack = createNativeStackNavigator();
 const ExploreStack = createNativeStackNavigator();
@@ -26,11 +26,14 @@ const HomeStackScreen = () => {
       <HomeStack.Navigator>
         <HomeStack.Screen name={ 'Home' }
                           component={ HomeScreen }/>
-        <HomeStack.Screen name={ 'SinglePostHomeStack' }
-                          component={ SinglePostScreen }/>
-        <HomeStack.Screen name={ 'SingleEvent' }
-                          component={ SingleEventScreen }/>
+        <HomeStack.Group screenOptions={ { presentation: 'modal' } }>
+          <HomeStack.Screen name={ 'SinglePostHomeStack' }
+                            component={ SinglePostScreen }/>
+          <HomeStack.Screen name={ 'SingleEvent' }
+                            component={ SingleEventScreen }/>
+        </HomeStack.Group>
       </HomeStack.Navigator>
+
   );
 };
 
@@ -38,10 +41,12 @@ const ExploreStackScreen = () => {
   return (
       <ExploreStack.Navigator>
         <ExploreStack.Screen name={ 'Explore' } component={ ExploreScreen }/>
-        <ExploreStack.Screen name={ 'SingleEvent' }
-                             component={ SingleEventScreen }/>
-        <ExploreStack.Screen name={ 'SinglePost' }
-                             component={ SinglePostScreen }/>
+        <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
+          <ExploreStack.Screen name={ 'SingleEvent' }
+                               component={ SingleEventScreen }/>
+          <ExploreStack.Screen name={ 'SinglePost' }
+                               component={ SinglePostScreen }/>
+        </ExploreStack.Group>
       </ExploreStack.Navigator>
   );
 };
@@ -49,16 +54,18 @@ const ExploreStackScreen = () => {
 const CreateStackScreen = () => {
   return (
       <CreateStack.Navigator>
-        <CreateStack.Screen name={ 'CreateEvent' }
-                            component={ CreatePostScreen }/>
-        <CreateStack.Screen name={ 'CreatePost' }
-                            component={ CreateEventScreen }/>
+        <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
+          <CreateStack.Screen name={ 'CreatePost' }
+                              component={ CreateEventScreen }/>
+          <CreateStack.Screen name={ 'CreateEvent' }
+                              component={ CreatePostScreen }/>
+        </CreateStack.Group>
       </CreateStack.Navigator>
   );
 };
 
 const AuthenticationStackScreen = () => {
-  const {user} = useAuthStorage();
+  const { user } = useAuthStorage();
   // TODO: test useFocusEffect
   // eslint-disable-next-line
   const viewIsFocused = useIsFocused();
@@ -74,48 +81,53 @@ const AuthenticationStackScreen = () => {
                                           component={ AuthenticateScreen }/>
             </>
         ) : (
-            <AuthenticationStack.Screen name={ 'Account' }
-                                        component={ AccountScreen }/>
+            <>
+              <AuthenticationStack.Screen name={ 'Account' } component={ AccountScreen }/>
+              <AuthenticationStack.Group screenOptions={ { presentation: 'modal' } }>
+                <AuthenticationStack.Screen name={ 'ModifyAccount' } component={ SettingsScreen }/>
+              </AuthenticationStack.Group>
+            </>
         )
         }
       </AuthenticationStack.Navigator>
   );
 };
 
-const AppNavigator = (props) => {
+const AppNavigator = ( props ) => {
   return (
       <NavigationContainer>
-        <BottomTab.Navigator tabBar={(props) => <TabBar {...props}/>}
-            screenOptions={ ( { route } ) => ( {
-              headerShown: false,}
-                )}
+        <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props }/> }
+                             screenOptions={ ( { route } ) => ( {
+                                   headerShown: false,
+                                 }
+                             ) }
         >
           <BottomTab.Screen
               // TODO Name "Home" conflicts with another screen
               name={ 'Feed' }
               component={ HomeStackScreen }
-              initialParams={{ icon: 'home' }}
+              initialParams={ { icon: 'home' } }
           />
           <BottomTab.Screen
               name={ 'Explore' }
               component={ ExploreStackScreen }
-              initialParams={{ icon: 'earth' }}
+              initialParams={ { icon: 'earth' } }
           />
           <BottomTab.Screen
               name={ 'Create' }
               component={ CreateStackScreen }
-              initialParams={{ icon: 'pluscircleo' }}
+              initialParams={ { icon: 'pluscircleo' } }
           />
           <BottomTab.Screen
               name={ 'Sign In' }
               component={ AuthenticationStackScreen }
-              initialParams={{ icon: 'user' }}
+              initialParams={ { icon: 'user' } }
           />
-            <BottomTab.Screen
-                name={ 'Settings' }
-                component={ SettingsScreen }
-                initialParams={{ icon: 'setting' }}
-            />
+          <BottomTab.Screen
+              name={ 'Settings' }
+              component={ SettingsScreen }
+              initialParams={ { icon: 'setting' } }
+          />
         </BottomTab.Navigator>
       </NavigationContainer>
   );

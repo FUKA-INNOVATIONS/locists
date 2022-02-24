@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import Post from '../components/Post';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
@@ -13,8 +13,13 @@ const SinglePost = ( { navigation, route } ) => {
 
     if(loadingSingleMedia) return <View><Text>Loading..</Text></View>
 
+    const onModalCloseHandler = () => {
+        navigation.goBack();
+    }
+
     return (
         <>
+            <Button title={'Go back'} onPress={onModalCloseHandler} />
             { singleMedia !== undefined && <Post postMedia={ singleMedia }/> }
         </>
     );
