@@ -43,7 +43,6 @@ const UploadMedia = ( { mediaType } ) => {
     } );
 
     // Upload media
-    setLoading( true );
     const response = await uploadMedia( formData, user.token );
 
     // Create new tag and associate it with uploaded media
@@ -67,7 +66,6 @@ const UploadMedia = ( { mediaType } ) => {
         },
         user.token,
     );
-    setLoading( false );
 
     console.log( 'new tag res in onSubmit', tagResponse );
     console.log( 'upload res in onSubmit', response );

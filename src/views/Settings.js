@@ -210,7 +210,7 @@ const Settings = ( { navigation } ) => {
           />
         </View>
         <Button title="Update details" onPress={ handleSubmit( onSubmit ) }/>
-        <UploadMedia mediaType={ 'avatar' } ussername={ user.username }/>
+        <UploadMedia mediaType={ 'avatar' } />
       </View>
   );
 
