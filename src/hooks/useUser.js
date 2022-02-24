@@ -5,6 +5,7 @@ import axios from 'axios';
 import { baseUrl, uploadsUrl } from '../../config';
 import useAuthStorage from './useAuthStorage';
 import useTag from './useTag';
+import doFetch from '../utils/doFetch';
 
 const useUser = () => {
   const authStorage = useAuthStorage();
@@ -154,7 +155,22 @@ const useUser = () => {
   };
 
   // Modify registered user account details
-  const modifyUser = async () => {};
+  const modifyUser = async (token, updateDetails) => {
+    console.log('details', updateDetails)
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token,
+      },
+      body: JSON.stringify(updateDetails),
+    };
+    try {
+      return await doFetch(baseUrl + 'users', options);
+    } catch ( e ) {
+      console.log('error in modifyUser', e)
+    }
+  };
 
   return {
     register,

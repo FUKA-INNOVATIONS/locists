@@ -8,7 +8,7 @@ const CreatePost = ( { navigation } ) => {
 
   return (
       <>
-        <Button title={'Go back'} onPress={onModalCloseHandler} />
+        <Button title={'Close'} onPress={onModalCloseHandler} />
         <UploadMedia mediaType={ 'post' }/>
       </>
   );

@@ -38,6 +38,10 @@ class AuthStorage {
     console.log( 'User obj (authStorage.login())', user );
   }
 
+  updateState( newState ) {
+    this.user = newState
+  }
+
   // Log out
   async logout() {
     try {

@@ -84,7 +84,7 @@ const Register = ( { navigation } ) => {
       const loginResponse = await login(data)
       if (loginResponse.token) {
         console.log('login succeeded')  // User login succeeded
-        navigation.navigate('Home')     // Redirect to home screen
+        navigation.navigate('HomeTab')     // Redirect to home screen
       } else {  // User login failed
         console.log('login failed')
         Alert.alert('Login failed', 'Please check your credentials and try again')
@@ -144,6 +144,7 @@ const Register = ( { navigation } ) => {
                         onChangeText={ onChange }
                         value={ value }
                         placeholder="Password"
+                        secureTextEntry={true}
                     />
                 ) }
                 name="password"
@@ -161,6 +162,7 @@ const Register = ( { navigation } ) => {
                         onChangeText={ onChange }
                         value={ value }
                         placeholder="Password confirmation"
+                        secureTextEntry={true}
                     />
                 ) }
                 name="passwordConfirm"

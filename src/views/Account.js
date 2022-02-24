@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
-import UploadMedia from '../components/UploadMedia';
 import { useFocusEffect } from '@react-navigation/native';
 
 const Account = ( { navigation } ) => {
@@ -40,7 +39,6 @@ const Account = ( { navigation } ) => {
         <Text>User id: { user.user_id }</Text>
         <Text>Full name: { user.full_name }</Text>
         <Button title={ 'Log out' } onPress={ logoutHandler }/>
-        <UploadMedia mediaType={ 'avatar' } ussername={ user.username }/>
       </View>
   );
 };
