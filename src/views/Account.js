@@ -10,6 +10,7 @@ const Account = ( { navigation } ) => {
 
   const logoutHandler = async () => {
     await authStorage.logout();
+    user.isLogged && navigation.navigate( 'AccountTab', {Screen: 'Account'} );
     // setUpdate( true );
   };
 
