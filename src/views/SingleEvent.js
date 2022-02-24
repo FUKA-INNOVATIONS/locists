@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 
@@ -30,16 +30,22 @@ const SingleEvent = ( { navigation, route } ) => {
   // const ListFooter = () => <Text>Footer</Text>;
 
 
+  const onModalCloseHandler = () => {
+    navigation.goBack();
+  }
 
 
   return (
-      <FlatList
-          data={ singleMediaComments }
-          ListEmptyComponent={ EmptyListMessage }
-          ListHeaderComponent={ <SingleEventHeader eventDetails={ singleMedia } /> }
-          keyExtractor={ (  item  ) => item.comment_id }
-          renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
-      />
+      <>
+        <Button title={'Go back'} onPress={onModalCloseHandler} />
+        <FlatList
+            data={ singleMediaComments }
+            ListEmptyComponent={ EmptyListMessage }
+            ListHeaderComponent={ <SingleEventHeader eventDetails={ singleMedia } /> }
+            keyExtractor={ (  item  ) => item.comment_id }
+            renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
+        />
+      </>
   );
 };
 

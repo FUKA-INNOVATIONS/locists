@@ -41,10 +41,12 @@ const ExploreStackScreen = () => {
   return (
       <ExploreStack.Navigator>
         <ExploreStack.Screen name={ 'Explore' } component={ ExploreScreen }/>
-        <ExploreStack.Screen name={ 'SingleEvent' }
-                             component={ SingleEventScreen }/>
-        <ExploreStack.Screen name={ 'SinglePost' }
-                             component={ SinglePostScreen }/>
+        <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
+          <ExploreStack.Screen name={ 'SingleEvent' }
+                               component={ SingleEventScreen }/>
+          <ExploreStack.Screen name={ 'SinglePost' }
+                               component={ SinglePostScreen }/>
+        </ExploreStack.Group>
       </ExploreStack.Navigator>
   );
 };
@@ -53,10 +55,10 @@ const CreateStackScreen = () => {
   return (
       <CreateStack.Navigator>
         <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
-          <CreateStack.Screen name={ 'CreateEvent' }
-                              component={ CreatePostScreen }/>
           <CreateStack.Screen name={ 'CreatePost' }
                               component={ CreateEventScreen }/>
+          <CreateStack.Screen name={ 'CreateEvent' }
+                              component={ CreatePostScreen }/>
         </CreateStack.Group>
       </CreateStack.Navigator>
   );
@@ -79,8 +81,12 @@ const AuthenticationStackScreen = () => {
                                           component={ AuthenticateScreen }/>
             </>
         ) : (
-            <AuthenticationStack.Screen name={ 'Account' }
-                                        component={ AccountScreen }/>
+            <>
+              <AuthenticationStack.Screen name={ 'Account' } component={ AccountScreen }/>
+              <AuthenticationStack.Group screenOptions={ { presentation: 'modal' } }>
+                <AuthenticationStack.Screen name={ 'ModifyAccount' } component={ SettingsScreen }/>
+              </AuthenticationStack.Group>
+            </>
         )
         }
       </AuthenticationStack.Navigator>

@@ -1,10 +1,15 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
 const Settings = ( { navigation } ) => {
 
+  const onModalCloseHandler = () => {
+    navigation.goBack();
+  }
+
     return (
         <View style={ { marginTop: 50, marginHorizontal: 10 } }>
-            <Text>Settings Page</Text>
+          <Button title={'Go back'} onPress={onModalCloseHandler} />
+          <Text>Settings Page</Text>
         </View>
     );
 
