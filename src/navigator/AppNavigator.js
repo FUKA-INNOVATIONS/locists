@@ -19,13 +19,14 @@ const HomeStack = createNativeStackNavigator();
 const ExploreStack = createNativeStackNavigator();
 const CreateStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
-const BottomTab = createBottomTabNavigator();
 
-const HomeStackScreen = () => {
+const BottomTab = createBottomTabNavigator();
+const AppStack = createNativeStackNavigator();
+
+ const HomeStackScreen = () => {
   return (
       <HomeStack.Navigator>
-        <HomeStack.Screen name={ 'Home' }
-                          component={ HomeScreen }/>
+        <HomeStack.Screen name={ 'Home' } component={ HomeScreen }/>
         <HomeStack.Group screenOptions={ { presentation: 'modal' } }>
           <HomeStack.Screen name={ 'SinglePostHomeStack' }
                             component={ SinglePostScreen }/>
@@ -93,6 +94,36 @@ const AuthenticationStackScreen = () => {
   );
 };
 
+/* const AppStackScreen = () => {
+  const { user } = useAuthStorage();
+  const viewIsFocused = useIsFocused(); //eslint-disable-line
+
+  return (
+      <AppStack.Navigator>
+        <AppStack.Screen name={ 'Home' } component={ HomeScreen }/>
+        <AppStack.Screen name={ 'Explore' } component={ ExploreScreen }/>
+        <AppStack.Group name={'Account'} screenOptions={ { presentation: 'modal' } }>
+          {!user.isLogged && <AppStack.Screen name={ 'Authenticate' } component={ AuthenticateScreen }/>}
+          <AppStack.Screen name={ 'AccountDetails' } component={ AccountScreen }/>
+          <AppStack.Screen name={ 'ModifyAccount' } component={ SettingsScreen }/>
+        </AppStack.Group>
+
+        <AppStack.Group name={'Explore'} screenOptions={ { presentation: 'modal' } }>
+        </AppStack.Group>
+
+        <AppStack.Group name={'Create'} screenOptions={ { presentation: 'modal' } }>
+          <AppStack.Screen name={ 'CreatePost' } component={ CreateEventScreen }/>
+          <AppStack.Screen name={ 'CreateEvent' } component={ CreatePostScreen }/>
+        </AppStack.Group>
+
+        <AppStack.Group name={'Modal'} screenOptions={ { presentation: 'modal' } }>
+          <AppStack.Screen name={ 'SingleEvent' } component={ SingleEventScreen }/>
+          <AppStack.Screen name={ 'SinglePost' } component={ SinglePostScreen }/>
+        </AppStack.Group>
+      </AppStack.Navigator>
+  )
+} */
+
 const AppNavigator = ( props ) => {
   return (
       <NavigationContainer>
@@ -119,7 +150,7 @@ const AppNavigator = ( props ) => {
               initialParams={ { icon: 'pluscircleo' } }
           />
           <BottomTab.Screen
-              name={ 'SignTab' }
+              name={ 'AccountTab' }
               component={ AuthenticationStackScreen }
               initialParams={ { icon: 'user' } }
           />
