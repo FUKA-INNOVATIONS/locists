@@ -99,6 +99,7 @@ const theme = {
   postInfo: {
     paddingLeft: 5,
     flex: 1,
+    height: 70,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 5,
@@ -108,7 +109,45 @@ const theme = {
     width: '80%',
   },
   postExtra: {
+    paddingTop: 5,
     paddingRight: 5,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
+
+  // Single Event Styles
+  singleEventInfo: {
+    marginHorizontal: 0,
+    backgroundColor: '#E9D6DB',
+    borderTopWidth: 0,
+    borderBottomWidth: 1,
+    borderRadius: 0,
+    marginTop: 0,
+    padding: 5,
+  },
+  singlePostComments: {
+     marginTop: 5,
+    borderWidth: 2,
+    alignSelf: 'center',
+    minHeight: 260,
+    paddingVertical: 5,
+    width: width * 0.95,
+  },
+  postComment: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'space-evenly',
+    paddingTop: 5,
+    width: width * 0.9,
+    minHeight: 60,
+    borderWidth: 1,
+  },
+  commentAvatar: {
+    width: 35,
+    height: 35,
+    borderRadius: 50,
   },
 
 }

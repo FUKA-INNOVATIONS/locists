@@ -36,7 +36,7 @@ const Post = ({postMedia}) => {
                     </View>
 
                     <View style={theme.postExtra}>
-                        <Text>
+                        <Text style={{marginBottom: 10}}>
                             0
                             <AntDesign name="like2" size={24} color="black" />
                         </Text>

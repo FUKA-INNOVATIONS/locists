@@ -1,9 +1,10 @@
-import { View, Text, FlatList, Button } from 'react-native';
+import { View, Text, FlatList, Button, ScrollView } from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 
 import SingleEventHeader from '../components/SingleEventHeader';
 import Comment from '../components/Comment';
+import theme from "../theme";
 
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params;
@@ -38,13 +39,16 @@ const SingleEvent = ( { navigation, route } ) => {
   return (
       <>
         <Button title={'Go back'} onPress={onModalCloseHandler} />
-        <FlatList
-            data={ singleMediaComments }
-            ListEmptyComponent={ EmptyListMessage }
-            ListHeaderComponent={ <SingleEventHeader eventDetails={ singleMedia } /> }
-            keyExtractor={ (  item  ) => item.comment_id }
-            renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
-        />
+        <SingleEventHeader eventDetails={ singleMedia } />
+        <View style={theme.singlePostComments}>
+          <FlatList
+              data={ singleMediaComments }
+              ListEmptyComponent={ EmptyListMessage }
+              keyExtractor={ (  item  ) => item.comment_id }
+              renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
+          />
+        </View>
+
       </>
   );
 };
