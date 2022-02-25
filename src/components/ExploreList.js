@@ -7,15 +7,15 @@ import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 const ExploreList = ( { navigation, explore } ) => {
-  const { getEvents, events, loading: loadingEvents } = useMedia();
-  const { getPosts, posts, loading: loadingPosts } = useMedia();
+  const { getEventsWithThumbnails, events, loading: loadingEvents } = useMedia();
+  const { getPostsWithThumbnails, posts, loading: loadingPosts } = useMedia();
   const viewIsFocused = useIsFocused();
   const [ loading, setLoading ] = useState(false);
 
   useEffect( async () => {
     setLoading(true)
-    await getEvents();
-    await getPosts();
+    await getEventsWithThumbnails();
+    await getPostsWithThumbnails();
     setLoading(false)
   }, [ viewIsFocused ] );
 

@@ -2,8 +2,8 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { uploadsUrl } from '../../config';
 
 const Event = ( { eventDetails } ) => {
-  let description = eventDetails.description;
-  description = JSON.parse(description)
+  // let description = eventDetails.description;
+  // description = JSON.parse(description)
 
   if ( eventDetails === null ) {
     return (
@@ -15,24 +15,24 @@ const Event = ( { eventDetails } ) => {
     );
   }
 
-  // console.log('eventDetails in Event.js', eventDetails)
+  console.log('eventDetails in Event.js', eventDetails)
 
   return (
       <View style={ styles.event }>
         <View style={ styles.text }>
-          <Text>{ description.name }</Text>
-          <Text numberOfLines={ 2 }>{ description.location }</Text>
-          <Text>{ description.date }</Text>
-          <Text>{ description.price } €</Text>
+          <Text>{ eventDetails.description.name }</Text>
+          <Text numberOfLines={ 2 }>{ eventDetails.description.location }</Text>
+          <Text>{ eventDetails.description.date }</Text>
+          <Text>{ eventDetails.description.price } €</Text>
           <View style={ styles.attendees }>
-            <Text>likes: { eventDetails.attendees }</Text>
+            <Text>likes: </Text>
             <Text>Host:</Text>
           </View>
         </View>
 
         <Image
             // TODO: use thumbnails when ever possible
-            source={ { uri: uploadsUrl + eventDetails.filename } }
+            source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
             style={ { width: 100, height: 100 } }
         />
       </View>

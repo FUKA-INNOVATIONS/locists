@@ -12,48 +12,46 @@ const useMedia = () => {
   // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
 
   const [ events, setEvents ] = useState();
-  const [ idEventFiles, setIdEventFiles ] = useState( [] );
   const [ posts, setPosts ] = useState();
-  const [ idPostFiles, setIdPostFiles ] = useState( [] );
   const [ singleMedia, setSingleMedia ] = useState();
   const [ allMedia, setAllMedia ] = useState();
   const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
-    const events = await getEvents();
-    const posts = await getPosts();
 
     /*
      * inorder to get thumbnails for optimization
      * get all ids and fetch files
      * */
 
-    const allEvents = [];
-    const allPosts = [];
-
-    // Get id of all event files
-    const eventsIdArray = events.map( e => e.file_id );
-    setIdEventFiles( eventsIdArray );
-
-    // Get id of all post files
-    const postsIdArray = posts.map( e => e.file_id );
-    setIdPostFiles( postsIdArray );
-
-    // Get posts and events by id
-    eventsIdArray.map( async ( eventId ) => {
-      const event = await getMediaById( eventId, true );
-      allEvents.push( event );
-    } );
-    postsIdArray.map( async ( postId ) => {
-      const post = await getMediaById( postId, true );
-      allEvents.push( post );
-    } );
+    const events = await getEventsWithThumbnails();
+    const posts = await getPostsWithThumbnails();
 
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
-    // setLoading( false );
-  };
 
+    /* // Get id of all event files
+     const eventsIdArray = events.map( e => e.file_id );
+     setIdEventFiles( eventsIdArray );
+
+     // Get id of all post files
+     const postsIdArray = posts.map( e => e.file_id );
+     setIdPostFiles( postsIdArray );
+
+     // Get posts and events by id
+     eventsIdArray.map( async ( eventId ) => {
+     const event = await getMediaById( eventId, true );
+     allEvents.push( event );
+     } );
+     postsIdArray.map( async ( postId ) => {
+     const post = await getMediaById( postId, true );
+     allEvents.push( post );
+     } );
+
+     const mixed = [ ...events, ...posts ];
+     setAllMedia( mixed );
+     // setLoading( false ); */
+  };
 
   const getEventsWithThumbnails = async () => {
     const eventArr = [];
@@ -63,6 +61,7 @@ const useMedia = () => {
       let event = await getMediaById( idEvents[ i ], true );
       eventArr.push( event );
     }
+    setEvents( eventArr );
     return eventArr;
   };
 
@@ -74,6 +73,7 @@ const useMedia = () => {
       let post = await getMediaById( idPosts[ i ], true );
       postArr.push( post );
     }
+    setPosts( postArr );
     return postArr;
   };
 
@@ -165,6 +165,7 @@ const useMedia = () => {
     getSingleMediaComments,
     uploadMedia,
     getEventsWithThumbnails,
+    getPostsWithThumbnails,
     events,
     posts,
     allMedia,
