@@ -20,6 +20,7 @@ const useMedia = () => {
   const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
+
     // setLoading( true );
     const events = await getEvents();
     const posts = await getPosts();
@@ -29,14 +30,55 @@ const useMedia = () => {
     * get all ids and fetch files
     * */
 
+    const allEvents = [];
+    const allPosts = [];
+
 
     // Get id of all event files
     const eventsIdArray = events.map( e => e.file_id );
     setIdEventFiles( eventsIdArray );
 
-    // Get id of all event files
-    const postsIdArray = events.map( e => e.file_id );
+    // Get events by id
+    eventsIdArray.map(async (eventId) => {
+      // console.log('Eid', eventId)
+      const URL = `${ baseUrl }media/${ eventId }`;
+      try {
+        const {data} = await axios.get( URL );
+        if(data) {
+          data.description = JSON.parse(data.description)
+
+          // console.log('eData', data)
+          allEvents.push(data)
+          // console.log('allEvents in hook', allEvents)
+        }
+      } catch ( e ) {
+        console.log( e );
+      }
+    })
+
+    // console.log('EEEEE', allEvents)
+
+    // Get id of all post files
+    const postsIdArray = posts.map( e => e.file_id );
     setIdPostFiles( postsIdArray );
+
+    // Get posts by id
+    postsIdArray.map(async (postId) => {
+      // console.log('Eid', eventId)
+      const URL = `${ baseUrl }media/${ postId }`;
+      try {
+        const {data} = await axios.get( URL );
+        if(data) {
+          data.description = JSON.parse(data.description)
+
+          // console.log('eData', data)
+          allPosts.push(data)
+          // console.log('allPosts in hook', allPosts)
+        }
+      } catch ( e ) {
+        console.log( e );
+      }
+    })
 
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );

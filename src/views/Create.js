@@ -2,10 +2,16 @@ import { Button } from 'react-native';
 
 const Create = ( { navigation } ) => {
 
+  /*
+  * Open Create new event modal
+  * */
   const createEventHandler = () => {
     navigation.navigate('CreateEvent')
   }
 
+  /*
+   * Open Create new post modal
+   * */
   const createPostHandler = () => {
     navigation.navigate('CreatePost')
   }
