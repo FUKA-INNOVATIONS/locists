@@ -12,7 +12,9 @@ const useMedia = () => {
   // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
 
   const [ events, setEvents ] = useState();
+  const [ idEventFiles, setIdEventFiles ] = useState( [] );
   const [ posts, setPosts ] = useState();
+  const [ idPostFiles, setIdPostFiles ] = useState( [] );
   const [ singleMedia, setSingleMedia ] = useState();
   const [ allMedia, setAllMedia ] = useState();
   const [ singleMediaComments, setSingleMediaComments ] = useState();
@@ -21,6 +23,21 @@ const useMedia = () => {
     // setLoading( true );
     const events = await getEvents();
     const posts = await getPosts();
+
+    /*
+    * inorder to get thumbnails for optimization
+    * get all ids and fetch files
+    * */
+
+
+    // Get id of all event files
+    const eventsIdArray = events.map( e => e.file_id );
+    setIdEventFiles( eventsIdArray );
+
+    // Get id of all event files
+    const postsIdArray = events.map( e => e.file_id );
+    setIdPostFiles( postsIdArray );
+
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
     // setLoading( false );
@@ -56,8 +73,13 @@ const useMedia = () => {
     const URL = `${ baseUrl }media/${ mediaId }`;
     try {
       // setLoading( true );
-      const singleMedia = await axios.get( URL );
-      setSingleMedia( singleMedia.data );
+      const {data} = await axios.get( URL );
+      if(data) {
+        data.description = JSON.parse(data.description)
+        // console.log('DATA:', data)
+        setSingleMedia( data );
+        // console.log('singleMedia in useMedia hook:', singleMedia)
+      }
       // setLoading( false );
     } catch ( e ) {
       console.log( e );
@@ -78,7 +100,7 @@ const useMedia = () => {
   };
 
   const uploadMedia = async ( formData, token ) => {
-   // console.log( 'uploadMedia hook' );
+    // console.log( 'uploadMedia hook' );
     // console.log( 'formData in uploadMedia hook', formData);
     // console.log( 'token in uploadMedia hook', token );
 
@@ -93,12 +115,12 @@ const useMedia = () => {
 
     try {
       // setLoading(true);
-      const result = await doFetch(baseUrl + 'media', options);
+      const result = await doFetch( baseUrl + 'media', options );
       // console.log('url', baseUrl)
       // result && setLoading(false);
       return result;
     } catch ( e ) {
-      console.log('error in uploadMedia hook', e.message);
+      console.log( 'error in uploadMedia hook', e.message );
       return false;
     }
 

@@ -8,21 +8,15 @@ import Comment from '../components/Comment';
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params;
   const { getMediaById, singleMedia, loadingSingleMedia } = useMedia();
-  const {
-    getSingleMediaComments,
-    singleMediaComments,
-    loadingSingleMediaComments,
-  } = useMedia();
+  const { getSingleMediaComments, singleMediaComments, loadingSingleMediaComments, } = useMedia();
 
   useEffect( async () => {
     await getMediaById( eventId );
     await getSingleMediaComments( eventId );
   }, [ eventId ] );
 
-  if ( loadingSingleMedia ) return <View><Text>Loading media
-    details..</Text></View>;
-  if ( loadingSingleMediaComments ) return <View><Text>Loading media
-    comments..</Text></View>;
+  if ( loadingSingleMedia ) return <View><Text>Loading media details..</Text></View>;
+  if ( loadingSingleMediaComments ) return <View><Text>Loading media comments..</Text></View>;
 
   // const EventHeader = () => <Text>Event header</Text>;
   // const ItemSeparator = () => <Text>----------------------</Text>;

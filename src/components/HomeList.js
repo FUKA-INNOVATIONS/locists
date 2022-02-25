@@ -10,6 +10,9 @@ const HomeList = ( { navigation } ) => {
   const viewIsFocused = useIsFocused();
   const [ loading, setLoading ] = useState(false);
 
+  // TODO: dont fetch all files at once
+  // onEndReached={this.onScrollHandler} , onEndThreshold={0}
+
   useEffect( async () => {
     setLoading(true);
     await getAllMedia();
@@ -38,6 +41,8 @@ const HomeList = ( { navigation } ) => {
   };
 
   const EmptyListMessage = () => <Text>No events </Text>;
+
+  // console.log('all media', allMedia)
 
   return (
       <FlatList
