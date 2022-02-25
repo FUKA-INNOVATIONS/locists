@@ -26,63 +26,50 @@ const useMedia = () => {
     const posts = await getPosts();
 
     /*
-    * inorder to get thumbnails for optimization
-    * get all ids and fetch files
-    * */
+     * inorder to get thumbnails for optimization
+     * get all ids and fetch files
+     * */
 
     const allEvents = [];
     const allPosts = [];
-
 
     // Get id of all event files
     const eventsIdArray = events.map( e => e.file_id );
     setIdEventFiles( eventsIdArray );
 
-    // Get events by id
-    eventsIdArray.map(async (eventId) => {
-      // console.log('Eid', eventId)
-      const URL = `${ baseUrl }media/${ eventId }`;
-      try {
-        const {data} = await axios.get( URL );
-        if(data) {
-          data.description = JSON.parse(data.description)
-
-          // console.log('eData', data)
-          allEvents.push(data)
-          // console.log('allEvents in hook', allEvents)
-        }
-      } catch ( e ) {
-        console.log( e );
-      }
-    })
-
-    // console.log('EEEEE', allEvents)
-
     // Get id of all post files
     const postsIdArray = posts.map( e => e.file_id );
     setIdPostFiles( postsIdArray );
 
-    // Get posts by id
-    postsIdArray.map(async (postId) => {
-      // console.log('Eid', eventId)
-      const URL = `${ baseUrl }media/${ postId }`;
-      try {
-        const {data} = await axios.get( URL );
-        if(data) {
-          data.description = JSON.parse(data.description)
-
-          // console.log('eData', data)
-          allPosts.push(data)
-          // console.log('allPosts in hook', allPosts)
-        }
-      } catch ( e ) {
-        console.log( e );
-      }
-    })
+    // Get posts and events by id
+    eventsIdArray.map( async ( eventId ) => {
+      const event = await getMediaById( eventId, true );
+      allEvents.push( event );
+    } );
+    postsIdArray.map( async ( postId ) => {
+      const post = await getMediaById( postId, true );
+      allEvents.push( post );
+    } );
 
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
     // setLoading( false );
+  };
+
+  const getAllEventsById = async () => {
+    const ev = []
+    const events = await getEvents().then(events => events.map(event => event.file_id).map(async id => {
+      await getMediaById(id, true).then(event => {
+        ev.push(event)
+        // console.log(ev.length)
+      }).then(() => {
+        console.log('Events fetched')
+        console.log('events size: ', ev.length)
+      }).then(() => {
+        console.log('fetching all events by id completed')
+        return ev;
+      })
+    }))
   };
 
   const getEvents = async () => {
@@ -111,18 +98,19 @@ const useMedia = () => {
     }
   };
 
-  const getMediaById = async ( mediaId ) => {
+  const getMediaById = async ( mediaId, returnObject = false ) => {
     const URL = `${ baseUrl }media/${ mediaId }`;
     try {
-      // setLoading( true );
-      const {data} = await axios.get( URL );
-      if(data) {
-        data.description = JSON.parse(data.description)
-        // console.log('DATA:', data)
-        setSingleMedia( data );
-        // console.log('singleMedia in useMedia hook:', singleMedia)
+      const { data } = await axios.get( URL );
+      if ( data ) {
+        data.description = JSON.parse( data.description );
+
+        if ( returnObject ) {
+          return data;
+        } else {
+          setSingleMedia( data );
+        }
       }
-      // setLoading( false );
     } catch ( e ) {
       console.log( e );
     }
@@ -175,6 +163,7 @@ const useMedia = () => {
     getAllMedia,
     getSingleMediaComments,
     uploadMedia,
+    getAllEventsById,
     events,
     posts,
     allMedia,
