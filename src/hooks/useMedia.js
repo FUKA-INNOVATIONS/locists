@@ -20,8 +20,6 @@ const useMedia = () => {
   const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
-
-    // setLoading( true );
     const events = await getEvents();
     const posts = await getPosts();
 
@@ -56,29 +54,34 @@ const useMedia = () => {
     // setLoading( false );
   };
 
-  const getAllEventsById = async () => {
-    const ev = []
-    const events = await getEvents().then(events => events.map(event => event.file_id).map(async id => {
-      await getMediaById(id, true).then(event => {
-        ev.push(event)
-        // console.log(ev.length)
-      }).then(() => {
-        console.log('Events fetched')
-        console.log('events size: ', ev.length)
-      }).then(() => {
-        console.log('fetching all events by id completed')
-        return ev;
-      })
-    }))
+
+  const getEventsWithThumbnails = async () => {
+    const eventArr = [];
+    const idEvents = await getEvents().
+        then( events => events.map( event => event.file_id ) );
+    for ( let i = 0; i < idEvents.length; i++ ) {
+      let event = await getMediaById( idEvents[ i ], true );
+      eventArr.push( event );
+    }
+    return eventArr;
+  };
+
+  const getPostsWithThumbnails = async () => {
+    const postArr = [];
+    const idPosts = await getPosts().
+        then( posts => posts.map( post => post.file_id ) );
+    for ( let i = 0; i < idPosts.length; i++ ) {
+      let post = await getMediaById( idPosts[ i ], true );
+      postArr.push( post );
+    }
+    return postArr;
   };
 
   const getEvents = async () => {
     const URL = `${ baseUrl }tags/${ eventTag }`;
     try {
-      // setLoading( true );
       const events = await axios.get( URL );
       setEvents( events.data );
-      // setLoading( false );
       return events.data;
     } catch ( e ) {
       console.log( e );
@@ -88,10 +91,8 @@ const useMedia = () => {
   const getPosts = async () => {
     const URL = `${ baseUrl }tags/${ postTag }`;
     try {
-      // setLoading( true );
       const posts = await axios.get( URL );
       setPosts( posts.data );
-      // setLoading( false );
       return posts.data;
     } catch ( e ) {
       console.log( e );
@@ -163,7 +164,7 @@ const useMedia = () => {
     getAllMedia,
     getSingleMediaComments,
     uploadMedia,
-    getAllEventsById,
+    getEventsWithThumbnails,
     events,
     posts,
     allMedia,
