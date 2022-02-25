@@ -11,6 +11,7 @@ import ExploreScreen from '../views/Explore';
 import CreateEventScreen from '../views/CreateEvent';
 import CreatePostScreen from '../views/createPost';
 import SettingsScreen from '../views/Settings';
+import CreateScreen from '../views/Create';
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import TabBar from '../components/nav/TabBar';
@@ -55,6 +56,8 @@ const ExploreStackScreen = () => {
 const CreateStackScreen = () => {
   return (
       <CreateStack.Navigator>
+        <CreateStack.Screen name={ 'Create' }
+                            component={ CreateScreen }/>
         <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
           <CreateStack.Screen name={ 'CreatePost' }
                               component={ CreateEventScreen }/>
