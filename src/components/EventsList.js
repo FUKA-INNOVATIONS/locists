@@ -4,18 +4,16 @@ import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
 import Event from './Event';
 
-const EventsList = ( { navigation, pressHandler, update, setUpdate } ) => {
-  const { getEventsWithThumbnails, events, loading } = useMedia();
-  const viewIsFocused = useIsFocused();
-
-  console.log( 'EventsList rendered', update);
+const EventsList = ( { navigation, pressHandler, events, loading, refetchEvents } ) => {
+  console.log( 'EventsList rendered');
 
   useEffect( () => {
     return navigation.addListener('focus', async () => {
       console.log( 'EventsList focus' );
-      await getEventsWithThumbnails();
+      // await getEventsWithThumbnails();
+      await refetchEvents();
     });
-  }, [update]);
+  }, []);
 
   const eventPressHandler = ( eventId ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } );

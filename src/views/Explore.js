@@ -7,11 +7,13 @@ import theme from '../theme';
 
 import PostsList from '../components/PostsList';
 import EventsList from '../components/EventsList';
+import useMedia from '../hooks/useMedia';
 
 const Explore = ( { navigation } ) => {
+  const { getPostsWithThumbnails, posts, loading: loadingPosts } = useMedia();
+  const { getEventsWithThumbnails, events, loading: loadingEvents } = useMedia();
   const [ explore, setExplore ] = useState( 'events' );
-  const [ updatePosts, setUpdatePosts ] = useState( false );
-  const [ updateEvents, setUpdateEvents ] = useState( false );
+  const [ loading, setLoading ] = useState( false );
   const exploreOptions = [
     {
       label: 'Events',
@@ -23,22 +25,25 @@ const Explore = ( { navigation } ) => {
     },
   ];
 
-  const setView = explore => {
+  const setView = async (explore) => {
     setExplore( explore );
     switch ( explore ) {
       case 'posts':
-        setUpdatePosts(true);
-        setUpdateEvents(false);
+        await getPostsWithThumbnails();
+        break;
       case 'events':
-        setUpdateEvents(true)
-        setUpdatePosts(false)
+        await getEventsWithThumbnails();
+        break;
+      /*default:
+        await getEventsWithThumbnails();
+        break;*/
     }
   };
 
   const pressHandler = ( postId, type ) => {
     switch ( type ) {
       case 'post':
-        navigation.navigate( 'SinglePost', { postId: postId } );
+        navigation.navigate( 'SinglePost', { postId: postId });
         break;
       case 'event':
         navigation.navigate( 'SingleEvent', { postId: postId } );
@@ -57,10 +62,10 @@ const Explore = ( { navigation } ) => {
         />
         { explore === 'events' &&
         <EventsList navigation={ navigation } pressHandler={ pressHandler }
-                    update={ updateEvents } setUpdate={setUpdateEvents}/> }
+                    events={events} loading={loadingEvents} refetchEvents={getEventsWithThumbnails}/> }
         { explore === 'posts' &&
         <PostsList navigation={ navigation } pressHandler={ pressHandler }
-                   update={ updatePosts }setUpdate={ setUpdatePosts}/> }
+                    posts={posts} loading={loadingPosts} refetchPosts={getPostsWithThumbnails}/> }
       </View>
   );
 };
