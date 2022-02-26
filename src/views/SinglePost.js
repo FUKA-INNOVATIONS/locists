@@ -1,44 +1,51 @@
-import { View, Text, Button, Image } from 'react-native';
+import {View, Text, Button, FlatList} from 'react-native';
 import Post from '../components/Post';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
-import {uploadsUrl} from "../../config";
+import SinglePostHeader from "../components/SinglePostHeader";
 import theme from "../theme";
+import Comment from "../components/Comment";
+
+import { MaterialIcons } from '@expo/vector-icons';
 
 const SinglePost = ( { navigation, route } ) => {
     const { postId } = route.params;
     const { getMediaById, singleMedia, loadingSingleMedia } = useMedia();
-
-    if (singleMedia) {
-        let description = singleMedia.description;
-        description = JSON.parse(description);
-    }
-
+    const {
+        getSingleMediaComments,
+        singleMediaComments,
+        loadingSingleMediaComments,
+    } = useMedia();
 
     useEffect(async () => {
         await getMediaById(postId);
+        await getSingleMediaComments( postId );
     }, [postId]);
 
-    if(loadingSingleMedia) return <View><Text>Loading..</Text></View>
+    if (loadingSingleMedia) return <View><Text>Loading..
+        details...</Text></View>;
+    if ( loadingSingleMediaComments ) return <View><Text>Loading media
+        comments..</Text></View>;
+
+    const EmptyListMessage = () => <Text>No comments </Text>;
 
     const onModalCloseHandler = () => {
         navigation.goBack();
     }
-    console.log('singlePost', singleMedia);
+
     return (
         <>
-            {singleMedia !== undefined &&
-            <View>
-                <Text>{description.owner}</Text>
-                <Image
-                    source={ { uri: uploadsUrl + singleMedia.filename } }
-                    style={ theme.postImage }
-                />
-                <Text>{description.description}</Text>
-            </View>
-            }
             <Button title={'Go back'} onPress={onModalCloseHandler} />
-
+            <SinglePostHeader postDetails={ singleMedia } />
+            <View style={theme.singlePostComments}>
+                <FlatList
+                    data={ singleMediaComments }
+                    ListEmptyComponent={ EmptyListMessage }
+                    keyExtractor={ (  item  ) => item.comment_id }
+                    renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
+                />
+                <MaterialIcons style={theme.addComment} name="post-add" size={30} color="black" />
+            </View>
         </>
     );
 };

@@ -133,6 +133,7 @@ const theme = {
     minHeight: 260,
     paddingVertical: 5,
     width: width * 0.95,
+    position: 'relative',
   },
   postComment: {
     flex: 1,
@@ -152,7 +153,42 @@ const theme = {
 
   // Single Post Styles
   singlePost: {
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  singlePostOwner: {
+    alignSelf: 'flex-start'
+  },
+  imageAndLikes: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  singlePostImage: {
+    alignSelf: 'flex-start',
+    width: width * 0.8,
+    height: undefined,
+    aspectRatio: 1.4,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#fff',
+  },
+  singlePostLikes: {
+    alignSelf: 'center',
+    fontSize: 20,
+  },
+  singlePostText: {
+    width: width * 0.94,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 5,
+    marginVertical: 5,
+    backgroundColor: '#E9D6DB',
+  },
 
+  addComment: {
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
   },
 
 }
