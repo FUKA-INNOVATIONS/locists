@@ -16,7 +16,7 @@ const Post = ({postMedia}) => {
                 {
                     // Todo add user avatar here
                 }
-                <Text>{description.owner}</Text>
+                <Text style={{ color: 'white'}}>{description.owner}</Text>
             </View>
 
             <View style={theme.post}>

@@ -1,4 +1,4 @@
-import { NavigationContainer, useIsFocused } from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer, useIsFocused} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -94,8 +94,14 @@ const AuthenticationStackScreen = () => {
 };
 
 const AppNavigator = ( props ) => {
+
+    const navTheme = DefaultTheme;
+    navTheme.colors.background = '#24292e';
+    navTheme.colors.card = '#24292e';
+    navTheme.colors.text = 'white';
+
   return (
-      <NavigationContainer>
+      <NavigationContainer theme={DefaultTheme}>
         <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props }/> }
                              screenOptions={ ( { route } ) => ( {
                                    headerShown: false,

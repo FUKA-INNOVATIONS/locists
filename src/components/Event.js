@@ -24,7 +24,7 @@ const Event = ( { eventDetails } ) => {
               {
                   // Todo add user avatar here
               }
-              <Text>Username</Text>
+              <Text style={{ color: 'white'}}>Username</Text>
           </View>
 
         <View style={theme.event}>
