@@ -29,7 +29,7 @@ const RegisterSchema = Yup.object().shape( {
 
 const Register = ( { navigation } ) => {
   // eslint-disable-next-line
-  const { isUsernameAvailable, register, login } = useUser();
+  const { isUsernameAvailable, register, login, loading } = useUser();
 
   const {
     control,
@@ -95,6 +95,16 @@ const Register = ( { navigation } ) => {
 
     console.log( 'registeredUser Register.js: ', registeredUser );
   };
+
+  if ( loading ) {
+    return (
+        <View>
+          <Text>
+            Loading..
+          </Text>
+        </View>
+    );
+  }
 
   return (
       <KeyboardAvoidingView>

@@ -30,27 +30,6 @@ const useMedia = () => {
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
 
-    /* // Get id of all event files
-     const eventsIdArray = events.map( e => e.file_id );
-     setIdEventFiles( eventsIdArray );
-
-     // Get id of all post files
-     const postsIdArray = posts.map( e => e.file_id );
-     setIdPostFiles( postsIdArray );
-
-     // Get posts and events by id
-     eventsIdArray.map( async ( eventId ) => {
-     const event = await getMediaById( eventId, true );
-     allEvents.push( event );
-     } );
-     postsIdArray.map( async ( postId ) => {
-     const post = await getMediaById( postId, true );
-     allEvents.push( post );
-     } );
-
-     const mixed = [ ...events, ...posts ];
-     setAllMedia( mixed );
-     // setLoading( false ); */
   };
 
   const getEventsWithThumbnails = async () => {
@@ -106,38 +85,38 @@ const useMedia = () => {
   const getMediaById = async ( mediaId, returnObject = false ) => {
     const URL = `${ baseUrl }media/${ mediaId }`;
     try {
+      setLoading( true );
       const { data } = await axios.get( URL );
       if ( data ) {
         data.description = JSON.parse( data.description );
-
         if ( returnObject ) {
+          setLoading( false );
           return data;
         } else {
           setSingleMedia( data );
+          setLoading( false );
         }
       }
     } catch ( e ) {
       console.log( e );
+      setLoading( false );
     }
   };
 
   const getSingleMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
     try {
-      // setLoading( true );
+      setLoading( true );
       const comments = await axios.get( URL );
       setSingleMediaComments( comments.data );
-      // console.log('comments in hook', comments.data)
-      // setLoading( false );
+      setLoading( false );
     } catch ( e ) {
       console.log( e );
+      setLoading( false );
     }
   };
 
   const uploadMedia = async ( formData, token ) => {
-    // console.log( 'uploadMedia hook' );
-    // console.log( 'formData in uploadMedia hook', formData);
-    // console.log( 'token in uploadMedia hook', token );
 
     const options = {
       method: 'POST',

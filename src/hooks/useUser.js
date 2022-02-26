@@ -31,13 +31,14 @@ const useUser = () => {
     };
 
     try {
-      // setLoading( true );
+      setLoading( true );
       const registeredUser = await axios.post( URL, newUser, options );
-      // setLoading( false );
+      setLoading( false );
       return registeredUser.data;
     } catch ( error ) {
       // setLoading( false );
       console.log( 'register error', error );
+      setLoading( false );
       return error;
     }
   };
@@ -45,6 +46,7 @@ const useUser = () => {
   const isUsernameAvailable = async ( username ) => {
     const URL = `${ baseUrl }users/username/${ username }`;
     try {
+      console.log('check')
       // setLoading( true );
       const available = await axios.get( URL );
       // setLoading( false );
@@ -213,7 +215,7 @@ const useUser = () => {
     fetchAvatar,
     loginWithToken,
     isUsernameAvailable,
-    // loading,
+    loading,
     // setLoading,
     error,
     token,

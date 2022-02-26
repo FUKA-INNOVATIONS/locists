@@ -33,7 +33,10 @@ const Settings = ( { navigation } ) => {
   });
 
   const onSubmit = async ( data ) => {
-    // console.log( 'formData 1', data );
+    // Check, is username available ?
+    const { available, username } = await isUsernameAvailable( data.username );
+    !available && Alert.alert( 'Username is not available',
+        'Please choose another cool username and try again' );
 
     try {
       delete data.confirmPassword;
