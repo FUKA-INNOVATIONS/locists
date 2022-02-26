@@ -3,7 +3,7 @@ import {
   Text,
   TextInput,
   Button,
-  KeyboardAvoidingView, Alert,
+  KeyboardAvoidingView, Alert, TouchableOpacity
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -97,8 +97,7 @@ const Register = ( { navigation } ) => {
 
   return (
       <KeyboardAvoidingView>
-        <View>
-          <Text>Register</Text>
+        <View style={theme.login}>
 
           <View style={ theme.inputContainer }>
             <Controller
@@ -114,7 +113,7 @@ const Register = ( { navigation } ) => {
                 ) }
                 name="username"
             />
-            { errors.username && <Text>{ errors.username.message }</Text> }
+            { errors.username && <Text style={theme.inputErrorText}>{ errors.username.message }</Text> }
           </View>
 
           <View style={ theme.inputContainer }>
@@ -131,7 +130,7 @@ const Register = ( { navigation } ) => {
                 ) }
                 name="email"
             />
-            { errors.email && <Text>{ errors.email.message }</Text> }
+            { errors.email && <Text style={theme.inputErrorText}>{ errors.email.message }</Text> }
           </View>
 
           <View style={ theme.inputContainer }>
@@ -148,7 +147,7 @@ const Register = ( { navigation } ) => {
                 ) }
                 name="password"
             />
-            { errors.password && <Text>{ errors.password.message }</Text> }
+            { errors.password && <Text style={theme.inputErrorText}>{ errors.password.message }</Text> }
           </View>
 
           <View style={ theme.inputContainer }>
@@ -166,7 +165,7 @@ const Register = ( { navigation } ) => {
                 name="passwordConfirm"
             />
             { errors.passwordConfirm && (
-                <Text>{ errors.passwordConfirm.message }</Text>
+                <Text style={theme.inputErrorText}>{ errors.passwordConfirm.message }</Text>
             ) }
           </View>
 
@@ -184,10 +183,12 @@ const Register = ( { navigation } ) => {
                 ) }
                 name="fullName"
             />
-            { errors.fullName && <Text>{ errors.fullName.message }</Text> }
+            { errors.fullName && <Text style={theme.inputErrorText}>{ errors.fullName.message }</Text> }
           </View>
 
-          <Button title="Register" onPress={ handleSubmit( onSubmit ) }/>
+          <TouchableOpacity style={theme.loginButton} onPress={ handleSubmit( onSubmit ) }>
+              <Text style={theme.loginButtonText}>Register</Text>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
   );

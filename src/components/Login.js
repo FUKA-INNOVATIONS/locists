@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, Alert } from 'react-native'
+import {View, Text, TextInput, Button, Alert, Pressable, TouchableOpacity} from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
 
@@ -37,8 +37,7 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    <View>
-      <Text>Login</Text>
+    <View style={theme.login}>
 
       <View style={theme.inputContainer}>
         <Controller
@@ -54,7 +53,7 @@ const Login = ({ navigation }) => {
           )}
           name="username"
         />
-        {errors.username && <Text>{errors.username.message}</Text>}
+        {errors.username && <Text style={theme.inputErrorText}>{errors.username.message}</Text>}
       </View>
 
       <View style={theme.inputContainer}>
@@ -71,9 +70,11 @@ const Login = ({ navigation }) => {
           )}
           name="password"
         />
-        {errors.password && <Text>{errors.password.message}</Text>}
+        {errors.password && <Text style={theme.inputErrorText}>{errors.password.message}</Text>}
       </View>
-      <Button title="Login" onPress={handleSubmit(onSubmit)} />
+      <TouchableOpacity style={theme.loginButton} onPress={handleSubmit(onSubmit)}>
+        <Text style={theme.loginButtonText}>Login</Text>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -10,7 +10,7 @@ const Authenticate = ( { navigation } ) => {
   const [ activeView, setActiveView ] = useState( 'signIn' );
   const viewOptions = [
     {
-      label: 'Sign in',
+      label: 'Sign In',
       value: { view: 'signIn' },
       // imageIcon: images.feminino //images.feminino = require('./path_to/assets/img/feminino.png')
     },
@@ -25,10 +25,16 @@ const Authenticate = ( { navigation } ) => {
   };
 
   return (
-      <View>
+      <View style={{marginHorizontal: 10}}>
         <SwitchSelector
-            textColor={ theme.colors.textPrimary }
-            buttonColor={ theme.colors.primary }
+            backgroundColor={ theme.colors.textPrimary}
+            textColor={ theme.colors.white }
+            selectedColor={theme.colors.primary}
+            buttonColor={theme.colors.white}
+            borderColor={theme.colors.primary}
+            valuePadding={3}
+            hasPadding={true}
+            bold={true}
             options={ viewOptions }
             initial={ 0 }
             onPress={ ( value ) => setView( value.view ) }

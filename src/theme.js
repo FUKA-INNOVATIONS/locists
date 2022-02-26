@@ -3,6 +3,7 @@ import { Platform, Dimensions } from 'react-native'
 // Testing the pipeline
 
 const {width} = Dimensions.get('screen');
+const {height} = Dimensions.get('screen');
 
 const theme = {
   colors: {
@@ -36,11 +37,19 @@ const theme = {
     width: 300,
     backgroundColor: '#ffffff',
     padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
   },
   inputContainer: {
+    borderRadius: 10,
+    marginVertical: 10,
     borderColor: 'eee',
-    borderWidth: 1,
     // height: 70,
+  },
+  inputErrorText: {
+    color: 'red',
+    fontSize: 14,
+    alignSelf: 'center',
   },
 
   mediaTitle: {
@@ -192,6 +201,57 @@ const theme = {
     bottom: 5,
     right: 5,
   },
+
+  //Authentication Screen Styles
+  login: {
+    height: height * 0.7,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginButton: {
+    width: 100,
+    alignItems: 'center',
+    borderRadius: 10,
+    padding: 10,
+    elevation: 5,
+    backgroundColor: '#fff',
+    borderColor: 'purple',
+    borderWidth: 1,
+  },
+  loginButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'purple',
+  },
+
+  //Create Media Styles
+  addImage: {
+    alignSelf: 'center',
+    width: width * 0.8,
+    aspectRatio: 1.4,
+  },
+  createMediaButton: {
+    alignSelf: 'center',
+    width: width * 0.8,
+    marginTop: 5,
+  },
+
+  createMediaForm: {
+    paddingBottom: 100,
+    alignItems: 'center',
+  },
+
+  //General Button Style
+  generalBtn: {
+    alignItems: 'center',
+    borderColor: 'purple',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    elevation: 5,
+    backgroundColor: '#fff',
+  }
 
 }
 

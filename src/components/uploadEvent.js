@@ -1,4 +1,4 @@
-import { Button, Image, Text, TextInput, View } from 'react-native';
+import { Button, Image, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import useDevice from '../hooks/useDevice';
@@ -80,111 +80,125 @@ const UploadEvent = props => {
 
   return (
       <>
-        <Text>Create new event</Text>
-        <Image source={ { uri: image } }
-               style={ { width: 200, height: 200, borderRadius: 100 } }/>
-        <Button title="Choose image" onPress={ pickImage }/>
-        <View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Location"
-                    />
-                ) }
-                name="location"
+          <ScrollView>
+            <Text>Create new event</Text>
+              {
+                  // TODO Replace Default image with custom component
+              }
+            <Image
+                source={ { uri: image } }
+               style={ theme.addImage }
             />
-            { errors.location && <Text>{ errors.location.message }</Text> }
-          </View>
+            <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ pickImage }>
+                <Text style={theme.loginButtonText}>Choose Image</Text>
+            </TouchableOpacity>
+            <View style={ theme.createMediaForm}>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Event name"
-                    />
-                ) }
-                name="name"
-            />
-            { errors.name && <Text>{ errors.name.message }</Text> }
-          </View>
+            <View style={ theme.inputContainer }>
+                <Controller
+                    control={ control }
+                    render={ ( { field: { onChange, onBlur, value } } ) => (
+                        <TextInput
+                            style={ theme.input }
+                            onBlur={ onBlur }
+                            onChangeText={ onChange }
+                            value={ value }
+                            placeholder="Location"
+                        />
+                    ) }
+                    name="location"
+              />
+              { errors.location && <Text style={theme.inputErrorText}>{ errors.location.message }</Text> }
+            </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Date & time"
-                    />
-                ) }
-                name="date"
-            />
-            { errors.date && <Text>{ errors.date.message }</Text> }
-          </View>
+            <View style={ theme.inputContainer }>
+              <Controller
+                  control={ control }
+                  render={ ( { field: { onChange, onBlur, value } } ) => (
+                      <TextInput
+                          style={ theme.input }
+                          onBlur={ onBlur }
+                          onChangeText={ onChange }
+                          value={ value }
+                          placeholder="Event name"
+                      />
+                  ) }
+                  name="name"
+              />
+              { errors.name && <Text style={theme.inputErrorText}>{ errors.name.message }</Text> }
+            </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ { ...theme.input, height: 100 } }
-                        multiline={ true }
-                        numberOfLines={ 5 }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Event description"
-                    />
-                ) }
-                name="description"
-            />
-            { errors.description &&
-            <Text>{ errors.description.message }</Text> }
-          </View>
+            <View style={ theme.inputContainer }>
+                <Controller
+                    control={ control }
+                    render={ ( { field: { onChange, onBlur, value } } ) => (
+                        <TextInput
+                            style={ theme.input }
+                            onBlur={ onBlur }
+                            onChangeText={ onChange }
+                            value={ value }
+                            placeholder="Date & time"
+                        />
+                    ) }
+                    name="date"
+                />
+                { errors.date && <Text style={theme.inputErrorText}>{ errors.date.message }</Text> }
+            </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Price"
-                    />
-                ) }
-                name="price"
-            />
-            { errors.price && <Text>{ errors.price.message }</Text> }
-          </View>
+            <View style={ theme.inputContainer }>
+                <Controller
+                    control={ control }
+                    render={ ( { field: { onChange, onBlur, value } } ) => (
+                        <TextInput
+                            style={ { ...theme.input, height: 100 } }
+                            multiline={ true }
+                            numberOfLines={ 5 }
+                            onBlur={ onBlur }
+                            onChangeText={ onChange }
+                            value={ value }
+                            placeholder="Event description"
+                        />
+                    ) }
+                    name="description"
+              />
+              { errors.description &&
+              <Text style={theme.inputErrorText}>{ errors.description.message }</Text> }
+            </View>
+
+            <View style={ theme.inputContainer }>
+                <Controller
+                    control={ control }
+                    render={ ( { field: { onChange, onBlur, value } } ) => (
+                        <TextInput
+                         style={ theme.input }
+                         onBlur={ onBlur }
+                            onChangeText={ onChange }
+                            value={ value }
+                            placeholder="Price"
+                        />
+                    ) }
+                    name="price"
+                />
+                { errors.price && <Text style={theme.inputErrorText}>{ errors.price.message }</Text> }
+            </View>
 
 
-          <Button
-              disabled={ !imageSelected }
-              loading={ loadingMediaUpload }
-              title="Create event"
-              onPress={ handleSubmit(
-                  data => props.onSubmit( data, mediaDescription, imageSelected,
-                      image ) ) }
-          />
-          <Button title="Reset form" onPress={ resetAll }/>
-        </View>
+            <TouchableOpacity
+                style={[theme.generalBtn, theme.createMediaButton]}
+                disabled={ !imageSelected }
+                loading={ loadingMediaUpload }
+                title="Create event"
+                onPress={ handleSubmit(
+                      data => props.onSubmit( data, mediaDescription, imageSelected,
+                          image ) ) }
+            >
+                <Text style={theme.loginButtonText}>Create Event</Text>
+            </TouchableOpacity>
+                <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} title="Reset form" onPress={ resetAll }>
+                    <Text style={theme.loginButtonText}>Reset Form</Text>
+                </TouchableOpacity>
+            </View>
+          </ScrollView>
       </>
   );
 };
