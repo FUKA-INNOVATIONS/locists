@@ -4,20 +4,18 @@ import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import Post from './Post';
 
-const PostsList = ( { navigation, pressHandler, posts, loading, refetchPosts } ) => {
+const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
   console.log( 'PostsList rendered');
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'PostsList focus' );
-      // await getPostsWithThumbnails();
-      await refetchPosts();
+      await fetchPosts();
     } );
   }, [  ] );
 
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } );
-    // pressHandler( postId, 'post' );
   };
 
   if ( loading ) {

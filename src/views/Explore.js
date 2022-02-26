@@ -40,7 +40,7 @@ const Explore = ( { navigation } ) => {
     }
   };
 
-  const pressHandler = ( postId, type ) => {
+  /* const pressHandler = ( postId, type ) => {
     switch ( type ) {
       case 'post':
         navigation.navigate( 'SinglePost', { postId: postId });
@@ -49,7 +49,7 @@ const Explore = ( { navigation } ) => {
         navigation.navigate( 'SingleEvent', { postId: postId } );
         break;
     }
-  };
+  }; */
 
   return (
       <View>
@@ -61,11 +61,11 @@ const Explore = ( { navigation } ) => {
             onPress={ value => setView( value.explore ) }
         />
         { explore === 'events' &&
-        <EventsList navigation={ navigation } pressHandler={ pressHandler }
-                    events={events} loading={loadingEvents} refetchEvents={getEventsWithThumbnails}/> }
+        <EventsList navigation={ navigation }
+                    events={events} loading={loadingEvents} fetchEvents={getEventsWithThumbnails}/> }
         { explore === 'posts' &&
-        <PostsList navigation={ navigation } pressHandler={ pressHandler }
-                    posts={posts} loading={loadingPosts} refetchPosts={getPostsWithThumbnails}/> }
+        <PostsList navigation={ navigation }
+                    posts={posts} loading={loadingPosts} fetchPosts={getPostsWithThumbnails}/> }
       </View>
   );
 };
