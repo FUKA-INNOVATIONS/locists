@@ -1,7 +1,5 @@
-import useMedia from '../hooks/useMedia';
 import { FlatList, Pressable, Text, View } from 'react-native';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Event from './Event';
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {

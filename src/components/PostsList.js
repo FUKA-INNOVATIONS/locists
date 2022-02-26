@@ -1,7 +1,5 @@
-import useMedia from '../hooks/useMedia';
 import { FlatList, Pressable, Text, View } from 'react-native';
-import { useEffect, useState } from 'react';
-import { useIsFocused } from '@react-navigation/native';
+import { useEffect } from 'react';
 import Post from './Post';
 
 const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {

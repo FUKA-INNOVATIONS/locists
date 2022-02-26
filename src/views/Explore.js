@@ -1,6 +1,4 @@
 import { View } from 'react-native';
-import ExploreList from '../components/ExploreList';
-
 import { useState } from 'react';
 import SwitchSelector from 'react-native-switch-selector';
 import theme from '../theme';
@@ -13,7 +11,6 @@ const Explore = ( { navigation } ) => {
   const { getPostsWithThumbnails, posts, loading: loadingPosts } = useMedia();
   const { getEventsWithThumbnails, events, loading: loadingEvents } = useMedia();
   const [ explore, setExplore ] = useState( 'events' );
-  const [ loading, setLoading ] = useState( false );
   const exploreOptions = [
     {
       label: 'Events',
