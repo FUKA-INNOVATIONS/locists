@@ -17,7 +17,7 @@ const SinglePostHeader = ( { postDetails } ) => {
   }
 
   // const mediaDescription = JSON.parse(singleMedia.description)
-  console.log('postDetails in singlePostHeader', postDetails)
+  // console.log('postDetails in singlePostHeader', postDetails)
 
   return (
       <>

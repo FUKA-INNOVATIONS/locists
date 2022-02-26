@@ -20,6 +20,7 @@ const Event = ( { eventDetails } ) => {
   return (
       <View style={ styles.event }>
         <View style={ styles.text }>
+          <Text>EVENT</Text>
           <Text>{ eventDetails.description.name }</Text>
           <Text numberOfLines={ 2 }>{ eventDetails.description.location }</Text>
           <Text>{ eventDetails.description.date }</Text>
