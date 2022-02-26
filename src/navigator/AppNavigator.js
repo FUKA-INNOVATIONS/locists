@@ -12,6 +12,8 @@ import CreateEventScreen from '../views/CreateEvent';
 import CreatePostScreen from '../views/createPost';
 import SettingsScreen from '../views/Settings';
 import CreateScreen from '../views/Create';
+import EventsListScreen from '../components/EventsList';
+import PostsListScreen from '../components/PostsList';
 
 import useAuthStorage from '../hooks/useAuthStorage';
 import TabBar from '../components/nav/TabBar';
@@ -43,6 +45,8 @@ const ExploreStackScreen = () => {
   return (
       <ExploreStack.Navigator>
         <ExploreStack.Screen name={ 'Explore' } component={ ExploreScreen }/>
+        <ExploreStack.Screen name={ 'EventList' } component={ EventsListScreen }/>
+        <ExploreStack.Screen name={ 'PostList' } component={ PostsListScreen }/>
         <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
           <ExploreStack.Screen name={ 'SingleEvent' }
                                component={ SingleEventScreen }/>

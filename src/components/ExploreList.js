@@ -3,7 +3,7 @@ import Event from './Event';
 import { View, Text, FlatList, Pressable } from 'react-native';
 
 import useMedia from '../hooks/useMedia';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 const ExploreList = ( { navigation, explore } ) => {
@@ -12,10 +12,16 @@ const ExploreList = ( { navigation, explore } ) => {
   const viewIsFocused = useIsFocused();
   const [ loading, setLoading ] = useState(false);
 
+  /* const getPostsAndEvents = useMemo( async () => {
+    await getEventsWithThumbnails();
+    await getPostsWithThumbnails();
+  }, [viewIsFocused] ); */
+
   useEffect( async () => {
     setLoading(true)
     await getEventsWithThumbnails();
     await getPostsWithThumbnails();
+    // await getPostsAndEvents;
     setLoading(false)
   }, [ viewIsFocused ] );
 
@@ -36,6 +42,8 @@ const ExploreList = ( { navigation, explore } ) => {
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } );
   };
+
+  // TODO: use 2 views and fetch only 1 view related media at once for sake of opt and speed
 
   return (
       <FlatList
