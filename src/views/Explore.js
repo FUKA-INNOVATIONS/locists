@@ -25,7 +25,6 @@ const Explore = ( { navigation } ) => {
     setExplore( explore );
   };
 
-  // <ExploreList navigation={navigation} explore={ explore }/>
   return (
       <View>
         <SwitchSelector
