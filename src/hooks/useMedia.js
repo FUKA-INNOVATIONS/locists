@@ -85,16 +85,16 @@ const useMedia = () => {
   const getMediaById = async ( mediaId, returnObject = false ) => {
     const URL = `${ baseUrl }media/${ mediaId }`;
     try {
-      setLoading( true );
+      // setLoading( true );
       const { data } = await axios.get( URL );
       if ( data ) {
         data.description = JSON.parse( data.description );
         if ( returnObject ) {
-          setLoading( false );
+          // setLoading( false );
           return data;
         } else {
           setSingleMedia( data );
-          setLoading( false );
+          // setLoading( false );
         }
       }
     } catch ( e ) {
@@ -106,13 +106,13 @@ const useMedia = () => {
   const getSingleMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
     try {
-      setLoading( true );
+      // setLoading( true );
       const comments = await axios.get( URL );
       setSingleMediaComments( comments.data );
-      setLoading( false );
+      // setLoading( false );
     } catch ( e ) {
       console.log( e );
-      setLoading( false );
+      // setLoading( false );
     }
   };
 
