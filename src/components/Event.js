@@ -15,7 +15,7 @@ const Event = ( { eventDetails } ) => {
     );
   }
 
-  console.log('eventDetails in Event.js', eventDetails)
+  // console.log('eventDetails in Event.js', eventDetails)
 
   return (
       <View style={ styles.event }>

@@ -2,22 +2,36 @@ import { FlatList, Pressable, View, Text } from 'react-native';
 import Post from './Post';
 import Event from './Event';
 import useMedia from '../hooks/useMedia';
-import { useEffect, useState } from 'react';
-import { useIsFocused } from '@react-navigation/native';
+import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia, allMedia } = useMedia();
   const viewIsFocused = useIsFocused();
-  const [ loading, setLoading ] = useState(false);
+  const [ loading, setLoading ] = useState( false );
+
+  const getPostsAndEvents = useMemo( async () => {
+    await getAllMedia()
+  }, [] );
 
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}
+  // No good solutions with the api available, considering the way we use the api
 
-  useEffect( async () => {
-    setLoading(true);
-    await getAllMedia();
-    setLoading(false);
-  }, [ viewIsFocused ] );
+  useFocusEffect(
+      useCallback( () => {
+        return async () => {
+          await getPostsAndEvents
+        };
+      }, [viewIsFocused] ),
+  );
+
+  /* useEffect( async () => {
+    setLoading( true );
+    await getPostsAndEvents
+    // await getAllMedia()
+    setLoading( false );
+  }, [] ); */
 
   // TODO: Add a spinner icon
   // Display loading spinner icon while loading
@@ -37,7 +51,7 @@ const HomeList = ( { navigation } ) => {
   };
 
   const postPressHandler = ( postId ) => {
-      navigation.navigate( 'SinglePostHomeStack', { postId: postId } );
+    navigation.navigate( 'SinglePostHomeStack', { postId: postId } );
   };
 
   const EmptyListMessage = () => <Text>No events </Text>;
@@ -47,14 +61,14 @@ const HomeList = ( { navigation } ) => {
   return (
       <FlatList
           data={ allMedia }
-          ListEmptyComponent={EmptyListMessage}
+          ListEmptyComponent={ EmptyListMessage }
           keyExtractor={ ( item ) => item.file_id }
           renderItem={ ( { item } ) => {
             return (
                 item.tag === 'locists_post' ?
                     <Pressable
                         onPress={ () => postPressHandler( item.file_id ) }>
-                        <Post postMedia={ item }/>
+                      <Post postMedia={ item }/>
                     </Pressable>
                     :
                     <Pressable
