@@ -3,12 +3,12 @@ import Event from './Event';
 import { View, Text, FlatList, Pressable } from 'react-native';
 
 import useMedia from '../hooks/useMedia';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 const ExploreList = ( { navigation, explore } ) => {
-  const { getEventsWithThumbnails, events, loading: loadingEvents } = useMedia();
-  const { getPostsWithThumbnails, posts, loading: loadingPosts } = useMedia();
+  const { getEventsWithThumbnails, events, loading: loadingEvents } = useMedia(); // eslint-disable-line
+  const { getPostsWithThumbnails, posts, loading: loadingPosts } = useMedia(); // eslint-disable-line
   const viewIsFocused = useIsFocused();
   const [ loading, setLoading ] = useState(false);
 

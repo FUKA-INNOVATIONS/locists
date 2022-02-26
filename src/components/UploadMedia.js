@@ -13,7 +13,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage();
   const { createTag } = useTag();
   const { uploadMedia } = useMedia();
-  const [ loading, setLoading ] = useState( false );
+  const [ loading, setLoading ] = useState( false ); // eslint-disable-line
 
   /* useFocusEffect(
    useCallback( () => {

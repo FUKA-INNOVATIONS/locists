@@ -10,7 +10,7 @@ import doFetch from '../utils/doFetch';
 const useUser = () => {
   const authStorage = useAuthStorage();
   const [ loading, setLoading ] = useState( false );
-  const [ error, setError ] = useState( null );
+  const [ error, setError ] = useState( null ); // eslint-disable-line
   const [ token, setToken ] = useState( null );
 
   // Create new user account

@@ -24,7 +24,7 @@ const CreateStack = createNativeStackNavigator();
 const AuthenticationStack = createNativeStackNavigator();
 
 const BottomTab = createBottomTabNavigator();
-const AppStack = createNativeStackNavigator();
+// const AppStack = createNativeStackNavigator();
 
 const HomeStackScreen = () => {
   return (

@@ -38,7 +38,7 @@ const useMedia = () => {
     const idEvents = await getEvents().
         then( events => events.map( event => event.file_id ) );
     for ( let i = 0; i < idEvents.length; i++ ) {
-      let event = await getMediaById( idEvents[ i ], true );
+      let event = await getMediaById( idEvents[ i ], true ); // eslint-disable-line
       eventArr.push( event );
     }
     setEvents( eventArr );
@@ -52,7 +52,7 @@ const useMedia = () => {
     const idPosts = await getPosts().
         then( posts => posts.map( post => post.file_id ) );
     for ( let i = 0; i < idPosts.length; i++ ) {
-      let post = await getMediaById( idPosts[ i ], true );
+      let post = await getMediaById( idPosts[ i ], true ); // eslint-disable-line
       postArr.push( post );
     }
     setPosts( postArr );

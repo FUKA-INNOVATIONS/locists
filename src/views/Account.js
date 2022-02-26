@@ -2,12 +2,11 @@ import { useCallback, useState } from 'react';
 import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
-import UploadMedia from '../components/UploadMedia';
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
-  const [ update, setUpdate ] = useState( false );
+  const [ update, setUpdate ] = useState( false ); // eslint-disable-line
 
   const logoutHandler = async () => {
     await authStorage.logout();

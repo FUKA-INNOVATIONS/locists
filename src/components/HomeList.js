@@ -7,7 +7,8 @@ import { useIsFocused } from '@react-navigation/native';
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia, allMedia } = useMedia();
-  const viewIsFocused = useIsFocused();
+  // TODO: fix with focus listener
+  const viewIsFocused = useIsFocused(); // eslint-disable-line
   const [ loading, setLoading ] = useState( false );
 
    const getPostsAndEvents = useMemo( async () => {

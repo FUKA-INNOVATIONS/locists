@@ -1,7 +1,5 @@
 import { Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
-import useMedia from '../hooks/useMedia';
-import { useEffect } from 'react';
 
 const SingleEventHeader = ( { eventDetails } ) => {
   if ( eventDetails === undefined ) return <View><Text>Loading..</Text></View>;

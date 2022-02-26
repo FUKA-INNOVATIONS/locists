@@ -31,9 +31,9 @@ const Explore = ( { navigation } ) => {
       case 'events':
         await getEventsWithThumbnails();
         break;
-      /*default:
+      /* default:
         await getEventsWithThumbnails();
-        break;*/
+        break; */
     }
   };
 
