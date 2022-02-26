@@ -4,21 +4,23 @@ import { useEffect, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 import Post from './Post';
 
-const PostsList = ( { navigation } ) => {
+const PostsList = ( { navigation, pressHandler, update, setUpdate } ) => {
   const { getPostsWithThumbnails, posts, loading } = useMedia();
+  const [ updateView, setUpdateView ] = useState( false );
   const viewIsFocused = useIsFocused();
 
-  console.log('PostsList rendered')
+  console.log( 'PostsList rendered', update);
 
   useEffect( () => {
-    return navigation.addListener('focus', async () => {
+    return navigation.addListener( 'focus', async () => {
       console.log( 'PostsList focus' );
       await getPostsWithThumbnails();
-    });
-  }, [navigation]);
+    } );
+  }, [ update ] );
 
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } );
+    // pressHandler( postId, 'post' );
   };
 
   if ( loading ) {
