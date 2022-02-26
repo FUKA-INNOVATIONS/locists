@@ -35,14 +35,19 @@ const Settings = ( { navigation } ) => {
   const onSubmit = async ( data ) => {
     // Check, is username available ?
     const { available, username } = await isUsernameAvailable( data.username );
-    !available && Alert.alert( 'Username is not available',
-        'Please choose another cool username and try again' );
+
+    if (!available && username !== user.username) {
+      Alert.alert( 'Username is not available',
+          'Please choose another cool username and try again' );
+    }
 
     try {
       delete data.confirmPassword;
       if (data.password === '') {
         delete data.password;
       }
+
+      // TODO: token not always available after login, needs app reload
       const token = user.token;
       const userData = await modifyUser(token, data);
 
