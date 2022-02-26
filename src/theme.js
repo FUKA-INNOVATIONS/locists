@@ -150,6 +150,11 @@ const theme = {
     borderRadius: 50,
   },
 
+  // Single Post Styles
+  singlePost: {
+
+  },
+
 }
 
 export default theme
