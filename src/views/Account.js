@@ -1,8 +1,10 @@
 import { useCallback, useState } from 'react';
-import { Button, Text, View, Image } from 'react-native';
+import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import UploadMedia from '../components/UploadMedia';
 import { useFocusEffect } from '@react-navigation/native';
+import theme from "../theme";
+import {Touchable} from "react-native-web";
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
@@ -28,20 +30,37 @@ const Account = ( { navigation } ) => {
   );
 
   return (
-      <View>
+      <ScrollView>
+        <View style={theme.profile}>
+          <View style={theme.profilePicAndInfo}>
+              <Text style={theme.profilePic}>ProPic Placeholder</Text>
+
+              <View style={theme.profileInfoCard}>
+                  <Text>User: { user.username }</Text>
+                  <Text>UserID: { user.user_id }</Text>
+                  <Text>{ user.email }</Text>
+                  <Text>{ user.full_name }</Text>
+              </View>
+          </View>
+
         <Button title={'Modify your account details'} onPress={() => navigation.navigate('ModifyAccount')} />
         { user.avatar ? <Image source={ { uri: user.avatar } }
                                style={ { width: 100, height: 100 } }/>
-            : <Text>You don't own an avatar</Text> // eslint-disable-line
+            :
+            <Text style={theme.profilePic}>
+                {
+                    // TODO media task: add default optimized image here
+                }
+                You don't own an avatar
+            </Text> // eslint-disable-line
         }
         <Text>User status: { user.isLogged && 'logged in' }</Text>
-        <Text>Username: { user.username }</Text>
-        <Text>Email: { user.email }</Text>
-        <Text>User id: { user.user_id }</Text>
-        <Text>Full name: { user.full_name }</Text>
-        <Button title={ 'Log out' } onPress={ logoutHandler }/>
+          <TouchableOpacity style={theme.generalBtn} onPress={ logoutHandler }>
+              <Text style={theme.loginButtonText}>Log Out</Text>
+          </TouchableOpacity>
         <UploadMedia mediaType={ 'avatar' } ussername={ user.username }/>
-      </View>
+        </View>
+      </ScrollView>
   );
 };
 

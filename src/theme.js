@@ -5,6 +5,18 @@ import { Platform, Dimensions } from 'react-native'
 const {width} = Dimensions.get('screen');
 const {height} = Dimensions.get('screen');
 
+const general = {
+  colors: {
+    btn: '#7b08a3',
+    btnFill: '#ffffff',
+    background: '#24292e',
+    txtLight: '#ffffff',
+    txtDark: '#000000',
+    txtError: '#d52d2d',
+    postBackground: '#E9D6DB'
+  },
+}
+
 const theme = {
   colors: {
     textPrimary: '#24292e',
@@ -47,7 +59,7 @@ const theme = {
     // height: 70,
   },
   inputErrorText: {
-    color: 'red',
+    color: general.colors.txtError,
     fontSize: 14,
     alignSelf: 'center',
   },
@@ -56,6 +68,17 @@ const theme = {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 5,
+  },
+
+  //General Styles
+  generalBtn: {
+    alignItems: 'center',
+    borderColor: general.colors.btn,
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    elevation: 5,
+    backgroundColor: '#fff',
   },
 
   // Event List Styles
@@ -242,17 +265,34 @@ const theme = {
     alignItems: 'center',
   },
 
-  //General Button Style
-  generalBtn: {
+
+
+  // Profile Styles
+  profile: {
     alignItems: 'center',
-    borderColor: 'purple',
+    paddingTop: 30,
+    paddingBottom: 70,
+  },
+  profilePicAndInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: width * 0.9,
+    marginBottom: 20,
+  },
+  profilePic: {
+    width: width * 0.3,
+    aspectRatio: 0.8,
+    borderWidth: 1,
+    borderColor: 'white'
+  },
+  profileInfoCard: {
+    width: width * 0.55,
+    padding: 5,
     borderWidth: 1,
     borderRadius: 10,
-    padding: 10,
-    elevation: 5,
-    backgroundColor: '#fff',
-  }
-
+    backgroundColor: '#E9D6DB',
+    justifyContent: 'space-between',
+  },
 }
 
 export default theme
