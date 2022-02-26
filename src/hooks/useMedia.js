@@ -54,6 +54,7 @@ const useMedia = () => {
   };
 
   const getEventsWithThumbnails = async () => {
+    setLoading(true)
     const eventArr = [];
     const idEvents = await getEvents().
         then( events => events.map( event => event.file_id ) );
@@ -62,10 +63,12 @@ const useMedia = () => {
       eventArr.push( event );
     }
     setEvents( eventArr );
+    setLoading(false)
     return eventArr;
   };
 
   const getPostsWithThumbnails = async () => {
+    setLoading(true)
     const postArr = [];
     const idPosts = await getPosts().
         then( posts => posts.map( post => post.file_id ) );
@@ -74,6 +77,7 @@ const useMedia = () => {
       postArr.push( post );
     }
     setPosts( postArr );
+    setLoading(false)
     return postArr;
   };
 
@@ -175,6 +179,7 @@ const useMedia = () => {
     // loadingPosts,
     // loadingSingleMedia,
     loading,
+    setLoading,
     // loadingSingleMediaComments,
     // loadingMediaUpload,
   };

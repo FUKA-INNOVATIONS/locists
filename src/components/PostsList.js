@@ -5,15 +5,14 @@ import { useIsFocused } from '@react-navigation/native';
 import Post from './Post';
 
 const PostsList = ( { navigation } ) => {
-  const { getPostsWithThumbnails, posts, loading: loadingPosts } = useMedia();
-  const [ loading, setLoading ] = useState( false );
+  const { getPostsWithThumbnails, posts, loading } = useMedia();
   const viewIsFocused = useIsFocused();
 
+  console.log('PostsList rendered')
+
   useEffect( async () => {
-    setLoading( true );
     await getPostsWithThumbnails();
-    setLoading( false );
-  }, [  ] );
+  }, [ viewIsFocused ] );
 
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } );

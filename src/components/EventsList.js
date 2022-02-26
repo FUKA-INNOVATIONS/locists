@@ -1,21 +1,20 @@
 import useMedia from '../hooks/useMedia';
 import { FlatList, Pressable, Text, View } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useCallback, useEffect, useState } from 'react';
 import Event from './Event';
 
-const EventsList = ({navigation}) => {
-  const { getEventsWithThumbnails, events, loading: loadingEvents } = useMedia();
-  const [ loading, setLoading ] = useState(false);
+const EventsList = ( { navigation } ) => {
+  const { getEventsWithThumbnails, events, loading } = useMedia();
   const viewIsFocused = useIsFocused();
 
-  console.log('n', navigation)
+
+  console.log( 'EventsList rendered' );
+  // console.log( 'EventsList is focused', viewIsFocused );
 
   useEffect( async () => {
-    setLoading(true)
     await getEventsWithThumbnails();
-    setLoading(false)
-  }, [  ] );
+  }, [ viewIsFocused ] );
 
   const eventPressHandler = ( eventId ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } );
@@ -37,10 +36,10 @@ const EventsList = ({navigation}) => {
           keyExtractor={ ( item ) => item.file_id }
           renderItem={ ( { item } ) => {
             return (
-                    <Pressable
-                        onPress={ () => eventPressHandler( item.file_id ) }>
-                      <Event eventDetails={ item }/>
-                    </Pressable>
+                <Pressable
+                    onPress={ () => eventPressHandler( item.file_id ) }>
+                  <Event eventDetails={ item }/>
+                </Pressable>
             );
           } }
       />
