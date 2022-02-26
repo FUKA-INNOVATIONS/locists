@@ -6,13 +6,21 @@ import Post from './Post';
 
 const PostsList = ( { navigation } ) => {
   const { getPostsWithThumbnails, posts, loading } = useMedia();
-  const viewIsFocused = useIsFocused();
+  // const viewIsFocused = useIsFocused();
 
   console.log('PostsList rendered')
 
-  useEffect( async () => {
+  useEffect( () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      console.log( 'PostsList focus' );
+      await getPostsWithThumbnails();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  /* useEffect( async () => {
     await getPostsWithThumbnails();
-  }, [ viewIsFocused ] );
+  }, [ viewIsFocused ] ); */
 
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } );

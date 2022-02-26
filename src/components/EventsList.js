@@ -6,15 +6,33 @@ import Event from './Event';
 
 const EventsList = ( { navigation } ) => {
   const { getEventsWithThumbnails, events, loading } = useMedia();
-  const viewIsFocused = useIsFocused();
-
+  // const viewIsFocused = useIsFocused();
 
   console.log( 'EventsList rendered' );
-  // console.log( 'EventsList is focused', viewIsFocused );
 
-  useEffect( async () => {
-    await getEventsWithThumbnails();
-  }, [ viewIsFocused ] );
+  /* useFocusEffect(async () => {
+   console.log( 'EventsList focus' );
+   // await getEventsWithThumbnails();
+   }) */
+
+  /* useFocusEffect(
+      useCallback( () => {
+        async function fetchData() {
+          // await getEventsWithThumbnails();
+          console.log( 'EventsList focus 2' );
+          // const res = await getEventsWithThumbnails();
+        }
+        fetchData()
+      }, [] ),
+  ); */
+
+  useEffect( () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
+      console.log( 'EventsList focus' );
+      await getEventsWithThumbnails();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   const eventPressHandler = ( eventId ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } );
