@@ -9,19 +9,19 @@ const Home = ( { navigation } ) => {
   // const token = useMemo(async() => await getToken(), [])
   // const login = useMemo(async() => await loginWithToken(token), [])
 
-  /* const loginw = useMemo(async() => {
+   const login = useMemo(async() => {
     const token = await getToken();
     await loginWithToken(token);
-  }, []) */
+  }, [])
 
   // console.log('user, Home.js', user)
 
   useEffect( async () => {
-    const tokenInDevice = await getToken();
-    await loginWithToken(tokenInDevice);
+    // const tokenInDevice = await getToken();
+    // await loginWithToken(tokenInDevice);
     // await token;
     // await login;
-    // await loginw;
+    await login;
   });
 
   return <HomeList navigation={ navigation }/>

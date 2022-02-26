@@ -2,7 +2,7 @@ import { FlatList, Pressable, View, Text } from 'react-native';
 import Post from './Post';
 import Event from './Event';
 import useMedia from '../hooks/useMedia';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useIsFocused } from '@react-navigation/native';
 
 const HomeList = ( { navigation } ) => {
@@ -10,9 +10,9 @@ const HomeList = ( { navigation } ) => {
   const viewIsFocused = useIsFocused();
   const [ loading, setLoading ] = useState( false );
 
-  /* const getPostsAndEvents = useMemo( async () => {
+   const getPostsAndEvents = useMemo( async () => {
     await getAllMedia()
-  }, [] ); */
+  }, [allMedia] );
 
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}
@@ -20,10 +20,10 @@ const HomeList = ( { navigation } ) => {
 
    useEffect( async () => {
     setLoading( true );
-    // await getPostsAndEvents
-    await getAllMedia()
+    await getPostsAndEvents
+    // await getAllMedia()
     setLoading( false );
-  }, [viewIsFocused] );
+  }, [] );
 
 
   if ( loading ) {  // TODO: Add a spinner icon
