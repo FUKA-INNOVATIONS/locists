@@ -27,7 +27,7 @@ const SinglePost = ( { navigation, route } ) => {
     if ( loadingSingleMediaComments ) return <View><Text>Loading media
         comments..</Text></View>;
 
-    const EmptyListMessage = () => <Text>No comments </Text>;
+    const EmptyListMessage = () => <Text style={{color: 'white'}}>No comments </Text>;
 
     const onModalCloseHandler = () => {
         navigation.goBack();

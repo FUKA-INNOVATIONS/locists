@@ -25,8 +25,14 @@ const Explore = ( {navigation} ) => {
     return (
         <View style={{paddingBottom: 90}}>
             <SwitchSelector
-                textColor={ theme.colors.textPrimary }
-                buttonColor={ theme.colors.primary }
+                backgroundColor={ theme.colors.textPrimary}
+                textColor={ theme.colors.white }
+                selectedColor={theme.colors.primary}
+                buttonColor={theme.colors.white}
+                borderColor={theme.colors.primary}
+                valuePadding={3}
+                hasPadding={true}
+                bold={true}
                 options={ exploreOptions }
                 initial={ 0 }
                 onPress={ value => setView( value.explore ) }

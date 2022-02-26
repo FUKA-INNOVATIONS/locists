@@ -27,7 +27,7 @@ const SingleEvent = ( { navigation, route } ) => {
 
   // const EventHeader = () => <Text>Event header</Text>;
   // const ItemSeparator = () => <Text>----------------------</Text>;
-  const EmptyListMessage = () => <Text>No comments </Text>;
+  const EmptyListMessage = () => <Text style={{color: 'white'}}>No comments </Text>;
   // const ListFooter = () => <Text>Footer</Text>;
 
 
