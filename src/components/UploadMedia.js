@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { Alert, View, Text } from 'react-native';
 import useMedia from '../hooks/useMedia';
 
 import useAuthStorage from '../hooks/useAuthStorage';
@@ -7,11 +7,13 @@ import UploadAvatar from './UploadAvatar';
 import UploadEvent from './uploadEvent';
 import { postTag, eventTag } from '../../config';
 import UploadPost from './uploadPost';
+import { useState } from 'react';
 
-const UploadMedia = ( { mediaType } ) => {
+const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage();
   const { createTag } = useTag();
   const { uploadMedia } = useMedia();
+  const [ loading, setLoading ] = useState( false ); // eslint-disable-line
 
   /* useFocusEffect(
    useCallback( () => {
@@ -41,7 +43,7 @@ const UploadMedia = ( { mediaType } ) => {
     } );
 
     // Upload media
-    const response = await uploadMedia( formData, user.token );
+    const fileResponse = await uploadMedia( formData, user.token );
 
     // Create new tag and associate it with uploaded media
 
@@ -59,15 +61,35 @@ const UploadMedia = ( { mediaType } ) => {
 
     const tagResponse = await createTag(
         {
-          file_id: response.file_id,
+          file_id: fileResponse.file_id,
           tag,
         },
         user.token,
     );
-
     console.log( 'new tag res in onSubmit', tagResponse );
-    console.log( 'upload res in onSubmit', response );
+    console.log( 'upload res in onSubmit', fileResponse );
+
+    /*
+    * Upload succeeded, close modal
+    * */
+
+    if (fileResponse && tagResponse) {
+      // TODO: close modal:
+      // Alert.alert(`${mediaType.toUpperCase()} uploaded!`)
+      navigation.goBack();
+    }
+
+    if (!fileResponse || !tagResponse ) {
+      Alert.alert('Sorry', `Something went wrong and ${mediaType} creation failed\n please check media file size!`)
+    }
+
   };
+
+  if ( loading ) {
+    return (
+        <View><Text>Loading..</Text></View>
+    );
+  }
 
   switch ( mediaType ) {
     case 'avatar':

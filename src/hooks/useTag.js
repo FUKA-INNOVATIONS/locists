@@ -16,8 +16,8 @@ const useTag = () => {
     try {
       return await doFetch(baseUrl + 'tags/', options);
     } catch (error) {
-      console.log('post tag error', error)
-      return error
+      console.log('error on createTag hook', error)
+      return false
     }
   }
 

@@ -6,11 +6,12 @@ import { useFocusEffect } from '@react-navigation/native';
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
-  const [ update, setUpdate ] = useState( false );
+  const [ update, setUpdate ] = useState( false ); // eslint-disable-line
 
   const logoutHandler = async () => {
     await authStorage.logout();
-    setUpdate( true );
+    user.isLogged && navigation.navigate( 'AccountTab', { Screen: 'Account' } );
+    // setUpdate( true );
   };
 
   /*  If user is logged in
@@ -20,15 +21,17 @@ const Account = ( { navigation } ) => {
   useFocusEffect(
       useCallback( () => {
         return () => {
-          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
-          setUpdate( false );
+          // user.isLogged && navigation.navigate( 'AccountTab', {Screen: 'Account'} );
+          // setUpdate( false );
         };
       }, [ update ] ),
   );
-
   return (
       <View>
-        <Button title={'Modify your account details'} onPress={() => navigation.navigate('ModifyAccount')} />
+        <Button title={ 'Modify your account details' }
+                onPress={ () => navigation.navigate( 'ModifyAccount' ) }/>
+        <Button title={ 'Upload a cool image' }
+                onPress={ () => navigation.navigate( 'ModifyAccount' ) }/>
         { user.avatar ? <Image source={ { uri: user.avatar } }
                                style={ { width: 100, height: 100 } }/>
             : <Text>You don't own an avatar</Text> // eslint-disable-line

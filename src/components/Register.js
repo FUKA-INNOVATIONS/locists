@@ -29,7 +29,7 @@ const RegisterSchema = Yup.object().shape( {
 
 const Register = ( { navigation } ) => {
   // eslint-disable-next-line
-  const { isUsernameAvailable, register, login, loading, error } = useUser();
+  const { isUsernameAvailable, register, login, loading } = useUser();
 
   const {
     control,
@@ -77,23 +77,34 @@ const Register = ( { navigation } ) => {
     if ( registeredUser.user_id ) {
 
       /* const loginCredentials = {
-        username: data.username,
-        password: data.password,
-      }; */
+       username: data.username,
+       password: data.password,
+       }; */
 
-      const loginResponse = await login(data)
-      if (loginResponse.token) {
-        console.log('login succeeded')  // User login succeeded
-        navigation.navigate('HomeTab')     // Redirect to home screen
+      const loginResponse = await login( data );
+      if ( loginResponse.token ) {
+        console.log( 'login succeeded' );  // User login succeeded
+        navigation.navigate( 'AccountTab', { Screen: 'Account' } ); // Redirect to account screen
       } else {  // User login failed
-        console.log('login failed')
-        Alert.alert('Login failed', 'Please check your credentials and try again')
+        console.log( 'login failed' );
+        Alert.alert( 'Login failed',
+            'Please check your credentials and try again' );
       }
 
     }
 
     console.log( 'registeredUser Register.js: ', registeredUser );
   };
+
+  if ( loading ) {
+    return (
+        <View>
+          <Text>
+            Loading..
+          </Text>
+        </View>
+    );
+  }
 
   return (
       <KeyboardAvoidingView>
@@ -144,7 +155,7 @@ const Register = ( { navigation } ) => {
                         onChangeText={ onChange }
                         value={ value }
                         placeholder="Password"
-                        secureTextEntry={true}
+                        secureTextEntry={ true }
                     />
                 ) }
                 name="password"
@@ -162,7 +173,7 @@ const Register = ( { navigation } ) => {
                         onChangeText={ onChange }
                         value={ value }
                         placeholder="Password confirmation"
-                        secureTextEntry={true}
+                        secureTextEntry={ true }
                     />
                 ) }
                 name="passwordConfirm"

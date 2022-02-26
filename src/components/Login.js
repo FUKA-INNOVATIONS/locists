@@ -29,7 +29,7 @@ const Login = ( { navigation } ) => {
     const loginResponse = await login( data );
     if ( loginResponse.token ) {
       console.log( 'login succeeded' );  // User login succeeded
-      navigation.navigate( 'HomeTab' );     // Redirect to home screen
+      navigation.navigate( 'AccountTab', {Screen: 'Account'} );     // Redirect to home screen
     } else {  // User login failed
       console.log( 'login failed' );
       Alert.alert( 'Login failed',

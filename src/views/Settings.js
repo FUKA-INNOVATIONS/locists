@@ -33,13 +33,21 @@ const Settings = ( { navigation } ) => {
   });
 
   const onSubmit = async ( data ) => {
-    // console.log( 'formData 1', data );
+    // Check, is username available ?
+    const { available, username } = await isUsernameAvailable( data.username );
+
+    if (!available && username !== user.username) {
+      Alert.alert( 'Username is not available',
+          'Please choose another cool username and try again' );
+    }
 
     try {
       delete data.confirmPassword;
       if (data.password === '') {
         delete data.password;
       }
+
+      // TODO: token not always available after login, needs app reload
       const token = user.token;
       const userData = await modifyUser(token, data);
 
@@ -210,7 +218,7 @@ const Settings = ( { navigation } ) => {
           />
         </View>
         <Button title="Update details" onPress={ handleSubmit( onSubmit ) }/>
-        <UploadMedia mediaType={ 'avatar' } ussername={ user.username }/>
+        <UploadMedia mediaType={ 'avatar' } navigation={navigation}/>
       </View>
   );
 

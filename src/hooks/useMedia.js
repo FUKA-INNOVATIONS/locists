@@ -4,13 +4,12 @@ import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
 
 const useMedia = () => {
-  const [ loadingEvents, setLoadingEvents ] = useState( false );
-  const [ loadingPosts, setLoadingPosts ] = useState( false );
-  const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
+  // const [ loadingEvents, setLoadingEvents ] = useState( false );
+  // const [ loadingPosts, setLoadingPosts ] = useState( false );
+  // const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
   const [ loading, setLoading ] = useState( false );
-  const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(
-      false );
-  const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
+  // const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(false );
+  // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
 
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
@@ -19,21 +18,53 @@ const useMedia = () => {
   const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
-    setLoading( true );
-    const events = await getEvents();
-    const posts = await getPosts();
+
+    /*
+     * inorder to get thumbnails for optimization
+     * get all ids and fetch files
+     * */
+
+    const events = await getEventsWithThumbnails();
+    const posts = await getPostsWithThumbnails();
+
     const mixed = [ ...events, ...posts ];
     setAllMedia( mixed );
-    setLoading( false );
+
+  };
+
+  const getEventsWithThumbnails = async () => {
+    setLoading(true)
+    const eventArr = [];
+    const idEvents = await getEvents().
+        then( events => events.map( event => event.file_id ) );
+    for ( let i = 0; i < idEvents.length; i++ ) {
+      let event = await getMediaById( idEvents[ i ], true ); // eslint-disable-line
+      eventArr.push( event );
+    }
+    setEvents( eventArr );
+    setLoading(false)
+    return eventArr;
+  };
+
+  const getPostsWithThumbnails = async () => {
+    setLoading(true)
+    const postArr = [];
+    const idPosts = await getPosts().
+        then( posts => posts.map( post => post.file_id ) );
+    for ( let i = 0; i < idPosts.length; i++ ) {
+      let post = await getMediaById( idPosts[ i ], true ); // eslint-disable-line
+      postArr.push( post );
+    }
+    setPosts( postArr );
+    setLoading(false)
+    return postArr;
   };
 
   const getEvents = async () => {
     const URL = `${ baseUrl }tags/${ eventTag }`;
     try {
-      setLoadingEvents( true );
       const events = await axios.get( URL );
       setEvents( events.data );
-      setLoadingEvents( false );
       return events.data;
     } catch ( e ) {
       console.log( e );
@@ -43,46 +74,49 @@ const useMedia = () => {
   const getPosts = async () => {
     const URL = `${ baseUrl }tags/${ postTag }`;
     try {
-      setLoadingEvents( true );
       const posts = await axios.get( URL );
       setPosts( posts.data );
-      setLoadingPosts( false );
       return posts.data;
     } catch ( e ) {
       console.log( e );
     }
   };
 
-  const getMediaById = async ( mediaId ) => {
+  const getMediaById = async ( mediaId, returnObject = false ) => {
     const URL = `${ baseUrl }media/${ mediaId }`;
     try {
-      setLoadingSingleMedia( true );
-      const singleMedia = await axios.get( URL );
-      setSingleMedia( singleMedia.data );
-      setLoadingSingleMedia( false );
+      setLoading( true );
+      const { data } = await axios.get( URL );
+      if ( data ) {
+        data.description = JSON.parse( data.description );
+        if ( returnObject ) {
+          setLoading( false );
+          return data;
+        } else {
+          setSingleMedia( data );
+          setLoading( false );
+        }
+      }
     } catch ( e ) {
       console.log( e );
+      setLoading( false );
     }
   };
 
   const getSingleMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
     try {
-      setSingleLoadingMediaComments( true );
+      setLoading( true );
       const comments = await axios.get( URL );
       setSingleMediaComments( comments.data );
-      // console.log('comments in hook', comments.data)
-      setSingleLoadingMediaComments( false );
+      setLoading( false );
     } catch ( e ) {
       console.log( e );
+      setLoading( false );
     }
   };
 
   const uploadMedia = async ( formData, token ) => {
-   // console.log( 'uploadMedia hook' );
-    // console.log( 'formData in uploadMedia hook', formData);
-    setLoadingMediaUpload( true );
-    // console.log( 'token in uploadMedia hook', token );
 
     const options = {
       method: 'POST',
@@ -94,12 +128,14 @@ const useMedia = () => {
     };
 
     try {
-      const result = await doFetch(baseUrl + 'media', options);
+      // setLoading(true);
+      const result = await doFetch( baseUrl + 'media', options );
       // console.log('url', baseUrl)
-      result && setLoadingMediaUpload(false);
+      // result && setLoading(false);
       return result;
     } catch ( e ) {
-      console.log(e.message)
+      console.log( 'error in uploadMedia hook', e.message );
+      return false;
     }
 
   };
@@ -111,17 +147,20 @@ const useMedia = () => {
     getAllMedia,
     getSingleMediaComments,
     uploadMedia,
+    getEventsWithThumbnails,
+    getPostsWithThumbnails,
     events,
     posts,
     allMedia,
     singleMedia,
     singleMediaComments,
-    loadingEvents,
-    loadingPosts,
-    loadingSingleMedia,
+    // loadingEvents,
+    // loadingPosts,
+    // loadingSingleMedia,
     loading,
-    loadingSingleMediaComments,
-    loadingMediaUpload,
+    setLoading,
+    // loadingSingleMediaComments,
+    // loadingMediaUpload,
   };
 
 };

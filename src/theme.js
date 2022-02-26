@@ -1,8 +1,13 @@
-import { Platform } from 'react-native'
+import { Platform, StatusBar } from 'react-native';
 // Add Dimensions
 // Testing the pipeline
 
 const theme = {
+  AndroidSafeArea: {
+    flex: 1,
+    backgroundColor: '#24292e',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
   colors: {
     textPrimary: '#24292e',
     textSecondary: '#586069',
