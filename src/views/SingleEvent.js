@@ -29,7 +29,6 @@ const SingleEvent = ( { navigation, route } ) => {
     navigation.goBack();
   }
 
-
   return (
       <>
         <Button title={'Go back'} onPress={onModalCloseHandler} />
