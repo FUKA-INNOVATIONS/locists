@@ -8,7 +8,6 @@ import theme from '../theme';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
-import dummyImage from '../../assets/dummy_image.gif';
 
 const UploadPost = props => {
   const { user } = useAuthStorage();
