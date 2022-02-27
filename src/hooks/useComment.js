@@ -2,10 +2,12 @@ import { baseUrl } from '../../config';
 import axios from 'axios';
 import { useState } from 'react';
 import doFetch from '../utils/doFetch';
+import useAuthStorage from './useAuthStorage';
 
 const useComment = () => {
-  const [loading, setLoading] = useState(false);
-  const [mediaComments, setMediaComments] = useState([]);
+  const { user } = useAuthStorage();
+  const [ loading, setLoading ] = useState( false );
+  const [ mediaComments, setMediaComments ] = useState( [] );
 
   const getMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
@@ -20,38 +22,54 @@ const useComment = () => {
     }
   };
 
-  const postComment = async (token, file_id, content) => {
+  const postComment = async ( file_id, content ) => {
     const newComment = {
       file_id,
-      comment: content
-    }
+      comment: content,
+    };
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': token,
+        'x-access-token': user.token,
       },
-      body: JSON.stringify(newComment),
+      body: JSON.stringify( newComment ),
     };
 
     try {
-      return await doFetch(baseUrl + 'comments/', options);
-    } catch (error) {
-      console.log('error on postComment hook', error)
-      return false
+      return await doFetch( baseUrl + 'comments/', options );
+    } catch ( error ) {
+      console.log( 'error on postComment hook', error );
+      return false;
     }
 
-  }
+  };
 
+  const deleteComment = async ( id ) => {
+    console.log('deleteComment hook')
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': user.token,
+      }
+    };
 
+    try {
+      return await doFetch( baseUrl + 'comments/' + id, options );
+    } catch ( error ) {
+      console.log( 'error on deleteComment hook', error );
+      return false;
+    }
+  };
 
   return {
     getMediaComments,
     postComment,
+    deleteComment,
     mediaComments,
     loading,
-  }
+  };
 
-}
+};
 
 export default useComment;

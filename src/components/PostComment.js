@@ -30,8 +30,7 @@ const PostComment = ( { file_id, display } ) => {
 
   const onSubmit = async ( data ) => {
     const { content } = data;
-    const token = user.token;
-    const comment = await postComment( token, file_id, content );
+    const comment = await postComment( file_id, content );
      if ( comment.comment_id ) {
      Alert.alert( 'Comment added' );
      reset();

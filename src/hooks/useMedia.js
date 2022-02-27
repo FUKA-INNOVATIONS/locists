@@ -4,6 +4,8 @@ import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
 
 const useMedia = () => {
+  // TODO: get token here, not in views, fix
+
   // const [ loadingEvents, setLoadingEvents ] = useState( false );
   // const [ loadingPosts, setLoadingPosts ] = useState( false );
   // const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
