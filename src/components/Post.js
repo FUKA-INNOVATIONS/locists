@@ -1,10 +1,12 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { uploadsUrl } from '../../config';
+import Like from './Like';
+import useFavourite from '../hooks/useFavourite';
+import { useEffect, useState } from 'react';
 
 const Post = ( { postMedia } ) => {
-
   // console.log( 'postDetails in Post.js', postMedia );
-  // console.log('Post.js')
+  console.log('Post.js file_id', postMedia.file_id)
   // TODO: fix rendering
 
   return (
@@ -26,6 +28,7 @@ const Post = ( { postMedia } ) => {
           <View style={ styles.rates }>
             <Text>likes: { postMedia.likes }</Text>
             <Text>comments: { postMedia.comments }</Text>
+            <Like file_id={ postMedia.file_id }/>
           </View>
         </View>
       </View>
