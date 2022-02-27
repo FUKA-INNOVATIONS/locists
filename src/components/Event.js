@@ -16,6 +16,7 @@ const Event = ( { eventDetails } ) => {
   }
 
   // console.log('eventDetails in Event.js', eventDetails)
+  // TODO: fix rendering
 
   return (
       <View style={ styles.event }>
