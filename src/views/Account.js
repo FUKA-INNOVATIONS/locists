@@ -3,11 +3,17 @@ import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-n
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
+import useComment from '../hooks/useComment';
+
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
   const [ update, setUpdate ] = useState( false ); // eslint-disable-line
+  const { getCurrentUserComments } = useComment();
+  const [ comments, setComments ] = useState([]);
+
+  getCurrentUserComments().then( comments => setComments( comments ) );
 
   const logoutHandler = async () => {
     await authStorage.logout();
@@ -57,6 +63,7 @@ const Account = ( { navigation } ) => {
               <TouchableOpacity style={theme.generalBtn} onPress={ logoutHandler }>
                   <Text style={theme.loginButtonText}>Log Out</Text>
               </TouchableOpacity>
+              <Text>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
           </View>
       </ScrollView>
   );

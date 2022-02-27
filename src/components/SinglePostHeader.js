@@ -1,13 +1,15 @@
-import { Image, Text, View } from 'react-native';
+import { Button, Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
+import { useState } from 'react';
 import theme from "../theme";
 import {AntDesign} from "@expo/vector-icons";
+import PostComment from './PostComment';
 
 const SinglePostHeader = ( { postDetails } ) => {
+  if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>;
+  const [ isWriteComment, setIsWriteComment ] = useState( false );
 
-  /* useEffect(async() => {
-   await getMediaById(eventDetails.file_id)
-   },[eventDetails.file_id]) */
+
 
   if (postDetails === undefined) {
       return (
@@ -19,9 +21,15 @@ const SinglePostHeader = ( { postDetails } ) => {
 
     const description = postDetails.description;
 
-
+    const onWriteCommentHandler = () => {
+      console.log( 'onWriteCommentHandler' );
+      setIsWriteComment(true)
+    };
+  
     return (
         <View style={theme.singlePost}>
+            <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
+            {isWriteComment && <PostComment file_id={postDetails.file_id} display={setIsWriteComment}/>}
             <Text style={theme.singlePostOwner}>{description.owner}</Text>
             <View style={theme.imageAndLikes}>
                 <Image source={{uri: uploadsUrl+postDetails.filename}} style={theme.singlePostImage} />
@@ -35,6 +43,7 @@ const SinglePostHeader = ( { postDetails } ) => {
             </View>
         </View>
     );
+
 };
 
 export default SinglePostHeader;

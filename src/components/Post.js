@@ -1,3 +1,4 @@
+
 import { View, Image, Text } from "react-native";
 import {uploadsUrl} from "../../config";
 import theme from "../theme";
@@ -59,3 +60,7 @@ const Post = ({postMedia}) => {
 }
 
 export default Post;
+
+
+
+
