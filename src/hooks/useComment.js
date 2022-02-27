@@ -46,12 +46,12 @@ const useComment = () => {
   };
 
   const deleteComment = async ( id ) => {
-    console.log('deleteComment hook')
+    console.log( 'deleteComment hook' );
     const options = {
       method: 'DELETE',
       headers: {
         'x-access-token': user.token,
-      }
+      },
     };
 
     try {
@@ -62,10 +62,27 @@ const useComment = () => {
     }
   };
 
+  const getCurrentUserComments = async () => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'x-access-token': user.token,
+      },
+    };
+
+    try {
+      return await doFetch( baseUrl + 'comments/', options );
+    } catch ( error ) {
+      console.log( 'error on getCurrentUserComments hook', error );
+      return false;
+    }
+  };
+
   return {
     getMediaComments,
     postComment,
     deleteComment,
+    getCurrentUserComments,
     mediaComments,
     loading,
   };
