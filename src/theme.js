@@ -70,7 +70,7 @@ const theme = {
     marginBottom: 5,
   },
 
-  //General Component Styles
+  // General Component Styles
   generalBtn: {
     alignItems: 'center',
     borderColor: general.colors.btn,
@@ -224,7 +224,7 @@ const theme = {
     right: 5,
   },
 
-  //Authentication Screen Styles
+  // Authentication Screen Styles
   login: {
     height: height * 0.7,
     flexDirection: 'column',
@@ -247,7 +247,7 @@ const theme = {
     color: 'purple',
   },
 
-  //Create Media Styles
+  // Create Media Styles
   addImage: {
     alignSelf: 'center',
     width: width * 0.8,

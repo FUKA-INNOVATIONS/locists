@@ -1,4 +1,4 @@
-import { Button, Image, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import useDevice from '../hooks/useDevice';

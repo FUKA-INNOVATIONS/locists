@@ -1,5 +1,4 @@
 import {View, Text, Button, FlatList} from 'react-native';
-import Post from '../components/Post';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 import SinglePostHeader from "../components/SinglePostHeader";

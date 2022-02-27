@@ -2,7 +2,6 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   KeyboardAvoidingView, Alert, TouchableOpacity
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';

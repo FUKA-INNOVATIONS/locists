@@ -1,4 +1,4 @@
-import {View, Text, TextInput, Button, Alert, Pressable, TouchableOpacity} from 'react-native'
+import {View, Text, TextInput, Alert, TouchableOpacity} from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
 

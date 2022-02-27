@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Button, ScrollView } from 'react-native';
+import { View, Text, FlatList, Button } from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 

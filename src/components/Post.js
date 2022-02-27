@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Text } from "react-native";
+import { View, Image, Text } from "react-native";
 import {uploadsUrl} from "../../config";
 import theme from "../theme";
 
@@ -48,35 +48,15 @@ const Post = ({postMedia}) => {
                 </View>
             </View>
         </>
-        /*<View style={styles.info}>
+        /* <View style={styles.info}>
             <View style={styles.allText}>
             <View style={styles.rates}>
                 <Text>likes: {postMedia.likes}</Text>
                 <Text>comments: {postMedia.comments}</Text>
             </View>
             </View>
-        </View>*/
+        </View> */
     )
 }
 
 export default Post;
-
-const styles = StyleSheet.create({
-    info: {
-        flex: 1,
-        flexDirection: "column",
-        width: '100%',
-        borderWidth: 2,
-        borderRadius: 10,
-        padding: 10,
-    },
-    allText: {
-        flex: 1,
-        flexDirection: "row",
-    },
-    text: {
-        width: '70%'
-    },
-    rates: {
-    }
-});

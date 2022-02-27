@@ -1,4 +1,4 @@
-import {View, Image, Text, StyleSheet, Button} from 'react-native';
+import {View, Image, Text, Button} from 'react-native';
 import { uploadsUrl } from '../../config';
 import theme from "../theme";
 

@@ -4,7 +4,6 @@ import useAuthStorage from '../hooks/useAuthStorage';
 import UploadMedia from '../components/UploadMedia';
 import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
-import {Touchable} from "react-native-web";
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
@@ -51,7 +50,7 @@ const Account = ( { navigation } ) => {
                 {
                     // TODO media task: add default optimized image here
                 }
-                You don't own an avatar
+                You do not own an avatar
             </Text> // eslint-disable-line
         }
         <Text>User status: { user.isLogged && 'logged in' }</Text>
