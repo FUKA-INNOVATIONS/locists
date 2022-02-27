@@ -22,7 +22,7 @@ const useComment = () => {
     }
   };
 
-  const postComment = async ( file_id, content ) => {
+  const postComment = async ( file_id, content ) => { // eslint-disable-line
     const newComment = {
       file_id,
       comment: content,
