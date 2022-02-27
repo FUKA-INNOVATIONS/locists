@@ -35,7 +35,7 @@ const SinglePost = ( { navigation, route } ) => {
             <SinglePostHeader postDetails={ singleMedia } />
             <View style={theme.singleMediaComments}>
                 <FlatList
-                    data={ singleMediaComments }
+                    data={ mediaComments }
                     ListEmptyComponent={ EmptyListMessage }
                     keyExtractor={ (  item  ) => item.comment_id }
                     renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }

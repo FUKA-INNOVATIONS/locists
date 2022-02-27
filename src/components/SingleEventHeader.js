@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button, Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
-import theme from "../theme";
 import PostComment from './PostComment';
 
 const SingleEventHeader = ({eventDetails}) => {
