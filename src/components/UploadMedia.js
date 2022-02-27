@@ -5,7 +5,7 @@ import useAuthStorage from '../hooks/useAuthStorage';
 import useTag from '../hooks/useTag';
 import UploadAvatar from './UploadAvatar';
 import UploadEvent from './uploadEvent';
-import { postTag, eventTag } from '../../config';
+import { postTag, eventTag, appId } from '../../config';
 import UploadPost from './uploadPost';
 import { useState } from 'react';
 
@@ -31,7 +31,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     // TODO: Handle too big image case
 
     const formData = new FormData();  // eslint-disable-line
-    data.location && formData.append( 'title', data.location );
+    data.location && formData.append( 'title', `${appId} ${data.location}` );
     formData.append( 'description', mediaDescription );
     const filename = image.split( '/' ).pop();
     let fileExtension = filename.split( '.' ).pop();
