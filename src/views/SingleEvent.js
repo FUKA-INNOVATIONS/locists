@@ -4,15 +4,16 @@ import { useEffect } from 'react';
 
 import SingleEventHeader from '../components/SingleEventHeader';
 import Comment from '../components/Comment';
+import useComment from '../hooks/useComment';
 
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params;
   const { getMediaById, singleMedia, loading: loadingSingleMedia } = useMedia();
-  const { getSingleMediaComments, singleMediaComments, loading: loadingComments, } = useMedia();
+  const { getMediaComments, mediaComments, loading: loadingComments, } = useComment();
 
   useEffect( async () => {
     await getMediaById( eventId ).then(async () => {
-      await getSingleMediaComments( eventId );
+      await getMediaComments( eventId );
     })
   }, [ eventId ] );
 
@@ -28,12 +29,11 @@ const SingleEvent = ( { navigation, route } ) => {
     navigation.goBack();
   }
 
-
   return (
       <>
         <Button title={'Go back'} onPress={onModalCloseHandler} />
         <FlatList
-            data={ singleMediaComments }
+            data={ mediaComments }
             ListEmptyComponent={ EmptyListMessage }
             ListHeaderComponent={ <SingleEventHeader eventDetails={ singleMedia } /> }
             keyExtractor={ (  item  ) => item.comment_id }

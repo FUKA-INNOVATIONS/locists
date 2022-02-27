@@ -4,6 +4,7 @@ import { uploadsUrl } from '../../config';
 const Post = ( { postMedia } ) => {
 
   // console.log( 'postDetails in Post.js', postMedia );
+  // console.log('Post.js')
   // TODO: fix rendering
 
   return (

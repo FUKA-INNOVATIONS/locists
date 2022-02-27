@@ -4,18 +4,19 @@ import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
 
 const useMedia = () => {
+  // TODO: get token here, not in views, fix
+
   // const [ loadingEvents, setLoadingEvents ] = useState( false );
   // const [ loadingPosts, setLoadingPosts ] = useState( false );
   // const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
   const [ loading, setLoading ] = useState( false );
-  // const [ loadingSingleMediaComments, setSingleLoadingMediaComments ] = useState(false );
   // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
 
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
   const [ singleMedia, setSingleMedia ] = useState();
   const [ allMedia, setAllMedia ] = useState();
-  const [ singleMediaComments, setSingleMediaComments ] = useState();
+  // const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
 
@@ -103,18 +104,6 @@ const useMedia = () => {
     }
   };
 
-  const getSingleMediaComments = async ( mediaId ) => {
-    const URL = `${ baseUrl }comments/file/${ mediaId }`;
-    try {
-      // setLoading( true );
-      const comments = await axios.get( URL );
-      setSingleMediaComments( comments.data );
-      // setLoading( false );
-    } catch ( e ) {
-      console.log( e );
-      // setLoading( false );
-    }
-  };
 
   const uploadMedia = async ( formData, token ) => {
 
@@ -145,7 +134,6 @@ const useMedia = () => {
     getPosts,
     getMediaById,
     getAllMedia,
-    getSingleMediaComments,
     uploadMedia,
     getEventsWithThumbnails,
     getPostsWithThumbnails,
@@ -153,13 +141,11 @@ const useMedia = () => {
     posts,
     allMedia,
     singleMedia,
-    singleMediaComments,
     // loadingEvents,
     // loadingPosts,
     // loadingSingleMedia,
     loading,
     setLoading,
-    // loadingSingleMediaComments,
     // loadingMediaUpload,
   };
 

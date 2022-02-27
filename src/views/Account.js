@@ -2,11 +2,16 @@ import { useCallback, useState } from 'react';
 import { Button, Text, View, Image } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
+import useComment from '../hooks/useComment';
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
   const authStorage = useAuthStorage();
   const [ update, setUpdate ] = useState( false ); // eslint-disable-line
+  const { getCurrentUserComments } = useComment();
+  const [ comments, setComments ] = useState([]);
+
+  getCurrentUserComments().then( comments => setComments( comments ) );
 
   const logoutHandler = async () => {
     await authStorage.logout();
@@ -41,6 +46,7 @@ const Account = ( { navigation } ) => {
         <Text>Email: { user.email }</Text>
         <Text>User id: { user.user_id }</Text>
         <Text>Full name: { user.full_name }</Text>
+        <Text>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
         <Button title={ 'Log out' } onPress={ logoutHandler }/>
       </View>
   );
