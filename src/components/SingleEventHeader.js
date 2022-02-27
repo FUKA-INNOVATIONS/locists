@@ -5,9 +5,8 @@ import theme from "../theme";
 const SingleEventHeader = ({eventDetails}) => {
   if(eventDetails === undefined) return <View><Text>Loading..</Text></View>
 
-    let description = eventDetails.description;
-    description = JSON.parse(description);
-    console.log('aaa', description);
+    const description = eventDetails.description;
+
   return (
       <>
         <Image source={{uri: uploadsUrl+eventDetails.filename}} style={{width: '100%', height: 200}} />

@@ -17,8 +17,8 @@ const SinglePostHeader = ( { postDetails } ) => {
       );
   };
 
-    let description = postDetails.description;
-    description = JSON.parse(description);
+    const description = postDetails.description;
+
 
     return (
         <View style={theme.singlePost}>
