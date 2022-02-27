@@ -15,7 +15,7 @@ const useFavourite = () => {
         'Content-Type': 'application/json',
         'x-access-token': user.token,
       },
-      body: JSON.stringify( file_id ),
+      body: JSON.stringify( { file_id } ),
     };
 
     try {

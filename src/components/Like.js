@@ -1,34 +1,49 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import { useEffect, useState } from 'react';
 import useFavourite from '../hooks/useFavourite';
 
 const Like = ( { file_id } ) => {
-  const { getMediaFavourites, mediaFavourites } = useFavourite();
+  const {
+    getMediaFavourites,
+    deleteFavourite,
+    createFavourite,
+    mediaFavourites,
+  } = useFavourite();
   // const { favouritesCount, setFavouritesCount } = useState();
+
+  const fav = [];
   useEffect( async () => {
     /*return navigation.addListener('focus', async () => {
      console.log( 'EventsList focus' );
      await fetchEvents();
      });*/
-    const favourites = await getMediaFavourites( file_id );
+    await getMediaFavourites( file_id );
     // console.log( favourites );
     // setFavouritesCount(favourites)
   }, [] );
 
   const likeHandler = async () => {
     console.log( 'Like', file_id );
+    if ( hasLiked() ) {
+      const disLiked = await deleteFavourite( file_id );
+      disLiked.message && Alert.alert(disLiked.message)
+    } else {
+      const liked = await createFavourite( file_id );
+      liked.file_id && Alert.alert('Successfully liked')
+    }
+
   };
 
   const hasLiked = () => {
-    const isOwner =  mediaFavourites.map( f => f.isOwner )
-    console.log(isOwner)
-    return isOwner
-  }
+    return mediaFavourites.filter( f => f.isOwner ).length > 0;
+  };
 
   return (
       <View>
         <Pressable onPress={ likeHandler }>
-          <Text style={ { fontSize: 20 } }>{ hasLiked() ? 'disLike' : 'like' } ({mediaFavourites.length})</Text>
+          <Text style={ { fontSize: 20 } }>{ hasLiked()
+              ? 'disLike'
+              : 'like' } ({ mediaFavourites.length })</Text>
         </Pressable>
       </View>
   );

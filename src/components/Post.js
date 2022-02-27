@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 const Post = ( { postMedia } ) => {
   // console.log( 'postDetails in Post.js', postMedia );
-  console.log('Post.js file_id', postMedia.file_id)
+  // console.log('Post.js file_id', postMedia.file_id)
   // TODO: fix rendering
 
   return (
