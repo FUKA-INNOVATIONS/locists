@@ -29,7 +29,7 @@ const SingleEventHeader = ( { eventDetails } ) => {
   return (
       <>
         <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
-        {isWriteComment && <PostComment onSubmit={onPostCommentHandler} file_id={eventDetails.file_id}/>}
+        {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment}/>}
         <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
                style={ { width: '100%', height: 200 } }/>
         <Text>Title: { eventDetails.title }</Text>
