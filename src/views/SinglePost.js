@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import SinglePostHeader from "../components/SinglePostHeader";
 import theme from "../theme";
 import Comment from "../components/Comment";
-import Comment from '../components/Comment';
 import SinglePostHeader from '../components/SinglePostHeader';
 import useComment from '../hooks/useComment';
 import { MaterialIcons } from '@expo/vector-icons';
