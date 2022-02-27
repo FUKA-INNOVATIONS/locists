@@ -70,7 +70,7 @@ const theme = {
     marginBottom: 5,
   },
 
-  //General Styles
+  //General Component Styles
   generalBtn: {
     alignItems: 'center',
     borderColor: general.colors.btn,
@@ -80,49 +80,30 @@ const theme = {
     elevation: 5,
     backgroundColor: '#fff',
   },
-
-  // Event List Styles
-  event: {
+  generalListPost: {
     marginBottom: 10,
     marginHorizontal: 10,
     flex: 1,
-    flexDirection: 'row',
     borderWidth: 1,
-    borderRadius: 12,
-    borderTopLeftRadius: 0,
-    backgroundColor: '#E9D6DB',
+    backgroundColor: general.colors.postBackground,
   },
-  eventInfo: {
-    flex: 1,
-    flexDirection: 'column',
-    paddingLeft: 5,
-  },
-  eventAttend: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    borderWidth: 0,
-    width: width/3,
-  },
-  eventImage: {
-    width: 135,
-    height: 135,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-
-  // Post List Styles
-  post: {
-    marginBottom: 10,
-    marginHorizontal: 10,
-    flex: 1,
+  singleMediaComments: {
+    marginTop: 5,
+    borderWidth: 3,
     alignSelf: 'center',
-    borderWidth: 1,
+    minHeight: 260,
+    paddingVertical: 5,
+    width: width * 0.95,
+    position: 'relative',
+  },
+
+  // In List Post Styles
+  post: {
+    alignSelf: 'center',
     borderRadius: 11,
-    backgroundColor: '#E9D6DB',
   },
   postImage: {
-    width: width-20,
+    width: width * 0.94,
     height: undefined,
     aspectRatio: 1.4,
     borderTopRightRadius: 10,
@@ -148,6 +129,31 @@ const theme = {
     alignItems: 'flex-end',
   },
 
+  // Event List Styles
+  event: {
+    flexDirection: 'row',
+    borderRadius: 12,
+    borderTopLeftRadius: 0,
+  },
+  eventInfo: {
+    flex: 1,
+    flexDirection: 'column',
+    paddingLeft: 5,
+  },
+  eventAttend: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    borderWidth: 0,
+    width: width/3,
+  },
+  eventImage: {
+    width: 135,
+    height: 135,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+
   // Single Event Styles
   singleEventInfo: {
     marginHorizontal: 0,
@@ -157,15 +163,6 @@ const theme = {
     borderRadius: 0,
     marginTop: 0,
     padding: 5,
-  },
-  singlePostComments: {
-     marginTop: 5,
-    borderWidth: 3,
-    alignSelf: 'center',
-    minHeight: 260,
-    paddingVertical: 5,
-    width: width * 0.95,
-    position: 'relative',
   },
   postComment: {
     flex: 1,
@@ -191,7 +188,8 @@ const theme = {
     alignSelf: 'center',
   },
   singlePostOwner: {
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    color: general.colors.txtLight
   },
   imageAndLikes: {
     flexDirection: 'row',
@@ -209,6 +207,7 @@ const theme = {
   singlePostLikes: {
     alignSelf: 'center',
     fontSize: 20,
+    color: general.colors.txtLight
   },
   singlePostText: {
     width: width * 0.94,
@@ -265,8 +264,6 @@ const theme = {
     alignItems: 'center',
   },
 
-
-
   // Profile Styles
   profile: {
     alignItems: 'center',
@@ -295,4 +292,4 @@ const theme = {
   },
 }
 
-export default theme
+export default theme;

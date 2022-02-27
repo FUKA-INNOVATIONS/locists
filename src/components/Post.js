@@ -8,7 +8,6 @@ const Post = ({postMedia}) => {
 
     let description = postMedia.description;
     description = JSON.parse(description);
-    console.log('xxxxxxxxxxxx', description);
 
     return (
         <>
@@ -19,7 +18,7 @@ const Post = ({postMedia}) => {
                 <Text style={{ color: 'white'}}>{description.owner}</Text>
             </View>
 
-            <View style={theme.post}>
+            <View style={[theme.generalListPost, theme.post]}>
                 {
                     // TODO check if post has image, display post without image if not present
                 }

@@ -27,7 +27,7 @@ const Event = ( { eventDetails } ) => {
               <Text style={{ color: 'white'}}>Username</Text>
           </View>
 
-        <View style={theme.event}>
+        <View style={[theme.generalListPost, theme.event]}>
           <View style={theme.eventInfo}>
             <Text style={theme.mediaTitle}>{ description.name }</Text>
             <Text>

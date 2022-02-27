@@ -37,7 +37,7 @@ const SinglePost = ( { navigation, route } ) => {
         <>
             <Button title={'Go back'} onPress={onModalCloseHandler} />
             <SinglePostHeader postDetails={ singleMedia } />
-            <View style={theme.singlePostComments}>
+            <View style={theme.singleMediaComments}>
                 <FlatList
                     data={ singleMediaComments }
                     ListEmptyComponent={ EmptyListMessage }
