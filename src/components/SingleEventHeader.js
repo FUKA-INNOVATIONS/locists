@@ -21,11 +21,6 @@ const SingleEventHeader = ( { eventDetails } ) => {
     setIsWriteComment(true)
   };
 
-  const onPostCommentHandler = () => {
-    console.log( 'onPostCommentHandler' );
-    setIsWriteComment(false)
-  };
-
   return (
       <>
         <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
