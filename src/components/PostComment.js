@@ -6,8 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import theme from '../theme';
 
-const PostComment = ( { file_id, display } ) => {
-  const { user } = useAuthStorage();
+const PostComment = ( { file_id, display } ) => { // eslint-disable-line
+  const { user } = useAuthStorage(); // eslint-disable-line
   const { postComment } = useComment();
 
   const CommentSchema = Yup.object().shape( {
