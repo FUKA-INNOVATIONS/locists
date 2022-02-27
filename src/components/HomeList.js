@@ -13,7 +13,9 @@ const HomeList = ( { navigation } ) => {
 
    const getPostsAndEvents = useMemo( async () => {
     await getAllMedia()
-  }, [allMedia] );
+  }, [] );
+
+  // TODO: fix rendering
 
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}

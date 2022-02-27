@@ -50,12 +50,15 @@ const UploadPost = props => {
     resolver: yupResolver( PostSchema ), mode: 'onBlur',
   } );
 
+  const dummyImage = require( '../../assets/dummy_image.gif' );
+
   const mediaDescription = {
     mediaType: 'post',
     owner: user.user_id,
     fileType: type,
     location: getValues().location,
     description: getValues().description,
+    hasImage: imageSelected !== dummyImage,
   };
 
   const resetAll = () => {
@@ -68,7 +71,7 @@ const UploadPost = props => {
   /*
   * Upload dummy image if user doesnt select and image
   * */
-  const dummyImage = require( '../../assets/dummy_image.gif' );
+
   !imageSelected && setImageSelected( dummyImage );
 
   return (
