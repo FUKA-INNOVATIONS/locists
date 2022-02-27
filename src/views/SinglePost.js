@@ -3,17 +3,22 @@ import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
 import Comment from '../components/Comment';
 import SinglePostHeader from '../components/SinglePostHeader';
+import useComment from '../hooks/useComment';
 
 const SinglePost = ( { navigation, route } ) => {
   const { postId } = route.params;
-  const { getMediaById, getSingleMediaComments, singleMediaComments, singleMedia, loadingSingleMedia } = useMedia();
+  // const { getMediaById, getSingleMediaComments, singleMediaComments, singleMedia, loadingSingleMedia } = useMedia();
+  const { getMediaById, singleMedia, loading: loadingSingleMedia } = useMedia();
+  const { getMediaComments, mediaComments, loading: loadingComments, } = useComment();
+
 
   useEffect( async () => {
     await getMediaById( postId );
-    await getSingleMediaComments( postId );
+    await getMediaComments( postId );
   }, [ postId ] );
 
   if ( loadingSingleMedia ) return <View><Text>Loading..</Text></View>;
+  if ( loadingComments ) return <View><Text>Loading media comments..</Text></View>;
 
   const onModalCloseHandler = () => {
     navigation.goBack();
@@ -28,7 +33,7 @@ const SinglePost = ( { navigation, route } ) => {
         <Text>Hello from SinglePost.js</Text>
         <Button title={'Go back'} onPress={onModalCloseHandler} />
         <FlatList
-            data={ singleMediaComments }
+            data={ mediaComments }
             ListEmptyComponent={ EmptyListMessage }
             ListHeaderComponent={ <SinglePostHeader postDetails={ singleMedia } /> }
             keyExtractor={ (  item  ) => item.comment_id }
