@@ -1,8 +1,6 @@
 import {View, Text, Button, FlatList} from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
-
-import SinglePostHeader from "../components/SinglePostHeader";
 import theme from "../theme";
 import Comment from "../components/Comment";
 import SinglePostHeader from '../components/SinglePostHeader';
