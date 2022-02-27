@@ -31,7 +31,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     // TODO: Handle too big image case
 
     const formData = new FormData();  // eslint-disable-line
-    data.title && formData.append( 'title', data.name );
+    data.location && formData.append( 'title', data.location );
     formData.append( 'description', mediaDescription );
     const filename = image.split( '/' ).pop();
     let fileExtension = filename.split( '.' ).pop();
