@@ -1,41 +1,51 @@
-import { View, Text, Button, FlatList } from 'react-native';
+import {View, Text, Button, FlatList} from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
-import Comment from '../components/Comment';
-import SinglePostHeader from '../components/SinglePostHeader';
+import SinglePostHeader from "../components/SinglePostHeader";
+import theme from "../theme";
+import Comment from "../components/Comment";
+
+import { MaterialIcons } from '@expo/vector-icons';
 
 const SinglePost = ( { navigation, route } ) => {
-  const { postId } = route.params;
-  const { getMediaById, getSingleMediaComments, singleMediaComments, singleMedia, loadingSingleMedia } = useMedia();
+    const { postId } = route.params;
+    const {
+            getMediaById,
+            getSingleMediaComments,
+            singleMediaComments,
+            singleMedia,
+            loadingSingleMedia
+    } = useMedia();
 
   useEffect( async () => {
     await getMediaById( postId );
     await getSingleMediaComments( postId );
   }, [ postId ] );
 
-  if ( loadingSingleMedia ) return <View><Text>Loading..</Text></View>;
+    if (loadingSingleMedia) return <View><Text>Loading..
+        details...</Text></View>;
 
-  const onModalCloseHandler = () => {
-    navigation.goBack();
-  };
+    const EmptyListMessage = () => <Text style={{color: 'white'}}>No comments </Text>;
 
-  const EmptyListMessage = () => <Text>No comments </Text>;
+    const onModalCloseHandler = () => {
+        navigation.goBack();
+    }
 
-  // console.log( 'singleMedia in SinglePost.js', singleMedia );
-
-  return (
-      <>
-        <Text>Hello from SinglePost.js</Text>
-        <Button title={'Go back'} onPress={onModalCloseHandler} />
-        <FlatList
-            data={ singleMediaComments }
-            ListEmptyComponent={ EmptyListMessage }
-            ListHeaderComponent={ <SinglePostHeader postDetails={ singleMedia } /> }
-            keyExtractor={ (  item  ) => item.comment_id }
-            renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
-        />
-      </>
-  );
+    return (
+        <>
+            <Button title={'Go back'} onPress={onModalCloseHandler} />
+            <SinglePostHeader postDetails={ singleMedia } />
+            <View style={theme.singleMediaComments}>
+                <FlatList
+                    data={ singleMediaComments }
+                    ListEmptyComponent={ EmptyListMessage }
+                    keyExtractor={ (  item  ) => item.comment_id }
+                    renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
+                />
+                <MaterialIcons style={theme.addComment} name="post-add" size={30} color="black" />
+            </View>
+        </>
+    );
 };
 
 export default SinglePost;

@@ -1,34 +1,25 @@
 import { Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
+import theme from "../theme";
 
-const SingleEventHeader = ( { eventDetails } ) => {
-  if ( eventDetails === undefined ) return <View><Text>Loading..</Text></View>;
-  // const { singleMedia, getMediaById } = useMedia();
+const SingleEventHeader = ({eventDetails}) => {
+  if(eventDetails === undefined) return <View><Text>Loading..</Text></View>
 
-  /* useEffect(async() => {
-    await getMediaById(eventDetails.file_id)
-  },[eventDetails.file_id]) */
-
-  if (eventDetails === undefined) {
-    return (
-        <>
-          <Text>Loading</Text>
-        </>
-    )
-  }
-
-  // const mediaDescription = JSON.parse(singleMedia.description)
-  // console.log('singleEventHeader', eventDetails)
-
+    let description = eventDetails.description;
+    description = JSON.parse(description);
+    console.log('aaa', description);
   return (
       <>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
-               style={ { width: '100%', height: 200 } }/>
-        <Text>Title: { eventDetails.title }</Text>
-        <Text>Description: { eventDetails.description.description }</Text>
-        <Text>Location: { eventDetails.description.location }</Text>
-        <Text>File_id: { eventDetails.file_id }</Text>
-        <Text>Media type: { eventDetails.description.mediaType }</Text>
+        <Image source={{uri: uploadsUrl+eventDetails.filename}} style={{width: '100%', height: 200}} />
+          <View style={theme.singleEventInfo}>
+              <Text style={theme.mediaTitle}>{description.name}</Text>
+              <Text>Desc: {description.description}</Text>
+              <Text>{description.date}</Text>
+              <Text>{description.location}</Text>
+              <Text>€{description.price}</Text>
+              <Text>Host: {description.owner}</Text>
+          </View>
+
       </>
   );
 };

@@ -1,35 +1,40 @@
 import { Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
+import theme from "../theme";
+import {AntDesign} from "@expo/vector-icons";
 
 const SinglePostHeader = ( { postDetails } ) => {
-  if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>;
 
   /* useEffect(async() => {
    await getMediaById(eventDetails.file_id)
    },[eventDetails.file_id]) */
 
   if (postDetails === undefined) {
+      return (
+          <>
+              <Text>Loading</Text>
+          </>
+      );
+  };
+
+    let description = postDetails.description;
+    description = JSON.parse(description);
+
     return (
-        <>
-          <Text>Loading</Text>
-        </>
-    )
-  }
-
-  // const mediaDescription = JSON.parse(singleMedia.description)
-  // console.log('postDetails in singlePostHeader', postDetails)
-
-  return (
-      <>
-        <Image source={ { uri: uploadsUrl + postDetails.thumbnails.w320 } }
-               style={ { width: '100%', height: 200 } }/>
-        <Text>Title: { postDetails.title }</Text>
-        <Text>Description: { postDetails.description.description }</Text>
-        <Text>Location: { postDetails.description.location }</Text>
-        <Text>File_id: { postDetails.file_id }</Text>
-        <Text>Media type: { postDetails.description.mediaType }</Text>
-      </>
-  );
+        <View style={theme.singlePost}>
+            <Text style={theme.singlePostOwner}>{description.owner}</Text>
+            <View style={theme.imageAndLikes}>
+                <Image source={{uri: uploadsUrl+postDetails.filename}} style={theme.singlePostImage} />
+                <View>
+                    <AntDesign name="like2" size={40} color="black" />
+                    <Text style={theme.singlePostLikes}>0</Text>
+                </View>
+            </View>
+            <View style={theme.singlePostText}>
+                <Text>{description.description}</Text>
+            </View>
+        </View>
+    );
 };
 
 export default SinglePostHeader;

@@ -1,9 +1,12 @@
-import { View, Image, Text, StyleSheet } from 'react-native';
+import {View, Image, Text, Button} from 'react-native';
 import { uploadsUrl } from '../../config';
+import theme from "../theme";
+
+import { Entypo } from '@expo/vector-icons';
 
 const Event = ( { eventDetails } ) => {
-  // let description = eventDetails.description;
-  // description = JSON.parse(description)
+  let description = eventDetails.description;
+  description = JSON.parse(description)
 
   if ( eventDetails === null ) {
     return (
@@ -15,51 +18,44 @@ const Event = ( { eventDetails } ) => {
     );
   }
 
-  // console.log('eventDetails in Event.js', eventDetails)
-
   return (
-      <View style={ styles.event }>
-        <View style={ styles.text }>
-          <Text>EVENT</Text>
-          <Text>{ eventDetails.description.name }</Text>
-          <Text numberOfLines={ 2 }>{ eventDetails.description.location }</Text>
-          <Text>{ eventDetails.description.date }</Text>
-          <Text>{ eventDetails.description.price } €</Text>
-          <View style={ styles.attendees }>
-            <Text>likes: </Text>
-            <Text>Host:</Text>
+      <>
+          <View style={{marginLeft: 15}}>
+              {
+                  // Todo add user avatar here
+              }
+              <Text style={{ color: 'white'}}>Username</Text>
           </View>
+
+        <View style={[theme.generalListPost, theme.event]}>
+          <View style={theme.eventInfo}>
+            <Text style={theme.mediaTitle}>{ description.name }</Text>
+            <Text>
+              <Entypo name="location-pin" size={20} color="black" />
+              { description.location }
+            </Text>
+            <Text>
+              <Entypo name="calendar" size={20} color="black" />
+              { description.date }
+            </Text>
+            <Text>{ description.price } €</Text>
+            <View style={theme.eventAttend}>
+              <Entypo name="users" size={20} color="black" />
+              <Text>
+                50
+                {
+                // {description.attendees}
+                }
+              </Text>
+
+              <Button title="Attend" />
+            </View>
+          </View>
+          <Image source={ { uri: uploadsUrl + eventDetails.filename } }
+                 style={theme.eventImage} />
         </View>
-
-        <Image
-            // TODO: use thumbnails when ever possible
-            source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
-            style={ { width: 100, height: 100 } }
-        />
-      </View>
-
+      </>
   );
 };
 
 export default Event;
-
-const styles = StyleSheet.create({
-  event: {
-    flex: 1,
-    flexDirection: 'row',
-    width: '100%',
-    borderWidth: 2,
-    borderRadius: 10,
-    padding: 10,
-    position: 'relative',
-  },
-  text: {
-    width: '70%',
-  },
-  attendees: {
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 0,
-  },
-} );
-
