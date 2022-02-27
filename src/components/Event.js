@@ -5,8 +5,8 @@ import theme from "../theme";
 import { Entypo } from '@expo/vector-icons';
 
 const Event = ( { eventDetails } ) => {
-  let description = eventDetails.description;
-  description = JSON.parse(description)
+
+    const description = eventDetails.description;
 
   if ( eventDetails === null ) {
     return (

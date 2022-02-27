@@ -5,9 +5,8 @@ import theme from "../theme";
 import { AntDesign } from '@expo/vector-icons';
 
 const Post = ({postMedia}) => {
-
+    console.log(postMedia);
     let description = postMedia.description;
-    description = JSON.parse(description);
 
     return (
         <>
