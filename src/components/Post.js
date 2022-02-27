@@ -28,7 +28,7 @@ const Post = ( { postMedia } ) => {
           <View style={ styles.rates }>
             <Text>likes: { postMedia.likes }</Text>
             <Text>comments: { postMedia.comments }</Text>
-            <Like file_id={ postMedia.file_id }/>
+            <Like displayIcon={false} file_id={ postMedia.file_id }/>
           </View>
         </View>
       </View>

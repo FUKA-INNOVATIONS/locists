@@ -2,7 +2,7 @@ import { View, Text, Pressable, Alert } from 'react-native';
 import { useEffect, useState } from 'react';
 import useFavourite from '../hooks/useFavourite';
 
-const Like = ( { file_id } ) => {
+const Like = ( { file_id, displayIcon } ) => {
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -26,10 +26,10 @@ const Like = ( { file_id } ) => {
     console.log( 'Like', file_id );
     if ( hasLiked() ) {
       const disLiked = await deleteFavourite( file_id );
-      disLiked.message && Alert.alert(disLiked.message)
+      disLiked.message && Alert.alert( disLiked.message );
     } else {
       const liked = await createFavourite( file_id );
-      liked.file_id && Alert.alert('Successfully liked')
+      liked.file_id && Alert.alert( 'Successfully liked' );
     }
 
   };
@@ -40,11 +40,12 @@ const Like = ( { file_id } ) => {
 
   return (
       <View>
-        <Pressable onPress={ likeHandler }>
+        { displayIcon && <Pressable onPress={ likeHandler }>
           <Text style={ { fontSize: 20 } }>{ hasLiked()
               ? 'disLike'
-              : 'like' } ({ mediaFavourites.length })</Text>
-        </Pressable>
+              : 'like' }</Text>
+        </Pressable> }
+        <Text>{ mediaFavourites.length } likes</Text>
       </View>
   );
 };
