@@ -1,8 +1,6 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { uploadsUrl } from '../../config';
 import Like from './Like';
-import useFavourite from '../hooks/useFavourite';
-import { useEffect, useState } from 'react';
 
 const Post = ( { postMedia } ) => {
   // console.log( 'postDetails in Post.js', postMedia );

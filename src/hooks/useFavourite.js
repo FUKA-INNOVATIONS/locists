@@ -6,9 +6,9 @@ import { useState } from 'react';
 const useFavourite = () => {
   const { user } = useAuthStorage();
   const [ mediaFavourites, setMediaFavourites ] = useState( [] );
-  const [ userFavourites, setUserFavourites ] = useState( [] );
+  const [ userFavourites, setUserFavourites ] = useState( [] ); // eslint-disable-line
 
-  const createFavourite = async ( file_id ) => {
+  const createFavourite = async ( file_id ) => {  // eslint-disable-line
     const options = {
       method: 'POST',
       headers: {

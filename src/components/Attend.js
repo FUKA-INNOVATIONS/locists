@@ -1,8 +1,8 @@
 import { View, Text, Pressable, Alert } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useFavourite from '../hooks/useFavourite';
 
-const Attend = ( { file_id, displayIcon } ) => {
+const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -11,10 +11,10 @@ const Attend = ( { file_id, displayIcon } ) => {
   } = useFavourite();
 
   useEffect( async () => {
-    /*return navigation.addListener('focus', async () => {
+    /* return navigation.addListener('focus', async () => {
      console.log( 'EventsList focus' );
      await fetchEvents();
-     });*/
+     }); */
     await getMediaFavourites( file_id );
     // console.log( favourites );
     // setFavouritesCount(favourites)
