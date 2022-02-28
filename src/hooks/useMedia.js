@@ -7,18 +7,11 @@ import useAuthStorage from './useAuthStorage';
 const useMedia = () => {
   // TODO: get token here, not in views, fix
   const { user } = useAuthStorage();
-
-  // const [ loadingEvents, setLoadingEvents ] = useState( false );
-  // const [ loadingPosts, setLoadingPosts ] = useState( false );
-  // const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
   const [ loading, setLoading ] = useState( false );
-  // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
-
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
   const [ singleMedia, setSingleMedia ] = useState();
   const [ allMedia, setAllMedia ] = useState();
-  // const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
 
@@ -42,10 +35,12 @@ const useMedia = () => {
         then( events => events.map( event => event.file_id ) );
     for ( let i = 0; i < idEvents.length; i++ ) {
       let event = await getMediaById( idEvents[ i ], true ); // eslint-disable-line
+      event.description.isOwner = (event.user_id === user.user_id)
       eventArr.push( event );
     }
     setEvents( eventArr );
     setLoading(false)
+    // console.log('EEE', eventArr)
     return eventArr;
   };
 
@@ -56,10 +51,12 @@ const useMedia = () => {
         then( posts => posts.map( post => post.file_id ) );
     for ( let i = 0; i < idPosts.length; i++ ) {
       let post = await getMediaById( idPosts[ i ], true ); // eslint-disable-line
+      post.description.isOwner = (post.user_id === user.user_id)
       postArr.push( post );
     }
     setPosts( postArr );
     setLoading(false)
+    // console.log('PPP', postArr)
     return postArr;
   };
 
@@ -67,11 +64,8 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ eventTag }`;
     try {
       const events = await axios.get( URL );
-      const eventsOwner = await events.data.map(event => {
-        return {...event, isOwner: (event.user_id === user.user_id)}
-      })
-      setEvents( eventsOwner );
-      return eventsOwner;
+      setEvents( events.data );
+      return events.data;
     } catch ( e ) {
       console.log( e );
     }

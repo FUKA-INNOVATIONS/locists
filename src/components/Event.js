@@ -4,7 +4,7 @@ import Attend from './Attend';
 
 const Event = ( { eventDetails } ) => {
 
-  console.log('event: ', eventDetails)
+  // console.log('event: ', eventDetails)
 
   if ( eventDetails === null ) {
     return (
