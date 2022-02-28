@@ -15,6 +15,9 @@ const HomeList = ( { navigation } ) => {
     await getAllMedia()
   }, [] );
 
+   console.log('HomeList.js')
+   // console.log('HomeList.js => allMedia', allMedia)
+
   // TODO: fix rendering
 
   // TODO: dont fetch all files at once
