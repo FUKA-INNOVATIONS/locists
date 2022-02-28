@@ -32,7 +32,7 @@ const SinglePostHeader = ( { postDetails } ) => {
             {isWriteComment && <PostComment file_id={postDetails.file_id} display={setIsWriteComment}/>}
             <Text style={theme.singlePostOwner}>{postDetails.description.owner}</Text>
             <View style={theme.imageAndLikes}>
-                <Image source={{uri: uploadsUrl+postDetails.postDetails.thumbnails.w320}} style={theme.singlePostImage} />
+                <Image source={{uri: uploadsUrl+postDetails.thumbnails.w320}} style={theme.singlePostImage} />
                 <View>
                     <AntDesign name="like2" size={40} color="black" />
                     <Text style={theme.singlePostLikes}>0</Text>
