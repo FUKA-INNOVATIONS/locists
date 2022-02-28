@@ -3,8 +3,8 @@ import { uploadsUrl } from '../../config';
 import Attend from './Attend';
 
 const Event = ( { eventDetails } ) => {
-  // let description = eventDetails.description;
-  // description = JSON.parse(description)
+
+  console.log('event: ', eventDetails)
 
   if ( eventDetails === null ) {
     return (

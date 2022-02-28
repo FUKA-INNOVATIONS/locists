@@ -2,9 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
+import useAuthStorage from './useAuthStorage';
 
 const useMedia = () => {
   // TODO: get token here, not in views, fix
+  const { user } = useAuthStorage();
 
   // const [ loadingEvents, setLoadingEvents ] = useState( false );
   // const [ loadingPosts, setLoadingPosts ] = useState( false );
@@ -65,8 +67,11 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ eventTag }`;
     try {
       const events = await axios.get( URL );
-      setEvents( events.data );
-      return events.data;
+      const eventsOwner = await events.data.map(event => {
+        return {...event, isOwner: (event.user_id === user.user_id)}
+      })
+      setEvents( eventsOwner );
+      return eventsOwner;
     } catch ( e ) {
       console.log( e );
     }
@@ -105,6 +110,7 @@ const useMedia = () => {
   };
 
 
+  // TODO: get token here in the hook
   const uploadMedia = async ( formData, token ) => {
 
     const options = {
