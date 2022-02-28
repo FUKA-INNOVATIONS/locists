@@ -16,7 +16,7 @@ const HomeList = ( { navigation } ) => {
   }, [] );
 
    console.log('HomeList.js')
-   console.log('HomeList.js => allMedia', allMedia)
+   // console.log('HomeList.js => allMedia', allMedia)
 
   // TODO: fix rendering
 

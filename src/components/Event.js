@@ -1,10 +1,11 @@
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { uploadsUrl } from '../../config';
 import Attend from './Attend';
+import DeleteMedia from './DeleteMedia';
 
 const Event = ( { eventDetails } ) => {
 
-  // console.log('event: ', eventDetails)
+  // console.log('Event.js => eventDetails: ', eventDetails)
 
   if ( eventDetails === null ) {
     return (
@@ -30,6 +31,7 @@ const Event = ( { eventDetails } ) => {
             <Attend file_id={eventDetails.file_id} displayIcon={false}/>
             <Text>Host:</Text>
           </View>
+          {eventDetails.description.isOwner && <DeleteMedia file_id={eventDetails.file_id} />}
         </View>
 
         <Image

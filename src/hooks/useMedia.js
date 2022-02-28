@@ -129,6 +129,26 @@ const useMedia = () => {
 
   };
 
+  const deleteMedia = async (id) => {
+    console.log('DELETE')
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': user.token,
+      }
+    };
+
+    try {
+      const result = await doFetch( baseUrl + 'media/' + id, options );
+      console.log('delete res in hook', result)
+      return result
+    } catch ( e ) {
+      console.log( 'error in deleteMedia hook', e.message );
+      return e.message;
+    }
+
+  }
+
   return {
     getEvents,
     getPosts,
@@ -137,6 +157,7 @@ const useMedia = () => {
     uploadMedia,
     getEventsWithThumbnails,
     getPostsWithThumbnails,
+    deleteMedia,
     events,
     posts,
     allMedia,

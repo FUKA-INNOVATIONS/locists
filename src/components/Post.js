@@ -3,9 +3,9 @@ import { uploadsUrl } from '../../config';
 import Like from './Like';
 
 const Post = ( { postMedia } ) => {
-  // console.log( 'postDetails in Post.js', postMedia );
-  // console.log('Post.js file_id', postMedia.file_id)
   // TODO: fix rendering
+
+  // console.log('Post.js => postMedia: ', postMedia)
 
   return (
       <View style={ styles.info }>
