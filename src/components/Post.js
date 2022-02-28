@@ -1,6 +1,7 @@
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { uploadsUrl } from '../../config';
 import Like from './Like';
+import DeleteMedia from './DeleteMedia';
 
 const Post = ( { postMedia } ) => {
   // TODO: fix rendering
@@ -22,6 +23,7 @@ const Post = ( { postMedia } ) => {
             <Text>POST</Text>
             <Text>{ postMedia.title }</Text>
             <Text>{ postMedia.description.mediaType }</Text>
+            {postMedia.description.isOwner && <DeleteMedia file_id={postMedia.file_id} />}
           </View>
           <View style={ styles.rates }>
             <Text>likes: { postMedia.likes }</Text>
