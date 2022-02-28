@@ -2,6 +2,7 @@ import { Button, Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
 import { useState } from 'react';
 import PostComment from './PostComment';
+import Like from './Like';
 
 const SinglePostHeader = ( { postDetails } ) => {
   if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>;
@@ -23,6 +24,7 @@ const SinglePostHeader = ( { postDetails } ) => {
 
   return (
       <>
+        <Like displayIcon file_id={postDetails.file_id} />
         <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
         {isWriteComment && <PostComment file_id={postDetails.file_id} display={setIsWriteComment}/>}
         <Image source={ { uri: uploadsUrl + postDetails.thumbnails.w320 } }

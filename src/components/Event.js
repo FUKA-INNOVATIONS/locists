@@ -1,5 +1,6 @@
 import { View, Image, Text, StyleSheet } from 'react-native';
 import { uploadsUrl } from '../../config';
+import Attend from './Attend';
 
 const Event = ( { eventDetails } ) => {
   // let description = eventDetails.description;
@@ -21,13 +22,12 @@ const Event = ( { eventDetails } ) => {
   return (
       <View style={ styles.event }>
         <View style={ styles.text }>
-          <Text>EVENT</Text>
           <Text>{ eventDetails.description.name }</Text>
           <Text numberOfLines={ 2 }>{ eventDetails.description.location }</Text>
           <Text>{ eventDetails.description.date }</Text>
           <Text>{ eventDetails.description.price } €</Text>
           <View style={ styles.attendees }>
-            <Text>likes: </Text>
+            <Attend file_id={eventDetails.file_id} displayIcon={false}/>
             <Text>Host:</Text>
           </View>
         </View>
