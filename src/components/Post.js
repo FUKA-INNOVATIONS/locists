@@ -8,8 +8,6 @@ import UserInfo from './UserInfo';
 
 const Post = ( { postMedia } ) => {
 
-  const description = postMedia.description;
-
   return (
       <>
         <View style={ { marginLeft: 15, marginVertical: 10 } }>
@@ -31,7 +29,7 @@ const Post = ( { postMedia } ) => {
 
           <View style={ theme.postInfo }>
             <View style={ theme.postText }>
-              <Text>{ description.description }</Text>
+              <Text>{ postMedia.description.description }</Text>
             </View>
 
             <View style={ theme.postExtra }>

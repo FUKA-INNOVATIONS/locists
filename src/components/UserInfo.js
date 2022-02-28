@@ -1,6 +1,4 @@
 import { View, Image, Text } from 'react-native';
-import fetchAvatar from '../utils/fetchAvatar';
-import { useEffect } from 'react';
 
 const UserInfo = ( { username, avatar } ) => {
 
