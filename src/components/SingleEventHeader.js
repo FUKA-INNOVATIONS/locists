@@ -3,6 +3,7 @@ import { Button, Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
 
 import PostComment from './PostComment';
+import Attend from './Attend';
 
 const SingleEventHeader = ( { eventDetails } ) => {
   if ( eventDetails === undefined ) return <View><Text>Loading..</Text></View>;
@@ -25,6 +26,7 @@ const SingleEventHeader = ( { eventDetails } ) => {
       <>
         <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
         {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment}/>}
+        <Attend displayIcon file_id={eventDetails.file_id} />
         <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
                style={ { width: '100%', height: 200 } }/>
         <Text>Title: { eventDetails.title }</Text>
