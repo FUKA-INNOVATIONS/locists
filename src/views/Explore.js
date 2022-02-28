@@ -48,23 +48,29 @@ const Explore = ( { navigation } ) => {
     }
   }; */
 
-  return (
-      <View>
-        <SwitchSelector
-            textColor={ theme.colors.textPrimary }
-            buttonColor={ theme.colors.primary }
-            options={ exploreOptions }
-            initial={ 0 }
-            onPress={ value => setView( value.explore ) }
-        />
-        { explore === 'events' &&
-        <EventsList navigation={ navigation }
-                    events={events} loading={loadingEvents} fetchEvents={getEventsWithThumbnails}/> }
-        { explore === 'posts' &&
-        <PostsList navigation={ navigation }
-                    posts={posts} loading={loadingPosts} fetchPosts={getPostsWithThumbnails}/> }
-      </View>
-  );
+    return (
+        <View style={{paddingBottom: 90}}>
+            <SwitchSelector
+                backgroundColor={ theme.colors.textPrimary}
+                textColor={ theme.colors.white }
+                selectedColor={theme.colors.primary}
+                buttonColor={theme.colors.white}
+                borderColor={theme.colors.primary}
+                valuePadding={3}
+                hasPadding={true}
+                bold={true}
+                options={ exploreOptions }
+                initial={ 0 }
+                onPress={ value => setView( value.explore ) }
+            />
+            { explore === 'events' &&
+            <EventsList navigation={ navigation }
+                        events={events} loading={loadingEvents} fetchEvents={getEventsWithThumbnails}/> }
+            { explore === 'posts' &&
+            <PostsList navigation={ navigation }
+                       posts={posts} loading={loadingPosts} fetchPosts={getPostsWithThumbnails}/> }
+        </View>
+    );
 };
 
 export default Explore;

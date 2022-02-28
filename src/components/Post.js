@@ -1,57 +1,69 @@
-import { StyleSheet, View, Image, Text } from 'react-native';
-import { uploadsUrl } from '../../config';
+import { View, Image, Text } from "react-native";
+import {uploadsUrl} from "../../config";
+import theme from "../theme";
+import { AntDesign } from '@expo/vector-icons';
 import Like from './Like';
 import DeleteMedia from './DeleteMedia';
 
-const Post = ( { postMedia } ) => {
-  // TODO: fix rendering
+const Post = ({postMedia}) => {
 
-  // console.log('Post.js => postMedia: ', postMedia)
+    const description = postMedia.description;
 
-  return (
-      <View style={ styles.info }>
+    return (
+        <>
+            <View style={{marginLeft: 20}}>
+                {
+                    // Todo add user avatar here
+                }
+                <Text style={{ color: 'white'}}>{description.owner}</Text>
+            </View>
 
-        { postMedia.filename &&
-        <Image
-            // TODO: use thumbnails when ever possible
-            source={ { uri: uploadsUrl + postMedia.filename } }
-            style={ { width: 100, height: 100 } }
-        />
-        }
-        <View style={ styles.allText }>
-          <View style={ styles.text }>
-            <Text>POST</Text>
-            <Text>{ postMedia.title }</Text>
-            <Text>{ postMedia.description.mediaType }</Text>
-            {postMedia.description.isOwner && <DeleteMedia file_id={postMedia.file_id} />}
-          </View>
-          <View style={ styles.rates }>
-            <Text>likes: { postMedia.likes }</Text>
-            <Text>comments: { postMedia.comments }</Text>
-            <Like displayIcon={false} file_id={ postMedia.file_id }/>
-          </View>
-        </View>
-      </View>
-  );
-};
+            <View style={[theme.generalListPost, theme.post]}>
+                {
+                    // TODO check if post has image, display post without image if not present
+                }
+                {postMedia.filename &&
+                    <Image
+                        source={ { uri: uploadsUrl + postMedia.filename } }
+                        style={ theme.postImage }
+                    />
+                }
+
+                <View style={theme.postInfo}>
+                    <View style={theme.postText}>
+                        <Text>{description.description}</Text>
+                    </View>
+
+                    <View style={theme.postExtra}>
+                        <Text style={{marginBottom: 10}}>
+                            0
+                            <AntDesign name="like2" size={24} color="black" />
+                              <Like displayIcon={false} file_id={ postMedia.file_id }/>
+                        </Text>
+
+                        <Text>
+                            0
+                            <AntDesign name="message1" size={24} color="black" />
+                        </Text>
+                        {postMedia.description.isOwner && <DeleteMedia file_id={postMedia.file_id} />}
+                    </View>
+                </View>
+            </View>
+        </>
+        /* <View style={styles.info}>
+            <View style={styles.allText}>
+            <View style={styles.rates}>
+                <Text>likes: {postMedia.likes}</Text>
+                <Text>comments: {postMedia.comments}</Text>
+            </View>
+            </View>
+        </View> */
+    )
+}
+
 
 export default Post;
 
-const styles = StyleSheet.create( {
-  info: {
-    flex: 1,
-    flexDirection: 'column',
-    width: '100%',
-    borderWidth: 2,
-    borderRadius: 10,
-    padding: 10,
-  },
-  allText: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  text: {
-    width: '70%',
-  },
-  rates: {},
-} );
+
+
+

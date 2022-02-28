@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { Button, Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
-
 import PostComment from './PostComment';
 import Attend from './Attend';
 
-const SingleEventHeader = ( { eventDetails } ) => {
-  if ( eventDetails === undefined ) return <View><Text>Loading..</Text></View>;
-  const [ isWriteComment, setIsWriteComment ] = useState( false );
+const SingleEventHeader = ({eventDetails}) => {
+    if (eventDetails === undefined) return <View><Text>Loading..</Text></View>
+    const [isWriteComment, setIsWriteComment] = useState(false);
 
+  const onWriteCommentHandler = () => {
+    console.log( 'onWriteCommentHandler' );
+    setIsWriteComment(true)
+  };
+
+  
   if ( eventDetails === undefined ) {
     return (
         <>
@@ -16,12 +21,7 @@ const SingleEventHeader = ( { eventDetails } ) => {
         </>
     );
   }
-
-  const onWriteCommentHandler = () => {
-    console.log( 'onWriteCommentHandler' );
-    setIsWriteComment(true)
-  };
-
+  
   return (
       <>
         <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>

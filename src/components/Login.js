@@ -1,6 +1,6 @@
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
-import * as Yup from 'yup';
+import {View, Text, TextInput, Alert, TouchableOpacity} from 'react-native'
+import { useForm, Controller } from 'react-hook-form'
+import * as Yup from 'yup'
 
 import theme from '../theme';
 import useUser from '../hooks/useUser';
@@ -38,46 +38,46 @@ const Login = ( { navigation } ) => {
   };
 
   return (
-      <View>
-        <Text>Login</Text>
+    <View style={theme.login}>
 
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="Username"
-                  />
-              ) }
-              name="username"
-          />
-          { errors.username && <Text>{ errors.username.message }</Text> }
-        </View>
-
-        <View style={ theme.inputContainer }>
-          <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                  <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="Password"
-                      secureTextEntry={ true }
-                  />
-              ) }
-              name="password"
-          />
-          { errors.password && <Text>{ errors.password.message }</Text> }
-        </View>
-        <Button title="Login" onPress={ handleSubmit( onSubmit ) }/>
+      <View style={theme.inputContainer}>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={theme.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Username"
+            />
+          )}
+          name="username"
+        />
+        {errors.username && <Text style={theme.inputErrorText}>{errors.username.message}</Text>}
       </View>
-  );
-};
+
+      <View style={theme.inputContainer}>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={theme.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              placeholder="Password"
+            />
+          )}
+          name="password"
+        />
+        {errors.password && <Text style={theme.inputErrorText}>{errors.password.message}</Text>}
+      </View>
+      <TouchableOpacity style={theme.loginButton} onPress={handleSubmit(onSubmit)}>
+        <Text style={theme.loginButtonText}>Login</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 export default Login;

@@ -1,8 +1,10 @@
 import { useCallback, useState } from 'react';
-import { Button, Text, View, Image } from 'react-native';
+import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
+import theme from "../theme";
 import useComment from '../hooks/useComment';
+
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
@@ -26,29 +28,44 @@ const Account = ( { navigation } ) => {
   useFocusEffect(
       useCallback( () => {
         return () => {
-          // user.isLogged && navigation.navigate( 'AccountTab', {Screen: 'Account'} );
-          // setUpdate( false );
+          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
+          setUpdate( false );
         };
       }, [ update ] ),
   );
+
   return (
-      <View>
-        <Button title={ 'Modify your account details' }
-                onPress={ () => navigation.navigate( 'ModifyAccount' ) }/>
-        <Button title={ 'Upload a cool image' }
-                onPress={ () => navigation.navigate( 'ModifyAccount' ) }/>
-        { user.avatar ? <Image source={ { uri: user.avatar } }
-                               style={ { width: 100, height: 100 } }/>
-            : <Text>You don't own an avatar</Text> // eslint-disable-line
-        }
-        <Text>User status: { user.isLogged && 'logged in' }</Text>
-        <Text>Username: { user.username }</Text>
-        <Text>Email: { user.email }</Text>
-        <Text>User id: { user.user_id }</Text>
-        <Text>Full name: { user.full_name }</Text>
-        <Text>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
-        <Button title={ 'Log out' } onPress={ logoutHandler }/>
-      </View>
+      <ScrollView>
+          <View style={theme.profile}>
+              <View style={theme.profilePicAndInfo}>
+                  <Text style={theme.profilePic}>ProPic Placeholder</Text>
+
+                  <View style={theme.profileInfoCard}>
+                      <Text>User: { user.username }</Text>
+                      <Text>UserID: { user.user_id }</Text>
+                      <Text>{ user.email }</Text>
+                      <Text>{ user.full_name }</Text>
+                  </View>
+              </View>
+
+              <Button title={'Modify your account details'} onPress={() => navigation.navigate('ModifyAccount')} />
+              { user.avatar ? <Image source={ { uri: user.avatar } }
+                                     style={ { width: 100, height: 100 } }/>
+                  :
+                  <Text style={theme.profilePic}>
+                      {
+                          // TODO media task: add default optimized image here
+                      }
+                      You do not own an avatar
+                  </Text> // eslint-disable-line
+              }
+              <Text>User status: { user.isLogged && 'logged in' }</Text>
+              <TouchableOpacity style={theme.generalBtn} onPress={ logoutHandler }>
+                  <Text style={theme.loginButtonText}>Log Out</Text>
+              </TouchableOpacity>
+              <Text>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
+          </View>
+      </ScrollView>
   );
 };
 

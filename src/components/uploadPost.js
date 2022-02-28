@@ -1,4 +1,4 @@
-import { Button, Image, Text, TextInput, View } from 'react-native';
+import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import useDevice from '../hooks/useDevice';
@@ -78,13 +78,11 @@ const UploadPost = props => {
       <>
         <Text>Create new post</Text>
         { dummyImage !== imageSelected && <Image source={ { uri: image } }
-                                  style={ {
-                                    width: 200,
-                                    height: 200,
-                                    borderRadius: 100,
-                                  } }/> }
-        <Button title="Choose image" onPress={ pickImage }/>
-        <View>
+                                  style={ theme.addImage }/> }
+          <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ pickImage }>
+              <Text style={theme.loginButtonText}>Add an Image</Text>
+          </TouchableOpacity>
+        <View style={ theme.createMediaForm}>
 
           <View style={ theme.inputContainer }>
             <Controller
@@ -100,7 +98,7 @@ const UploadPost = props => {
                 ) }
                 name="location"
             />
-            { errors.location && <Text>{ errors.location.message }</Text> }
+            { errors.location && <Text style={theme.inputErrorText}>{ errors.location.message }</Text> }
           </View>
 
 
@@ -121,19 +119,23 @@ const UploadPost = props => {
                 name="description"
             />
             { errors.description &&
-            <Text>{ errors.description.message }</Text> }
+            <Text style={theme.inputErrorText}>{ errors.description.message }</Text> }
           </View>
 
 
-          <Button
+          <TouchableOpacity
+              style={[theme.generalBtn, theme.createMediaButton]}
               disabled={ !imageSelected }
               loading={ loadingMediaUpload }
-              title="Create post"
               onPress={ handleSubmit(
                   data => props.onSubmit( data, mediaDescription, imageSelected,
                       image, setImageSelected ) ) }
-          />
-          <Button title="Reset form" onPress={ resetAll }/>
+          >
+              <Text style={theme.loginButtonText}>Create Post</Text>
+          </TouchableOpacity>
+            <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ resetAll }>
+                <Text style={theme.loginButtonText}>Reset Form</Text>
+            </TouchableOpacity>
         </View>
       </>
   );

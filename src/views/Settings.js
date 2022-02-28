@@ -1,4 +1,4 @@
-import { View, Button, TextInput, Alert } from 'react-native';
+import {View, Button, TextInput, Alert, ScrollView} from 'react-native';
 import useUser from '../hooks/useUser';
 import useAuthStorage from '../hooks/useAuthStorage';
 import theme from '../theme';
@@ -69,7 +69,7 @@ const Settings = ( { navigation } ) => {
   };
 
   return (
-      <View style={ { marginTop: 50, marginHorizontal: 10 } }>
+      <ScrollView style={ { marginTop: 50, marginHorizontal: 10 } }>
         <Button title={ 'Go back' } onPress={ onModalCloseHandler }/>
         <View style={ theme.inputContainer }>
           <Controller
@@ -219,7 +219,7 @@ const Settings = ( { navigation } ) => {
         </View>
         <Button title="Update details" onPress={ handleSubmit( onSubmit ) }/>
         <UploadMedia mediaType={ 'avatar' } navigation={navigation}/>
-      </View>
+      </ScrollView>
   );
 
 };
