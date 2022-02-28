@@ -272,7 +272,7 @@ const theme = {
   // Profile Styles
   profile: {
     alignItems: 'center',
-    paddingTop: 30,
+    paddingTop: 0,
     paddingBottom: 70,
   },
   profilePicAndInfo: {
@@ -285,10 +285,11 @@ const theme = {
     width: width * 0.3,
     aspectRatio: 0.8,
     borderWidth: 1,
-    borderColor: 'white'
+    borderColor: 'white',
+    borderRadius: 5,
   },
   profileInfoCard: {
-    width: width * 0.55,
+    width: width * 0.58,
     padding: 5,
     borderWidth: 1,
     borderRadius: 10,
