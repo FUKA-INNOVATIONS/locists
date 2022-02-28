@@ -32,16 +32,16 @@ const Event = ( { eventDetails } ) => {
 
         <View style={[theme.generalListPost, theme.event]}>
           <View style={theme.eventInfo}>
-            <Text style={theme.mediaTitle}>{ description.name }</Text>
+            <Text style={theme.mediaTitle}>{ eventDetails.description.name }</Text>
             <Text>
               <Entypo name="location-pin" size={20} color="black" />
-              { description.location }
+              { eventDetails.description.location }
             </Text>
             <Text>
               <Entypo name="calendar" size={20} color="black" />
-              { description.date }
+              { eventDetails.description.date }
             </Text>
-            <Text>{ description.price } €</Text>
+            <Text>{ eventDetails.description.price } €</Text>
             <View style={theme.eventAttend}>
               <Entypo name="users" size={20} color="black" />
               <Text>
