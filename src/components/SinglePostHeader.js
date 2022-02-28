@@ -4,6 +4,7 @@ import { useState } from 'react';
 import theme from "../theme";
 import {AntDesign} from "@expo/vector-icons";
 import PostComment from './PostComment';
+import Like from './Like';
 
 const SinglePostHeader = ( { postDetails } ) => {
   if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>;
@@ -19,8 +20,6 @@ const SinglePostHeader = ( { postDetails } ) => {
       );
   };
 
-    const description = postDetails.description;
-
     const onWriteCommentHandler = () => {
       console.log( 'onWriteCommentHandler' );
       setIsWriteComment(true)
@@ -28,22 +27,22 @@ const SinglePostHeader = ( { postDetails } ) => {
   
     return (
         <View style={theme.singlePost}>
+            <Like displayIcon file_id={postDetails.file_id} />
             <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
             {isWriteComment && <PostComment file_id={postDetails.file_id} display={setIsWriteComment}/>}
-            <Text style={theme.singlePostOwner}>{description.owner}</Text>
+            <Text style={theme.singlePostOwner}>{postDetails.description.owner}</Text>
             <View style={theme.imageAndLikes}>
-                <Image source={{uri: uploadsUrl+postDetails.filename}} style={theme.singlePostImage} />
+                <Image source={{uri: uploadsUrl+postDetails.postDetails.thumbnails.w320}} style={theme.singlePostImage} />
                 <View>
                     <AntDesign name="like2" size={40} color="black" />
                     <Text style={theme.singlePostLikes}>0</Text>
                 </View>
             </View>
             <View style={theme.singlePostText}>
-                <Text>{description.description}</Text>
+                <Text>{postDetails.description.description}</Text>
             </View>
         </View>
     );
-
 };
 
 export default SinglePostHeader;

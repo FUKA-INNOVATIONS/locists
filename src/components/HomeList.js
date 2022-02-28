@@ -15,6 +15,11 @@ const HomeList = ( { navigation } ) => {
     await getAllMedia()
   }, [] );
 
+   console.log('HomeList.js')
+   // console.log('HomeList.js => allMedia', allMedia)
+
+  // TODO: fix rendering
+
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}
   // No good solutions with the api available, considering the way we use the api

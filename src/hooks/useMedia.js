@@ -2,21 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
+import useAuthStorage from './useAuthStorage';
 
 const useMedia = () => {
   // TODO: get token here, not in views, fix
-
-  // const [ loadingEvents, setLoadingEvents ] = useState( false );
-  // const [ loadingPosts, setLoadingPosts ] = useState( false );
-  // const [ loadingSingleMedia, setLoadingSingleMedia ] = useState( false );
+  const { user } = useAuthStorage();
   const [ loading, setLoading ] = useState( false );
-  // const [ loadingMediaUpload, setLoadingMediaUpload ] = useState( false );
-
   const [ events, setEvents ] = useState();
   const [ posts, setPosts ] = useState();
   const [ singleMedia, setSingleMedia ] = useState();
   const [ allMedia, setAllMedia ] = useState();
-  // const [ singleMediaComments, setSingleMediaComments ] = useState();
 
   const getAllMedia = async () => {
 
@@ -40,10 +35,12 @@ const useMedia = () => {
         then( events => events.map( event => event.file_id ) );
     for ( let i = 0; i < idEvents.length; i++ ) {
       let event = await getMediaById( idEvents[ i ], true ); // eslint-disable-line
+      event.description.isOwner = (event.user_id === user.user_id)
       eventArr.push( event );
     }
     setEvents( eventArr );
     setLoading(false)
+    // console.log('EEE', eventArr)
     return eventArr;
   };
 
@@ -54,10 +51,12 @@ const useMedia = () => {
         then( posts => posts.map( post => post.file_id ) );
     for ( let i = 0; i < idPosts.length; i++ ) {
       let post = await getMediaById( idPosts[ i ], true ); // eslint-disable-line
+      post.description.isOwner = (post.user_id === user.user_id)
       postArr.push( post );
     }
     setPosts( postArr );
     setLoading(false)
+    // console.log('PPP', postArr)
     return postArr;
   };
 
@@ -105,6 +104,7 @@ const useMedia = () => {
   };
 
 
+  // TODO: get token here in the hook
   const uploadMedia = async ( formData, token ) => {
 
     const options = {
@@ -129,6 +129,26 @@ const useMedia = () => {
 
   };
 
+  const deleteMedia = async (id) => {
+    console.log('DELETE')
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': user.token,
+      }
+    };
+
+    try {
+      const result = await doFetch( baseUrl + 'media/' + id, options );
+      console.log('delete res in hook', result)
+      return result
+    } catch ( e ) {
+      console.log( 'error in deleteMedia hook', e.message );
+      return e.message;
+    }
+
+  }
+
   return {
     getEvents,
     getPosts,
@@ -137,6 +157,7 @@ const useMedia = () => {
     uploadMedia,
     getEventsWithThumbnails,
     getPostsWithThumbnails,
+    deleteMedia,
     events,
     posts,
     allMedia,

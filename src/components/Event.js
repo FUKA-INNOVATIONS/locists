@@ -1,12 +1,11 @@
 import {View, Image, Text, Button} from 'react-native';
 import { uploadsUrl } from '../../config';
+import Attend from './Attend';
+import DeleteMedia from './DeleteMedia';
 import theme from "../theme";
-
 import { Entypo } from '@expo/vector-icons';
 
 const Event = ( { eventDetails } ) => {
-
-    const description = eventDetails.description;
 
   if ( eventDetails === null ) {
     return (
@@ -53,6 +52,8 @@ const Event = ( { eventDetails } ) => {
               </Text>
 
               <Button title="Attend" />
+                <Attend file_id={eventDetails.file_id} displayIcon={false}/>
+                {eventDetails.description.isOwner && <DeleteMedia file_id={eventDetails.file_id} />}
             </View>
           </View>
           <Image source={ { uri: uploadsUrl + eventDetails.filename } }

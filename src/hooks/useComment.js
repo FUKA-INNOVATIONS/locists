@@ -39,7 +39,7 @@ const useComment = () => {
     try {
       return await doFetch( baseUrl + 'comments/', options );
     } catch ( error ) {
-      console.log( 'error on postComment hook', error );
+      console.log( 'error in postComment hook', error );
       return false;
     }
 
@@ -57,7 +57,7 @@ const useComment = () => {
     try {
       return await doFetch( baseUrl + 'comments/' + id, options );
     } catch ( error ) {
-      console.log( 'error on deleteComment hook', error );
+      console.log( 'error in deleteComment hook', error );
       return false;
     }
   };
@@ -73,7 +73,7 @@ const useComment = () => {
     try {
       return await doFetch( baseUrl + 'comments/', options );
     } catch ( error ) {
-      console.log( 'error on getCurrentUserComments hook', error );
+      console.log( 'error in getCurrentUserComments hook', error );
       return false;
     }
   };

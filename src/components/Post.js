@@ -1,9 +1,9 @@
-
 import { View, Image, Text } from "react-native";
 import {uploadsUrl} from "../../config";
 import theme from "../theme";
-
 import { AntDesign } from '@expo/vector-icons';
+import Like from './Like';
+import DeleteMedia from './DeleteMedia';
 
 const Post = ({postMedia}) => {
 
@@ -38,12 +38,14 @@ const Post = ({postMedia}) => {
                         <Text style={{marginBottom: 10}}>
                             0
                             <AntDesign name="like2" size={24} color="black" />
+                              <Like displayIcon={false} file_id={ postMedia.file_id }/>
                         </Text>
 
                         <Text>
                             0
                             <AntDesign name="message1" size={24} color="black" />
                         </Text>
+                        {postMedia.description.isOwner && <DeleteMedia file_id={postMedia.file_id} />}
                     </View>
                 </View>
             </View>
@@ -58,6 +60,7 @@ const Post = ({postMedia}) => {
         </View> */
     )
 }
+
 
 export default Post;
 

@@ -62,7 +62,7 @@ const UploadEvent = props => {
 
   const mediaDescription = {
     mediaType: 'event',
-    owner: user.user_id,
+    owner: user.username,
     fileType: type,
     location: getValues().location,
     name: getValues().name,
