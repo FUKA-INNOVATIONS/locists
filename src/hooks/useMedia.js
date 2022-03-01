@@ -103,6 +103,32 @@ const useMedia = () => {
     }
   };
 
+  const getUserMedia = async (token) => {
+    let userMedia = [];
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-access-token': token
+    },
+  };
+  try {
+    const data = await doFetch( URL, options );
+    console.log('Testing data', data);
+    if ( data ) {
+      console.log(data.length);
+      for ( let i = 0; i < data.length; i++ ){
+        console.log('data i', data[i]);
+        data[i].description = JSON.parse( data[i].description );
+      }
+      console.log('Testing data after parse', data);
+    }
+    setUserMedia( data );
+  } catch (e) {
+    console.log('Error in getting user files', e.message);
+  }
+};
+
 
   // TODO: get token here in the hook
   const uploadMedia = async ( formData, token ) => {
@@ -154,6 +180,7 @@ const useMedia = () => {
     getPosts,
     getMediaById,
     getAllMedia,
+    getUserMedia,
     uploadMedia,
     getEventsWithThumbnails,
     getPostsWithThumbnails,
