@@ -1,4 +1,4 @@
-import { FlatList, Pressable, View, Text } from 'react-native'
+import { FlatList, Pressable, View, Text, Button } from 'react-native'
 import Post from './Post'
 import Event from './Event'
 import useMedia from '../hooks/useMedia'
@@ -11,16 +11,17 @@ const HomeList = ( { navigation } ) => {
   // TODO: fix with focus listener
   const viewIsFocused = useIsFocused() // eslint-disable-line
   const [ loading, setLoading ] = useState( false )
+  const [all, setAll] = useState([])
 
   const getPostsAndEvents = useMemo( async () => {
-    await getAllMedia()
+    await getAllMedia().then(mixedMedia => setAll(mixedMedia))
   }, [] )
 
 
 
 
   // console.log('HomeList.js')
-  console.log('HomeList.js => allMedia', allMedia)
+  // console.log('HomeList.js => allMedia', allMedia)
 
   // TODO: fix rendering
 
@@ -58,9 +59,15 @@ const HomeList = ( { navigation } ) => {
 
   // console.log('all media', allMedia)
 
+  const sortLatest = async () => {
+    await getAllMedia().then(mixed => setAll(mixed))
+  }
+
+
   return (
     <FlatList
-      data={ allMedia }
+      data={ all }
+      ListHeaderComponent={<View><Button title={'Latest'} onPress={sortLatest} /></View>}
       ListEmptyComponent={ EmptyListMessage }
       keyExtractor={ ( item ) => item.file_id }
       renderItem={ ( { item } ) => {
