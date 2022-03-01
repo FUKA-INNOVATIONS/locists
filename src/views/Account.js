@@ -51,7 +51,7 @@ const Account = ( { navigation } ) => {
       }, [ update ] ),
   );
 
-    const EmptyListMessage = () => <Text>No events </Text>;
+    const EmptyListMessage = () => <Text>You Haven't posted anything yet</Text>;
 
   return (
           <View style={theme.profile}>
@@ -67,8 +67,6 @@ const Account = ( { navigation } ) => {
                           style={theme.profilePic}
                       />
                   }
-
-
                   <View style={theme.profileInfoCard}>
                       <Text>User: { user.username }</Text>
                       <Text>UserID: { user.user_id }</Text>
