@@ -262,7 +262,7 @@ const UploadEvent = props => {
             title='Create event'
             onPress={ handleSubmit(
               data => props.onSubmit( data, mediaDescription, imageSelected,
-                image ) ) }
+                image, type ) ) }
           >
             <Text style={ theme.loginButtonText }>Create Event</Text>
           </TouchableOpacity>
