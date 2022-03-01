@@ -34,12 +34,12 @@ const useMedia = () => {
     switch ( filter ) {
 
       case 'latest':
-        const x = sortLatest(mixed)
-        return x;
+        return sortLatest(mixed)
+      case 'postsFirst':
+        return [ ...posts, ...events ]
       default:
         return mixed
     }
-
 
 
   };
