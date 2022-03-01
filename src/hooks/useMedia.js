@@ -38,7 +38,7 @@ const useMedia = () => {
       case 'postsFirst':
         return [ ...posts, ...events ]
       default:
-        return mixed
+        return mixed.sort(() => Math.random() - 0.5)
     }
 
 
