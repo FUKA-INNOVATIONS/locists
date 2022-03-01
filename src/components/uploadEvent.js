@@ -1,4 +1,4 @@
-import { Image, Text, TextInput, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, Text, TextInput, View, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import useDevice from '../hooks/useDevice';
@@ -7,16 +7,27 @@ import useAuthStorage from '../hooks/useAuthStorage';
 import theme from '../theme';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const UploadEvent = props => {
   const { user } = useAuthStorage();
+  const [date, setDate] = useState(new Date());
+  const android = Platform.OS === 'android';
 
   useFocusEffect(
       useCallback( () => {
         return () => resetAll();
       }, [] ),
   );
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    // setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    console.log(date)
+    console.log(android)
+  };
 
   const {
     image,
@@ -92,6 +103,42 @@ const UploadEvent = props => {
             <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ pickImage }>
                 <Text style={theme.loginButtonText}>Choose Image</Text>
             </TouchableOpacity>
+
+            <View style={ theme.inputContainer }>
+              {android ?
+                <>
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={'date'}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={'time'}
+                    is24Hour={true}
+                    display="default"
+                    onChange={onChange}
+                  />
+                </>
+
+              :
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode={'datetime'}
+                  is24Hour={true}
+                  display="default"
+                  onChange={onChange}
+                />
+              }
+            </View>
+
+
             <View style={ theme.createMediaForm}>
 
             <View style={ theme.inputContainer }>
