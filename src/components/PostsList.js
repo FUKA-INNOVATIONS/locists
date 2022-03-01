@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Post from './Post';
 
 const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
-  console.log( 'PostsList rendered');
+  // console.log( 'PostsList rendered');
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
