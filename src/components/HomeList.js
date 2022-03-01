@@ -4,11 +4,10 @@ import Event from './Event'
 import useMedia from '../hooks/useMedia'
 import { useEffect, useMemo, useState } from 'react'
 import { useIsFocused } from '@react-navigation/native'
-import sortLatest from '../utils/sortLatest'
 import theme from '../theme'
 
 const HomeList = ( { navigation } ) => {
-  const { getAllMedia, allMedia } = useMedia()
+  const { getAllMedia } = useMedia()
   // TODO: fix with focus listener
   const viewIsFocused = useIsFocused() // eslint-disable-line
   const [ loading, setLoading ] = useState( false )
