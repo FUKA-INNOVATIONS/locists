@@ -39,7 +39,7 @@ const UploadEvent = props => {
 
     setFormValue( 'date', currentDate, { shouldValidate: false } )
 
-    console.log( selectedDate.toLocaleString() )
+    console.log( 'currentDate',currentDate.toLocaleString() )
   }
 
   const showMode = ( currentMode ) => {
