@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Event from './Event';
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
-  console.log( 'EventsList rendered');
+  // console.log( 'EventsList rendered');
 
   useEffect( () => {
     return navigation.addListener('focus', async () => {

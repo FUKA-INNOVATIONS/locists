@@ -133,7 +133,7 @@ const UploadPost = props => {
               loading={ loadingMediaUpload }
               onPress={ handleSubmit(
                   data => props.onSubmit( data, mediaDescription, imageSelected,
-                      image, setImageSelected ) ) }
+                      image, type, setImageSelected ) ) }
           >
               <Text style={theme.loginButtonText}>Create Post</Text>
           </TouchableOpacity>
