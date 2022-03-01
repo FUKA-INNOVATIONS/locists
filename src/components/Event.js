@@ -6,7 +6,7 @@ import theme from '../theme';
 import { Entypo } from '@expo/vector-icons';
 import UserInfo from './UserInfo';
 
-const Event = ( { eventDetails } ) => {
+const Event = ( { eventDetails, ownProfile } ) => {
   // console.log(eventDetails)
 
   if ( eventDetails === null ) {
@@ -24,10 +24,15 @@ const Event = ( { eventDetails } ) => {
 
   return (
       <>
-        <View style={ { marginLeft: 15, marginVertical: 10 } }>
-          <UserInfo username={ eventDetails.description.owner }
-                    avatar={ eventDetails.description.ownerAvatar }/>
-        </View>
+          {
+              !ownProfile
+              &&
+              <View style={ { marginLeft: 15, marginVertical: 10 } }>
+                  <UserInfo username={ eventDetails.description.owner }
+                            avatar={ eventDetails.description.ownerAvatar }/>
+              </View>
+          }
+
 
         <View style={ [ theme.generalListPost, theme.event ] }>
           <View style={ theme.eventInfo }>

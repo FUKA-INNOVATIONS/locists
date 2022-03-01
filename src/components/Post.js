@@ -6,15 +6,20 @@ import Like from './Like';
 import DeleteMedia from './DeleteMedia';
 import UserInfo from './UserInfo';
 
-const Post = ( { postMedia } ) => {
+const Post = ( { postMedia, ownProfile } ) => {
 
   return (
       <>
-        <View style={ { marginLeft: 15, marginVertical: 10 } }>
-          <UserInfo username={ postMedia.description.owner }
-                    avatar={ postMedia.description.ownerAvatar }/>
+          {
+              !ownProfile
+              &&
+              <View style={ { marginLeft: 15, marginVertical: 10 } }>
+                  <UserInfo username={ postMedia.description.owner }
+                            avatar={ postMedia.description.ownerAvatar }/>
 
-        </View>
+              </View>
+          }
+
 
         <View style={ [ theme.generalListPost, theme.post ] }>
           {

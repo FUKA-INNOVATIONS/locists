@@ -89,9 +89,9 @@ const Account = ( { navigation } ) => {
                   renderItem={ ( { item } ) => {
                       return (
                           item.description.mediaType === 'post' ?
-                              <Post postMedia={ item }/>
+                              <Post postMedia={ item } ownProfile={true}/>
                               :
-                              <Event eventDetails={ item }/>
+                              <Event eventDetails={ item } ownProfile={true}/>
 
                       );
                   }
