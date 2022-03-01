@@ -19,11 +19,12 @@ import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 
+
 const UploadEvent = props => {
   const { user } = useAuthStorage()
   const [ dateTime, setDateTime ] = useState( new Date() )
   const [ mode, setMode ] = useState( 'date' )
-  const [ show, setShow ] = useState( false )
+  const [ show, setShow ] = useState( true )
   // const android = Platform.OS === 'android'
 
   useFocusEffect(
@@ -36,9 +37,7 @@ const UploadEvent = props => {
     const currentDate = selectedDate || dateTime
     setShow( Platform.OS === 'ios' )
     setDateTime( currentDate )
-
     setFormValue( 'date', currentDate, { shouldValidate: false } )
-
     console.log( 'currentDate',currentDate.toLocaleString() )
   }
 
@@ -193,6 +192,7 @@ const UploadEvent = props => {
             <View style={ theme.inputContainer }>
               {
                 <RNDateTimePicker
+                  style={ {...theme.inputContainer, width: 150} }
                   testID='dateTimePicker'
                   value={ dateTime }
                   mode={ mode }
@@ -204,8 +204,8 @@ const UploadEvent = props => {
             </View>
             }
 
-            <View style={ { flexDirection: 'row', justifyContent: 'center' } }>
-              <Text style={ { color: 'white' } }>{dateTime.toLocaleString()}</Text>
+            <View style={ { justifyContent: 'center' } }>
+              <Text style={ { color: 'white' } }>{getValues().date && dateTime.toLocaleString()}</Text>
               <Button onPress={ showDatepicker } title='Select date!' />
               <Button onPress={ showTimepicker } title='Select time!' />
             </View>

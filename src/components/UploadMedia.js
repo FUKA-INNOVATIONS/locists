@@ -22,8 +22,6 @@ const UploadMedia = ( { mediaType, navigation } ) => {
    ); */
 
   const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
-    console.log('mediaDescription', mediaDescription)
-
     mediaDescription = JSON.stringify( mediaDescription );
 
     if ( !imageSelected ) {
