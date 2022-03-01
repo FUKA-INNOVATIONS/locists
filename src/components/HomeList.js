@@ -60,7 +60,7 @@ const HomeList = ( { navigation } ) => {
   // console.log('all media', allMedia)
 
   const sortLatest = async () => {
-    await getAllMedia().then(mixed => setAll(mixed))
+    await getAllMedia('latest').then(sortedLatest => setAll(sortedLatest))
   }
 
 

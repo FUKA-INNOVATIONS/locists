@@ -34,7 +34,8 @@ const useMedia = () => {
     switch ( filter ) {
 
       case 'latest':
-        return sortLatest(mixed)
+        const x = sortLatest(mixed)
+        return x;
       default:
         return mixed
     }
