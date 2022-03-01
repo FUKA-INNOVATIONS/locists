@@ -1,9 +1,10 @@
-import { useCallback, useState } from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
 import useComment from '../hooks/useComment';
+import useMedia from "../hooks/useMedia";
 
 
 const Account = ( { navigation } ) => {
@@ -12,6 +13,9 @@ const Account = ( { navigation } ) => {
   const [ update, setUpdate ] = useState( false ); // eslint-disable-line
   const { getCurrentUserComments } = useComment();
   const [ comments, setComments ] = useState([]);
+  const { getUserMedia, userMedia} = useMedia();
+  const [ loading, setLoading ] = useState( false );
+
 
   getCurrentUserComments().then( comments => setComments( comments ) );
 
@@ -21,9 +25,20 @@ const Account = ( { navigation } ) => {
     // setUpdate( true );
   };
 
+    const getMediaForUser = useMemo( async () => {
+        await getUserMedia( user.token )
+    }, [] );
+
   /*  If user is logged in
    *   Hide Authentication view and move to Account view
    * */
+
+    useEffect( async () => {
+        setLoading( true );
+        await getMediaForUser;
+        console.log(loading);
+        setLoading( false )
+    }, [] );
 
   useFocusEffect(
       useCallback( () => {
