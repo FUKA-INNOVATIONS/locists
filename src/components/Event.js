@@ -43,7 +43,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             </Text>
             <Text>
               <Entypo name="calendar" size={ 20 } color="black"/>
-              { eventDetails.description.date }
+              { new Date(eventDetails.description.date).toDateString() }
             </Text>
             <Text>{ eventDetails.description.price } €</Text>
             <View style={ theme.eventAttend }>

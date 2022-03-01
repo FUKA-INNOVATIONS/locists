@@ -6,7 +6,7 @@ const fetchAvatar = async ( userId ) => {
   try {
     const avatarArray = await getFilesByTag( 'avatar_' + userId );
     const avatar = avatarArray.pop();
-    console.log('avatar', avatar)
+    // console.log('avatar', avatar)
     return uploadsUrl + avatar.filename;
   } catch ( error ) {
     console.error( error.message );
