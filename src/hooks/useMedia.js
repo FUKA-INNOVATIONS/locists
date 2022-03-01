@@ -113,7 +113,7 @@ const useMedia = () => {
 
   // TODO: get token here in the hook
   const uploadMedia = async ( formData, token ) => {
-
+    console.log('token', token)
     const options = {
       method: 'POST',
       headers: {
