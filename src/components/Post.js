@@ -6,6 +6,9 @@ import Like from './Like';
 import DeleteMedia from './DeleteMedia';
 import UserInfo from './UserInfo';
 
+import AddComment from '../../assets/icons/AddComment.svg';
+
+
 const Post = ( { postMedia, ownProfile } ) => {
 
   return (
@@ -16,7 +19,6 @@ const Post = ( { postMedia, ownProfile } ) => {
               <View style={ { marginLeft: 15, marginVertical: 10 } }>
                   <UserInfo username={ postMedia.description.owner }
                             avatar={ postMedia.description.ownerAvatar }/>
-
               </View>
           }
 
@@ -38,15 +40,10 @@ const Post = ( { postMedia, ownProfile } ) => {
             </View>
 
             <View style={ theme.postExtra }>
-              <Text style={ { marginBottom: 10 } }>
-                0
-                <AntDesign name="like2" size={ 24 } color="black"/>
-                <Like displayIcon={ false } file_id={ postMedia.file_id }/>
-              </Text>
+                <Like displayIcon={ true } file_id={ postMedia.file_id }/>
 
               <Text>
-                0
-                <AntDesign name="message1" size={ 24 } color="black"/>
+                  <AddComment width={30} height={30} />
               </Text>
               { postMedia.description.isOwner &&
               <DeleteMedia file_id={ postMedia.file_id }/> }

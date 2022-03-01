@@ -117,14 +117,14 @@ const theme = {
   postInfo: {
     paddingLeft: 5,
     flex: 1,
-    height: 70,
+    height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 5,
   },
   postText: {
     marginVertical: 5,
-    width: '80%',
+    width: '75%',
   },
   postExtra: {
     paddingTop: 5,
@@ -132,6 +132,12 @@ const theme = {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-end',
+  },
+  postLikes: {
+    width: '80%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
   },
 
   // Event List Styles

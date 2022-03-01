@@ -131,7 +131,6 @@ const useMedia = () => {
         (type === 'event' || type === 'post' ) && userMediaPE.push(data[i]);
       }
     }
-    console.log('qegonqqe0', userMediaPE);
     setUserMedia( userMediaPE );
   } catch (e) {
     console.log('Error in getting user files', e.message);

@@ -30,6 +30,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
               <View style={ { marginLeft: 15, marginVertical: 10 } }>
                   <UserInfo username={ eventDetails.description.owner }
                             avatar={ eventDetails.description.ownerAvatar }/>
+              <DeleteMedia file_id={ eventDetails.file_id } />
               </View>
           }
 
