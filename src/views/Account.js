@@ -1,10 +1,12 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import {Button, Text, View, Image, TouchableOpacity, ScrollView, Pressable, FlatList} from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
 import useComment from '../hooks/useComment';
 import useMedia from "../hooks/useMedia";
+import Post from "../components/Post";
+import Event from "../components/Event";
 
 
 const Account = ( { navigation } ) => {
@@ -49,8 +51,9 @@ const Account = ( { navigation } ) => {
       }, [ update ] ),
   );
 
+    const EmptyListMessage = () => <Text>No events </Text>;
+
   return (
-      <ScrollView>
           <View style={theme.profile}>
               <View style={theme.profilePicAndInfo}>
                   { user.avatar ?
@@ -81,8 +84,22 @@ const Account = ( { navigation } ) => {
                   <Text style={theme.loginButtonText}>Log Out</Text>
               </TouchableOpacity>
               <Text style={{color: '#fff'}}>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
+              <FlatList
+                  data={ userMedia }
+                  ListEmptyComponent={ EmptyListMessage }
+                  keyExtractor={ ( item ) => item.file_id }
+                  renderItem={ ( { item } ) => {
+                      return (
+                          item.description.mediaType === 'post' ?
+                              <Post postMedia={ item }/>
+                              :
+                              <Event eventDetails={ item }/>
+
+                      );
+                  }
+                  }
+              />
           </View>
-      </ScrollView>
   );
 };
 
