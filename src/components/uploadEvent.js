@@ -21,10 +21,10 @@ import RNDateTimePicker from '@react-native-community/datetimepicker'
 
 const UploadEvent = props => {
   const { user } = useAuthStorage()
-  const [ date, setDate ] = useState( new Date() )
+  const [ dateTime, setDateTime ] = useState( new Date() )
   const [ mode, setMode ] = useState( 'date' )
   const [ show, setShow ] = useState( false )
-  const android = Platform.OS === 'android'
+  // const android = Platform.OS === 'android'
 
   useFocusEffect(
     useCallback( () => {
@@ -33,11 +33,11 @@ const UploadEvent = props => {
   )
 
   const onChange = ( event, selectedDate ) => {
-    const currentDate = selectedDate || date
+    const currentDate = selectedDate || dateTime
     setShow( Platform.OS === 'ios' )
-    setDate( currentDate )
+    setDateTime( currentDate )
 
-    setFormValue( 'date', date.toLocaleString(), { shouldValidate: false } )
+    setFormValue( 'date', currentDate, { shouldValidate: false } )
 
     console.log( selectedDate.toLocaleString() )
   }
@@ -75,10 +75,8 @@ const UploadEvent = props => {
       min( 5, 'Too Short!' ).
       max( 15, 'Too Long!' ).
       required( 'Name is required: 5-15 characters' ),
-    date: Yup.string().
-      min( 5, 'Too Short!' ).
-      max( 15, 'Too Long!' ).
-      required( 'Name is required: format => 13.3.2022' ),
+    date: Yup.date().
+      required( 'Date and time is required' ),
     description: Yup.string().
       min( 25, 'Too Short!' ).
       max( 250, 'Too Long!' ).
@@ -104,7 +102,7 @@ const UploadEvent = props => {
     fileType: type,
     location: getValues().location,
     name: getValues().name,
-    date: getValues().date,
+    date: dateTime,
     description: getValues().description,
     price: getValues().price,
   }
@@ -132,22 +130,6 @@ const UploadEvent = props => {
           onPress={ pickImage }>
           <Text style={ theme.loginButtonText }>Choose Image</Text>
         </TouchableOpacity>
-
-        { show &&
-        <View style={ theme.inputContainer }>
-          {
-            <RNDateTimePicker
-              testID='dateTimePicker'
-              value={ date }
-              mode={ mode }
-              is24Hour={ true }
-              display='default'
-              onChange={ onChange }
-            />
-          }
-        </View>
-
-        }
 
         <View style={ theme.createMediaForm }>
 
@@ -189,24 +171,41 @@ const UploadEvent = props => {
 
           <View style={ theme.inputContainer }>
 
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  defaultValue={ value }
-                  placeholder='Date & time'
-                />
-              ) }
-              name='date'
-            />
+            {/* <Controller
+             control={ control }
+             render={ ( { field: { onChange, onBlur, value } } ) => (
+             <TextInput
+             style={ theme.input }
+             onBlur={ onBlur }
+             onChangeText={ onChange }
+             value={ value }
+             defaultValue={ date }
+             placeholder='Date & time'
+             disabled={true}
+             />
+             ) }
+             name='date'
+             /> */ }
             { errors.date && <Text
               style={ theme.inputErrorText }>{ errors.date.message }</Text> }
 
+            { show &&
+            <View style={ theme.inputContainer }>
+              {
+                <RNDateTimePicker
+                  testID='dateTimePicker'
+                  value={ dateTime }
+                  mode={ mode }
+                  is24Hour={ true }
+                  display='default'
+                  onChange={ onChange }
+                />
+              }
+            </View>
+            }
+
             <View style={ { flexDirection: 'row', justifyContent: 'center' } }>
+              <Text style={ { color: 'white' } }>{dateTime.toLocaleString()}</Text>
               <Button onPress={ showDatepicker } title='Select date!' />
               <Button onPress={ showTimepicker } title='Select time!' />
             </View>
