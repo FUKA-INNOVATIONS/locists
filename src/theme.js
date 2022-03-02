@@ -136,6 +136,7 @@ const theme = {
     borderTopLeftRadius: 10,
   },
   postInfo: {
+    width: width * 0.94,
     paddingLeft: 5,
     flex: 1,
     height: 80,
