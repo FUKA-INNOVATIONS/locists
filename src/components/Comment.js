@@ -32,7 +32,7 @@ const Comment = ( { commentObj, avatar } ) => {
               {isOwner && <Button title={'Delete'} onPress={() => onDeleteHandler(commentObj.comment_id)}>Delete</Button>}
           </View>
 
-        {/*<Text>comment_id: {commentObj.comment_id}</Text>*/}
+        {/* <Text>comment_id: {commentObj.comment_id}</Text> */}
 
       </View>
   );

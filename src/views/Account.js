@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
-import {Button, Text, View, Image, TouchableOpacity, ScrollView, Pressable, FlatList} from 'react-native';
+import {Button, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
@@ -51,7 +51,7 @@ const Account = ( { navigation } ) => {
       }, [ update ] ),
   );
 
-    const EmptyListMessage = () => <Text style={{ color: '#fff' }}>You Haven't posted anything yet</Text>;
+    const EmptyListMessage = () => <Text style={{ color: '#fff' }}>You Have not posted anything yet</Text>;
 
   return (
           <View style={theme.profile}>

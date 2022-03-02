@@ -2,7 +2,6 @@ import { Button, Image, Text, View } from 'react-native';
 import { uploadsUrl } from '../../config';
 import { useState } from 'react';
 import theme from "../theme";
-import {AntDesign} from "@expo/vector-icons";
 import PostComment from './PostComment';
 import Like from './Like';
 import AddComment from "../../assets/icons/AddComment.svg";

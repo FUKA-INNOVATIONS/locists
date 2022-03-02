@@ -1,4 +1,4 @@
-import { View, Image, Text, Button } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { uploadsUrl } from '../../config';
 import Attend from './Attend';
 import DeleteMedia from './DeleteMedia';

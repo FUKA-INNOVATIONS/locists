@@ -128,7 +128,7 @@ const useMedia = () => {
   };
 
   const getUserMedia = async (token) => {
-  let userMediaPE = [];
+  const userMediaPE = [];
     const URL = `${ baseUrl }media/user`;
   const options = {
     method: 'GET',

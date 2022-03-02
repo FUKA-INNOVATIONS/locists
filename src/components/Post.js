@@ -1,7 +1,6 @@
 import { View, Image, Text } from 'react-native';
 import { uploadsUrl } from '../../config';
 import theme from '../theme';
-import { AntDesign } from '@expo/vector-icons';
 import Like from './Like';
 import DeleteMedia from './DeleteMedia';
 import UserInfo from './UserInfo';
