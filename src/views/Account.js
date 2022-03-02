@@ -25,14 +25,14 @@ const Account = ( { navigation } ) => {
    *   Hide Authentication view and move to Account view
    * */
 
-  useFocusEffect(
+  /* useFocusEffect(
       useCallback( () => {
         return () => {
           user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
           setUpdate( false );
         };
       }, [ update ] ),
-  );
+  ); */
 
   return (
       <ScrollView>

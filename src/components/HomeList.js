@@ -66,7 +66,6 @@ const HomeList = ( { navigation } ) => {
   const ListHeader = () => {
     return (
       <View style={ {
-        // height: 50,
         backgroundColor: theme.colors.mainBackground,
         justifyContent: 'center',
 
