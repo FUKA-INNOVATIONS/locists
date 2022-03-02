@@ -1,7 +1,6 @@
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import {Button, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
-import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
 import useComment from '../hooks/useComment';
 import useMedia from "../hooks/useMedia";
@@ -35,6 +34,7 @@ const Account = ( { navigation } ) => {
    *   Hide Authentication view and move to Account view
    * */
 
+
     useEffect( async () => {
         setLoading( true );
         await getMediaForUser;
@@ -42,16 +42,8 @@ const Account = ( { navigation } ) => {
         setLoading( false )
     }, [] );
 
-  useFocusEffect(
-      useCallback( () => {
-        return () => {
-          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
-          setUpdate( false );
-        };
-      }, [ update ] ),
-  );
 
-    const EmptyListMessage = () => <Text style={{ color: '#fff' }}>You Have not posted anything yet</Text>;
+  const EmptyListMessage = () => <Text style={{ color: '#fff' }}>You Have not posted anything yet</Text>;
 
   return (
           <View style={theme.profile}>

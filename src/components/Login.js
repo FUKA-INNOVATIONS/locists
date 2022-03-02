@@ -67,6 +67,7 @@ const Login = ( { navigation } ) => {
               onChangeText={onChange}
               value={value}
               placeholder="Password"
+              secureTextEntry={ true }
             />
           )}
           name="password"
