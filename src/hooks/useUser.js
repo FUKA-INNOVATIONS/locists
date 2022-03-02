@@ -10,7 +10,6 @@ import doFetch from '../utils/doFetch';
 const useUser = () => {
   const authStorage = useAuthStorage();
   const [ loading, setLoading ] = useState( false );
-  const [ token, setToken ] = useState( null );
 
   // Create new user account
   const register = async ( username, password, email, fullName ) => {
@@ -122,27 +121,11 @@ const useUser = () => {
 
   // Get currently logged in user's details
   const getAuthenticatedUser = async () => {
-    // setLoading( true );
     const token = await authStorage.getToken();
     if ( token ) {
       console.log( 'token found', token );
-      // setLoading( false );
     } else {
       console.log( 'no token', token );
-      // setLoading( false );
-    }
-  };
-
-  const getToken = async () => {
-    try {
-      // setLoading( true );
-      const token = await authStorage.getToken();
-      setToken( token );
-      // setLoading( false );
-      return token;
-    } catch ( e ) {
-      console.log( e );
-      // setLoading( false );
     }
   };
 
@@ -192,7 +175,6 @@ const useUser = () => {
     register,
     login,
     getAuthenticatedUser,
-    getToken,
     getUserById,
     modifyUser,
     getUserByToken,
@@ -200,7 +182,6 @@ const useUser = () => {
     loginWithToken,
     isUsernameAvailable,
     loading,
-    token,
   };
 };
 
