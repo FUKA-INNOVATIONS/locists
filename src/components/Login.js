@@ -1,4 +1,4 @@
-import {View, Text, TextInput, Alert, TouchableOpacity} from 'react-native'
+import {View, Text, TextInput, Alert, TouchableOpacity, KeyboardAvoidingView, Platform} from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
 
@@ -38,7 +38,9 @@ const Login = ( { navigation } ) => {
   };
 
   return (
-    <View style={theme.login}>
+    <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={theme.login}>
 
       <View style={theme.inputContainer}>
         <Controller
@@ -77,7 +79,7 @@ const Login = ( { navigation } ) => {
       <TouchableOpacity style={theme.loginButton} onPress={handleSubmit(onSubmit)}>
         <Text style={theme.loginButtonText}>Login</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 

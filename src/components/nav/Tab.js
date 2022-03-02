@@ -13,9 +13,12 @@ import {
   SettingsEmpty,
   SettingsFull,
 } from "../../utils";
+import useAuthStorage from "../../hooks/useAuthStorage";
 
 
-const Tab = ( { selected, tab, onPress, icon } ) => {
+const Tab = ( { selected, tab, onPress } ) => {
+
+    const { user } = useAuthStorage();
 
   switch (tab.name) {
     case 'HomeTab':
@@ -41,7 +44,7 @@ const Tab = ( { selected, tab, onPress, icon } ) => {
           </TouchableOpacity>
       );
     case 'CreateTab':
-      return (
+      return ( user.isLogged &&
           <TouchableOpacity style={{ bottom: 20 }} onPress={ onPress }>
               { selected ?
                   <PlusButtonSelected top={0} width={60} height={60} bottom={20} elevation={10} />
@@ -58,7 +61,7 @@ const Tab = ( { selected, tab, onPress, icon } ) => {
             <Text style={ [
               styles.iconText,
               { color: selected ? '#7b08a3' : '#fff'  },
-            ] }>{ tab.name.slice(0, -3) }</Text>
+            ] }>Profile</Text>
           </TouchableOpacity>
       );
     case 'SettingsTab':

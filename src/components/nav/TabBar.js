@@ -1,6 +1,7 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Tab from './Tab';
 import { useState } from 'react';
+import useAuthStorage from "../../hooks/useAuthStorage";
 
 const { width } = Dimensions.get( 'screen' );
 
@@ -24,7 +25,6 @@ const TabBar = ( { state, navigation } ) => {
       {
         routes.map( ( route, index ) => <Tab
             tab={ route }
-            icon={ route.params.icon }
             onPress={ () => handlePress( route.name, index ) }
             selected={ isSelected( route.name ) }
             key={ route.key }/> )
@@ -37,6 +37,7 @@ const styles = StyleSheet.create( {
   wrapper: {
     position: 'absolute',
     bottom: -2,
+    paddingBottom: 5,
     width,
     height: 50,
     alignItems: 'center',
@@ -48,6 +49,8 @@ const styles = StyleSheet.create( {
     backgroundColor: '#24292e',
     width,
     paddingHorizontal: 20,
+    borderTopWidth: 2,
+    borderColor: '#7b08a3',
   },
 } );
 
