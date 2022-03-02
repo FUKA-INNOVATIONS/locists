@@ -10,7 +10,6 @@ import doFetch from '../utils/doFetch';
 const useUser = () => {
   const authStorage = useAuthStorage();
   const [ loading, setLoading ] = useState( false );
-  const [ error, setError ] = useState( null ); // eslint-disable-line
   const [ token, setToken ] = useState( null );
 
   // Create new user account
@@ -69,6 +68,7 @@ const useUser = () => {
       // setLoading( true );
       const loginResponse = await axios.post( URL, loginCredentials, options );
       const { token, user } = loginResponse.data;
+      console.log('lres', loginResponse)
 
       /*
        * If user login succeeded,
@@ -216,8 +216,6 @@ const useUser = () => {
     loginWithToken,
     isUsernameAvailable,
     loading,
-    // setLoading,
-    error,
     token,
   };
 };

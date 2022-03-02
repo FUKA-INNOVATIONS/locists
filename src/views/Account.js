@@ -18,6 +18,7 @@ const Account = ( { navigation } ) => {
   const logoutHandler = async () => {
     await authStorage.logout();
     user.isLogged && navigation.navigate( 'AccountTab', { Screen: 'Account' } );
+    // setUpdate( true );
   };
 
   /*  If user is logged in
@@ -30,16 +31,17 @@ const Account = ( { navigation } ) => {
       user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
       setUpdate( false );
     } )
-  }, [update] )
+  }, [] )
 
-  /* useFocusEffect(
-    useCallback( () => {
-      return () => {
-        user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
-        setUpdate( false );
-      };
-    }, [ update ] ),
-  ); */
+  useFocusEffect(
+      useCallback( () => {
+        return () => {
+          console.log('Account.jssdsdsdsd focus')
+          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
+          setUpdate( false );
+        };
+      }, [  ] ),
+  );
 
   return (
       <ScrollView>
