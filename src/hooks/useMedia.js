@@ -4,6 +4,8 @@ import doFetch from '../utils/doFetch';
 import { baseUrl, eventTag, postTag } from '../../config';
 import useAuthStorage from './useAuthStorage';
 import fetchAvatar from '../utils/fetchAvatar';
+import sortLatest from '../utils/sortLatest'
+
 
 const useMedia = () => {
   // TODO: get token here, not in views, fix
@@ -15,7 +17,10 @@ const useMedia = () => {
   const [ allMedia, setAllMedia ] = useState();
   const [ userMedia, setUserMedia] = useState();
 
-  const getAllMedia = async () => {
+  const getAllMedia = async (filter=null) => {
+
+    console.log('filter in getAllMedia hook:', filter)
+
 
     /*
      * inorder to get thumbnails for optimization
@@ -26,7 +31,17 @@ const useMedia = () => {
     const posts = await getPostsWithThumbnails();
 
     const mixed = [ ...events, ...posts ];
-    setAllMedia( mixed );
+
+    switch ( filter ) {
+
+      case 'latest':
+        return sortLatest(mixed)
+      case 'postsFirst':
+        return [ ...posts, ...events ]
+      default:
+        return mixed.sort(() => Math.random() - 0.5)
+    }
+
 
   };
 
@@ -140,7 +155,7 @@ const useMedia = () => {
 
   // TODO: get token here in the hook
   const uploadMedia = async ( formData, token ) => {
-
+    console.log('token', token)
     const options = {
       method: 'POST',
       headers: {
@@ -203,6 +218,7 @@ const useMedia = () => {
     // loadingSingleMedia,
     loading,
     setLoading,
+    setAllMedia,
     // loadingMediaUpload,
   };
 

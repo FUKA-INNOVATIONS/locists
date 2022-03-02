@@ -21,7 +21,9 @@ const UploadMedia = ( { mediaType, navigation } ) => {
    }, [] ),
    ); */
 
-  const onSubmit = async ( data, mediaDescription, imageSelected, image ) => {
+  const onSubmit = async ( data, mediaDescription, imageSelected, image, type ) => {
+    console.log('TYPE', type)
+
     mediaDescription = JSON.stringify( mediaDescription );
 
     if ( !imageSelected ) {
@@ -39,7 +41,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     formData.append( 'file', {
       uri: image,
       name: filename,
-      type: mediaDescription.fileType + '/' + fileExtension,
+      type: type + '/' + fileExtension,
     } );
 
     // Upload media

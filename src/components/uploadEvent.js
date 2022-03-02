@@ -57,6 +57,8 @@ const UploadEvent = props => {
   const {
     image,
     setImage,
+    width,
+    height,
     imageSelected,
     setImageSelected,
     type,
@@ -104,6 +106,8 @@ const UploadEvent = props => {
     date: dateTime,
     description: getValues().description,
     price: getValues().price,
+    width,
+    height
   }
 
   const resetAll = () => {
@@ -258,7 +262,7 @@ const UploadEvent = props => {
             title='Create event'
             onPress={ handleSubmit(
               data => props.onSubmit( data, mediaDescription, imageSelected,
-                image ) ) }
+                image, type ) ) }
           >
             <Text style={ theme.loginButtonText }>Create Event</Text>
           </TouchableOpacity>
