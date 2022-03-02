@@ -29,7 +29,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
           {
               !ownProfile
               &&
-              <View style={ { marginLeft: 10, marginVertical: 5 } }>
+              <View style={ { marginLeft: 10, marginVertical: 3 } }>
                   <UserInfo username={ eventDetails.description.owner }
                             avatar={ eventDetails.description.ownerAvatar }/>
               </View>

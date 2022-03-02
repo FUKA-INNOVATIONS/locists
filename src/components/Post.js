@@ -16,7 +16,7 @@ const Post = ( { postMedia, ownProfile } ) => {
           {
               !ownProfile
               &&
-              <View style={ { marginLeft: 15, marginVertical: 10 } }>
+              <View style={ { marginLeft: 15, marginVertical: 3 } }>
                   <UserInfo username={ postMedia.description.owner }
                             avatar={ postMedia.description.ownerAvatar }/>
               </View>

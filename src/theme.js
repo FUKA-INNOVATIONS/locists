@@ -296,6 +296,27 @@ const theme = {
     alignItems: 'center',
   },
 
+  // Create Page Styles
+  createPage: {
+    flex: 0.7,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  createBtn: {
+    marginVertical: 30,
+    width: width * 0.5,
+    marginRight: 10,
+  },
+  infoBox: {
+    width: width * 0.7,
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  infoText: {
+    fontSize: 16,
+  },
+
   // Profile Styles
   profile: {
     alignItems: 'center',
