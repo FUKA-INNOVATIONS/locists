@@ -35,7 +35,6 @@ const useUser = () => {
       setLoading( false );
       return registeredUser.data;
     } catch ( error ) {
-      // setLoading( false );
       console.log( 'register error', error );
       setLoading( false );
       return error;
@@ -46,9 +45,7 @@ const useUser = () => {
     const URL = `${ baseUrl }users/username/${ username }`;
     try {
       console.log('check')
-      // setLoading( true );
       const available = await axios.get( URL );
-      // setLoading( false );
       return available.data;
     } catch ( e ) {
       console.log( 'error in isUsernameAvailable', e );
@@ -65,10 +62,8 @@ const useUser = () => {
       body: JSON.stringify( loginCredentials ),
     };
     try {
-      // setLoading( true );
       const loginResponse = await axios.post( URL, loginCredentials, options );
       const { token, user } = loginResponse.data;
-      console.log('lres', loginResponse)
 
       /*
        * If user login succeeded,
@@ -82,13 +77,10 @@ const useUser = () => {
         user.avatar = await fetchAvatar( user.user_id );
         user.isLogged = true;
         authStorage.login( user );
-        // setLoading( false );
       }
-      // setLoading( false );
       return loginResponse.data;
     } catch ( error ) {
       console.log( 'login error in hook', error );
-      // setError( error );
       return error;
     }
   };
@@ -99,16 +91,13 @@ const useUser = () => {
   const fetchAvatar = async ( userId ) => {
     const { getFilesByTag } = useTag();
     try {
-      // setLoading( true );
       const avatarArray = await getFilesByTag( 'avatar_' + userId );
       const avatar = avatarArray.pop();
       if ( avatar !== undefined ) {
         authStorage.user.avatar = uploadsUrl + avatar.filename;
-        // setLoading( false );
         return uploadsUrl + avatar.filename;
       }
     } catch ( error ) {
-      // setLoading( false );
       console.error( error.message );
     }
   };
@@ -116,21 +105,16 @@ const useUser = () => {
   const loginWithToken = async ( token ) => {
     if ( token ) {
       try {
-        // setLoading( true );
         const user = await getUserByToken( token );
         if ( user ) {
-          // setLoading( true );
           const avatar = await fetchAvatar( user.user_id );
           user.isLogged = true;
           user.avatar = avatar;
           user.token = token;
           authStorage.login( user );
-          // setLoading( false );
         }
-        // setLoading( false );
       } catch ( e ) {
         console.log( 'error in loginWithToken hook', e );
-        // setLoading( false );
       }
     }
     return null;

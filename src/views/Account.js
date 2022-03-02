@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react';
 import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
@@ -25,22 +25,13 @@ const Account = ( { navigation } ) => {
    *   Hide Authentication view and move to Account view
    * */
 
-  useEffect( () => {
-    return navigation.addListener( 'focus', async () => {
-      console.log( 'Account.js focus' )
-      user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
-      setUpdate( false );
-    } )
-  }, [] )
-
   useFocusEffect(
       useCallback( () => {
         return () => {
-          console.log('Account.jssdsdsdsd focus')
           user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
           setUpdate( false );
         };
-      }, [  ] ),
+      }, [ update ] ),
   );
 
   return (
