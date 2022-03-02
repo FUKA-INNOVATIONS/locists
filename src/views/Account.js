@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import {Button, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import theme from "../theme";
