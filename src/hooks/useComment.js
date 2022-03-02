@@ -5,9 +5,10 @@ import doFetch from '../utils/doFetch';
 import useAuthStorage from './useAuthStorage';
 
 const useComment = () => {
-  const { user } = useAuthStorage();
   const [ loading, setLoading ] = useState( false );
   const [ mediaComments, setMediaComments ] = useState( [] );
+  const authStorage = useAuthStorage();
+
 
   const getMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
@@ -23,6 +24,7 @@ const useComment = () => {
   };
 
   const postComment = async ( file_id, content ) => { // eslint-disable-line
+    const token = await authStorage.getToken()
     const newComment = {
       file_id,
       comment: content,
@@ -31,7 +33,7 @@ const useComment = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
       body: JSON.stringify( newComment ),
     };
@@ -46,11 +48,11 @@ const useComment = () => {
   };
 
   const deleteComment = async ( id ) => {
-    console.log( 'deleteComment hook' );
+    const token = await authStorage.getToken()
     const options = {
       method: 'DELETE',
       headers: {
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
     };
 
@@ -63,10 +65,11 @@ const useComment = () => {
   };
 
   const getCurrentUserComments = async () => {
+    const token = await authStorage.getToken()
     const options = {
       method: 'GET',
       headers: {
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
     };
 

@@ -3,13 +3,11 @@ import Post from './Post'
 import Event from './Event'
 import useMedia from '../hooks/useMedia'
 import { useEffect, useMemo, useState } from 'react'
-import { useIsFocused } from '@react-navigation/native'
 import theme from '../theme'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
   // TODO: fix with focus listener
-  const viewIsFocused = useIsFocused() // eslint-disable-line
   const [ loading, setLoading ] = useState( false )
   const [ all, setAll ] = useState( [] )
 
@@ -17,18 +15,15 @@ const HomeList = ( { navigation } ) => {
     await getAllMedia().then( mixedMedia => setAll( mixedMedia ) )
   }, [] )
 
-  // console.log('HomeList.js')
-  // console.log('HomeList.js => allMedia', allMedia)
-
   // TODO: fix rendering
-
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}
   // No good solutions with the api available, considering the way we use the api
 
+
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
-      console.log( 'HomeList focus' )
+      console.log( 'HomeList.js focus' )
       await getPostsAndEvents
     } )
   }, [] )
@@ -36,7 +31,6 @@ const HomeList = ( { navigation } ) => {
   useEffect( async () => {
     setLoading( true )
     await getPostsAndEvents
-    // await getAllMedia()
     setLoading( false )
   }, [] )
 
@@ -61,8 +55,6 @@ const HomeList = ( { navigation } ) => {
 
   const EmptyListMessage = () => <Text>No events </Text>
 
-  // console.log('all media', allMedia)
-
   const sortLatest = async () => {
     await getAllMedia( 'latest' ).then( sortedList => setAll( sortedList ) )
   }
@@ -74,7 +66,6 @@ const HomeList = ( { navigation } ) => {
   const ListHeader = () => {
     return (
       <View style={ {
-        // height: 50,
         backgroundColor: theme.colors.mainBackground,
         justifyContent: 'center',
 
