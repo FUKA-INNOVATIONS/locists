@@ -1,7 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
-import { useFocusEffect } from '@react-navigation/native';
 import theme from "../theme";
 import useComment from '../hooks/useComment';
 
