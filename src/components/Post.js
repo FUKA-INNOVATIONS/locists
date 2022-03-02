@@ -42,23 +42,15 @@ const Post = ( { postMedia, ownProfile } ) => {
             <View style={ theme.postExtra }>
                 <Like displayIcon={ true } file_id={ postMedia.file_id }/>
 
-              <Text>
-                  <AddComment width={30} height={30} />
-              </Text>
+
+                <AddComment width={30} height={30} style={{marginRight: 8}} />
+
               { postMedia.description.isOwner &&
               <DeleteMedia file_id={ postMedia.file_id }/> }
             </View>
           </View>
         </View>
       </>
-      /* <View style={styles.info}>
-       <View style={styles.allText}>
-       <View style={styles.rates}>
-       <Text>likes: {postMedia.likes}</Text>
-       <Text>comments: {postMedia.comments}</Text>
-       </View>
-       </View>
-       </View> */
   );
 };
 

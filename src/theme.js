@@ -153,9 +153,9 @@ const theme = {
   },
   eventAttend: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
+    marginTop: 3,
     alignItems: 'center',
-    borderWidth: 0,
     width: width/3,
   },
   eventImage: {

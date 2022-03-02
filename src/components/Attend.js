@@ -37,13 +37,13 @@ const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   };
 
   return (
-      <View>
+      <View style={{marginLeft: 5}}>
         { displayIcon && <Pressable onPress={ likeHandler }>
           <Text style={ { fontSize: 20 } }>{ hasAttended()
               ? 'can\'t attend'
               : 'attend' }</Text>
         </Pressable> }
-        <Text>{ mediaFavourites.length } attendees </Text>
+        <Text>{ mediaFavourites.length } attending </Text>
       </View>
   );
 };
