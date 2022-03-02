@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react'
 import { Button, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import { useFocusEffect } from '@react-navigation/native';
@@ -18,21 +18,28 @@ const Account = ( { navigation } ) => {
   const logoutHandler = async () => {
     await authStorage.logout();
     user.isLogged && navigation.navigate( 'AccountTab', { Screen: 'Account' } );
-    // setUpdate( true );
   };
 
   /*  If user is logged in
    *   Hide Authentication view and move to Account view
    * */
 
-  useFocusEffect(
-      useCallback( () => {
-        return () => {
-          user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
-          setUpdate( false );
-        };
-      }, [ update ] ),
-  );
+  useEffect( () => {
+    return navigation.addListener( 'focus', async () => {
+      console.log( 'Account.js focus' )
+      user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
+      setUpdate( false );
+    } )
+  }, [update] )
+
+  /* useFocusEffect(
+    useCallback( () => {
+      return () => {
+        user.isLogged && navigation.navigate( 'HomeTab', {Screen: 'Home'} );
+        setUpdate( false );
+      };
+    }, [ update ] ),
+  ); */
 
   return (
       <ScrollView>

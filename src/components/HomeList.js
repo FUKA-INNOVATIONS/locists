@@ -28,7 +28,7 @@ const HomeList = ( { navigation } ) => {
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
-      console.log( 'HomeList focus' )
+      console.log( 'HomeList.js focus' )
       await getPostsAndEvents
     } )
   }, [] )
