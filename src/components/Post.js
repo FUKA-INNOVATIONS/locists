@@ -1,20 +1,26 @@
 import { View, Image, Text } from 'react-native';
 import { uploadsUrl } from '../../config';
 import theme from '../theme';
-import { AntDesign } from '@expo/vector-icons';
 import Like from './Like';
 import DeleteMedia from './DeleteMedia';
 import UserInfo from './UserInfo';
 
-const Post = ( { postMedia } ) => {
+import AddComment from '../../assets/icons/AddComment.svg';
+
+
+const Post = ( { postMedia, ownProfile } ) => {
 
   return (
       <>
-        <View style={ { marginLeft: 15, marginVertical: 10 } }>
-          <UserInfo username={ postMedia.description.owner }
-                    avatar={ postMedia.description.ownerAvatar }/>
+          {
+              !ownProfile
+              &&
+              <View style={ { marginLeft: 15, marginVertical: 10 } }>
+                  <UserInfo username={ postMedia.description.owner }
+                            avatar={ postMedia.description.ownerAvatar }/>
+              </View>
+          }
 
-        </View>
 
         <View style={ [ theme.generalListPost, theme.post ] }>
           {
@@ -33,30 +39,17 @@ const Post = ( { postMedia } ) => {
             </View>
 
             <View style={ theme.postExtra }>
-              <Text style={ { marginBottom: 10 } }>
-                0
-                <AntDesign name="like2" size={ 24 } color="black"/>
-                <Like displayIcon={ false } file_id={ postMedia.file_id }/>
-              </Text>
+                <Like displayIcon={ true } file_id={ postMedia.file_id }/>
 
-              <Text>
-                0
-                <AntDesign name="message1" size={ 24 } color="black"/>
-              </Text>
+
+                <AddComment width={30} height={30} style={{marginRight: 8}} />
+
               { postMedia.description.isOwner &&
               <DeleteMedia file_id={ postMedia.file_id }/> }
             </View>
           </View>
         </View>
       </>
-      /* <View style={styles.info}>
-       <View style={styles.allText}>
-       <View style={styles.rates}>
-       <Text>likes: {postMedia.likes}</Text>
-       <Text>comments: {postMedia.comments}</Text>
-       </View>
-       </View>
-       </View> */
   );
 };
 

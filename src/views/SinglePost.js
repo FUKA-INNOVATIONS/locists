@@ -1,12 +1,10 @@
 import {View, Text, Button, FlatList} from 'react-native';
 import useMedia from '../hooks/useMedia';
 import { useEffect } from 'react';
-
 import theme from "../theme";
 import Comment from "../components/Comment";
 import SinglePostHeader from '../components/SinglePostHeader';
 import useComment from '../hooks/useComment';
-import { MaterialIcons } from '@expo/vector-icons';
 
 const SinglePost = ( { navigation, route } ) => {
     const { postId } = route.params;
@@ -40,7 +38,6 @@ const SinglePost = ( { navigation, route } ) => {
                     keyExtractor={ (  item  ) => item.comment_id }
                     renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
                 />
-                <MaterialIcons style={theme.addComment} name="post-add" size={30} color="black" />
             </View>
         </>
     );

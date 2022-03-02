@@ -2,7 +2,12 @@ import { View, Text, Pressable, Alert } from 'react-native';
 import { useEffect } from 'react';
 import useFavourite from '../hooks/useFavourite';
 
-const Like = ( { file_id, displayIcon } ) => {  // eslint-disable-line
+import HeartEmpty from '../../assets/icons/HeartEmpty.svg';
+import HeartFull from '../../assets/icons/HeartFull.svg';
+import theme from "../theme";
+
+
+const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -38,13 +43,16 @@ const Like = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   };
 
   return (
-      <View>
+      <View style={ single ? theme.singlePostLikes : theme.postLikes }>
+        <Text style={single ? {color: '#fff'} : {color: '#000'}}>{ mediaFavourites.length }</Text>
         { displayIcon && <Pressable onPress={ likeHandler }>
-          <Text style={ { fontSize: 20 } }>{ hasLiked()
-              ? 'disLike'
-              : 'like' }</Text>
+          { hasLiked()
+              ?
+              <HeartFull width={30} height={30} />
+              :
+              <HeartEmpty width={30} height={30} />
+          }
         </Pressable> }
-        <Text>{ mediaFavourites.length } likes</Text>
       </View>
   );
 };
