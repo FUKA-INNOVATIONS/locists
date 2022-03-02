@@ -7,7 +7,7 @@ import HeartFull from '../../assets/icons/HeartFull.svg';
 import theme from "../theme";
 
 
-const Like = ( { file_id, displayIcon } ) => {  // eslint-disable-line
+const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -43,8 +43,8 @@ const Like = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   };
 
   return (
-      <View style={theme.postLikes}>
-        <Text>{ mediaFavourites.length }</Text>
+      <View style={ single ? theme.singlePostLikes : theme.postLikes }>
+        <Text style={single ? {color: '#fff'} : {color: '#000'}}>{ mediaFavourites.length }</Text>
         { displayIcon && <Pressable onPress={ likeHandler }>
           { hasLiked()
               ?

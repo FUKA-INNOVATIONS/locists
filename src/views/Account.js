@@ -51,7 +51,7 @@ const Account = ( { navigation } ) => {
       }, [ update ] ),
   );
 
-    const EmptyListMessage = () => <Text>You Haven't posted anything yet</Text>;
+    const EmptyListMessage = () => <Text style={{ color: '#fff' }}>You Haven't posted anything yet</Text>;
 
   return (
           <View style={theme.profile}>

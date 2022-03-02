@@ -101,6 +101,27 @@ const theme = {
     width: width * 0.95,
     position: 'relative',
   },
+  comment: {
+    backgroundColor: general.colors.postBackground,
+    padding: 5,
+    marginBottom: 5,
+    borderWidth: 1,
+    borderRadius: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  commentInfo: {
+    flexDirection: 'row',
+  },
+  commentExtra: {
+
+  },
+  commentUser: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    marginRight: 10,
+  },
 
   // In List Post Styles
   post: {
@@ -139,6 +160,12 @@ const theme = {
     alignItems: 'center',
     justifyContent: 'space-evenly'
   },
+  singlePostLikes: {
+    marginLeft: 10,
+    marginBottom: 5,
+    flexDirection: 'column-reverse',
+    alignItems: 'center',
+  },
 
   // Event List Styles
   event: {
@@ -167,13 +194,11 @@ const theme = {
 
   // Single Event Styles
   singleEventInfo: {
-    marginHorizontal: 0,
-    backgroundColor: '#E9D6DB',
-    borderTopWidth: 0,
-    borderBottomWidth: 1,
-    borderRadius: 0,
-    marginTop: 0,
-    padding: 5,
+    backgroundColor: general.colors.postBackground,
+    paddingHorizontal: 5,
+    marginHorizontal: 5,
+    marginTop: 5,
+    borderRadius: 10,
   },
   postComment: {
     flex: 1,
@@ -214,11 +239,6 @@ const theme = {
     borderRadius: 5,
     borderWidth: 2,
     borderColor: '#fff',
-  },
-  singlePostLikes: {
-    alignSelf: 'center',
-    fontSize: 20,
-    color: general.colors.txtLight
   },
   singlePostText: {
     width: width * 0.94,

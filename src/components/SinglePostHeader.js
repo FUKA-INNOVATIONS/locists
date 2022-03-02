@@ -5,6 +5,7 @@ import theme from "../theme";
 import {AntDesign} from "@expo/vector-icons";
 import PostComment from './PostComment';
 import Like from './Like';
+import AddComment from "../../assets/icons/AddComment.svg";
 
 const SinglePostHeader = ( { postDetails } ) => {
   if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>;
@@ -27,15 +28,14 @@ const SinglePostHeader = ( { postDetails } ) => {
   
     return (
         <View style={theme.singlePost}>
-            <Like displayIcon file_id={postDetails.file_id} />
             <Button title={ 'Write a comment' } onPress={ onWriteCommentHandler }/>
             {isWriteComment && <PostComment file_id={postDetails.file_id} display={setIsWriteComment}/>}
             <Text style={theme.singlePostOwner}>{postDetails.description.owner}</Text>
             <View style={theme.imageAndLikes}>
                 <Image source={{uri: uploadsUrl+postDetails.thumbnails.w320}} style={theme.singlePostImage} />
-                <View>
-                    <AntDesign name="like2" size={40} color="black" />
-                    <Text style={theme.singlePostLikes}>0</Text>
+                <View style={{alignItems: 'flex-end'}}>
+                    <Like displayIcon file_id={postDetails.file_id} single={true}/>
+                    <AddComment width={32} height={32} />
                 </View>
             </View>
             <View style={theme.singlePostText}>
