@@ -1,32 +1,80 @@
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
-const Tab = ( { color, tab, onPress, icon } ) => {
-  return (
-      <TouchableOpacity style={ styles.container } onPress={ onPress }>
-        { tab.name === 'CreateTab' ?
-            (
-                // TODO create custom plus button component (with lottie animation?)
-                icon && <AntDesign name={ icon } size={ 30 } color={ color }
-                                   style={ styles.create }/>
+import {
+  HomeEmpty ,
+  HomeFull,
+  ExploreEmpty,
+  ExploreFull,
+  PlusButton,
+  PlusButtonSelected,
+  ProfileEmpty,
+  ProfileFull,
+  SettingsEmpty,
+  SettingsFull,
+} from "../../utils";
 
-            )
-            :
-            (
-                // TODO create custom svg icons for tabs
-                <>
-                  { icon &&
-                  <AntDesign name={ icon } size={ 20 } color={ color }/> }
-                  <Text style={ [
-                    styles.iconText,
-                    { color },
-                  ] }>{ tab.name }</Text>
-                </>
-            )
-        }
 
-      </TouchableOpacity>
-  );
+const Tab = ( { selected, tab, onPress, icon } ) => {
+
+  switch (tab.name) {
+    case 'HomeTab':
+      return (
+          <TouchableOpacity style={ styles.container } onPress={ onPress }>
+            { selected ? <HomeFull width={25} height={25} /> :
+                <HomeEmpty width={25} height={25} /> }
+            <Text style={ [
+              styles.iconText,
+              { color: selected ? '#7b08a3' : '#fff'  },
+            ] }>{ tab.name.slice(0, -3) }</Text>
+          </TouchableOpacity>
+      );
+    case 'ExploreTab':
+      return (
+          <TouchableOpacity style={ styles.container } onPress={ onPress }>
+            { selected ? <ExploreFull width={25} height={25} /> :
+                <ExploreEmpty width={25} height={25} /> }
+            <Text style={ [
+              styles.iconText,
+              { color: selected ? '#7b08a3' : '#fff'  },
+            ] }>{ tab.name.slice(0, -3) }</Text>
+          </TouchableOpacity>
+      );
+    case 'CreateTab':
+      return (
+          <TouchableOpacity style={{ bottom: 20 }} onPress={ onPress }>
+              { selected ?
+                  <PlusButtonSelected top={0} width={60} height={60} bottom={20} elevation={10} />
+                  :
+                  <PlusButton top={0} width={60} height={60} bottom={20} elevation={10} />
+              }
+          </TouchableOpacity>
+      )
+    case 'AccountTab':
+      return (
+          <TouchableOpacity style={ styles.container } onPress={ onPress }>
+            { selected ? <ProfileFull width={25} height={25} /> :
+                <ProfileEmpty width={25} height={25} /> }
+            <Text style={ [
+              styles.iconText,
+              { color: selected ? '#7b08a3' : '#fff'  },
+            ] }>{ tab.name.slice(0, -3) }</Text>
+          </TouchableOpacity>
+      );
+    case 'SettingsTab':
+      return (
+          <TouchableOpacity style={ styles.container } onPress={ onPress }>
+            { selected ? <SettingsFull width={25} height={25} /> :
+                <SettingsEmpty width={25} height={25} /> }
+            <Text style={ [
+              styles.iconText,
+              { color: selected ? '#7b08a3' : '#fff'  },
+            ] }>{ tab.name.slice(0, -3) }</Text>
+          </TouchableOpacity>
+      );
+  }
+  console.log('selected', selected);
+
 };
 
 const styles = StyleSheet.create( {
@@ -34,6 +82,7 @@ const styles = StyleSheet.create( {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 5,
+    position: 'relative',
   },
   create: {
     position: 'absolute',

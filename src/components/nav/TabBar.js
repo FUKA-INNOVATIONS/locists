@@ -9,9 +9,7 @@ const TabBar = ( { state, navigation } ) => {
   const { routes } = state;
 
   // Active/inactive color of icons
-  const renderColor = ( currentTab ) => currentTab === selected
-      ? 'white'
-      : 'grey';
+  const isSelected = ( currentTab ) => currentTab === selected;
 
   // Handles navigation on touch, ignores already selected
   const handlePress = ( activeTab, index ) => {
@@ -28,7 +26,7 @@ const TabBar = ( { state, navigation } ) => {
             tab={ route }
             icon={ route.params.icon }
             onPress={ () => handlePress( route.name, index ) }
-            color={ renderColor( route.name ) }
+            selected={ isSelected( route.name ) }
             key={ route.key }/> )
       }
     </View>
@@ -49,7 +47,7 @@ const styles = StyleSheet.create( {
     justifyContent: 'space-between',
     backgroundColor: '#24292e',
     width,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
 } );
 
