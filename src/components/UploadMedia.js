@@ -11,6 +11,7 @@ import { useState } from 'react';
 
 const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage();
+  const authStorage = useAuthStorage()
   const { createTag } = useTag();
   const { uploadMedia } = useMedia();
   const [ loading, setLoading ] = useState( false ); // eslint-disable-line
@@ -23,6 +24,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
   const onSubmit = async ( data, mediaDescription, imageSelected, image, type ) => {
     console.log('TYPE', type)
+    const token = await authStorage.getToken()
 
     mediaDescription = JSON.stringify( mediaDescription );
 
@@ -45,7 +47,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     } );
 
     // Upload media
-    const fileResponse = await uploadMedia( formData, user.token );
+    const fileResponse = await uploadMedia( formData, token );
 
     // Create new tag and associate it with uploaded media
 
@@ -66,7 +68,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
           file_id: fileResponse.file_id,
           tag,
         },
-        user.token,
+        token,
     );
     console.log( 'new tag res in onSubmit', tagResponse );
     console.log( 'upload res in onSubmit', fileResponse );

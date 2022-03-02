@@ -1,10 +1,10 @@
 import HomeList from '../components/HomeList'
 import useUser from '../hooks/useUser'
 import { useEffect, useMemo } from 'react'
-import useAuthStorage from '../hooks/useAuthStorage';
+import useAuthStorage from '../hooks/useAuthStorage'
 
 const Home = ( { navigation } ) => {
-  const authStorage = useAuthStorage();
+  const authStorage = useAuthStorage()
   const { loginWithToken } = useUser()
 
   const login = useMemo( async () => {
