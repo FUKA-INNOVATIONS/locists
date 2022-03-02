@@ -12,10 +12,12 @@ const Home = ( { navigation } ) => {
     await loginWithToken( token )
   }, [] )
 
+  console.log( 'Home.js' )
+
   useEffect( async () => {
     await login
     return navigation.addListener( 'focus', async () => {
-      console.log( 'Home.js focus' )
+      console.log( 'HomeList focus' )
       await login
     } )
   } )

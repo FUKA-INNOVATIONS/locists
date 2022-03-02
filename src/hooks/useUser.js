@@ -139,18 +139,16 @@ const useUser = () => {
       headers: { 'x-access-token': token },
     };
     try {
-      // setLoading( true );
       const user = await axios.get( URL, options );
-      // setLoading( false );
       return user.data;
     } catch ( e ) {
       console.log( e );
-      // setLoading( false );
     }
   };
 
   // Modify registered user account details
-  const modifyUser = async ( token, updateDetails ) => {
+  const modifyUser = async ( updateDetails ) => {
+    const token = await authStorage.getToken();
     console.log( 'details', updateDetails );
     const options = {
       method: 'PUT',
@@ -161,13 +159,9 @@ const useUser = () => {
       body: JSON.stringify( updateDetails ),
     };
     try {
-      // setLoading( true );
-      const response = await doFetch( baseUrl + 'users', options );
-      // setLoading( false );
-      return response;
+      return await doFetch( baseUrl + 'users', options );
     } catch ( e ) {
       console.log( 'error in modifyUser', e );
-      // setLoading( false );
     }
   };
 

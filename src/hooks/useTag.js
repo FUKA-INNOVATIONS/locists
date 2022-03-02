@@ -1,8 +1,11 @@
 import axios from 'axios'
 import { baseUrl } from '../../config'
 import doFetch from '../utils/doFetch';
+import useAuthStorage from './useAuthStorage'
 
 const useTag = () => {
+  const authStorage = useAuthStorage();
+
   const createTag = async (tagData, token) => {
     const options = {
       method: 'POST',

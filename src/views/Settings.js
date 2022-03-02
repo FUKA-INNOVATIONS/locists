@@ -48,8 +48,7 @@ const Settings = ( { navigation } ) => {
       }
 
       // TODO: token not always available after login, needs app reload
-      const token = user.token;
-      const userData = await modifyUser(token, data);
+      const userData = await modifyUser(data);
 
       const newUserState = {
         ...user,
