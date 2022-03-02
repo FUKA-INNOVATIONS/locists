@@ -1,8 +1,12 @@
 import {
-  View,
-  Text,
-  TextInput,
-  KeyboardAvoidingView, Alert, TouchableOpacity
+    View,
+    Text,
+    TextInput,
+    KeyboardAvoidingView,
+    ScrollView,
+    Alert,
+    TouchableOpacity,
+    Platform,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -106,9 +110,10 @@ const Register = ( { navigation } ) => {
   }
 
   return (
-      <KeyboardAvoidingView>
-        <View style={theme.login}>
-
+      <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ScrollView >
+            <View style={theme.register}>
           <View style={ theme.inputContainer }>
             <Controller
                 control={ control }
@@ -201,7 +206,8 @@ const Register = ( { navigation } ) => {
           <TouchableOpacity style={theme.loginButton} onPress={ handleSubmit( onSubmit ) }>
               <Text style={theme.loginButtonText}>Register</Text>
           </TouchableOpacity>
-        </View>
+            </View>
+        </ScrollView>
       </KeyboardAvoidingView>
   );
 };

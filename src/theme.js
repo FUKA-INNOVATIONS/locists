@@ -278,6 +278,13 @@ const theme = {
     fontWeight: 'bold',
     color: 'purple',
   },
+  register: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 70,
+    paddingBottom: 180,
+  },
 
   // Create Media Styles
   addImage: {
