@@ -1,5 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import {
   HomeEmpty ,

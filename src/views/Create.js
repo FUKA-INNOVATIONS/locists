@@ -1,4 +1,4 @@
-import { View, Button, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity} from 'react-native';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import theme from '../theme';
 import {useState} from "react";
