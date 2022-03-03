@@ -1,3 +1,5 @@
+import { Image } from 'react-native';
+
 export const sortLatest = (arr) => {
   return arr.sort(function(a,b){
     return Number( new Date( b.time_added ) ) - Number( new Date( a.time_added ) );
@@ -38,4 +40,15 @@ export const initCities = (arr, setArr) => {
     city => cityOptions.push( { label: city, value: city } ) )
   setArr( cityOptions )
   // console.log('cityOptions in initCities', cityOptions)
+}
+
+// TODO add icon //   icon: () => <Image source={require('./assets/icon.png')} style={styles.iconStyle} />
+export const initSearchNames = (arr, setArr) => {
+  const names = []
+  arr.map( item => names.push( item.description.name || `no-name-${Math.floor(Math.random()*(999-100+1)+100)}` ) )
+  const nameOptions = [ { label: 'No search keyword', value: 'no-search' } ]
+  names.map(
+    city => nameOptions.push( { label: city, value: city } ) )
+  setArr( nameOptions )
+  console.log('nameOptions in initSearchNames', nameOptions)
 }

@@ -144,6 +144,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           zIndex={ 2000 }
           zIndexInverse={ 2000 }
           listMode={ 'SCROLLVIEW' }
+          searchable={true}
         />
       </View>
     )

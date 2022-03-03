@@ -135,6 +135,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           zIndex={ 2000 }
           zIndexInverse={ 2000 }
           listMode={'SCROLLVIEW'}
+          searchable={true}
         />
       </View>
     )

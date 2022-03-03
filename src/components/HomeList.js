@@ -5,7 +5,7 @@ import useMedia from '../hooks/useMedia'
 import { useEffect, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { initCities } from '../utils/sortFilterHelpers'
+import { initCities, initSearchNames } from '../utils/sortFilterHelpers'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
@@ -17,7 +17,11 @@ const HomeList = ( { navigation } ) => {
 
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
   const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
-  const [ CityItems, setCityItems ] = useState( [] )
+  const [ cityItems, setCityItems ] = useState( [] )
+
+  const [ searchFilterOpen, setSearchFilterOpen ] = useState( false )
+  const [ searchFilterValue, setSearchFilterValue ] = useState( 'no-search' )
+  const [ searchItems, setSearchItems ] = useState( [] )
 
   /* const getPostsAndEvents = useMemo( async () => {
    await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
@@ -36,6 +40,7 @@ const HomeList = ( { navigation } ) => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
         initCities(mixedMedia, setCityItems)
+        initSearchNames(mixedMedia, setSearchItems)
       } )
     } )
   }, [] )
@@ -45,6 +50,7 @@ const HomeList = ( { navigation } ) => {
     getAllMedia().then( mixedMedia => {
       setActiveList( mixedMedia )
       initCities(mixedMedia, setCityItems)
+      initSearchNames(mixedMedia, setSearchItems)
     } ).then( () => {
       console.log( 'ready' )
     } )
@@ -97,13 +103,32 @@ const HomeList = ( { navigation } ) => {
         <DropDownPicker
           open={ cityFilterOpen }
           value={ cityFilterValue }
-          items={ CityItems }
+          items={ cityItems }
           setOpen={ setCityFilterOpen }
           setValue={ setCityFilterValue }
           setItems={ setCityItems }
           // onPress={ ( open ) => setSortOpen( false ) }
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
           listMode={'SCROLLVIEW'}
+          theme={'LIGHT'}
+          searchable={true}
+        />
+        <DropDownPicker
+          open={ searchFilterOpen }
+          value={ searchFilterValue }
+          items={ searchItems }
+          setOpen={ setSearchFilterOpen }
+          setValue={ setSearchFilterValue }
+          setItems={ setSearchItems }
+          // onPress={ ( open ) => setSortOpen( false ) }
+          onSelectItem={ ( item ) => filterCityHandler( item.value ) }
+          listMode={'SCROLLVIEW'}
+          theme={'LIGHT'}
+          searchable={true}
+
+          // addCustomItem={true}
+          // searchContainerStyle={{ borderBottomColor: "#dfdfdf" }}
+          // searchTextInputStyle={{ color: "#000" }}
         />
       </View>
     )
