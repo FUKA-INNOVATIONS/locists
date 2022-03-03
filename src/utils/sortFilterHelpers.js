@@ -28,6 +28,7 @@ export const sortSoonestEvents = (arr) => {
   } )
 }
 
+
 export const initCities = (arr, setArr) => {
   const cities = []
   arr.map( item => cities.push( item.description.location ) )

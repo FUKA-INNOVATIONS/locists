@@ -1,10 +1,14 @@
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { useCallback, useEffect, useState } from 'react'
 import Post from './Post'
-import sortLatest from '../utils/sortLatest'
-import sortMostCommented from '../utils/sortMostCommented'
 import DropDownPicker from 'react-native-dropdown-picker'
-import sortMostLikes from '../utils/sortMostLikes'
+
+import {
+  sortLatest,
+  sortMostCommented,
+  sortMostLikes,
+  initCities
+} from '../utils/sortFilterHelpers'
 
 const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
   // console.log( 'PostsList rendered');
@@ -34,19 +38,13 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
   const [ CityItems, setCityItems ] = useState( [] )
 
   useEffect( () => {
-    const cities = []
-    posts.map( item => cities.push( item.description.location ) )
-    const uniqueCities = [ ...new Set( cities ) ]
-    const cityOptions = [ { label: 'All locations', value: 'none' } ]
-    uniqueCities.map(
-      city => cityOptions.push( { label: city, value: city } ) )
-    setCityItems( cityOptions )
+    initCities(posts, setCityItems)
   }, [] )
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'PostsList focus' )
-      // await fetchPosts();
+      initCities(posts, setCityItems)
     } )
   }, [] )
 
@@ -54,22 +52,22 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
     sortHandler( sortValue )
   }, [ sortValue ] )
 
-  const sortHandler = (type) => {
+  const sortHandler = ( type ) => {
     switch ( type ) {
       case 'latest':
-        const latest = sortLatest( activeList) // eslint-disable-line
+        const latest = sortLatest( activeList ) // eslint-disable-line
         // console.log('latest', latest)
-        setActiveList(latest)
+        setActiveList( latest )
         break
       case 'mostCommented':
-        const mostCommented = sortMostCommented(activeList) // eslint-disable-line
+        const mostCommented = sortMostCommented( activeList ) // eslint-disable-line
         // console.log('most commented', mostCommented)
-        setActiveList(mostCommented)
+        setActiveList( mostCommented )
         break
       case 'mostLikes':
-        const mostLikes = sortMostLikes(activeList) // eslint-disable-line
+        const mostLikes = sortMostLikes( activeList ) // eslint-disable-line
         // console.log('most likes', mostLikes)
-        setActiveList(mostLikes)
+        setActiveList( mostLikes )
         break
     }
 
@@ -86,13 +84,13 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
     }
   }
 
-  const onSortOpen = useCallback(() => {
-    setCityFilterOpen(false);
-  }, []);
+  const onSortOpen = useCallback( () => {
+    setCityFilterOpen( false )
+  }, [] )
 
-  const onCityFilterOpen = useCallback(() => {
-    setSortOpen(false);
-  }, []);
+  const onCityFilterOpen = useCallback( () => {
+    setSortOpen( false )
+  }, [] )
 
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } )
@@ -109,11 +107,11 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           setValue={ setSortValue }
           setItems={ setSortItems }
           // onPress={ ( open ) => setCityFilterOpen( false ) }
-          onOpen={onSortOpen}
+          onOpen={ onSortOpen }
           onSelectItem={ ( item ) => sortHandler( item.value ) }
           // onChangeValue={ ( value ) => setSortValue(value) }
-          zIndex={3000}
-          zIndexInverse={3000}
+          zIndex={ 3000 }
+          zIndexInverse={ 3000 }
         />
 
         <DropDownPicker
@@ -124,10 +122,10 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           setValue={ setCityFilterValue }
           setItems={ setCityItems }
           // onPress={ ( open ) => setSortOpen( false ) }
-          onOpen={onCityFilterOpen}
+          onOpen={ onCityFilterOpen }
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
-          zIndex={2000}
-          zIndexInverse={2000}
+          zIndex={ 2000 }
+          zIndexInverse={ 2000 }
         />
       </>
     )

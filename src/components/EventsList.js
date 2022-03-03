@@ -2,11 +2,13 @@ import { FlatList, Pressable, Text, View } from 'react-native'
 import { useCallback, useEffect, useState } from 'react'
 import Event from './Event'
 import DropDownPicker from 'react-native-dropdown-picker'
-import sortLatest from '../utils/sortLatest'
-import sortSoonestEvents from '../utils/sortSoonestEvents'
-import sortMostCommented from '../utils/sortMostCommented'
-import sortMostAttendees from '../utils/sortMostAttendees'
-import { initCities } from '../utils/sortHelpers'
+import {
+  initCities,
+  sortLatest,
+  sortSoonestEvents,
+  sortMostCommented,
+  sortMostAttendees,
+} from '../utils/sortFilterHelpers'
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   // console.log( 'EventsList rendered'); // TODO fix too many renders
@@ -38,6 +40,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
 
   useEffect( async () => {
     // await fetchEvents().then( () => initCities( events, setCityItems ) )
+    // await fetchEvents()
     events && initCities( events, setCityItems )
   }, [] )
 

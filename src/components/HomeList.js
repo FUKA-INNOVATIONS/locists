@@ -5,7 +5,7 @@ import useMedia from '../hooks/useMedia'
 import { useEffect, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { initCities } from '../utils/sortHelpers'
+import { initCities } from '../utils/sortFilterHelpers'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
@@ -34,6 +34,7 @@ const HomeList = ( { navigation } ) => {
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
+        initCities(mixedMedia, setCityItems)
       } )
     } )
   }, [] )
