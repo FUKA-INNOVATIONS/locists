@@ -7,6 +7,7 @@ import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { locations } from '../utils/locations'
 import sortMostCommented from '../utils/sortMostCommented'
+import sortMostLikesOrAttendees from '../utils/sortMostLikesOrAttendees'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
@@ -88,7 +89,13 @@ const HomeList = ( { navigation } ) => {
   const sortMostComments = async () => {
     console.log('sort comm')
     const most = sortMostCommented(activeList)
-    console.log('most commented', most)
+    // console.log('most commented', most)
+  }
+
+  const sortMostLikesAttendees = () => {
+    console.log('sort likes attendees')
+    const sorted = sortMostLikesOrAttendees(activeList)
+    console.log('most ikes attendees', sorted)
   }
 
   const ListHeader = () => {
@@ -100,6 +107,7 @@ const HomeList = ( { navigation } ) => {
       } }>
         <Button title={ 'Latest' } onPress={ sortLatest } />
         <Button title={ 'most comments' } onPress={ sortMostComments } />
+        <Button title={ 'most likes / attendees' } onPress={ sortMostLikesAttendees } />
 
         {/* <DropDownPicker
           open={ cityFilterOpen }
