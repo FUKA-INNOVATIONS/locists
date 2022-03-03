@@ -56,7 +56,6 @@ const useMedia = () => {
     for ( let i = 0; i < idEvents.length; i++ ) {
       let event = await getMediaById( idEvents[ i ], true ) // eslint-disable-line
       event.description.isOwner = ( event.user_id === user.user_id )
-      console.log('OOOO', (event.user_id === user.user_id))
 
       // Set owner avatar url
       event.description.ownerAvatar = await fetchAvatar( event.user_id )

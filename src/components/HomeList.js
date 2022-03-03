@@ -49,7 +49,7 @@ const HomeList = ( { navigation } ) => {
       console.log( 'HomeList.js focus' )
       await getPostsAndEvents
     } )
-  }, [] )
+  }, [sortValue, cityFilterValue] )
 
   useEffect( async () => {
     setLoading( true )
