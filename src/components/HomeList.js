@@ -1,8 +1,8 @@
-import { FlatList, Pressable, View, Text, Button } from 'react-native'
+import { FlatList, Pressable, View, Text } from 'react-native'
 import Post from './Post'
 import Event from './Event'
 import useMedia from '../hooks/useMedia'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
 

@@ -28,7 +28,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     { label: 'Freshest events', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
     { label: 'Most attendees', value: 'mostAttendees' },
-    { label: 'Upcoming', value: 'soonest' },
+    { label: 'Upcoming (disabled)', value: 'soonest' },
   ] )
 
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
