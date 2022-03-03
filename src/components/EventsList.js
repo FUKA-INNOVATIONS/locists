@@ -1,12 +1,11 @@
 import { FlatList, Pressable, Text, View } from 'react-native'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Event from './Event'
 import DropDownPicker from 'react-native-dropdown-picker'
 import sortLatest from '../utils/sortLatest'
 import sortSoonestEvents from '../utils/sortSoonestEvents'
 import sortMostCommented from '../utils/sortMostCommented'
-import sortMostLikesOrAttendees from '../utils/sortMostLikesOrAttendees'
-import { locations } from '../utils/locations'
+import sortMostAttendees from '../utils/sortMostAttendees'
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   // console.log( 'EventsList rendered'); // TODO fix too many renders
@@ -26,13 +25,27 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   const [ sortOpen, setSortOpen ] = useState( false )
   const [ sortValue, setSortValue ] = useState( 'latest' )
   const [ sortItems, setSortItems ] = useState( [
-    { label: 'Latest added', value: 'latest' },
+    { label: 'Freshest events', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
     { label: 'Most attendees', value: 'mostAttendees' },
     { label: 'Upcoming', value: 'soonest' },
   ] )
 
+  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
+  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ CityItems, setCityItems ] = useState( [] )
 
+  useEffect( () => {
+    const cities = []
+    events.map( item => cities.push( item.description.location ) )
+    const uniqueCities = [ ...new Set( cities ) ]
+    console.log( 'cities', cities.length )
+    console.log( 'cities unique', uniqueCities.length )
+    const cityOptions = [ { label: 'All locations', value: 'none' } ]
+    uniqueCities.map(
+      city => cityOptions.push( { label: city, value: city } ) )
+    setCityItems( cityOptions )
+  }, [] )
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
@@ -67,13 +80,32 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
         setActiveList( mostCommented )
         break
       case 'mostAttendees':
-        const mostAttendees = sortMostLikesOrAttendees( activeList ) // eslint-disable-line
+        const mostAttendees = sortMostAttendees( activeList ) // eslint-disable-line
         // console.log('most attendees', mostAttendees)
         setActiveList( mostAttendees )
         break
     }
 
   }
+
+  const filterCityHandler = ( city ) => {
+    console.log( city )
+    if ( city === 'none' ) {
+      setActiveList( events )
+    } else {
+      const filter = events.filter(
+        item => item.description.location === city )
+      setActiveList( filter )
+    }
+  }
+
+  const onSortOpen = useCallback(() => {
+    setCityFilterOpen(false);
+  }, []);
+
+  const onCityFilterOpen = useCallback(() => {
+    setSortOpen(false);
+  }, []);
 
   const ListHeader = () => {
     return (
@@ -86,8 +118,25 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           setValue={ setSortValue }
           setItems={ setSortItems }
           // onPress={ ( open ) => setCityFilterOpen( false ) }
+          onOpen={onSortOpen}
           onSelectItem={ ( item ) => sortHandler( item.value ) }
           // onChangeValue={ ( value ) => setSortValue(value) }
+          zIndex={3000}
+          zIndexInverse={3000}
+        />
+
+        <DropDownPicker
+          open={ cityFilterOpen }
+          value={ cityFilterValue }
+          items={ CityItems }
+          setOpen={ setCityFilterOpen }
+          setValue={ setCityFilterValue }
+          setItems={ setCityItems }
+          // onPress={ ( open ) => setSortOpen( false ) }
+          onOpen={onCityFilterOpen}
+          onSelectItem={ ( item ) => filterCityHandler( item.value ) }
+          zIndex={2000}
+          zIndexInverse={2000}
         />
       </>
     )

@@ -108,8 +108,6 @@ const HomeList = ( { navigation } ) => {
           // onPress={ ( open ) => setSortOpen( false ) }
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
         />
-
-
       </View>
     )
   }
