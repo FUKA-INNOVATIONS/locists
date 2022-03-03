@@ -5,20 +5,22 @@ import useMedia from '../hooks/useMedia'
 import { useEffect, useMemo, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { locations } from '../utils/locations'
-import sortMostCommented from '../utils/sortMostCommented'
-import sortMostLikesOrAttendees from '../utils/sortMostLikesOrAttendees'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
   // TODO: fix with focus listener
   const [ loading, setLoading ] = useState( false )
 
+  const [ mixedMedia, setMixedMedia ] = useState( [] )
   const [ activeList, setActiveList ] = useState( [] )
 
-  const getPostsAndEvents = useMemo( async () => {
-    await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
-  }, [] )
+  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
+  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ CityItems, setCityItems ] = useState( [] )
+
+  /* const getPostsAndEvents = useMemo( async () => {
+   await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
+   }, [] ) */
 
   // TODO: fix rendering : as many renders as amount of items
   // TODO: dont fetch all files at once
@@ -28,13 +30,29 @@ const HomeList = ( { navigation } ) => {
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'HomeList.js focus' )
-      await getPostsAndEvents
+      getAllMedia().then( mixedMedia => {
+        setActiveList( mixedMedia )
+        setMixedMedia( mixedMedia )
+      } )
     } )
   }, [] )
 
-  useEffect( async () => {
+  useEffect( () => {
     setLoading( true )
-    await getPostsAndEvents
+    getAllMedia().then( mixedMedia => {
+      setActiveList( mixedMedia )
+      const cities = []
+      mixedMedia.map( item => cities.push( item.description.location ) )
+      const uniqueCities = [ ...new Set( cities ) ]
+      console.log( 'cities', cities.length )
+      console.log( 'cities unique', uniqueCities.length )
+      const cityOptions = [{label: 'All locations', value: 'none'}]
+      uniqueCities.map(
+        city => cityOptions.push( { label: city, value: city } ) )
+      setCityItems( cityOptions )
+    } ).then( () => {
+      console.log( 'ready' )
+    } )
     setLoading( false )
   }, [] )
 
@@ -57,6 +75,20 @@ const HomeList = ( { navigation } ) => {
     navigation.navigate( 'SinglePostHomeStack', { postId: postId } )
   }
 
+  const filterCityHandler = ( city ) => {
+    console.log( city )
+    if ( city === 'none' ) {
+      getAllMedia().then( mixedMedia => {
+        setActiveList( mixedMedia )
+        setMixedMedia(mixedMedia)
+      } )
+    } else {
+      const filter = mixedMedia.filter(
+        item => item.description.location === city )
+      setActiveList( filter )
+    }
+  }
+
   const EmptyListMessage = () => <Text>No events </Text>
 
   const ListHeader = () => {
@@ -66,23 +98,17 @@ const HomeList = ( { navigation } ) => {
         justifyContent: 'center',
 
       } }>
-        {/* <DropDownPicker
+        <DropDownPicker
           open={ cityFilterOpen }
           value={ cityFilterValue }
           items={ CityItems }
           setOpen={ setCityFilterOpen }
           setValue={ setCityFilterValue }
           setItems={ setCityItems }
-        /> */}
+          // onPress={ ( open ) => setSortOpen( false ) }
+          onSelectItem={ ( item ) => filterCityHandler( item.value ) }
+        />
 
-        {/* <DropDownPicker
-          open={ sortOpen }
-          value={ sortValue }
-          items={ sortItems }
-          setOpen={ setSortOpen }
-          setValue={ setSortValue }
-          setItems={ setSortItems }
-        /> */}
 
       </View>
     )

@@ -21,7 +21,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     )
   }
 
-  const [activeList, setActiveList] = useState(events)
+  const [ activeList, setActiveList ] = useState( events )
 
   const [ sortOpen, setSortOpen ] = useState( false )
   const [ sortValue, setSortValue ] = useState( 'latest' )
@@ -32,9 +32,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     { label: 'Upcoming', value: 'soonest' },
   ] )
 
-  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
-  const [ cityFilterValue, setCityFilterValue ] = useState( null )
-  const [ CityItems, setCityItems ] = useState( locations )
+
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
@@ -43,36 +41,35 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     } )
   }, [] )
 
-  useEffect(() => {
-    sortHandler(sortValue)
-  }, [sortValue])
+  useEffect( () => {
+    sortHandler( sortValue )
+  }, [ sortValue ] )
 
   const eventPressHandler = ( eventId ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } )
   }
 
-
-  const sortHandler = (type) => {
+  const sortHandler = ( type ) => {
     switch ( type ) {
       case 'latest':
-        const latest = sortLatest(activeList) // eslint-disable-line
+        const latest = sortLatest( activeList ) // eslint-disable-line
         // console.log('latest', latest)
-        setActiveList(latest)
+        setActiveList( latest )
         break
       case 'soonest': // TODO fix soonest result
-        const soonest = sortSoonestEvents(activeList) // eslint-disable-line
+        const soonest = sortSoonestEvents( activeList ) // eslint-disable-line
         // console.log('soonest', soonest)
-        setActiveList(soonest)
+        setActiveList( soonest )
         break
       case 'mostCommented':
-        const mostCommented = sortMostCommented(activeList) // eslint-disable-line
+        const mostCommented = sortMostCommented( activeList ) // eslint-disable-line
         // console.log('most commented', mostCommented)
-        setActiveList(mostCommented)
+        setActiveList( mostCommented )
         break
       case 'mostAttendees':
-        const mostAttendees = sortMostLikesOrAttendees(activeList) // eslint-disable-line
+        const mostAttendees = sortMostLikesOrAttendees( activeList ) // eslint-disable-line
         // console.log('most attendees', mostAttendees)
-        setActiveList(mostAttendees)
+        setActiveList( mostAttendees )
         break
     }
 
@@ -80,17 +77,19 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
 
   const ListHeader = () => {
     return (
-      <DropDownPicker
-        open={ sortOpen }
-        value={ sortValue }
-        items={ sortItems }
-        setOpen={ setSortOpen }
-        setValue={ setSortValue }
-        setItems={ setSortItems }
-        // onPress={ ( open ) => console.log( 'Sort picker open?', open ) }
-        onSelectItem={ ( item ) => sortHandler(item.value) }
-        // onChangeValue={ ( value ) => setSortValue(value) }
-      />
+      <>
+        <DropDownPicker
+          open={ sortOpen }
+          value={ sortValue }
+          items={ sortItems }
+          setOpen={ setSortOpen }
+          setValue={ setSortValue }
+          setItems={ setSortItems }
+          // onPress={ ( open ) => setCityFilterOpen( false ) }
+          onSelectItem={ ( item ) => sortHandler( item.value ) }
+          // onChangeValue={ ( value ) => setSortValue(value) }
+        />
+      </>
     )
   }
 
