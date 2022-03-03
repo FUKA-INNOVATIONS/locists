@@ -5,6 +5,7 @@ import useMedia from '../hooks/useMedia'
 import { useEffect, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
+import { initCities } from '../utils/sortHelpers'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
@@ -41,15 +42,7 @@ const HomeList = ( { navigation } ) => {
     setLoading( true )
     getAllMedia().then( mixedMedia => {
       setActiveList( mixedMedia )
-      const cities = []
-      mixedMedia.map( item => cities.push( item.description.location ) )
-      const uniqueCities = [ ...new Set( cities ) ]
-      console.log( 'cities', cities.length )
-      console.log( 'cities unique', uniqueCities.length )
-      const cityOptions = [{label: 'All locations', value: 'none'}]
-      uniqueCities.map(
-        city => cityOptions.push( { label: city, value: city } ) )
-      setCityItems( cityOptions )
+      initCities(mixedMedia, setCityItems)
     } ).then( () => {
       console.log( 'ready' )
     } )
@@ -80,7 +73,7 @@ const HomeList = ( { navigation } ) => {
     if ( city === 'none' ) {
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
-        setMixedMedia(mixedMedia)
+        setMixedMedia( mixedMedia )
       } )
     } else {
       const filter = mixedMedia.filter(

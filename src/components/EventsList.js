@@ -6,6 +6,7 @@ import sortLatest from '../utils/sortLatest'
 import sortSoonestEvents from '../utils/sortSoonestEvents'
 import sortMostCommented from '../utils/sortMostCommented'
 import sortMostAttendees from '../utils/sortMostAttendees'
+import { initCities } from '../utils/sortHelpers'
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   // console.log( 'EventsList rendered'); // TODO fix too many renders
@@ -35,22 +36,16 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   const [ cityFilterValue, setCityFilterValue ] = useState( null )
   const [ CityItems, setCityItems ] = useState( [] )
 
-  useEffect( () => {
-    const cities = []
-    events.map( item => cities.push( item.description.location ) )
-    const uniqueCities = [ ...new Set( cities ) ]
-    console.log( 'cities', cities.length )
-    console.log( 'cities unique', uniqueCities.length )
-    const cityOptions = [ { label: 'All locations', value: 'none' } ]
-    uniqueCities.map(
-      city => cityOptions.push( { label: city, value: city } ) )
-    setCityItems( cityOptions )
+  useEffect( async () => {
+    // await fetchEvents().then( () => initCities( events, setCityItems ) )
+    events && initCities( events, setCityItems )
   }, [] )
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'EventsList focus' )
-      // await fetchEvents()
+      // await fetchEvents().then( () => initCities( events, setCityItems ) )
+      events && initCities( events, setCityItems )
     } )
   }, [] )
 
@@ -99,13 +94,13 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     }
   }
 
-  const onSortOpen = useCallback(() => {
-    setCityFilterOpen(false);
-  }, []);
+  const onSortOpen = useCallback( () => {
+    setCityFilterOpen( false )
+  }, [] )
 
-  const onCityFilterOpen = useCallback(() => {
-    setSortOpen(false);
-  }, []);
+  const onCityFilterOpen = useCallback( () => {
+    setSortOpen( false )
+  }, [] )
 
   const ListHeader = () => {
     return (
@@ -118,11 +113,11 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           setValue={ setSortValue }
           setItems={ setSortItems }
           // onPress={ ( open ) => setCityFilterOpen( false ) }
-          onOpen={onSortOpen}
+          onOpen={ onSortOpen }
           onSelectItem={ ( item ) => sortHandler( item.value ) }
           // onChangeValue={ ( value ) => setSortValue(value) }
-          zIndex={3000}
-          zIndexInverse={3000}
+          zIndex={ 3000 }
+          zIndexInverse={ 3000 }
         />
 
         <DropDownPicker
@@ -133,10 +128,10 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           setValue={ setCityFilterValue }
           setItems={ setCityItems }
           // onPress={ ( open ) => setSortOpen( false ) }
-          onOpen={onCityFilterOpen}
+          onOpen={ onCityFilterOpen }
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
-          zIndex={2000}
-          zIndexInverse={2000}
+          zIndex={ 2000 }
+          zIndexInverse={ 2000 }
         />
       </>
     )
