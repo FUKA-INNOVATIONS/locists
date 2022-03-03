@@ -4,22 +4,42 @@ import Event from './Event'
 import useMedia from '../hooks/useMedia'
 import { useEffect, useMemo, useState } from 'react'
 import theme from '../theme'
+import DropDownPicker from 'react-native-dropdown-picker'
+import { locations } from '../utils/locations'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
   // TODO: fix with focus listener
   const [ loading, setLoading ] = useState( false )
-  const [ all, setAll ] = useState( [] )
+
+  const [ activeList, setActiveList ] = useState( [] )
+  // const [ cityFilter, setCityFilter ] = useState( null )
+  // const [ sort, setSort ] = useState( 'latest' )
+
+  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
+  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ CityItems, setCityItems ] = useState( locations )
+
+  const [sortOpen, setSortOpen] = useState(false);
+  const [sortValue, setSortValue] = useState('latest');
+  const [sortItems, setSortItems] = useState([
+    {label: 'Latest', value: 'latest'},
+    {label: 'Most commented', value: 'mostCommented'},
+    {label: 'Popularity', value: 'popular'}
+  ]);
+
+  // console.log('cityFilterValue: ', cityFilterValue)
+  console.log('sortValue: ', sortValue)
+
 
   const getPostsAndEvents = useMemo( async () => {
-    await getAllMedia().then( mixedMedia => setAll( mixedMedia ) )
+    await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
   }, [] )
 
   // TODO: fix rendering
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}
   // No good solutions with the api available, considering the way we use the api
-
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
@@ -72,13 +92,32 @@ const HomeList = ( { navigation } ) => {
       } }>
         <Button title={ 'Latest' } onPress={ sortLatest } />
         <Button title={ 'Posts First' } onPress={ sortPostsFirst } />
+
+        {/* <DropDownPicker
+          open={ cityFilterOpen }
+          value={ cityFilterValue }
+          items={ CityItems }
+          setOpen={ setCityFilterOpen }
+          setValue={ setCityFilterValue }
+          setItems={ setCityItems }
+        /> */}
+
+        <DropDownPicker
+          open={ sortOpen }
+          value={ sortValue }
+          items={ sortItems }
+          setOpen={ setSortOpen }
+          setValue={ setSortValue }
+          setItems={ setSortItems }
+        />
+
       </View>
     )
   }
 
   return (
     <FlatList
-      data={ all }
+      data={ activeList }
       ListHeaderComponent={ <ListHeader /> }
       stickyHeaderIndices={ [ 0 ] }
       ListEmptyComponent={ EmptyListMessage }
