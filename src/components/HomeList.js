@@ -16,7 +16,7 @@ const HomeList = ( { navigation } ) => {
   const [ activeList, setActiveList ] = useState( [] )
 
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
-  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ CityItems, setCityItems ] = useState( [] )
 
   /* const getPostsAndEvents = useMemo( async () => {
@@ -89,8 +89,9 @@ const HomeList = ( { navigation } ) => {
   const ListHeader = () => {
     return (
       <View style={ {
-        backgroundColor: theme.colors.mainBackground,
+        backgroundColor: theme.colors.backgroundColor,
         justifyContent: 'center',
+        padding: 10
 
       } }>
         <DropDownPicker

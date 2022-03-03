@@ -9,6 +9,7 @@ import {
   sortMostLikes,
   initCities
 } from '../utils/sortFilterHelpers'
+import theme from '../theme'
 
 const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
   // console.log( 'PostsList rendered');
@@ -34,7 +35,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
   ] )
 
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
-  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ CityItems, setCityItems ] = useState( [] )
 
   useEffect( () => {
@@ -98,7 +99,12 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
 
   const ListHeader = () => {
     return (
-      <>
+      <View style={ {
+        backgroundColor: theme.colors.backgroundColor,
+        justifyContent: 'center',
+        padding: 10,
+      } }
+      >
         <DropDownPicker
           loading={loading}
           open={ sortOpen }
@@ -130,7 +136,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           zIndexInverse={ 2000 }
           listMode={'SCROLLVIEW'}
         />
-      </>
+      </View>
     )
   }
 

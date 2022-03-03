@@ -9,6 +9,7 @@ import {
   sortMostCommented,
   sortMostAttendees,
 } from '../utils/sortFilterHelpers'
+import theme from '../theme'
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   // console.log( 'EventsList rendered'); // TODO fix too many renders
@@ -35,7 +36,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   ] )
 
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
-  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ CityItems, setCityItems ] = useState( [] )
 
   useEffect( async () => {
@@ -107,9 +108,14 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
 
   const ListHeader = () => {
     return (
-      <>
+      <View style={ {
+        backgroundColor: theme.colors.backgroundColor,
+        justifyContent: 'center',
+        padding: 10,
+      } }
+      >
         <DropDownPicker
-          loading={loading}
+          loading={ loading }
           open={ sortOpen }
           value={ sortValue }
           items={ sortItems }
@@ -125,7 +131,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
         />
 
         <DropDownPicker
-          loading={loading}
+          loading={ loading }
           open={ cityFilterOpen }
           value={ cityFilterValue }
           items={ CityItems }
@@ -137,9 +143,9 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
           zIndex={ 2000 }
           zIndexInverse={ 2000 }
-          listMode={'SCROLLVIEW'}
+          listMode={ 'SCROLLVIEW' }
         />
-      </>
+      </View>
     )
   }
 
