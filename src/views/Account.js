@@ -10,20 +10,12 @@ import Event from "../components/Event";
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage();
-  const authStorage = useAuthStorage();
-  const [ update, setUpdate ] = useState( false ); // eslint-disable-line
   const { getCurrentUserComments } = useComment();
   const [ comments, setComments ] = useState([]);
   const { getUserMedia, userMedia} = useMedia();
   const [ loading, setLoading ] = useState( false );
 
   getCurrentUserComments().then( comments => setComments( comments ) );
-
-  const logoutHandler = async () => {
-    await authStorage.logout();
-    user.isLogged && navigation.navigate( 'AccountTab', { Screen: 'Account' } );
-    // setUpdate( true );
-  };
 
     const getMediaForUser = useMemo( async () => {
         await getUserMedia( user.token )
@@ -32,7 +24,6 @@ const Account = ( { navigation } ) => {
   /*  If user is logged in
    *   Hide Authentication view and move to Account view
    * */
-
 
     useEffect( async () => {
         setLoading( true );
@@ -66,12 +57,7 @@ const Account = ( { navigation } ) => {
                   </View>
               </View>
 
-              <Button title={'Modify your account details'} onPress={() => navigation.navigate('ModifyAccount')} />
-
               <Text style={{color: '#fff'}}>User status: { user.isLogged && 'logged in' }</Text>
-              <TouchableOpacity style={theme.generalBtn} onPress={ logoutHandler }>
-                  <Text style={theme.loginButtonText}>Log Out</Text>
-              </TouchableOpacity>
               <Text style={{color: '#fff'}}>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
               <FlatList
                   data={ userMedia }

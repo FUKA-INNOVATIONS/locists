@@ -350,6 +350,24 @@ const theme = {
     backgroundColor: '#E9D6DB',
     justifyContent: 'space-between',
   },
+
+  // Settings Page Styles
+  settingsPage: {
+    height: height * 0.7,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  settingsBtn: {
+    marginVertical: 20,
+    width: width * 0.6,
+  },
+  logoutBtn: {
+    position: 'absolute',
+    bottom: 0,
+  },
+
+
 }
 
 export default theme;
