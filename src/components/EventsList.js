@@ -25,7 +25,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   const [ sortOpen, setSortOpen ] = useState( false )
   const [ sortValue, setSortValue ] = useState( 'latest' )
   const [ sortItems, setSortItems ] = useState( [
-    { label: 'Latest', value: 'latest' },
+    { label: 'Latest added', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
     { label: 'Most attendees', value: 'mostAttendees' },
     { label: 'Upcoming', value: 'soonest' },
@@ -50,25 +50,25 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   }, [sortValue])
 
   const sortHandler = (type) => {
-    const latest = sortLatest(activeList)
-    const soonest = sortSoonestEvents(activeList)
-    const mostCommented = sortMostCommented(activeList)
-    const mostAttendees = sortMostLikesOrAttendees(activeList)
     switch ( type ) {
       case 'latest':
-        console.log('latest', latest)
+        const latest = sortLatest(activeList) // eslint-disable-line
+        // console.log('latest', latest)
         setActiveList(latest)
         break
-      case 'soonest':
+      case 'soonest': // TODO fix soonest result
+        const soonest = sortSoonestEvents(activeList) // eslint-disable-line
         // console.log('soonest', soonest)
         setActiveList(soonest)
         break
       case 'mostCommented':
+        const mostCommented = sortMostCommented(activeList) // eslint-disable-line
         // console.log('most commented', mostCommented)
         setActiveList(mostCommented)
         break
       case 'mostAttendees':
-        // console.log('most attendees', mostAttendees)
+        const mostAttendees = sortMostLikesOrAttendees(activeList) // eslint-disable-line
+        console.log('most attendees', mostAttendees)
         setActiveList(mostAttendees)
         break
     }
