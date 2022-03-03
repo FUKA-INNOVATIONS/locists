@@ -37,7 +37,7 @@ const useMedia = () => {
 
     switch ( filter ) {
 
-      case 'latest':
+      case 'lates t':
         return sortLatest( mixed )
       case 'postsFirst':
         return [ ...posts, ...events ]
