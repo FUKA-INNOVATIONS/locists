@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { locations } from '../utils/locations'
+import sortMostCommented from '../utils/sortMostCommented'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
@@ -84,8 +85,10 @@ const HomeList = ( { navigation } ) => {
     setActiveList(sortedList)
   }
 
-  const sortPostsFirst = async () => {
-    await getAllMedia( 'postsFirst' ).then( sortedList => setActiveList( sortedList ) )
+  const sortMostComments = async () => {
+    console.log('sort comm')
+    const most = sortMostCommented(activeList)
+    console.log('most commented', most)
   }
 
   const ListHeader = () => {
@@ -96,7 +99,7 @@ const HomeList = ( { navigation } ) => {
 
       } }>
         <Button title={ 'Latest' } onPress={ sortLatest } />
-        <Button title={ 'Posts First' } onPress={ sortPostsFirst } />
+        <Button title={ 'most comments' } onPress={ sortMostComments } />
 
         {/* <DropDownPicker
           open={ cityFilterOpen }
