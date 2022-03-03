@@ -32,6 +32,7 @@ const HomeList = ( { navigation } ) => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'HomeList.js focus' )
       getAllMedia().then( mixedMedia => {
+        // mixedMedia.map(m => console.log(m.description))
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
         initCities(mixedMedia, setCityItems)
@@ -101,6 +102,7 @@ const HomeList = ( { navigation } ) => {
           setItems={ setCityItems }
           // onPress={ ( open ) => setSortOpen( false ) }
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
+          listMode={'SCROLLVIEW'}
         />
       </View>
     )
