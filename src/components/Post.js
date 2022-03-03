@@ -35,7 +35,7 @@ const Post = ( { postMedia, ownProfile } ) => {
               source={ { uri: uploadsUrl + postMedia.filename } }
               style={ theme.postImage }
           />
-          }*/ }
+          } */ }
           <View style={ theme.postInfo }>
             <View style={ theme.postText }>
               <Text>{ postMedia.description.description }</Text>
