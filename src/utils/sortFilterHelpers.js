@@ -37,5 +37,5 @@ export const initCities = (arr, setArr) => {
   uniqueCities.map(
     city => cityOptions.push( { label: city, value: city } ) )
   setArr( cityOptions )
-  console.log('cityOptions in initCities', cityOptions)
+  // console.log('cityOptions in initCities', cityOptions)
 }

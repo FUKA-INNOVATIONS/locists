@@ -109,6 +109,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     return (
       <>
         <DropDownPicker
+          loading={loading}
           open={ sortOpen }
           value={ sortValue }
           items={ sortItems }
@@ -124,6 +125,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
         />
 
         <DropDownPicker
+          loading={loading}
           open={ cityFilterOpen }
           value={ cityFilterValue }
           items={ CityItems }

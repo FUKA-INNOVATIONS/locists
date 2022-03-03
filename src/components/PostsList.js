@@ -100,6 +100,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
     return (
       <>
         <DropDownPicker
+          loading={loading}
           open={ sortOpen }
           value={ sortValue }
           items={ sortItems }
@@ -115,6 +116,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
         />
 
         <DropDownPicker
+          loading={loading}
           open={ cityFilterOpen }
           value={ cityFilterValue }
           items={ CityItems }
