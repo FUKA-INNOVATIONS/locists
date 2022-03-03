@@ -29,14 +29,15 @@ const HomeList = ( { navigation } ) => {
   ]);
 
   // console.log('cityFilterValue: ', cityFilterValue)
-  console.log('sortValue: ', sortValue)
+  // console.log('sortValue: ', sortValue)
+
 
 
   const getPostsAndEvents = useMemo( async () => {
     await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
   }, [] )
 
-  // TODO: fix rendering
+  // TODO: fix rendering : as many renders as amount of items
   // TODO: dont fetch all files at once
   // onEndReached={this.onScrollHandler} , onEndThreshold={0}
   // No good solutions with the api available, considering the way we use the api
@@ -75,12 +76,16 @@ const HomeList = ( { navigation } ) => {
 
   const EmptyListMessage = () => <Text>No events </Text>
 
-  const sortLatest = async () => {
-    await getAllMedia( 'latest' ).then( sortedList => setAll( sortedList ) )
+  const sortLatest = () => {
+    console.log('sort latest')
+    const sortedList = activeList.sort(function(a,b){
+      return Number( new Date( b.time_added ) ) - Number( new Date( a.time_added ) );
+    } )
+    setActiveList(sortedList)
   }
 
   const sortPostsFirst = async () => {
-    await getAllMedia( 'postsFirst' ).then( sortedList => setAll( sortedList ) )
+    await getAllMedia( 'postsFirst' ).then( sortedList => setActiveList( sortedList ) )
   }
 
   const ListHeader = () => {
@@ -102,14 +107,14 @@ const HomeList = ( { navigation } ) => {
           setItems={ setCityItems }
         /> */}
 
-        <DropDownPicker
+        {/* <DropDownPicker
           open={ sortOpen }
           value={ sortValue }
           items={ sortItems }
           setOpen={ setSortOpen }
           setValue={ setSortValue }
           setItems={ setSortItems }
-        />
+        /> */}
 
       </View>
     )
