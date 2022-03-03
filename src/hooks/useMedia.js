@@ -6,6 +6,7 @@ import useAuthStorage from './useAuthStorage'
 import fetchAvatar from '../utils/fetchAvatar'
 import sortLatest from '../utils/sortLatest'
 import useComment from './useComment'
+import useFavourite from './useFavourite'
 
 const useMedia = () => {
   // TODO: get token here, not in views, fix
@@ -18,6 +19,7 @@ const useMedia = () => {
   const [ userMedia, setUserMedia ] = useState()
 
   const { getMediaComments } = useComment()
+  const { getMediaFavourites } = useFavourite()
 
   const getAllMedia = async ( filter = null ) => {
 
@@ -57,18 +59,21 @@ const useMedia = () => {
       // Set owner avatar url
       event.description.ownerAvatar = await fetchAvatar( event.user_id )
 
-      // Set comments count
-      event.description.commentsCount = await getMediaComments(event.file_id).then(e => e.length);
-      console.log('commentsCount', event.description)
+      // Set comments count for sorting
+      event.description.commentsCount = await getMediaComments( event.file_id ).
+        then( e => e.length )
+
+      // Set attendees count for sorting
+      event.description.attendeesCount = await getMediaFavourites( event.file_id ).
+        then( favs => favs.length )
 
       // Set internal id for list opt
-
+      event.eventId = i + 1
 
       eventArr.push( event )
     }
     setEvents( eventArr )
     setLoading( false )
-    // console.log('EEE', eventArr)
     return eventArr
   }
 
@@ -83,6 +88,18 @@ const useMedia = () => {
 
       // Set owner avatar url
       post.description.ownerAvatar = await fetchAvatar( post.user_id )
+
+      // Set comments count for sorting
+      post.description.commentsCount = await getMediaComments( post.file_id ).
+        then( e => e.length )
+
+      // Set attendees count for sorting
+      post.description.likesCount = await getMediaFavourites( post.file_id ).
+        then( likes => likes.length )
+
+      // Set internal id for list opt
+      post.postId = i + 1
+
       postArr.push( post )
     }
     setPosts( postArr )
