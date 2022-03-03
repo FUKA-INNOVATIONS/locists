@@ -10,6 +10,8 @@ import AddComment from '../../assets/icons/AddComment.svg';
 
 const Post = ( { postMedia, ownProfile } ) => {
 
+  console.log(postMedia)
+
   return (
       <>
           {
@@ -28,7 +30,7 @@ const Post = ( { postMedia, ownProfile } ) => {
           }
           { postMedia.filename &&
           <Image
-              source={ { uri: uploadsUrl + postMedia.filename } }
+              source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
               style={ theme.postImage }
           />
           }

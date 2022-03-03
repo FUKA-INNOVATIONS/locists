@@ -15,25 +15,6 @@ const HomeList = ( { navigation } ) => {
   const [ loading, setLoading ] = useState( false )
 
   const [ activeList, setActiveList ] = useState( [] )
-  // const [ cityFilter, setCityFilter ] = useState( null )
-  // const [ sort, setSort ] = useState( 'latest' )
-
-  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
-  const [ cityFilterValue, setCityFilterValue ] = useState( null )
-  const [ CityItems, setCityItems ] = useState( locations )
-
-  const [sortOpen, setSortOpen] = useState(false);
-  const [sortValue, setSortValue] = useState('latest');
-  const [sortItems, setSortItems] = useState([
-    {label: 'Latest', value: 'latest'},
-    {label: 'Most commented', value: 'mostCommented'},
-    {label: 'Popularity', value: 'popular'}
-  ]);
-
-  // console.log('cityFilterValue: ', cityFilterValue)
-  // console.log('sortValue: ', sortValue)
-
-
 
   const getPostsAndEvents = useMemo( async () => {
     await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
@@ -49,7 +30,7 @@ const HomeList = ( { navigation } ) => {
       console.log( 'HomeList.js focus' )
       await getPostsAndEvents
     } )
-  }, [sortValue, cityFilterValue] )
+  }, [] )
 
   useEffect( async () => {
     setLoading( true )
@@ -78,26 +59,6 @@ const HomeList = ( { navigation } ) => {
 
   const EmptyListMessage = () => <Text>No events </Text>
 
-  const sortLatest = () => {
-    console.log('sort latest')
-    const sortedList = activeList.sort(function(a,b){
-      return Number( new Date( b.time_added ) ) - Number( new Date( a.time_added ) );
-    } )
-    setActiveList(sortedList)
-  }
-
-  const sortMostComments = async () => {
-    console.log('sort comm')
-    const most = sortMostCommented(activeList)
-    // console.log('most commented', most)
-  }
-
-  const sortMostLikesAttendees = () => {
-    console.log('sort likes attendees')
-    const sorted = sortMostLikesOrAttendees(activeList)
-    console.log('most ikes attendees', sorted)
-  }
-
   const ListHeader = () => {
     return (
       <View style={ {
@@ -105,10 +66,6 @@ const HomeList = ( { navigation } ) => {
         justifyContent: 'center',
 
       } }>
-        <Button title={ 'Latest' } onPress={ sortLatest } />
-        <Button title={ 'most comments' } onPress={ sortMostComments } />
-        <Button title={ 'most likes / attendees' } onPress={ sortMostLikesAttendees } />
-
         {/* <DropDownPicker
           open={ cityFilterOpen }
           value={ cityFilterValue }

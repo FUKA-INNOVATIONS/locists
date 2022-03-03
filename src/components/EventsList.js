@@ -1,4 +1,4 @@
-import { Button, FlatList, Pressable, Text, View } from 'react-native'
+import { FlatList, Pressable, Text, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import Event from './Event'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -6,6 +6,7 @@ import sortLatest from '../utils/sortLatest'
 import sortSoonestEvents from '../utils/sortSoonestEvents'
 import sortMostCommented from '../utils/sortMostCommented'
 import sortMostLikesOrAttendees from '../utils/sortMostLikesOrAttendees'
+import { locations } from '../utils/locations'
 
 const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
   // console.log( 'EventsList rendered'); // TODO fix too many renders
@@ -31,6 +32,10 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     { label: 'Upcoming', value: 'soonest' },
   ] )
 
+  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
+  const [ cityFilterValue, setCityFilterValue ] = useState( null )
+  const [ CityItems, setCityItems ] = useState( locations )
+
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'EventsList focus' )
@@ -38,16 +43,14 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
     } )
   }, [] )
 
+  useEffect(() => {
+    sortHandler(sortValue)
+  }, [sortValue])
+
   const eventPressHandler = ( eventId ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } )
   }
 
-
-
-  useEffect(() => {
-    console.log(sortValue)
-    sortHandler(sortValue)
-  }, [sortValue])
 
   const sortHandler = (type) => {
     switch ( type ) {
@@ -68,7 +71,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
         break
       case 'mostAttendees':
         const mostAttendees = sortMostLikesOrAttendees(activeList) // eslint-disable-line
-        console.log('most attendees', mostAttendees)
+        // console.log('most attendees', mostAttendees)
         setActiveList(mostAttendees)
         break
     }
