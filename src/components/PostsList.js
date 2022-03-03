@@ -126,6 +126,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
           zIndex={ 2000 }
           zIndexInverse={ 2000 }
+          listMode={'SCROLLVIEW'}
         />
       </>
     )

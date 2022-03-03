@@ -135,6 +135,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           onSelectItem={ ( item ) => filterCityHandler( item.value ) }
           zIndex={ 2000 }
           zIndexInverse={ 2000 }
+          listMode={'SCROLLVIEW'}
         />
       </>
     )
