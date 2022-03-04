@@ -37,17 +37,6 @@ const Explore = ( { navigation } ) => {
     }
   };
 
-  /* const pressHandler = ( postId, type ) => {
-    switch ( type ) {
-      case 'post':
-        navigation.navigate( 'SinglePost', { postId: postId });
-        break;
-      case 'event':
-        navigation.navigate( 'SingleEvent', { postId: postId } );
-        break;
-    }
-  }; */
-
     return (
         <View style={{paddingBottom: 90}}>
             <SwitchSelector
