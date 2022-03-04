@@ -33,13 +33,10 @@ export const sortMostLikes = ( arr ) => {
 } */
 
 export const sortSoonestEvents = ( arr ) => {
-  const sort = arr.sort( function( a, b ) {
+  return arr.sort( function( a, b ) {
     return Number( new Date( a.description.date ) ) -
       Number( new Date( b.description.date ) )
-  } )
-  const today = new Date()
-  const s = sort.filter(event =>  today.getTime() <= new Date(event.description.date).getTime())
-  return s
+  } ).filter(event =>  new Date().getTime() <= new Date(event.description.date).getTime())
 }
 
 export const initCities = ( arr, setArr ) => {

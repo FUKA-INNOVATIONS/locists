@@ -26,7 +26,7 @@ const EventListHeader = ( {
     { label: 'Freshest events', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
     { label: 'Most attendees', value: 'mostAttendees' },
-    { label: 'Upcoming (disabled)', value: 'soonest' },
+    { label: 'Upcoming events', value: 'soonest' },
   ] )
 
   useEffect( () => {
