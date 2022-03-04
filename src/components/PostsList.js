@@ -1,9 +1,8 @@
-import { FlatList, Pressable, Text, View } from 'react-native'
+import { FlatList, Pressable } from 'react-native'
 import { useEffect, useState } from 'react'
 import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
-import EventListHeader from './EventListHeader'
 import PostsListHeader from './PostsListHeader'
 
 const PostsList = ( { navigation } ) => {

@@ -25,7 +25,6 @@ const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
       const liked = await createFavourite( file_id )
       liked.file_id && Alert.alert( 'Successfully attended' )
     }
-
   }
 
   const hasAttended = () => {
