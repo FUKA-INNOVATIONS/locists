@@ -32,6 +32,7 @@ const HomeList = ( { navigation } ) => {
     setLoading( true )
     getAllMedia().then( mixedMedia => {
       setActiveList( mixedMedia )
+      setMixedMedia( mixedMedia )
     } ).then( () => {
       console.log( 'HomeList getAllMedia in useEffect ready' )
       setLoading( false )
