@@ -8,6 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { initCities } from '../utils/sortFilterHelpers'
 
 const HomeList = ( { navigation } ) => {
+  //
   const { getAllMedia } = useMedia()
   // TODO: fix with focus listener
   const [ loading, setLoading ] = useState( false )
