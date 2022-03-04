@@ -9,7 +9,7 @@ import {
 } from '../utils/sortFilterHelpers'
 
 const HomeListHeader = ( { media, activeList , setActiveList, navigation, loading } ) => {
-  // console.log('HomeListHeader.js')
+  // console.log('EventListHeader.js')
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
   const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ cityItems, setCityItems ] = useState( [] )
