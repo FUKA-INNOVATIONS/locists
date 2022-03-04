@@ -14,17 +14,17 @@ const HomeList = ( { navigation } ) => {
   const [ mixedMedia, setMixedMedia ] = useState( [] )
   const [ activeList, setActiveList ] = useState( [] )
 
-  /* useEffect( () => {
+  useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       console.log( 'HomeList.js focus' )
-      setLoading(true)
+      // setLoading(true)
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
-        setLoading(false)
+        // setLoading(false)
       } )
     } )
-  }, [] ) */
+  }, [] )
   // console.log('Loading in HomeList.js 2', loading)
 
   /* useEffect( () => {
