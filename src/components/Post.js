@@ -10,12 +10,13 @@ import AddComment from '../../assets/icons/AddComment.svg';
 
 const Post = ( { postMedia, ownProfile } ) => {
 
+    console.log(postMedia);
   return (
       <>
           {
               !ownProfile
               &&
-              <View style={ { marginLeft: 15, marginVertical: 10 } }>
+              <View style={ { marginLeft: 15, marginVertical: 3 } }>
                   <UserInfo username={ postMedia.description.owner }
                             avatar={ postMedia.description.ownerAvatar }/>
               </View>
@@ -24,15 +25,17 @@ const Post = ( { postMedia, ownProfile } ) => {
 
         <View style={ [ theme.generalListPost, theme.post ] }>
           {
-            // TODO check if post has image, display post without image if not present
+            postMedia.description.hasImage && <Image
+                source={ { uri: uploadsUrl + postMedia.filename } }
+                style={ theme.postImage }
+            />
           }
-          { postMedia.filename &&
+          { /* { postMedia.filename &&
           <Image
               source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
               style={ theme.postImage }
           />
-          }
-
+          } */ }
           <View style={ theme.postInfo }>
             <View style={ theme.postText }>
               <Text>{ postMedia.description.description }</Text>

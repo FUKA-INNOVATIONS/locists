@@ -17,7 +17,6 @@ const Account = ( { navigation } ) => {
   const { getUserMedia, userMedia} = useMedia();
   const [ loading, setLoading ] = useState( false );
 
-
   getCurrentUserComments().then( comments => setComments( comments ) );
 
   const logoutHandler = async () => {
