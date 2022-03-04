@@ -69,9 +69,9 @@ const UploadEvent = props => {
 
   const EventSchema = Yup.object().shape( {
     location: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 3, 'Too Short!' ).
       max( 20, 'Too Long!' ).
-      required( 'Location is required: 5-20 characters' ),
+      required( 'Location is required: 3-20 characters' ),
     name: Yup.string().
       min( 5, 'Too Short!' ).
       max( 15, 'Too Long!' ).

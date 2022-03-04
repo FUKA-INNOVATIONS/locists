@@ -17,6 +17,7 @@ const useComment = () => {
       const comments = await axios.get( URL );
       setMediaComments( comments.data );
       setLoading( false );
+      return comments.data;
     } catch ( e ) {
       console.log( e );
       setLoading( false );

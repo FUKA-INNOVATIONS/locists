@@ -28,7 +28,7 @@ const Post = ( { postMedia, ownProfile } ) => {
           }
           { postMedia.filename &&
           <Image
-              source={ { uri: uploadsUrl + postMedia.filename } }
+              source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
               style={ theme.postImage }
           />
           }
