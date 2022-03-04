@@ -1,12 +1,9 @@
 import doFetch from '../utils/doFetch';
 import { baseUrl } from '../../config';
 import useAuthStorage from './useAuthStorage';
-import { useState } from 'react';
 
 const useFavourite = () => {
   const { user } = useAuthStorage();
-  const [ mediaFavourites, setMediaFavourites ] = useState( [] );
-  const [ userFavourites, setUserFavourites ] = useState( [] ); // eslint-disable-line
 
   const createFavourite = async ( file_id ) => {  // eslint-disable-line
     const options = {
@@ -70,7 +67,6 @@ const useFavourite = () => {
         return { ...favourite, isOwner: favourite.user_id === user.user_id };
       } );
       // console.log('f', favourites)
-      // setMediaFavourites( favourites );
       return favourites;
     } catch ( error ) {
       console.log( 'error in getMediaFavourites hook', error );
@@ -83,8 +79,6 @@ const useFavourite = () => {
     deleteFavourite,
     getCurrentUserFavourites,
     getMediaFavourites,
-    mediaFavourites,
-    userFavourites,
   };
 };
 

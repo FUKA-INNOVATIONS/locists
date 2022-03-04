@@ -17,7 +17,7 @@ const useMedia = () => {
   const { getMediaFavourites } = useFavourite()
 
   const getAllMedia = async () => {
-    console.log( 'called getAllMedia hook:' )
+    // console.log( 'called getAllMedia hook' )
 
     /*
      * inorder to get thumbnails for optimization

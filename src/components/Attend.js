@@ -10,10 +10,15 @@ const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
-  useEffect( async () => {
+  useEffect( () => {
+    let cancel = true
     getMediaFavourites( file_id ).then( mediaFavourites => {
+      if(cancel) return
       setMediaFavourites( mediaFavourites )
     } )
+    return () => {
+      cancel = true;
+    }
   }, [] )
 
   const likeHandler = async () => {
