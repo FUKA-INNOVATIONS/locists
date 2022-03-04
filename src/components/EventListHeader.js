@@ -45,7 +45,7 @@ const EventListHeader = ( {
 
   // TODO: find solution to update EvenList ui without spreading into new array
   const sortHandler = ( type ) => {
-    console.log( 'EventListHeader.js sortHandler' )
+    // console.log( 'EventListHeader.js sortHandler' )
     switch ( type ) {
       case 'latest':
         const latest = sortLatest( activeList ) // eslint-disable-line
