@@ -13,14 +13,14 @@ const useComment = () => {
   const getMediaComments = async ( mediaId ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`;
     try {
-      setLoading( true );
+      // setLoading( true );
       const comments = await axios.get( URL );
-      setMediaComments( comments.data );
-      setLoading( false );
+      // setMediaComments( comments.data );
+      // setLoading( false );
       return comments.data;
     } catch ( e ) {
       console.log( e );
-      setLoading( false );
+      // setLoading( false );
     }
   };
 

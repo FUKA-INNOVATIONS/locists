@@ -70,7 +70,7 @@ const useFavourite = () => {
         return { ...favourite, isOwner: favourite.user_id === user.user_id };
       } );
       // console.log('f', favourites)
-      setMediaFavourites( favourites );
+      // setMediaFavourites( favourites );
       return favourites;
     } catch ( error ) {
       console.log( 'error in getMediaFavourites hook', error );

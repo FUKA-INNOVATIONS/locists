@@ -11,9 +11,6 @@ import useFavourite from './useFavourite'
 const useMedia = () => {
   // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
-  const [ loading, setLoading ] = useState( false )
-  const [ events, setEvents ] = useState()
-  const [ posts, setPosts ] = useState()
   const [ singleMedia, setSingleMedia ] = useState()
   const [ allMedia, setAllMedia ] = useState()
   const [ userMedia, setUserMedia ] = useState()
@@ -21,9 +18,8 @@ const useMedia = () => {
   const { getMediaComments } = useComment()
   const { getMediaFavourites } = useFavourite()
 
-  const getAllMedia = async ( filter = null ) => {
-
-    console.log( 'filter in getAllMedia hook:', filter )
+  const getAllMedia = async () => {
+    console.log( 'called getAllMedia hook:' )
 
     /*
      * inorder to get thumbnails for optimization
@@ -33,28 +29,14 @@ const useMedia = () => {
     const events = await getEventsWithThumbnails()
     const posts = await getPostsWithThumbnails()
 
-    const mixed = [ ...events, ...posts ]
-
-    switch ( filter ) {
-
-      case 'latest':
-        return sortLatest( mixed )
-      case 'postsFirst':
-        return [ ...posts, ...events ]
-      default:
-        setLoading(true)
-        // return mixed.sort( () => Math.random() - 0.5 )
-        setLoading(false)
-        return mixed
-    }
-
+    return [ ...events, ...posts ]
   }
 
   const getEventsWithThumbnails = async () => {
-    setLoading( true )
     const eventArr = []
     const idEvents = await getEvents().
       then( events => events.map( event => event.file_id ) )
+
     for ( let i = 0; i < idEvents.length; i++ ) {
       let event = await getMediaById( idEvents[ i ], true ) // eslint-disable-line
       event.description.isOwner = ( event.user_id === user.user_id )
@@ -63,28 +45,23 @@ const useMedia = () => {
       event.description.ownerAvatar = await fetchAvatar( event.user_id )
 
       // Set comments count for sorting
-      event.description.commentsCount = await getMediaComments( event.file_id ).
-        then( e => e.length )
+      event.description.commentsCount = await getMediaComments( event.file_id ).then( e => e.length )
 
       // Set attendees count for sorting
-      event.description.attendeesCount = await getMediaFavourites( event.file_id ).
-        then( favs => favs.length )
+      event.description.attendeesCount = await getMediaFavourites( event.file_id ).then( favs => favs.length )
 
-      // Set internal id for list opt
-      event.eventId = i + 1
+      event.eventId = i + 1 // Set internal id for list opt
 
       eventArr.push( event )
     }
-    setEvents( eventArr )
-    setLoading( false )
     return eventArr
   }
 
   const getPostsWithThumbnails = async () => {
-    setLoading( true )
     const postArr = []
     const idPosts = await getPosts().
       then( posts => posts.map( post => post.file_id ) )
+
     for ( let i = 0; i < idPosts.length; i++ ) {
       let post = await getMediaById( idPosts[ i ], true ) // eslint-disable-line
       post.description.isOwner = ( post.user_id === user.user_id )
@@ -100,14 +77,10 @@ const useMedia = () => {
       post.description.likesCount = await getMediaFavourites( post.file_id ).
         then( likes => likes.length )
 
-      // Set internal id for list opt
-      post.postId = i + 1
+      post.postId = i + 1 // Set internal id for list opt
 
       postArr.push( post )
     }
-    setPosts( postArr )
-    setLoading( false )
-    // console.log('PPP', postArr)
     return postArr
   }
 
@@ -115,7 +88,7 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ eventTag }`
     try {
       const events = await axios.get( URL )
-      setEvents( events.data )
+      // setEvents( events.data )
       return events.data
     } catch ( e ) {
       console.log( e )
@@ -126,7 +99,7 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ postTag }`
     try {
       const posts = await axios.get( URL )
-      setPosts( posts.data )
+      // setPosts( posts.data )
       return posts.data
     } catch ( e ) {
       console.log( e )
@@ -136,21 +109,17 @@ const useMedia = () => {
   const getMediaById = async ( mediaId, returnObject = false ) => {
     const URL = `${ baseUrl }media/${ mediaId }`
     try {
-      // setLoading( true );
       const { data } = await axios.get( URL )
       if ( data ) {
         data.description = JSON.parse( data.description )
         if ( returnObject ) {
-          // setLoading( false );
           return data
         } else {
           setSingleMedia( data )
-          // setLoading( false );
         }
       }
     } catch ( e ) {
       console.log( e )
-      setLoading( false )
     }
   }
 
@@ -235,18 +204,9 @@ const useMedia = () => {
     getEventsWithThumbnails,
     getPostsWithThumbnails,
     deleteMedia,
-    events,
-    posts,
-    allMedia,
     singleMedia,
     userMedia,
-    // loadingEvents,
-    // loadingPosts,
-    // loadingSingleMedia,
-    loading,
-    setLoading,
     setAllMedia,
-    // loadingMediaUpload,
   }
 
 }

@@ -9,7 +9,7 @@ import UserInfo from './UserInfo'
 import Location from '../../assets/icons/Location.svg'
 
 const Event = ( { eventDetails, ownProfile } ) => {
-  console.log('Event.js')
+  // console.log('Event.js')
 
   if ( eventDetails === null ) {
     return (
