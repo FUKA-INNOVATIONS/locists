@@ -4,9 +4,14 @@ import Event from './Event'
 import Loading from './Loading'
 import EventListHeader from './EventListHeader'
 import useMedia from '../hooks/useMedia'
+import {
+  sortLatest, sortMostAttendees,
+  sortMostCommented,
+  sortSoonestEvents,
+} from '../utils/sortFilterHelpers'
 
 const EventsList = ( { navigation } ) => {
-  // console.log( 'EventsList.js')
+  console.log( 'EventsList.js')
 
   const { getEventsWithThumbnails } = useMedia()
   const [ loading, setLoading ] = useState( false )
@@ -35,6 +40,30 @@ const EventsList = ( { navigation } ) => {
 
   const eventPressHandler = ( eventId ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } )
+  }
+
+  const sortHandler = ( type ) => {
+    console.log( 'EventListHeader.js sortHandler' )
+    switch ( type ) {
+      case 'latest':
+        const latest = sortLatest( activeList ) // eslint-disable-line
+        setActiveList( latest )
+        break
+      case 'soonest': // TODO fix soonest result
+        const soonest = sortSoonestEvents( activeList ) // eslint-disable-line
+        setActiveList( soonest )
+        break
+      case 'mostCommented':
+        const mostCommented = sortMostCommented( activeList ) // eslint-disable-line
+        setActiveList( mostCommented )
+        break
+      case 'mostAttendees':
+        // console.log('mostAttendees')
+        const mostAttendees = sortMostAttendees( activeList ) // eslint-disable-line
+        // console.log('activeList', activeList)
+        setActiveList( mostAttendees )
+        break
+    }
   }
 
   if ( loading ) return <Loading />

@@ -8,7 +8,13 @@ import {
   sortSoonestEvents,
 } from '../utils/sortFilterHelpers'
 
-const HomeListHeader = ( { media, activeList , setActiveList, navigation, loading } ) => {
+const EventListHeader = ( {
+  media,
+  activeList,
+  setActiveList,
+  navigation,
+  loading,
+} ) => {
   // console.log('EventListHeader.js')
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
   const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
@@ -37,24 +43,25 @@ const HomeListHeader = ( { media, activeList , setActiveList, navigation, loadin
     sortHandler( sortValue )
   }, [ sortValue ] )
 
+  // TODO: find solution to update EvenList ui without spreading into new array
   const sortHandler = ( type ) => {
-    console.log( 'EventList.js sortHandler' )
+    console.log( 'EventListHeader.js sortHandler' )
     switch ( type ) {
       case 'latest':
         const latest = sortLatest( activeList ) // eslint-disable-line
-        setActiveList( latest )
+        setActiveList( [ ...latest ] )
         break
       case 'soonest': // TODO fix soonest result
         const soonest = sortSoonestEvents( activeList ) // eslint-disable-line
-        setActiveList( soonest )
+        setActiveList( [ ...soonest ] )
         break
       case 'mostCommented':
         const mostCommented = sortMostCommented( activeList ) // eslint-disable-line
-        setActiveList( mostCommented )
+        setActiveList( [ ...mostCommented ] )
         break
       case 'mostAttendees':
         const mostAttendees = sortMostAttendees( activeList ) // eslint-disable-line
-        setActiveList( mostAttendees )
+        setActiveList( [ ...mostAttendees ] )
         break
     }
   }
@@ -114,21 +121,21 @@ const HomeListHeader = ( { media, activeList , setActiveList, navigation, loadin
         zIndex={ 2000 }
         zIndexInverse={ 2000 }
         listMode={ 'SCROLLVIEW' }
-        searchable={true}
-        searchTextInputProps={{
-          maxLength: 25
-        }}
-        addCustomItem={true}
-        searchPlaceholder="Search location"
-        searchContainerStyle={{
-          borderBottomColor: "#dfdfdf",
-        }}
-        searchTextInputStyle={{
+        searchable={ true }
+        searchTextInputProps={ {
+          maxLength: 25,
+        } }
+        addCustomItem={ true }
+        searchPlaceholder='Search location'
+        searchContainerStyle={ {
+          borderBottomColor: '#dfdfdf',
+        } }
+        searchTextInputStyle={ {
           height: 35,
-        }}
+        } }
       />
     </View>
   )
 }
 
-export default HomeListHeader
+export default EventListHeader
