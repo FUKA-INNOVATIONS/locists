@@ -1,4 +1,4 @@
-import { Text, Button, Alert, TextInput, View } from 'react-native';
+import { Text, Button, Alert, TextInput, View, TouchableOpacity } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import useComment from '../hooks/useComment';
 import { Controller, useForm } from 'react-hook-form';
@@ -43,7 +43,6 @@ const PostComment = ( { file_id, display } ) => { // eslint-disable-line
 
   return (
       <>
-        <Text>Write a comment</Text>
         <View style={ theme.inputContainer }>
           <Controller
               control={ control }
@@ -60,14 +59,16 @@ const PostComment = ( { file_id, display } ) => { // eslint-disable-line
           />
           { errors.content && <Text>{ errors.content.message }</Text> }
         </View>
-        <View>
-          <Button
-              // disabled={ !imageSelected }
-              // loading={ loadingMediaUpload }
-              title="Post comment"
-              onPress={ handleSubmit( onSubmit ) }
-          />
-          <Button title="Clear" onPress={ () => reset() }/>
+        <View style={ theme.addCommentButtons }>
+            <TouchableOpacity style={ theme.generalBtn } onPress={ handleSubmit( onSubmit ) }>
+                <Text style={ theme.loginButtonText }>Post</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={ theme.generalBtn } title="Clear" onPress={ () => reset() }>
+                <Text style={ theme.loginButtonText }>Clear</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={ theme.generalBtn } >
+                <Text style={ theme.loginButtonText }>Cancel</Text>
+            </TouchableOpacity>
         </View>
       </>
   );

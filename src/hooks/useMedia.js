@@ -113,6 +113,7 @@ const useMedia = () => {
       const { data } = await axios.get( URL );
       if ( data ) {
         data.description = JSON.parse( data.description );
+        data.description.ownerAvatar = await fetchAvatar( data.user_id );
         if ( returnObject ) {
           // setLoading( false );
           return data;

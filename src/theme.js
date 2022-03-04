@@ -92,11 +92,16 @@ const theme = {
     borderWidth: 1,
     backgroundColor: general.colors.postBackground,
   },
+  singleMediaAvatar: {
+    marginLeft: 5,
+    marginTop: 10,
+    alignSelf: 'flex-start',
+  },
   singleMediaComments: {
     marginTop: 5,
     borderWidth: 3,
     alignSelf: 'center',
-    minHeight: 260,
+    minHeight: 250,
     paddingVertical: 5,
     width: width * 0.95,
     position: 'relative',
@@ -115,6 +120,16 @@ const theme = {
   },
   commentExtra: {
 
+  },
+  addCommentBtn: {
+
+  },
+  addCommentButtons: {
+    width: width * 0.85,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    borderWidth: 1,
+    borderColor: '#fff'
   },
   commentUser: {
     width: 30,
@@ -243,11 +258,19 @@ const theme = {
   },
   singlePostText: {
     width: width * 0.94,
+    height: 90,
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
     marginVertical: 5,
     backgroundColor: '#E9D6DB',
+  },
+  noMedia: {
+    width: width * 0.94,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingRight: 10,
+    paddingBottom: 10,
   },
 
   addComment: {
