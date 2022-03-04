@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import useFavourite from '../hooks/useFavourite';
 import theme from "../theme";
 
-const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
+const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -38,7 +38,7 @@ const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   };
 
   return (
-      <View style={{marginLeft: 5}}>
+      <View style={ theme.attend } >
         { displayIcon && <TouchableOpacity style={ [theme.generalBtn, theme.attendBtn] } onPress={ likeHandler }>
           <Text style={ theme.loginButtonText }>{ hasAttended()
               ? 'can\'t attend'

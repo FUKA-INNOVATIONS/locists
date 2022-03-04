@@ -118,8 +118,9 @@ const theme = {
   commentInfo: {
     flexDirection: 'row',
   },
-  commentExtra: {
-
+  attend: {
+    alignItems: 'center',
+    marginLeft: 5,
   },
   addCommentBtn: {
 
@@ -128,8 +129,6 @@ const theme = {
     width: width * 0.85,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    borderWidth: 1,
-    borderColor: '#fff'
   },
   commentUser: {
     width: 30,
@@ -215,6 +214,18 @@ const theme = {
     marginHorizontal: 5,
     marginTop: 5,
     borderRadius: 10,
+  },
+  infoTop: {
+    paddingTop: 10,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  infoBottom: {
+    width: width * 0.85,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   postComment: {
     flex: 1,

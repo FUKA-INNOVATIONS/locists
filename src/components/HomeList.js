@@ -153,6 +153,7 @@ const HomeList = ( { navigation } ) => {
   return (
     <FlatList
       data={ activeList }
+      style={{marginBottom: 50}}
       ListHeaderComponent={ <ListHeader /> }
       stickyHeaderIndices={ [ 0 ] }
       ListEmptyComponent={ EmptyListMessage }

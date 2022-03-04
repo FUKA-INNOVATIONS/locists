@@ -66,9 +66,6 @@ const PostComment = ( { file_id, display } ) => { // eslint-disable-line
             <TouchableOpacity style={ theme.generalBtn } title="Clear" onPress={ () => reset() }>
                 <Text style={ theme.loginButtonText }>Clear</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={ theme.generalBtn } >
-                <Text style={ theme.loginButtonText }>Cancel</Text>
-            </TouchableOpacity>
         </View>
       </>
   );

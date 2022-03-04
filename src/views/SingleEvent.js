@@ -36,7 +36,7 @@ const SingleEvent = ( { navigation, route } ) => {
         <SingleEventHeader eventDetails={ singleMedia } />
         {/* <View style={theme.singleMediaComments}> */}
           <FlatList
-              style={theme.singleMediaComments}
+              style={ [theme.singleMediaComments, {maxHeight: 50}] }
               data={ mediaComments }
               ListEmptyComponent={ EmptyListMessage }
               keyExtractor={ (  item  ) => item.comment_id }
