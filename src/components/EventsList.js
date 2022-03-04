@@ -89,7 +89,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
 
   const filterCityHandler = ( city ) => {
     console.log( city )
-    if ( city === 'none' ) {
+    if ( city === 'all' ) {
       setActiveList( events )
     } else {
       const filter = events.filter(
@@ -145,6 +145,19 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           zIndexInverse={ 2000 }
           listMode={ 'SCROLLVIEW' }
           searchable={true}
+          searchTextInputProps={{
+            maxLength: 25
+          }}
+          addCustomItem={true}
+          searchPlaceholder="Search location"
+          searchContainerStyle={{
+            borderBottomColor: "#dfdfdf",
+            ...theme.inputContainer,
+          }}
+          searchTextInputStyle={{
+            height: 35,
+            ...theme.inputContainer,
+          }}
         />
       </View>
     )

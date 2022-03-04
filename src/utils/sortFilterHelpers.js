@@ -48,5 +48,5 @@ export const initSearchNames = (arr, setArr) => {
   names.map(
     city => nameOptions.push( { label: city, value: city } ) )
   setArr( nameOptions )
-  console.log('nameOptions in initSearchNames', nameOptions)
+  // console.log('nameOptions in initSearchNames', nameOptions)
 }

@@ -5,7 +5,7 @@ import useMedia from '../hooks/useMedia'
 import { useEffect, useState } from 'react'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { initCities, initSearchNames } from '../utils/sortFilterHelpers'
+import { initCities } from '../utils/sortFilterHelpers'
 
 const HomeList = ( { navigation } ) => {
   const { getAllMedia } = useMedia()
@@ -19,9 +19,9 @@ const HomeList = ( { navigation } ) => {
   const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ cityItems, setCityItems ] = useState( [] )
 
-  const [ searchFilterOpen, setSearchFilterOpen ] = useState( false )
-  const [ searchFilterValue, setSearchFilterValue ] = useState( 'no-search' )
-  const [ searchItems, setSearchItems ] = useState( [] )
+  // const [ searchFilterOpen, setSearchFilterOpen ] = useState( false )
+  // const [ searchFilterValue, setSearchFilterValue ] = useState( 'no-search' )
+  // const [ searchItems, setSearchItems ] = useState( [] )
 
   /* const getPostsAndEvents = useMemo( async () => {
    await getAllMedia().then( mixedMedia => setActiveList( mixedMedia ) )
@@ -40,7 +40,7 @@ const HomeList = ( { navigation } ) => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
         initCities(mixedMedia, setCityItems)
-        initSearchNames(mixedMedia, setSearchItems)
+        // initSearchNames(mixedMedia, setSearchItems)
       } )
     } )
   }, [] )
@@ -50,7 +50,7 @@ const HomeList = ( { navigation } ) => {
     getAllMedia().then( mixedMedia => {
       setActiveList( mixedMedia )
       initCities(mixedMedia, setCityItems)
-      initSearchNames(mixedMedia, setSearchItems)
+      // initSearchNames(mixedMedia, setSearchItems)
     } ).then( () => {
       console.log( 'ready' )
     } )
@@ -78,7 +78,7 @@ const HomeList = ( { navigation } ) => {
 
   const filterCityHandler = ( city ) => {
     console.log( city )
-    if ( city === 'none' ) {
+    if ( city === 'all' ) {
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
@@ -112,24 +112,40 @@ const HomeList = ( { navigation } ) => {
           listMode={'SCROLLVIEW'}
           theme={'LIGHT'}
           searchable={true}
+          // mode="BADGE"
+          searchTextInputProps={{
+            maxLength: 25
+          }}
+          addCustomItem={true}
+          searchPlaceholder="Search location"
+          searchContainerStyle={{
+            borderBottomColor: "#dfdfdf",
+              ...theme.inputContainer,
+          }}
+          searchTextInputStyle={{
+            height: 35,
+            ...theme.inputContainer,
+          }}
         />
-        <DropDownPicker
-          open={ searchFilterOpen }
-          value={ searchFilterValue }
-          items={ searchItems }
-          setOpen={ setSearchFilterOpen }
-          setValue={ setSearchFilterValue }
-          setItems={ setSearchItems }
-          // onPress={ ( open ) => setSortOpen( false ) }
-          onSelectItem={ ( item ) => filterCityHandler( item.value ) }
-          listMode={'SCROLLVIEW'}
-          theme={'LIGHT'}
-          searchable={true}
+        {/*
+         <DropDownPicker
+         open={ searchFilterOpen }
+         value={ searchFilterValue }
+         items={ searchItems }
+         setOpen={ setSearchFilterOpen }
+         setValue={ setSearchFilterValue }
+         setItems={ setSearchItems }
+         // onPress={ ( open ) => setSortOpen( false ) }
+         onSelectItem={ ( item ) => filterCityHandler( item.value ) }
+         listMode={'SCROLLVIEW'}
+         theme={'LIGHT'}
+         searchable={true}
 
-          // addCustomItem={true}
-          // searchContainerStyle={{ borderBottomColor: "#dfdfdf" }}
-          // searchTextInputStyle={{ color: "#000" }}
-        />
+         // addCustomItem={true}
+         // searchContainerStyle={{ borderBottomColor: "#dfdfdf" }}
+         // searchTextInputStyle={{ color: "#000" }}
+         />
+        */}
       </View>
     )
   }

@@ -76,7 +76,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
 
   const filterCityHandler = ( city ) => {
     console.log( city )
-    if ( city === 'none' ) {
+    if ( city === 'all' ) {
       setActiveList( posts )
     } else {
       const filter = posts.filter(
@@ -136,6 +136,19 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           zIndexInverse={ 2000 }
           listMode={'SCROLLVIEW'}
           searchable={true}
+          searchTextInputProps={{
+            maxLength: 25
+          }}
+          addCustomItem={true}
+          searchPlaceholder="Search location"
+          searchContainerStyle={{
+            borderBottomColor: "#dfdfdf",
+            ...theme.inputContainer,
+          }}
+          searchTextInputStyle={{
+            height: 35,
+            ...theme.inputContainer,
+          }}
         />
       </View>
     )
