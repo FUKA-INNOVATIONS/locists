@@ -26,9 +26,9 @@ const Explore = ( { navigation } ) => {
   ]
 
   useEffect(async () => {
-    console.log('Explore.js useEffect')
-    const events = await getEventsWithThumbnails()  // eslint-disable-line
-    setActiveItems( events )
+    // console.log('Explore.js useEffect')
+    // const events = await getEventsWithThumbnails()  // eslint-disable-line
+      // setActiveItems( events )
   }, [])
 
   const setView = async ( explore ) => {
@@ -41,13 +41,13 @@ const Explore = ( { navigation } ) => {
         // setLoading(false)
         break
       case 'events':
-        const events = await getEventsWithThumbnails()  // eslint-disable-line
-        setActiveItems( events )
+        // const events = await getEventsWithThumbnails()  // eslint-disable-line
+        // setActiveItems( events )
         break
       default:
-        const defaultItems = await getEventsWithThumbnails()  // eslint-disable-line
-        setActiveItems( defaultItems )
-        break
+        // const defaultItems = await getEventsWithThumbnails()  // eslint-disable-line
+        // setActiveItems( defaultItems )
+        // break
     }
   }
 

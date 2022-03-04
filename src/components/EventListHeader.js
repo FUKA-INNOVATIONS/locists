@@ -43,7 +43,7 @@ const EventListHeader = ( {
     sortHandler( sortValue )
   }, [ sortValue ] )
 
-  // TODO: find solution to update EvenList ui without spreading into new array
+  // TODO: find solution to update EvenList ui without spreading into new array to force update ui
   const sortHandler = ( type ) => {
     // console.log( 'EventListHeader.js sortHandler' )
     switch ( type ) {

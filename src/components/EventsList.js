@@ -6,7 +6,7 @@ import EventListHeader from './EventListHeader'
 import useMedia from '../hooks/useMedia'
 
 const EventsList = ( { navigation } ) => {
-  console.log( 'EventsList.js')
+  // console.log( 'EventsList.js')
 
   const { getEventsWithThumbnails } = useMedia()
   const [ loading, setLoading ] = useState( false )
@@ -14,7 +14,7 @@ const EventsList = ( { navigation } ) => {
   const [ activeList, setActiveList ] = useState( events )
 
   useEffect( async () => {
-    console.log( 'EventsList.js useEffect' )
+    // console.log( 'EventsList.js useEffect' )
     setLoading( true )
     getEventsWithThumbnails().then( events => {
       setEvents( events )
@@ -24,7 +24,7 @@ const EventsList = ( { navigation } ) => {
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
-      console.log( 'EventsList.js focus' )
+      // console.log( 'EventsList.js focus' )
       setLoading( true )
       getEventsWithThumbnails().then( events => {
         setEvents( events )
