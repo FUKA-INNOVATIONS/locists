@@ -1,6 +1,7 @@
-import { View, Text, Pressable, Alert } from 'react-native';
+import { View, Text, Alert, TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
 import useFavourite from '../hooks/useFavourite';
+import theme from "../theme";
 
 const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   const {
@@ -38,11 +39,11 @@ const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
 
   return (
       <View style={{marginLeft: 5}}>
-        { displayIcon && <Pressable onPress={ likeHandler }>
-          <Text style={ { fontSize: 20 } }>{ hasAttended()
+        { displayIcon && <TouchableOpacity style={ [theme.generalBtn, theme.attendBtn] } onPress={ likeHandler }>
+          <Text style={ theme.loginButtonText }>{ hasAttended()
               ? 'can\'t attend'
-              : 'attend' }</Text>
-        </Pressable> }
+              : 'Attend' }</Text>
+        </TouchableOpacity> }
         <Text>{ mediaFavourites.length } attending </Text>
       </View>
   );

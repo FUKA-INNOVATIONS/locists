@@ -233,6 +233,10 @@ const theme = {
     height: 35,
     borderRadius: 50,
   },
+  attendBtn: {
+    width: 120,
+    padding: 5,
+  },
 
   // Single Post Styles
   singlePost: {

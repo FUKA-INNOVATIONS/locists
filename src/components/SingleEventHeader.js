@@ -30,12 +30,15 @@ const SingleEventHeader = ({eventDetails}) => {
         <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
                style={ { width: '100%', height: 200 } }/>
           <View style={ theme.singleEventInfo }>
-              <Text style={ theme.mediaTitle }>{ eventDetails.description.name }</Text>
+              <View>
+                  <Text style={ theme.mediaTitle }>{ eventDetails.description.name }</Text>
+                  <Attend displayIcon file_id={eventDetails.file_id} />
+              </View>
+
               <Text>Description: { eventDetails.description.description }</Text>
               <Text>Location: { eventDetails.description.location }</Text>
               <Text>File_id: { eventDetails.file_id }</Text>
               <Text>Media type: { eventDetails.description.mediaType }</Text>
-              <Attend displayIcon file_id={eventDetails.file_id} />
           </View>
 
       </View>
