@@ -1,4 +1,4 @@
-import { FlatList, Pressable, View, Text } from 'react-native'
+import { FlatList, Pressable } from 'react-native'
 import Post from './Post'
 import Event from './Event'
 import useMedia from '../hooks/useMedia'
@@ -8,8 +8,8 @@ import HomeListHeader from './HomeListHeader'
 import EmptyListMessage from './EmptyListMessage'
 
 const HomeList = ( { navigation } ) => {
-  console.log('HomeList.js')
-  //
+  // console.log('HomeList.js')
+
   const { getAllMedia } = useMedia()
   const [ mixedMedia, setMixedMedia ] = useState( [] )
   const [ activeList, setActiveList ] = useState( [] )
@@ -17,28 +17,25 @@ const HomeList = ( { navigation } ) => {
 
   useEffect( () => {
     return navigation.addListener( 'focus', async () => {
-      console.log( 'HomeList.js focus' )
-      setLoading(true)
+      // console.log( 'HomeList.js focus' )
+      setLoading( true )
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
-        setLoading(false)
-      } )
+      } ).finally(() => setLoading( false ))
     } )
   }, [] )
-  // console.log('Loading in HomeList.js 2', loading)
 
   useEffect( async () => {
     setLoading( true )
     getAllMedia().then( mixedMedia => {
       setActiveList( mixedMedia )
       setMixedMedia( mixedMedia )
-    } ).then( () => {
-      console.log( 'HomeList getAllMedia in useEffect ready' )
+    } ).finally( () => {
+      // console.log( 'HomeList getAllMedia in useEffect ready' )
       setLoading( false )
     } )
   }, [] )
-  // console.log('Loading in HomeList.js 3', loading)
 
   // Move user to single event view when tapping event card
   const eventPressHandler = ( eventId ) => {
@@ -76,7 +73,7 @@ const HomeList = ( { navigation } ) => {
           navigation={ navigation }
           filterCityHandler={ filterCityHandler }
           media={ mixedMedia }
-          loading={loading}
+          loading={ loading }
         /> }
       stickyHeaderIndices={ [ 0 ] }
       ListEmptyComponent={ <EmptyListMessage /> }

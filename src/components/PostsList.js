@@ -54,6 +54,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
   }, [ sortValue ] )
 
   const sortHandler = ( type ) => {
+    console.log( 'PostList.js sortHandler' )
     switch ( type ) {
       case 'latest':
         const latest = sortLatest( activeList ) // eslint-disable-line
@@ -143,11 +144,9 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           searchPlaceholder="Search location"
           searchContainerStyle={{
             borderBottomColor: "#dfdfdf",
-            ...theme.inputContainer,
           }}
           searchTextInputStyle={{
             height: 35,
-            ...theme.inputContainer,
           }}
         />
       </View>

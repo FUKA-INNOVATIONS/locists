@@ -4,7 +4,6 @@ import doFetch from '../utils/doFetch'
 import { baseUrl, eventTag, postTag } from '../../config'
 import useAuthStorage from './useAuthStorage'
 import fetchAvatar from '../utils/fetchAvatar'
-import sortLatest from '../utils/sortLatest'
 import useComment from './useComment'
 import useFavourite from './useFavourite'
 
@@ -12,7 +11,6 @@ const useMedia = () => {
   // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
   const [ singleMedia, setSingleMedia ] = useState()
-  const [ allMedia, setAllMedia ] = useState()
   const [ userMedia, setUserMedia ] = useState()
 
   const { getMediaComments } = useComment()
@@ -206,7 +204,6 @@ const useMedia = () => {
     deleteMedia,
     singleMedia,
     userMedia,
-    setAllMedia,
   }
 
 }

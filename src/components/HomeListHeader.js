@@ -5,15 +5,10 @@ import { useState, useEffect } from 'react'
 import { initCities } from '../utils/sortFilterHelpers'
 
 const HomeListHeader = ( { media, filterCityHandler, navigation, loading } ) => {
-  console.log('HomeListHeader.js')
+  // console.log('HomeListHeader.js')
   const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
   const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ cityItems, setCityItems ] = useState( [] )
-
-
-  // console.log('loading in home list header', loading)
-  // console.log('media length in home list header', media.length)
-  // console.log('loading in home list header', loading)
 
   useEffect( () => {
     initCities( media, setCityItems )
@@ -34,6 +29,7 @@ const HomeListHeader = ( { media, filterCityHandler, navigation, loading } ) => 
     } }>
       {
         <DropDownPicker
+          loading={loading}
           open={ cityFilterOpen }
           value={ cityFilterValue }
           items={ cityItems }
