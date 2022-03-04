@@ -20,7 +20,7 @@ const Home = ( { navigation } ) => {
       console.log( 'HomeList focus' )
       await login
     } )
-  } )
+  }, [] )
 
   return <HomeList navigation={ navigation } />
 }
