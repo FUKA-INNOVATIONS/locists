@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native';
 const authStorage = new AuthStorage();
 
 export default function App() {
+  console.log( 'App.js' )
   return (
       <>
         <AuthStorageContext.Provider value={ authStorage }>

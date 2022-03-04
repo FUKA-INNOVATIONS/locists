@@ -42,7 +42,9 @@ const useMedia = () => {
       case 'postsFirst':
         return [ ...posts, ...events ]
       default:
+        setLoading(true)
         // return mixed.sort( () => Math.random() - 0.5 )
+        setLoading(false)
         return mixed
     }
 

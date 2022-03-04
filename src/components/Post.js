@@ -9,8 +9,7 @@ import AddComment from '../../assets/icons/AddComment.svg';
 
 
 const Post = ( { postMedia, ownProfile } ) => {
-
-    console.log(postMedia);
+  console.log('Home.js')
   return (
       <>
           {
