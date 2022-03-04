@@ -9,7 +9,7 @@ import AddComment from '../../assets/icons/AddComment.svg';
 
 
 const Post = ( { postMedia, ownProfile } ) => {
-  // console.log('Home.js')
+  // console.log('Post.js', postMedia)
   return (
       <>
           {
@@ -25,16 +25,10 @@ const Post = ( { postMedia, ownProfile } ) => {
         <View style={ [ theme.generalListPost, theme.post ] }>
           {
             postMedia.description.hasImage && <Image
-                source={ { uri: uploadsUrl + postMedia.filename } }
+                source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
                 style={ theme.postImage }
             />
           }
-          { /* { postMedia.filename &&
-          <Image
-              source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
-              style={ theme.postImage }
-          />
-          } */ }
           <View style={ theme.postInfo }>
             <View style={ theme.postText }>
               <Text>{ postMedia.description.description }</Text>

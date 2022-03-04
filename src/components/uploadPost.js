@@ -61,8 +61,6 @@ const UploadPost = props => {
     location: getValues().location,
     description: getValues().description,
     hasImage: imageSelected !== dummyImage,
-    width,
-    height,
   };
 
   const resetAll = () => {

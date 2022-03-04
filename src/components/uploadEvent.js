@@ -106,8 +106,6 @@ const UploadEvent = props => {
     date: dateTime,
     description: getValues().description,
     price: getValues().price,
-    width,
-    height
   }
 
   const resetAll = () => {

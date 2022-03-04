@@ -9,7 +9,7 @@ import UserInfo from './UserInfo'
 import Location from '../../assets/icons/Location.svg'
 
 const Event = ( { eventDetails, ownProfile } ) => {
-  // console.log('Event.js')
+  // console.log('Event.js', eventDetails)
 
   if ( eventDetails === null ) {
     return (
@@ -59,7 +59,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <DeleteMedia file_id={ eventDetails.file_id } /> }
           </View>
         </View>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
+        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w160 } }
                style={ theme.eventImage } />
       </View>
     </>
