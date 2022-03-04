@@ -1,8 +1,9 @@
-import { Button, Image, Text, View } from 'react-native';
+import { Button, Image, Text, View, TouchableOpacity } from 'react-native';
 import { useForm } from 'react-hook-form';
 import useDevice from '../hooks/useDevice';
 import useMedia from '../hooks/useMedia';
 import useAuthStorage from '../hooks/useAuthStorage';
+import theme from "../theme";
 
 const UploadAvatar = props => {
   const { user } = useAuthStorage();
@@ -37,18 +38,27 @@ const UploadAvatar = props => {
 
   return (
       <>
-        <Text>Upload profile image</Text>
         <Image source={ { uri: image } }
-               style={ { width: 200, height: 200, borderRadius: 100 } }/>
+               style={ theme.changePicture }/>
         <View>
-          <Button title="Choose image" onPress={ pickImage }/>
-          <Button
+          <TouchableOpacity style={ theme.generalBtn } onPress={ pickImage }>
+            <Text style={ theme.loginButtonText }>Choose Image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={ theme.generalBtn } onPress={ reset }>
+            <Text style={ theme.loginButtonText }>Reset</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={ theme.generalBtn }
+                            disabled={ !imageSelected }
+                            loading={ loadingMediaUpload }
+                            onPress={ handleSubmit( data => props.onSubmit( data, mediaDescription, imageSelected, image ) ) }>
+            <Text style={ theme.loginButtonText }>Upload</Text>
+          </TouchableOpacity>
+          {/*<Button
               disabled={ !imageSelected }
               loading={ loadingMediaUpload }
               title="Upload"
               onPress={ handleSubmit( data => props.onSubmit( data, mediaDescription, imageSelected, image ) ) }
-          />
-          <Button title="Reset form" onPress={ reset }/>
+          />*/}
         </View>
       </>
   );

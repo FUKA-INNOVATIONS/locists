@@ -126,6 +126,7 @@ const EventsList = ( { navigation, events, loading, fetchEvents } ) => {
           onOpen={ onSortOpen }
           onSelectItem={ ( item ) => sortHandler( item.value ) }
           // onChangeValue={ ( value ) => setSortValue(value) }
+          style={ theme.dropdown }
           zIndex={ 3000 }
           zIndexInverse={ 3000 }
         />

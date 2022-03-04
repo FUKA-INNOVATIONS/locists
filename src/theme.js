@@ -122,8 +122,19 @@ const theme = {
     alignItems: 'center',
     marginLeft: 5,
   },
-  addCommentBtn: {
-
+  dropdown: {
+    borderColor: general.colors.btn,
+    borderWidth: 2,
+  },
+  dropdownMenu: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  dropdownExplore: {
+    borderColor: general.colors.btn,
+    width: width * 0.45,
+    marginHorizontal: 5,
   },
   addCommentButtons: {
     width: width * 0.85,
@@ -135,6 +146,13 @@ const theme = {
     height: 30,
     borderRadius: 15,
     marginRight: 10,
+  },
+  changePicture: {
+    alignSelf: 'center',
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    marginVertical: 20,
   },
 
   // In List Post Styles
@@ -327,6 +345,7 @@ const theme = {
   // Create Media Styles
   addImage: {
     alignSelf: 'center',
+    marginTop: 10,
     width: width * 0.8,
     aspectRatio: 1.4,
   },

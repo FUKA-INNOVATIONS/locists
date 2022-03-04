@@ -112,6 +112,7 @@ const HomeList = ( { navigation } ) => {
           listMode={'SCROLLVIEW'}
           theme={'LIGHT'}
           searchable={true}
+          style={ theme.dropdown }
           // mode="BADGE"
           searchTextInputProps={{
             maxLength: 25

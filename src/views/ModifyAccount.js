@@ -1,4 +1,4 @@
-import {View, Alert, Button, TextInput, ScrollView} from 'react-native';
+import {View, Text, Alert, Button, TextInput, ScrollView, TouchableOpacity} from 'react-native';
 import useAuthStorage from "../hooks/useAuthStorage";
 import useUser from "../hooks/useUser";
 import {Controller, useForm} from "react-hook-form";
@@ -73,7 +73,7 @@ const ModifyAccount = ({navigation, route}) => {
         type === 'picture' ?
             <UploadMedia mediaType={'avatar'} navigation={navigation}/>
             :
-            <ScrollView style={{marginTop: 50, marginHorizontal: 10}}>
+            <ScrollView style={ { marginHorizontal: 10 } }>
                 <Button title={'Go back'} onPress={onModalCloseHandler}/>
                 <View style={theme.inputContainer}>
                     <Controller
@@ -221,7 +221,9 @@ const ModifyAccount = ({navigation, route}) => {
                         name="full_name"
                     />
                 </View>
-                <Button title="Update details" onPress={handleSubmit(onSubmit)}/>
+                <TouchableOpacity style={ theme.generalBtn } onPress={handleSubmit(onSubmit)}>
+                    <Text style={theme.loginButtonText}>Update Details</Text>
+                </TouchableOpacity>
 
             </ScrollView>
     );

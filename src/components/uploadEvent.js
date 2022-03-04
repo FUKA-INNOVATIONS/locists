@@ -18,6 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
+import {Touchable} from "react-native-web";
 
 
 const UploadEvent = props => {
@@ -120,7 +121,6 @@ const UploadEvent = props => {
   return (
     <>
       <ScrollView>
-        <Text>Create new event</Text>
         {
           // TODO Replace Default image with custom component
         }
@@ -210,9 +210,13 @@ const UploadEvent = props => {
 
             <View style={ { justifyContent: 'center' } }>
               <Text style={ { color: 'white' } }>{getValues().date && dateTime.toLocaleString()}</Text>
-              <Button onPress={ showDatepicker } title='Select date!' />
-              <Button onPress={ showTimepicker } title='Select time!' />
-            </View>
+              <TouchableOpacity style={ theme.generalBtn } onPress={ showDatepicker }>
+                <Text style={ theme.loginButtonText }>Select Date</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={ theme.generalBtn } onPress={ showTimepicker }>
+                <Text style={ theme.loginButtonText }>Select Time</Text>
+              </TouchableOpacity>
+             </View>
           </View>
 
           <View style={ theme.inputContainer }>

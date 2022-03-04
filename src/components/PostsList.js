@@ -99,11 +99,7 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
 
   const ListHeader = () => {
     return (
-      <View style={ {
-        backgroundColor: theme.colors.backgroundColor,
-        justifyContent: 'center',
-        padding: 10,
-      } }
+      <View style={ theme.dropdownMenu }
       >
         <DropDownPicker
           loading={loading}
@@ -117,6 +113,8 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           onOpen={ onSortOpen }
           onSelectItem={ ( item ) => sortHandler( item.value ) }
           // onChangeValue={ ( value ) => setSortValue(value) }
+          style={ [theme.dropdownExplore, {alignSelf: 'flex-end'}] }
+          containerStyle={ [theme.dropdownExplore] }
           zIndex={ 3000 }
           zIndexInverse={ 3000 }
         />
@@ -141,6 +139,8 @@ const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
           }}
           addCustomItem={true}
           searchPlaceholder="Search location"
+          style={ theme.dropdownExplore }
+          containerStyle={ theme.dropdownExplore }
           searchContainerStyle={{
             borderBottomColor: "#dfdfdf",
             ...theme.inputContainer,
