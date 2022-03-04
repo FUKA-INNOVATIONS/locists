@@ -8,7 +8,7 @@ import {
   sortSoonestEvents,
 } from '../utils/sortFilterHelpers'
 
-const EventListHeader = ( {
+const PostsListHeader = ( {
   media,
   activeList,
   setActiveList,
@@ -23,10 +23,9 @@ const EventListHeader = ( {
   const [ sortOpen, setSortOpen ] = useState( false )
   const [ sortValue, setSortValue ] = useState( 'latest' )
   const [ sortItems, setSortItems ] = useState( [
-    { label: 'Freshest events', value: 'latest' },
+    { label: 'Freshest posts', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
-    { label: 'Most attendees', value: 'mostAttendees' },
-    { label: 'Upcoming events', value: 'soonest' },
+    { label: 'Most likes', value: 'mostLikes' },
   ] )
 
   useEffect( () => {
@@ -58,10 +57,6 @@ const EventListHeader = ( {
       case 'mostCommented':
         const mostCommented = sortMostCommented( activeList ) // eslint-disable-line
         setActiveList( [ ...mostCommented ] )
-        break
-      case 'mostAttendees':
-        const mostAttendees = sortMostAttendees( activeList ) // eslint-disable-line
-        setActiveList( [ ...mostAttendees ] )
         break
       default:
         const defaultSort = sortLatest( activeList ) // eslint-disable-line
@@ -142,4 +137,4 @@ const EventListHeader = ( {
   )
 }
 
-export default EventListHeader
+export default PostsListHeader
