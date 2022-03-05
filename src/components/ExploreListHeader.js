@@ -38,13 +38,8 @@ const EventListHeader = ( {
   const [ sortValue, setSortValue ] = useState( 'latest' )
   const [ sortItems, setSortItems ] = useState( mediaType === 'event' ? eventSortItems : postSortItems )
 
-  console.log('t', mediaType)
-
   useEffect( () => {
     initCities( media, setCityItems )
-  }, [] )
-
-  useEffect( () => {
     return navigation.addListener( 'focus', async () => {
       initCities( media, setCityItems )
     } )

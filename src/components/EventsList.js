@@ -13,16 +13,16 @@ const EventsList = ( { navigation } ) => {
   const [ events, setEvents ] = useState( [] )
   const [ activeList, setActiveList ] = useState( events )
 
-  useEffect( async () => {
+  useEffect( () => {
     // console.log( 'EventsList.js useEffect' )
     setLoading( true )
     getEventsWithThumbnails().then( events => {
       setEvents( events )
       setActiveList( events )
     } ).finally( () => setLoading( false ) )
-  }, [] )
 
-  useEffect( () => {
+    // To keep state up to date
+    // TODO instead update app state on changes like add/delete new event/comment/attendee
     return navigation.addListener( 'focus', async () => {
       // console.log( 'EventsList.js focus' )
       setLoading( true )

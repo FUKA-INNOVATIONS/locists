@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
-import PostsListHeader from './PostsListHeader'
 import ExploreListHeader from './ExploreListHeader'
 
 const PostsList = ( { navigation } ) => {
@@ -14,18 +13,18 @@ const PostsList = ( { navigation } ) => {
   const [ posts, setPosts ] = useState( [] )
   const [ activeList, setActiveList ] = useState( posts )
 
-  useEffect( async () => {
-    // console.log( 'PostList.js useEffect' )
+  useEffect( () => {
+    console.log( 'PostList.js useEffect' )
     setLoading( true )
     getPostsWithThumbnails().then( posts => {
       setPosts( posts )
       setActiveList( posts )
     } ).finally( () => setLoading( false ) )
-  }, [] )
 
-  useEffect( () => {
+    // To keep state up to date
+    // TODO instead update app state on changes like add/delete new post/comment/like
     return navigation.addListener( 'focus', async () => {
-      // console.log( 'PostList.js focus' )
+      console.log( 'PostList.js focus' )
       setLoading( true )
       getPostsWithThumbnails().then( posts => {
         setPosts( posts )
