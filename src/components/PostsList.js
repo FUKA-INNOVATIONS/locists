@@ -14,7 +14,7 @@ const PostsList = ( { navigation } ) => {
   const [ activeList, setActiveList ] = useState( posts )
 
   useEffect( () => {
-    console.log( 'PostList.js useEffect' )
+    // console.log( 'PostList.js useEffect' )
     setLoading( true )
     getPostsWithThumbnails().then( posts => {
       setPosts( posts )
@@ -24,7 +24,7 @@ const PostsList = ( { navigation } ) => {
     // To keep state up to date
     // TODO instead update app state on changes like add/delete new post/comment/like
     return navigation.addListener( 'focus', async () => {
-      console.log( 'PostList.js focus' )
+      // console.log( 'PostList.js focus' )
       setLoading( true )
       getPostsWithThumbnails().then( posts => {
         setPosts( posts )

@@ -4,8 +4,8 @@ import Event from './Event'
 import useMedia from '../hooks/useMedia'
 import { useEffect, useState } from 'react'
 import Loading from './Loading'
-import HomeListHeader from './HomeListHeader'
 import EmptyListMessage from './EmptyListMessage'
+import ExploreListHeader from './ExploreListHeader'
 
 const HomeList = ( { navigation } ) => {
   // console.log('HomeList.js')
@@ -16,8 +16,20 @@ const HomeList = ( { navigation } ) => {
   const [ loading, setLoading ] = useState( false )
 
   useEffect( () => {
+    console.log( 'HomeList.js useEffect' )
+    setLoading( true )
+    getAllMedia().then( mixedMedia => {
+      setActiveList( mixedMedia )
+      setMixedMedia( mixedMedia )
+    } ).finally( () => {
+      console.log( 'HomeList getAllMedia in useEffect ready' )
+      setLoading( false )
+    } )
+
+    // To keep state up to date
+    // TODO instead update app state on changes like add/delete new event/comment/attendee
     return navigation.addListener( 'focus', async () => {
-      // console.log( 'HomeList.js focus' )
+      console.log( 'HomeList.js focus' )
       setLoading( true )
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
@@ -26,16 +38,6 @@ const HomeList = ( { navigation } ) => {
     } )
   }, [] )
 
-  useEffect( async () => {
-    setLoading( true )
-    getAllMedia().then( mixedMedia => {
-      setActiveList( mixedMedia )
-      setMixedMedia( mixedMedia )
-    } ).finally( () => {
-      // console.log( 'HomeList getAllMedia in useEffect ready' )
-      setLoading( false )
-    } )
-  }, [] )
 
   // Move user to single event view when tapping event card
   const eventPressHandler = ( eventId ) => {
@@ -47,21 +49,6 @@ const HomeList = ( { navigation } ) => {
     navigation.navigate( 'SinglePostHomeStack', { postId: postId } )
   }
 
-  const filterCityHandler = ( city ) => {
-    if ( city === 'all' ) {
-      setLoading( true )
-      getAllMedia().then( mixedMedia => {
-        setActiveList( mixedMedia )
-        setMixedMedia( mixedMedia )
-        setLoading( false )
-      } )
-    } else {
-      const filter = mixedMedia.filter(
-        item => item.description.location === city )
-      setActiveList( filter )
-      setLoading( false )
-    }
-  }
 
   if ( loading ) return <Loading />
 
@@ -69,10 +56,12 @@ const HomeList = ( { navigation } ) => {
     <FlatList
       data={ activeList }
       ListHeaderComponent={
-        <HomeListHeader
-          navigation={ navigation }
-          filterCityHandler={ filterCityHandler }
+        <ExploreListHeader
+          mediaType={'mixedMedia'}
           media={ mixedMedia }
+          activeList={ activeList }
+          setActiveList={ setActiveList }
+          navigation={ navigation }
           loading={ loading }
         /> }
       stickyHeaderIndices={ [ 0 ] }

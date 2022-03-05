@@ -101,21 +101,23 @@ const EventListHeader = ( {
       padding: 0,
 
     } }>
-      <DropDownPicker
-        loading={ loading }
-        open={ sortOpen }
-        value={ sortValue }
-        items={ sortItems }
-        setOpen={ setSortOpen }
-        setValue={ setSortValue }
-        setItems={ setSortItems }
-        // onPress={ ( open ) => setCityFilterOpen( false ) }
-        onOpen={ onSortOpen }
-        onSelectItem={ ( item ) => sortHandler( item.value ) }
-        // onChangeValue={ ( value ) => setSortValue(value) }
-        zIndex={ 3000 }
-        zIndexInverse={ 3000 }
-      />
+      {(mediaType === 'event' || mediaType === 'post') &&
+        <DropDownPicker
+          loading={ loading }
+          open={ sortOpen }
+          value={ sortValue }
+          items={ sortItems }
+          setOpen={ setSortOpen }
+          setValue={ setSortValue }
+          setItems={ setSortItems }
+          // onPress={ ( open ) => setCityFilterOpen( false ) }
+          onOpen={ onSortOpen }
+          onSelectItem={ ( item ) => sortHandler( item.value ) }
+          // onChangeValue={ ( value ) => setSortValue(value) }
+          zIndex={ 3000 }
+          zIndexInverse={ 3000 }
+        />
+      }
 
       <DropDownPicker
         loading={ loading }
