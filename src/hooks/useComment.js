@@ -1,28 +1,27 @@
-import { baseUrl } from '../../config';
-import axios from 'axios';
-import doFetch from '../utils/doFetch';
-import useAuthStorage from './useAuthStorage';
+import { baseUrl } from '../../config'
+import axios from 'axios'
+import doFetch from '../utils/doFetch'
+import useAuthStorage from './useAuthStorage'
 
 const useComment = () => {
-  const authStorage = useAuthStorage();
-
+  const authStorage = useAuthStorage()
 
   const getMediaComments = async ( mediaId ) => {
-    const URL = `${ baseUrl }comments/file/${ mediaId }`;
+    const URL = `${ baseUrl }comments/file/${ mediaId }`
     try {
-      const comments = await axios.get( URL );
-      return comments.data;
+      const comments = await axios.get( URL )
+      return comments.data
     } catch ( e ) {
-      console.log( e );
+      console.log( e )
     }
-  };
+  }
 
   const postComment = async ( file_id, content ) => { // eslint-disable-line
     const token = await authStorage.getToken()
     const newComment = {
       file_id,
       comment: content,
-    };
+    }
     const options = {
       method: 'POST',
       headers: {
@@ -30,16 +29,16 @@ const useComment = () => {
         'x-access-token': token,
       },
       body: JSON.stringify( newComment ),
-    };
-
-    try {
-      return await doFetch( baseUrl + 'comments/', options );
-    } catch ( error ) {
-      console.log( 'error in postComment hook', error );
-      return false;
     }
 
-  };
+    try {
+      return await doFetch( baseUrl + 'comments/', options )
+    } catch ( error ) {
+      console.log( 'error in postComment hook', error )
+      return false
+    }
+
+  }
 
   const deleteComment = async ( id ) => {
     const token = await authStorage.getToken()
@@ -48,15 +47,15 @@ const useComment = () => {
       headers: {
         'x-access-token': token,
       },
-    };
+    }
 
     try {
-      return await doFetch( baseUrl + 'comments/' + id, options );
+      return await doFetch( baseUrl + 'comments/' + id, options )
     } catch ( error ) {
-      console.log( 'error in deleteComment hook', error );
-      return false;
+      console.log( 'error in deleteComment hook', error )
+      return false
     }
-  };
+  }
 
   const getCurrentUserComments = async () => {
     const token = await authStorage.getToken()
@@ -65,23 +64,23 @@ const useComment = () => {
       headers: {
         'x-access-token': token,
       },
-    };
+    }
 
     try {
-      return await doFetch( baseUrl + 'comments/', options );
+      return await doFetch( baseUrl + 'comments/', options )
     } catch ( error ) {
-      console.log( 'error in getCurrentUserComments hook', error );
-      return false;
+      console.log( 'error in getCurrentUserComments hook', error )
+      return false
     }
-  };
+  }
 
   return {
     getMediaComments,
     postComment,
     deleteComment,
     getCurrentUserComments,
-  };
+  }
 
-};
+}
 
-export default useComment;
+export default useComment

@@ -43,7 +43,7 @@ const EventsList = ( { navigation } ) => {
     <FlatList
       ListHeaderComponent={
         <ExploreListHeader
-          mediaType={'event'}
+          mediaType={ 'event' }
           media={ events }
           activeList={ activeList }
           setActiveList={ setActiveList }

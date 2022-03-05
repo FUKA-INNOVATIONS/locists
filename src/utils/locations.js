@@ -26,6 +26,6 @@ export const locations = [
 
   {
     label: 'Kauniainen',
-    value: 'kauniainen'
+    value: 'kauniainen',
   },
 ]

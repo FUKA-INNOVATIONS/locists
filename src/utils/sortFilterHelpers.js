@@ -27,16 +27,18 @@ export const sortMostLikes = ( arr ) => {
 }
 
 /* export const dateInPast = function( firstDate, secondDate ) {
-  if ( firstDate.setHours( 0, 0, 0, 0 ) <= secondDate.setHours( 0, 0, 0, 0 ) ) {
-    return true
-  }
-} */
+ if ( firstDate.setHours( 0, 0, 0, 0 ) <= secondDate.setHours( 0, 0, 0, 0 ) ) {
+ return true
+ }
+ } */
 
 export const sortSoonestEvents = ( arr ) => {
   return arr.sort( function( a, b ) {
     return Number( new Date( a.description.date ) ) -
       Number( new Date( b.description.date ) )
-  } ).filter(event =>  new Date().getTime() <= new Date(event.description.date).getTime())
+  } ).
+    filter( event => new Date().getTime() <=
+      new Date( event.description.date ).getTime() )
 }
 
 export const initCities = ( arr, setArr ) => {

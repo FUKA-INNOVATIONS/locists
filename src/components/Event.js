@@ -15,15 +15,15 @@ const Event = ( { eventDetails, ownProfile } ) => {
   if ( eventDetails === null ) return <Loading />
 
   return (
-      <>
-          {
-              !ownProfile
-              &&
-              <View style={ { marginLeft: 10, marginVertical: 3 } }>
-                  <UserInfo username={ eventDetails.description.owner }
-                            avatar={ eventDetails.description.ownerAvatar }/>
-              </View>
-          }
+    <>
+      {
+        !ownProfile
+        &&
+        <View style={ { marginLeft: 10, marginVertical: 3 } }>
+          <UserInfo username={ eventDetails.description.owner }
+                    avatar={ eventDetails.description.ownerAvatar } />
+        </View>
+      }
 
       <View style={ [ theme.generalListPost, theme.event ] }>
         <View style={ theme.eventInfo }>

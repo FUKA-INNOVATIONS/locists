@@ -34,10 +34,9 @@ const HomeList = ( { navigation } ) => {
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
-      } ).finally(() => setLoading( false ))
+      } ).finally( () => setLoading( false ) )
     } )
   }, [] )
-
 
   // Move user to single event view when tapping event card
   const eventPressHandler = ( eventId ) => {
@@ -49,7 +48,6 @@ const HomeList = ( { navigation } ) => {
     navigation.navigate( 'SinglePostHomeStack', { postId: postId } )
   }
 
-
   if ( loading ) return <Loading />
 
   return (
@@ -57,7 +55,7 @@ const HomeList = ( { navigation } ) => {
       data={ activeList }
       ListHeaderComponent={
         <ExploreListHeader
-          mediaType={'mixedMedia'}
+          mediaType={ 'mixedMedia' }
           media={ mixedMedia }
           activeList={ activeList }
           setActiveList={ setActiveList }

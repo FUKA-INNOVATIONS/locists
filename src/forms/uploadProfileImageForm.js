@@ -2,4 +2,4 @@ const UploadProfileImageForm = () => {
 
 }
 
-export default UploadProfileImageForm;
+export default UploadProfileImageForm

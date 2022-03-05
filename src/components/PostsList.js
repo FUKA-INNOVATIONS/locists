@@ -43,7 +43,7 @@ const PostsList = ( { navigation } ) => {
     <FlatList
       ListHeaderComponent={
         <ExploreListHeader
-          mediaType={'post'}
+          mediaType={ 'post' }
           media={ posts }
           activeList={ activeList }
           setActiveList={ setActiveList }

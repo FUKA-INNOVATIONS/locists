@@ -1,7 +1,7 @@
 import { Platform, Dimensions, StatusBar } from 'react-native'
 
-const {width} = Dimensions.get('screen');
-const {height} = Dimensions.get('screen');
+const { width } = Dimensions.get( 'screen' )
+const { height } = Dimensions.get( 'screen' )
 
 const general = {
   colors: {
@@ -11,7 +11,7 @@ const general = {
     txtLight: '#ffffff',
     txtDark: '#000000',
     txtError: '#d52d2d',
-    postBackground: '#E9D6DB'
+    postBackground: '#E9D6DB',
   },
 }
 
@@ -38,11 +38,11 @@ const theme = {
     subheading: 16,
   },
   fonts: {
-    main: Platform.select({
+    main: Platform.select( {
       ios: 'Arial',
       android: 'Roboto',
       default: 'System',
-    }),
+    } ),
   },
   fontWeights: {
     normal: '400',
@@ -111,9 +111,7 @@ const theme = {
   commentInfo: {
     flexDirection: 'row',
   },
-  commentExtra: {
-
-  },
+  commentExtra: {},
   commentUser: {
     width: 30,
     height: 30,
@@ -157,7 +155,7 @@ const theme = {
     width: '80%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   singlePostLikes: {
     marginLeft: 10,
@@ -182,7 +180,7 @@ const theme = {
     justifyContent: 'flex-start',
     marginTop: 3,
     alignItems: 'center',
-    width: width/3,
+    width: width / 3,
   },
   eventImage: {
     width: 135,
@@ -224,7 +222,7 @@ const theme = {
   },
   singlePostOwner: {
     alignSelf: 'flex-start',
-    color: general.colors.txtLight
+    color: general.colors.txtLight,
   },
   imageAndLikes: {
     flexDirection: 'row',
@@ -338,7 +336,7 @@ const theme = {
     width: width * 0.3,
     aspectRatio: 0.8,
     borderWidth: 1,
-    borderColor: 'white'
+    borderColor: 'white',
   },
   profileInfoCard: {
     width: width * 0.55,
@@ -350,4 +348,4 @@ const theme = {
   },
 }
 
-export default theme;
+export default theme

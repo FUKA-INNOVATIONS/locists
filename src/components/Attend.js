@@ -13,11 +13,11 @@ const Attend = ( { file_id, displayIcon } ) => {  // eslint-disable-line
   useEffect( () => {
     let cancel = true
     getMediaFavourites( file_id ).then( mediaFavourites => {
-      if(cancel) return
+      if ( cancel ) return
       setMediaFavourites( mediaFavourites )
     } )
     return () => {
-      cancel = true;
+      cancel = true
     }
   }, [] )
 

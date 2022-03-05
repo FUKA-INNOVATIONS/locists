@@ -1,16 +1,16 @@
-import UploadMedia from '../components/UploadMedia';
-import { Button } from 'react-native';
+import UploadMedia from '../components/UploadMedia'
+import { Button } from 'react-native'
 
 const CreateEvent = ( { navigation } ) => {
   const onModalCloseHandler = () => {
-    navigation.goBack();
-  };
+    navigation.goBack()
+  }
   return (
-      <>
-        <Button title={ 'Close' } onPress={ onModalCloseHandler }/>
-        <UploadMedia mediaType={ 'event' } navigation={ navigation }/>
-      </>
-  );
-};
+    <>
+      <Button title={ 'Close' } onPress={ onModalCloseHandler } />
+      <UploadMedia mediaType={ 'event' } navigation={ navigation } />
+    </>
+  )
+}
 
-export default CreateEvent;
+export default CreateEvent

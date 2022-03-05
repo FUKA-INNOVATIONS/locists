@@ -43,10 +43,12 @@ const useMedia = () => {
       event.description.ownerAvatar = await fetchAvatar( event.user_id )
 
       // Set comments count for sorting
-      event.description.commentsCount = await getMediaComments( event.file_id ).then( e => e.length )
+      event.description.commentsCount = await getMediaComments( event.file_id ).
+        then( e => e.length )
 
       // Set attendees count for sorting
-      event.description.attendeesCount = await getMediaFavourites( event.file_id ).then( favs => favs.length )
+      event.description.attendeesCount = await getMediaFavourites(
+        event.file_id ).then( favs => favs.length )
 
       event.eventId = i + 1 // Set internal id for list opt
 
