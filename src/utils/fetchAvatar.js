@@ -1,16 +1,16 @@
-import { uploadsUrl } from '../../config';
-import useTag from '../hooks/useTag';
+import { uploadsUrl } from '../../config'
+import useTag from '../hooks/useTag'
 
 const fetchAvatar = async ( userId ) => {
-  const { getFilesByTag } = useTag();
+  const { getFilesByTag } = useTag()
   try {
-    const avatarArray = await getFilesByTag( 'avatar_' + userId );
-    const avatar = avatarArray.pop();
+    const avatarArray = await getFilesByTag( 'avatar_' + userId )
+    const avatar = avatarArray.pop()
     // console.log('avatar', avatar)
-    return uploadsUrl + avatar.filename;
+    return uploadsUrl + avatar.filename
   } catch ( error ) {
-    console.error( error.message );
+    console.error( error.message )
   }
-};
+}
 
-export default fetchAvatar;
+export default fetchAvatar

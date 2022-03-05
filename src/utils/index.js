@@ -1,5 +1,7 @@
 // index.js
 
+// TODO move to assets folder
+
 export { default as HomeEmpty } from '../../assets/icons/HomeEmpty.svg';
 export { default as HomeFull } from '../../assets/icons/HomeFull.svg';
 export { default as ExploreEmpty } from '../../assets/icons/ExploreEmpty.svg';

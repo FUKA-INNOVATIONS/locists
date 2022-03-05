@@ -1,12 +1,9 @@
-import doFetch from '../utils/doFetch';
-import { baseUrl } from '../../config';
-import useAuthStorage from './useAuthStorage';
-import { useState } from 'react';
+import doFetch from '../utils/doFetch'
+import { baseUrl } from '../../config'
+import useAuthStorage from './useAuthStorage'
 
 const useFavourite = () => {
-  const { user } = useAuthStorage();
-  const [ mediaFavourites, setMediaFavourites ] = useState( [] );
-  const [ userFavourites, setUserFavourites ] = useState( [] ); // eslint-disable-line
+  const { user } = useAuthStorage()
 
   const createFavourite = async ( file_id ) => {  // eslint-disable-line
     const options = {
@@ -16,15 +13,15 @@ const useFavourite = () => {
         'x-access-token': user.token,
       },
       body: JSON.stringify( { file_id } ),
-    };
+    }
 
     try {
-      return await doFetch( baseUrl + 'favourites/', options );
+      return await doFetch( baseUrl + 'favourites/', options )
     } catch ( error ) {
-      console.log( 'error in createFavourite hook', error );
-      return false;
+      console.log( 'error in createFavourite hook', error )
+      return false
     }
-  };
+  }
 
   const deleteFavourite = async ( id ) => {
     const options = {
@@ -32,15 +29,15 @@ const useFavourite = () => {
       headers: {
         'x-access-token': user.token,
       },
-    };
+    }
 
     try {
-      return await doFetch( baseUrl + 'favourites/file/' + id, options );
+      return await doFetch( baseUrl + 'favourites/file/' + id, options )
     } catch ( error ) {
-      console.log( 'error in deleteFavourite hook', error );
-      return false;
+      console.log( 'error in deleteFavourite hook', error )
+      return false
     }
-  };
+  }
 
   const getCurrentUserFavourites = async () => {
     const options = {
@@ -48,44 +45,41 @@ const useFavourite = () => {
       headers: {
         'x-access-token': user.token,
       },
-    };
-    try {
-      return await doFetch( baseUrl + 'favourites/', options );
-    } catch ( error ) {
-      console.log( 'error in getCurrentUserFavourites hook', error );
-      return false;
     }
-  };
+    try {
+      return await doFetch( baseUrl + 'favourites/', options )
+    } catch ( error ) {
+      console.log( 'error in getCurrentUserFavourites hook', error )
+      return false
+    }
+  }
 
   const getMediaFavourites = async ( id ) => {
     const options = {
       method: 'GET',
-    };
+    }
 
     try {
       let favourites = await doFetch( baseUrl + 'favourites/file/' + id,
-          options );
+        options )
       // favourites.isOwner = favourites.user_id === user.user_id;
       favourites = favourites.map( favourite => {
-        return { ...favourite, isOwner: favourite.user_id === user.user_id };
-      } );
+        return { ...favourite, isOwner: favourite.user_id === user.user_id }
+      } )
       // console.log('f', favourites)
-      setMediaFavourites( favourites );
-      return favourites;
+      return favourites
     } catch ( error ) {
-      console.log( 'error in getMediaFavourites hook', error );
-      return false;
+      console.log( 'error in getMediaFavourites hook', error )
+      return false
     }
-  };
+  }
 
   return {
     createFavourite,
     deleteFavourite,
     getCurrentUserFavourites,
     getMediaFavourites,
-    mediaFavourites,
-    userFavourites,
-  };
-};
+  }
+}
 
-export default useFavourite;
+export default useFavourite

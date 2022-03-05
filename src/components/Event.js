@@ -7,33 +7,23 @@ import { Entypo } from '@expo/vector-icons'
 import UserInfo from './UserInfo'
 
 import Location from '../../assets/icons/Location.svg'
+import Loading from './Loading'
 
 const Event = ( { eventDetails, ownProfile } ) => {
-  // console.log(eventDetails)
+  // console.log('Event.js', eventDetails)
 
-  if ( eventDetails === null ) {
-    return (
-      <View>
-        <Text>
-          Loading...
-        </Text>
-      </View>
-    )
-  }
-
-  // console.log('eventDetails in Event.js', eventDetails)
-  // TODO: fix rendering
+  if ( eventDetails === null ) return <Loading />
 
   return (
-      <>
-          {
-              !ownProfile
-              &&
-              <View style={ { marginLeft: 10, marginVertical: 3 } }>
-                  <UserInfo username={ eventDetails.description.owner }
-                            avatar={ eventDetails.description.ownerAvatar }/>
-              </View>
-          }
+    <>
+      {
+        !ownProfile
+        &&
+        <View style={ { marginLeft: 10, marginVertical: 3 } }>
+          <UserInfo username={ eventDetails.description.owner }
+                    avatar={ eventDetails.description.ownerAvatar } />
+        </View>
+      }
 
       <View style={ [ theme.generalListPost, theme.event ] }>
         <View style={ theme.eventInfo }>
@@ -59,7 +49,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <DeleteMedia file_id={ eventDetails.file_id } /> }
           </View>
         </View>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
+        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w160 } }
                style={ theme.eventImage } />
       </View>
     </>

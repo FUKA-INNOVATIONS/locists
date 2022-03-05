@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 import theme from '../theme';
 import useUser from '../hooks/useUser';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Loading from './Loading'
 
 const RegisterSchema = Yup.object().shape( {
   username: Yup.string().
@@ -99,15 +100,7 @@ const Register = ( { navigation } ) => {
     console.log( 'registeredUser Register.js: ', registeredUser );
   };
 
-  if ( loading ) {
-    return (
-        <View>
-          <Text>
-            Loading..
-          </Text>
-        </View>
-    );
-  }
+  if ( loading ) return <Loading />
 
   return (
       <KeyboardAvoidingView

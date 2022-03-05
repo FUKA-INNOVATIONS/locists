@@ -1,162 +1,56 @@
-import { FlatList, Pressable, Text, View } from 'react-native'
-import { useCallback, useEffect, useState } from 'react'
+import { FlatList, Pressable } from 'react-native'
+import { useEffect, useState } from 'react'
 import Post from './Post'
-import DropDownPicker from 'react-native-dropdown-picker'
+import useMedia from '../hooks/useMedia'
+import Loading from './Loading'
+import ExploreListHeader from './ExploreListHeader'
 
-import {
-  sortLatest,
-  sortMostCommented,
-  sortMostLikes,
-  initCities
-} from '../utils/sortFilterHelpers'
-import theme from '../theme'
+const PostsList = ( { navigation } ) => {
+  // console.log( 'PostsList.js rendered');
 
-const PostsList = ( { navigation, posts, loading, fetchPosts } ) => {
-  // console.log( 'PostsList rendered');
-
-  if ( loading || !posts ) {
-    return (
-      <View>
-        <Text>
-          Loading..
-        </Text>
-      </View>
-    )
-  }
-
+  const { getPostsWithThumbnails } = useMedia()
+  const [ loading, setLoading ] = useState( false )
+  const [ posts, setPosts ] = useState( [] )
   const [ activeList, setActiveList ] = useState( posts )
 
-  const [ sortOpen, setSortOpen ] = useState( false )
-  const [ sortValue, setSortValue ] = useState( 'latest' )
-  const [ sortItems, setSortItems ] = useState( [
-    { label: 'Freshest posts', value: 'latest' },
-    { label: 'Most commented', value: 'mostCommented' },
-    { label: 'Most likes', value: 'mostLikes' },
-  ] )
-
-  const [ cityFilterOpen, setCityFilterOpen ] = useState( false )
-  const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
-  const [ CityItems, setCityItems ] = useState( [] )
-
   useEffect( () => {
-    initCities(posts, setCityItems)
-  }, [] )
-
-  useEffect( () => {
-    return navigation.addListener( 'focus', async () => {
-      console.log( 'PostsList focus' )
-      initCities(posts, setCityItems)
-    } )
-  }, [] )
-
-  useEffect( () => {
-    sortHandler( sortValue )
-  }, [ sortValue ] )
-
-  const sortHandler = ( type ) => {
-    switch ( type ) {
-      case 'latest':
-        const latest = sortLatest( activeList ) // eslint-disable-line
-        // console.log('latest', latest)
-        setActiveList( latest )
-        break
-      case 'mostCommented':
-        const mostCommented = sortMostCommented( activeList ) // eslint-disable-line
-        // console.log('most commented', mostCommented)
-        setActiveList( mostCommented )
-        break
-      case 'mostLikes':
-        const mostLikes = sortMostLikes( activeList ) // eslint-disable-line
-        // console.log('most likes', mostLikes)
-        setActiveList( mostLikes )
-        break
-    }
-
-  }
-
-  const filterCityHandler = ( city ) => {
-    console.log( city )
-    if ( city === 'all' ) {
+    // console.log( 'PostList.js useEffect' )
+    setLoading( true )
+    getPostsWithThumbnails().then( posts => {
+      setPosts( posts )
       setActiveList( posts )
-    } else {
-      const filter = posts.filter(
-        item => item.description.location === city )
-      setActiveList( filter )
-    }
-  }
+    } ).finally( () => setLoading( false ) )
 
-  const onSortOpen = useCallback( () => {
-    setCityFilterOpen( false )
-  }, [] )
-
-  const onCityFilterOpen = useCallback( () => {
-    setSortOpen( false )
+    // To keep state up to date
+    // TODO instead update app state on changes like add/delete new post/comment/like
+    return navigation.addListener( 'focus', async () => {
+      // console.log( 'PostList.js focus' )
+      setLoading( true )
+      getPostsWithThumbnails().then( posts => {
+        setPosts( posts )
+        setActiveList( posts )
+      } ).finally( () => setLoading( false ) )
+    } )
   }, [] )
 
   const postPressHandler = ( postId ) => {
     navigation.navigate( 'SinglePost', { postId: postId } )
   }
 
-  const ListHeader = () => {
-    return (
-      <View style={ {
-        backgroundColor: theme.colors.backgroundColor,
-        justifyContent: 'center',
-        padding: 10,
-      } }
-      >
-        <DropDownPicker
-          loading={loading}
-          open={ sortOpen }
-          value={ sortValue }
-          items={ sortItems }
-          setOpen={ setSortOpen }
-          setValue={ setSortValue }
-          setItems={ setSortItems }
-          // onPress={ ( open ) => setCityFilterOpen( false ) }
-          onOpen={ onSortOpen }
-          onSelectItem={ ( item ) => sortHandler( item.value ) }
-          // onChangeValue={ ( value ) => setSortValue(value) }
-          zIndex={ 3000 }
-          zIndexInverse={ 3000 }
-        />
-
-        <DropDownPicker
-          loading={loading}
-          open={ cityFilterOpen }
-          value={ cityFilterValue }
-          items={ CityItems }
-          setOpen={ setCityFilterOpen }
-          setValue={ setCityFilterValue }
-          setItems={ setCityItems }
-          // onPress={ ( open ) => setSortOpen( false ) }
-          onOpen={ onCityFilterOpen }
-          onSelectItem={ ( item ) => filterCityHandler( item.value ) }
-          zIndex={ 2000 }
-          zIndexInverse={ 2000 }
-          listMode={'SCROLLVIEW'}
-          searchable={true}
-          searchTextInputProps={{
-            maxLength: 25
-          }}
-          addCustomItem={true}
-          searchPlaceholder="Search location"
-          searchContainerStyle={{
-            borderBottomColor: "#dfdfdf",
-            ...theme.inputContainer,
-          }}
-          searchTextInputStyle={{
-            height: 35,
-            ...theme.inputContainer,
-          }}
-        />
-      </View>
-    )
-  }
+  if ( loading ) return <Loading />
 
   return (
     <FlatList
-      ListHeaderComponent={ <ListHeader /> }
+      ListHeaderComponent={
+        <ExploreListHeader
+          mediaType={ 'post' }
+          media={ posts }
+          activeList={ activeList }
+          setActiveList={ setActiveList }
+          navigation={ navigation }
+          loading={ loading }
+        />
+      }
       stickyHeaderIndices={ [ 0 ] }
       data={ activeList }
       keyExtractor={ ( item ) => item.file_id }
