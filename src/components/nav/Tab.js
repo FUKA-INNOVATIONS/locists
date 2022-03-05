@@ -43,6 +43,7 @@ const Tab = ( { selected, tab, onPress } ) => {
           </TouchableOpacity>
       );
     case 'CreateTab':
+      // TODO fix create button visibility on app start
       return ( user.isLogged &&
           <TouchableOpacity style={{ bottom: 20 }} onPress={ onPress }>
               { selected ?

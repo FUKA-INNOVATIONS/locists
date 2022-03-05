@@ -56,8 +56,6 @@ const UploadEvent = props => {
   const {
     image,
     setImage,
-    width,
-    height,
     imageSelected,
     setImageSelected,
     type,

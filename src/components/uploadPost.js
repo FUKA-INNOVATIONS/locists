@@ -22,8 +22,6 @@ const UploadPost = props => {
     image,
     imageSelected,
     setImageSelected,
-    width,
-    height,
     type,
     setType,
     pickImage,
