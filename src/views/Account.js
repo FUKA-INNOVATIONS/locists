@@ -15,8 +15,6 @@ import Event from '../components/Event'
 
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage()
-  const authStorage = useAuthStorage()
-  const [ update, setUpdate ] = useState( false ) // eslint-disable-line
   const { getCurrentUserComments } = useComment()
   const [ comments, setComments ] = useState( [] )
   const { getUserMedia, userMedia } = useMedia()

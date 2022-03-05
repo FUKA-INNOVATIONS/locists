@@ -6,6 +6,7 @@ import PostComment from './PostComment'
 import Like from './Like'
 import AddComment from '../../assets/icons/AddComment.svg'
 import UserInfo from './UserInfo'
+import Loading from './Loading'
 
 const SinglePostHeader = ( { postDetails } ) => {
   if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>

@@ -1,19 +1,14 @@
 import {View, Button, Text, TouchableOpacity} from 'react-native'
-import useUser from '../hooks/useUser'
 import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
-import { Controller, useForm } from 'react-hook-form'
-
-import UploadMedia from '../components/UploadMedia'
 
 const Settings = ( { navigation } ) => {
   const { user } = useAuthStorage()
   const authStorage = useAuthStorage()
-  const { modifyUser, isUsernameAvailable } = useUser()
 
     const onModalCloseHandler = () => {
         navigation.goBack();
-    };
+    }
 
     const modifyProfile = (type) => {
         navigation.navigate( 'ModifyAccount', { type: type } )

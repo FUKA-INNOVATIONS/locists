@@ -4,7 +4,6 @@ import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
 import ExploreListHeader from './ExploreListHeader'
-import theme from '../theme'
 
 const PostsList = ( { navigation } ) => {
   // console.log( 'PostsList.js rendered');
