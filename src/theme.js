@@ -1,6 +1,4 @@
 import { Platform, Dimensions, StatusBar } from 'react-native'
-// Add Dimensions
-// Testing the pipeline
 
 const {width} = Dimensions.get('screen');
 const {height} = Dimensions.get('screen');

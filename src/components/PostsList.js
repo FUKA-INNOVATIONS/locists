@@ -4,6 +4,7 @@ import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
 import PostsListHeader from './PostsListHeader'
+import ExploreListHeader from './ExploreListHeader'
 
 const PostsList = ( { navigation } ) => {
   // console.log( 'PostsList.js rendered');
@@ -42,7 +43,8 @@ const PostsList = ( { navigation } ) => {
   return (
     <FlatList
       ListHeaderComponent={
-        <PostsListHeader
+        <ExploreListHeader
+          mediaType={'post'}
           media={ posts }
           activeList={ activeList }
           setActiveList={ setActiveList }

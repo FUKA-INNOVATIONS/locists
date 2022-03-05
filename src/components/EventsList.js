@@ -2,8 +2,8 @@ import { FlatList, Pressable } from 'react-native'
 import { useEffect, useState } from 'react'
 import Event from './Event'
 import Loading from './Loading'
-import EventListHeader from './EventListHeader'
 import useMedia from '../hooks/useMedia'
+import ExploreListHeader from './ExploreListHeader'
 
 const EventsList = ( { navigation } ) => {
   // console.log( 'EventsList.js')
@@ -42,7 +42,8 @@ const EventsList = ( { navigation } ) => {
   return (
     <FlatList
       ListHeaderComponent={
-        <EventListHeader
+        <ExploreListHeader
+          mediaType={'event'}
           media={ events }
           activeList={ activeList }
           setActiveList={ setActiveList }

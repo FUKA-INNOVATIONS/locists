@@ -7,7 +7,7 @@ import HeartFull from '../../assets/icons/HeartFull.svg';
 import theme from "../theme";
 
 const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
-  const { getMediaFavourites, deleteFavourite, createFavourite, } = useFavourite();
+  const { getMediaFavourites, deleteFavourite, createFavourite } = useFavourite();
   const [ mediaFavourites, setMediaFavourites ] = useState([]);
 
   useEffect( () => {

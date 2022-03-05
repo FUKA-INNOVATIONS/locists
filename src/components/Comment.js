@@ -9,6 +9,8 @@ const Comment = ( { commentObj, avatar } ) => {
   const { deleteComment } = useComment();
   const isOwner = commentObj.user_id === user.user_id
 
+  // TODO: fetch avatar here
+
   // console.log( 'comObj', commentObj, isOwner );
 
   const onDeleteHandler = (id) => {

@@ -7,22 +7,12 @@ import { Entypo } from '@expo/vector-icons'
 import UserInfo from './UserInfo'
 
 import Location from '../../assets/icons/Location.svg'
+import Loading from './Loading'
 
 const Event = ( { eventDetails, ownProfile } ) => {
   // console.log('Event.js', eventDetails)
 
-  if ( eventDetails === null ) {
-    return (
-      <View>
-        <Text>
-          Loading...
-        </Text>
-      </View>
-    )
-  }
-
-  // console.log('eventDetails in Event.js', eventDetails)
-  // TODO: fix rendering
+  if ( eventDetails === null ) return <Loading />
 
   return (
       <>
