@@ -3,8 +3,9 @@ import { Image, Text, TouchableOpacity, View} from 'react-native'
 import { uploadsUrl } from '../../config'
 import PostComment from './PostComment'
 import Attend from './Attend'
-import theme from "../theme"
-import AddComment from "../../assets/icons/AddComment.svg"
+import theme from '../theme'
+import AddComment from '../../assets/icons/AddComment.svg'
+import Loading from './Loading'
 
 const SingleEventHeader = ( { eventDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
