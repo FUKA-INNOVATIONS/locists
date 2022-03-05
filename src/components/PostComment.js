@@ -1,4 +1,4 @@
-import { Text, Button, Alert, TextInput, View, TouchableOpacity } from 'react-native';
+import { Text, Alert, TextInput, View, TouchableOpacity } from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import useComment from '../hooks/useComment';
 import { Controller, useForm } from 'react-hook-form';

@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
-  Button,
 } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -18,8 +17,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback, useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
-import {Touchable} from "react-native-web";
-
 
 const UploadEvent = props => {
   const { user } = useAuthStorage()

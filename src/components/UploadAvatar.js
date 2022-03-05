@@ -1,4 +1,4 @@
-import { Button, Image, Text, View, TouchableOpacity } from 'react-native';
+import { Image, Text, View, TouchableOpacity } from 'react-native';
 import { useForm } from 'react-hook-form';
 import useDevice from '../hooks/useDevice';
 import useMedia from '../hooks/useMedia';
@@ -53,12 +53,12 @@ const UploadAvatar = props => {
                             onPress={ handleSubmit( data => props.onSubmit( data, mediaDescription, imageSelected, image ) ) }>
             <Text style={ theme.loginButtonText }>Upload</Text>
           </TouchableOpacity>
-          {/*<Button
+          { /* <Button
               disabled={ !imageSelected }
               loading={ loadingMediaUpload }
               title="Upload"
               onPress={ handleSubmit( data => props.onSubmit( data, mediaDescription, imageSelected, image ) ) }
-          />*/}
+          /> */ }
         </View>
       </>
   );

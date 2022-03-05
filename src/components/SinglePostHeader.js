@@ -1,4 +1,4 @@
-import { Button, Image, Text, View, TouchableOpacity } from 'react-native';
+import { Image, Text, View, TouchableOpacity } from 'react-native';
 import { uploadsUrl } from '../../config';
 import { useState } from 'react';
 import theme from "../theme";

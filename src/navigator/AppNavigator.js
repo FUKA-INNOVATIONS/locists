@@ -94,11 +94,11 @@ const AuthenticationStackScreen = () => {
             <>
               <AuthenticationStack.Screen name={ 'Account' }
                                           component={ AccountScreen }/>
-              {/*<AuthenticationStack.Group
+              { /* <AuthenticationStack.Group
                   screenOptions={ { presentation: 'modal' } }>
                 <AuthenticationStack.Screen name={ 'ModifyAccount' }
                                             component={ SettingsScreen }/>
-              </AuthenticationStack.Group>*/}
+              </AuthenticationStack.Group> */ }
             </>
         )
         }

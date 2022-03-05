@@ -1,5 +1,5 @@
 import {useState, useEffect, useMemo} from 'react';
-import {Button, Text, View, Image, TouchableOpacity, FlatList} from 'react-native';
+import { Text, View, Image, FlatList} from 'react-native';
 import useAuthStorage from '../hooks/useAuthStorage';
 import theme from "../theme";
 import useComment from '../hooks/useComment';

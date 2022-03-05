@@ -1,10 +1,6 @@
 import {View, Button, Text, TouchableOpacity} from 'react-native';
 import theme from "../theme";
 import useAuthStorage from "../hooks/useAuthStorage";
-import {useState} from "react";
-import Dialog, {DialogContent} from "react-native-popup-dialog";
-import UploadMedia from "../components/UploadMedia";
-
 
 const Settings = ( { navigation } ) => {
     const { user } = useAuthStorage();

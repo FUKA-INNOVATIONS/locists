@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {Button, Image, Text, TouchableOpacity, View} from 'react-native';
+import { Image, Text, TouchableOpacity, View} from 'react-native';
 import { uploadsUrl } from '../../config';
 import PostComment from './PostComment';
 import Attend from './Attend';
