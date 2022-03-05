@@ -36,7 +36,7 @@ const UploadEvent = props => {
     setShow( Platform.OS === 'ios' )
     setDateTime( currentDate )
     setFormValue( 'date', currentDate, { shouldValidate: false } )
-    console.log( 'currentDate',currentDate.toLocaleString() )
+    console.log( 'currentDate', currentDate.toLocaleString() )
   }
 
   const showMode = ( currentMode ) => {
@@ -55,8 +55,6 @@ const UploadEvent = props => {
   const {
     image,
     setImage,
-    width,
-    height,
     imageSelected,
     setImageSelected,
     type,
@@ -104,8 +102,6 @@ const UploadEvent = props => {
     date: dateTime,
     description: getValues().description,
     price: getValues().price,
-    width,
-    height
   }
 
   const resetAll = () => {
@@ -193,7 +189,7 @@ const UploadEvent = props => {
             <View style={ theme.inputContainer }>
               {
                 <RNDateTimePicker
-                  style={ {...theme.inputContainer, width: 150} }
+                  style={ { ...theme.inputContainer, width: 150 } }
                   testID='dateTimePicker'
                   value={ dateTime }
                   mode={ mode }

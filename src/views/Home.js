@@ -4,6 +4,7 @@ import { useEffect, useMemo } from 'react'
 import useAuthStorage from '../hooks/useAuthStorage'
 
 const Home = ( { navigation } ) => {
+  console.log( 'Home.js' )
   const authStorage = useAuthStorage()
   const { loginWithToken } = useUser()
 
@@ -12,12 +13,10 @@ const Home = ( { navigation } ) => {
     await loginWithToken( token )
   }, [] )
 
-  console.log( 'Home.js' )
-
   useEffect( async () => {
     await login
     return navigation.addListener( 'focus', async () => {
-      console.log( 'HomeList focus' )
+      console.log( 'Home.js focus' )
       await login
     } )
   }, [] )

@@ -27,7 +27,15 @@ const useDevice = () => {
   }
 
   return {
-    image, setImage, width, height, imageSelected, setImageSelected, type, setType, pickImage,
+    image,
+    setImage,
+    width,
+    height,
+    imageSelected,
+    setImageSelected,
+    type,
+    setType,
+    pickImage,
   }
 
 }

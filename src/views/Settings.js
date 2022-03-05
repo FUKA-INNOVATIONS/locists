@@ -1,10 +1,15 @@
-import {View, Button, Text, TouchableOpacity} from 'react-native';
-import theme from "../theme";
-import useAuthStorage from "../hooks/useAuthStorage";
+import {View, Button, Text, TouchableOpacity} from 'react-native'
+import useUser from '../hooks/useUser'
+import useAuthStorage from '../hooks/useAuthStorage'
+import theme from '../theme'
+import { Controller, useForm } from 'react-hook-form'
+
+import UploadMedia from '../components/UploadMedia'
 
 const Settings = ( { navigation } ) => {
-    const { user } = useAuthStorage();
-    const authStorage = useAuthStorage();
+  const { user } = useAuthStorage()
+  const authStorage = useAuthStorage()
+  const { modifyUser, isUsernameAvailable } = useUser()
 
     const onModalCloseHandler = () => {
         navigation.goBack();
@@ -21,28 +26,22 @@ const Settings = ( { navigation } ) => {
     };
 
   return (
-      <>
+    <>
       <Button title={ 'Go back' } onPress={ onModalCloseHandler }/>
       <View style={ theme.settingsPage }>
-
-
-          <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn] } onPress={ () => modifyProfile( 'details' ) }>
-              <Text style={theme.loginButtonText}>Modify Account Details</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn] } onPress={ () => modifyProfile( 'picture' ) }>
-              <Text style={theme.loginButtonText}>Change Profile Picture</Text>
-          </TouchableOpacity>
-
-
-          <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn, theme.logoutBtn] } onPress={ logoutHandler }>
-              <Text style={theme.loginButtonText}>Log Out</Text>
-          </TouchableOpacity>
-
+        <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn] } onPress={ () => modifyProfile( 'details' ) }>
+          <Text style={theme.loginButtonText}>Modify Account Details</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn] } onPress={ () => modifyProfile( 'picture' ) }>
+          <Text style={theme.loginButtonText}>Change Profile Picture</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn, theme.logoutBtn] } onPress={ logoutHandler }>
+          <Text style={theme.loginButtonText}>Log Out</Text>
+        </TouchableOpacity>
       </View>
-      </>
-  );
+    </>
+  )
 
-};
+}
 
-export default Settings;
+export default Settings
