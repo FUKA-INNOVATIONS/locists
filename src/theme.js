@@ -90,11 +90,16 @@ const theme = {
     borderWidth: 1,
     backgroundColor: general.colors.postBackground,
   },
+  singleMediaAvatar: {
+    marginLeft: 5,
+    marginTop: 10,
+    alignSelf: 'flex-start',
+  },
   singleMediaComments: {
     marginTop: 5,
     borderWidth: 3,
     alignSelf: 'center',
-    minHeight: 260,
+    minHeight: 250,
     paddingVertical: 5,
     width: width * 0.95,
     position: 'relative',
@@ -111,12 +116,48 @@ const theme = {
   commentInfo: {
     flexDirection: 'row',
   },
-  commentExtra: {},
+  attend: {
+    alignItems: 'center',
+    marginLeft: 5,
+  },
+  dropdown: {
+    borderColor: general.colors.btn,
+    borderWidth: 2,
+  },
+  dropdownMenu: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  dropdownExplore: {
+    borderColor: general.colors.btn,
+    width: width * 0.45,
+    marginHorizontal: 5,
+  },
+  addCommentButtons: {
+    width: width * 0.85,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+  },
   commentUser: {
     width: 30,
     height: 30,
     borderRadius: 15,
     marginRight: 10,
+  },
+  changePicture: {
+    alignSelf: 'center',
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    marginVertical: 20,
+  },
+  dropDownPicker: {
+    height: 40,
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#7b08a3',
+    width: '45%',
   },
 
   // In List Post Styles
@@ -197,6 +238,18 @@ const theme = {
     marginTop: 5,
     borderRadius: 10,
   },
+  infoTop: {
+    paddingTop: 10,
+    paddingHorizontal: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  infoBottom: {
+    width: width * 0.85,
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   postComment: {
     flex: 1,
     flexDirection: 'row',
@@ -213,6 +266,10 @@ const theme = {
     width: 35,
     height: 35,
     borderRadius: 50,
+  },
+  attendBtn: {
+    width: 120,
+    padding: 5,
   },
 
   // Single Post Styles
@@ -239,11 +296,19 @@ const theme = {
   },
   singlePostText: {
     width: width * 0.94,
+    height: 90,
     borderWidth: 1,
     borderRadius: 5,
     padding: 5,
     marginVertical: 5,
     backgroundColor: '#E9D6DB',
+  },
+  noMedia: {
+    width: width * 0.94,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingRight: 10,
+    paddingBottom: 10,
   },
 
   addComment: {
@@ -285,6 +350,7 @@ const theme = {
   // Create Media Styles
   addImage: {
     alignSelf: 'center',
+    marginTop: 10,
     width: width * 0.8,
     aspectRatio: 1.4,
   },
@@ -345,6 +411,22 @@ const theme = {
     borderRadius: 10,
     backgroundColor: '#E9D6DB',
     justifyContent: 'space-between',
+  },
+
+  // Settings Page Styles
+  settingsPage: {
+    height: height * 0.7,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+  },
+  settingsBtn: {
+    marginVertical: 20,
+    width: width * 0.6,
+  },
+  logoutBtn: {
+    position: 'absolute',
+    bottom: 0,
   },
 }
 

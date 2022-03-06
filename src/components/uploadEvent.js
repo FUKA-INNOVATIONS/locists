@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
-  Button,
 } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -115,7 +114,6 @@ const UploadEvent = props => {
   return (
     <>
       <ScrollView>
-        <Text>Create new event</Text>
         {
           // TODO Replace Default image with custom component
         }
@@ -204,11 +202,14 @@ const UploadEvent = props => {
             }
 
             <View style={ { justifyContent: 'center' } }>
-              <Text style={ { color: 'white' } }>{ getValues().date &&
-              dateTime.toLocaleString() }</Text>
-              <Button onPress={ showDatepicker } title='Select date!' />
-              <Button onPress={ showTimepicker } title='Select time!' />
-            </View>
+              <Text style={ { color: 'white' } }>{getValues().date && dateTime.toLocaleString()}</Text>
+              <TouchableOpacity style={ theme.generalBtn } onPress={ showDatepicker }>
+                <Text style={ theme.loginButtonText }>Select Date</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={ theme.generalBtn } onPress={ showTimepicker }>
+                <Text style={ theme.loginButtonText }>Select Time</Text>
+              </TouchableOpacity>
+             </View>
           </View>
 
           <View style={ theme.inputContainer }>

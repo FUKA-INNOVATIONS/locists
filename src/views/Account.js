@@ -1,23 +1,20 @@
-import { useState, useEffect, useMemo } from 'react'
+import {useState, useEffect, useMemo} from 'react'
 import {
-  Button,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  FlatList,
+    Text,
+    View,
+    Image,
+    FlatList
 } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
 import useComment from '../hooks/useComment'
-import useMedia from '../hooks/useMedia'
+import useMedia from "../hooks/useMedia"
 import Post from '../components/Post'
 import Event from '../components/Event'
 
+
 const Account = ( { navigation } ) => {
   const { user } = useAuthStorage()
-  const authStorage = useAuthStorage()
-  const [ update, setUpdate ] = useState( false ) // eslint-disable-line
   const { getCurrentUserComments } = useComment()
   const [ comments, setComments ] = useState( [] )
   const { getUserMedia, userMedia } = useMedia()
@@ -25,15 +22,9 @@ const Account = ( { navigation } ) => {
 
   getCurrentUserComments().then( comments => setComments( comments ) )
 
-  const logoutHandler = async () => {
-    await authStorage.logout()
-    user.isLogged && navigation.navigate( 'AccountTab', { Screen: 'Account' } )
-    // setUpdate( true );
-  }
-
-  const getMediaForUser = useMemo( async () => {
-    await getUserMedia( user.token )
-  }, [] )
+    const getMediaForUser = useMemo( async () => {
+        await getUserMedia( user.token )
+    }, [] );
 
   /*  If user is logged in
    *   Hide Authentication view and move to Account view
@@ -71,30 +62,20 @@ const Account = ( { navigation } ) => {
         </View>
       </View>
 
-      <Button title={ 'Modify your account details' }
-              onPress={ () => navigation.navigate( 'ModifyAccount' ) } />
-
-      <Text style={ { color: '#fff' } }>User status: { user.isLogged &&
-      'logged in' }</Text>
-      <TouchableOpacity style={ theme.generalBtn } onPress={ logoutHandler }>
-        <Text style={ theme.loginButtonText }>Log Out</Text>
-      </TouchableOpacity>
-      <Text style={ { color: '#fff' } }>Comments posted: { comments.length > 0
-        ? comments.length
-        : 0 }</Text>
-      <FlatList
-        data={ userMedia }
-        ListEmptyComponent={ EmptyListMessage }
-        keyExtractor={ ( item ) => item.file_id }
-        renderItem={ ( { item } ) => {
-          return (
-            item.description.mediaType === 'post' ?
-              <Post postMedia={ item } ownProfile={ true } />
-              :
-              <Event eventDetails={ item } ownProfile={ true } />
-
-          )
-        }
+        <Text style={ { color: '#fff' } }>User status: { user.isLogged && 'logged in' }</Text>
+        <Text style={ { color: '#fff' } }>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
+        <FlatList
+          data={ userMedia }
+          ListEmptyComponent={ EmptyListMessage }
+          keyExtractor={ ( item ) => item.file_id }
+          renderItem={ ( { item } ) => {
+            return (
+              item.description.mediaType === 'post' ?
+                <Post postMedia={ item } ownProfile={true}/>
+                :
+                <Event eventDetails={ item } ownProfile={true}/>
+            )
+          }
         }
       />
     </View>

@@ -1,4 +1,4 @@
-import { Text, Button, Alert, TextInput, View } from 'react-native'
+import { Text, Alert, TextInput, View, TouchableOpacity } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
 import { Controller, useForm } from 'react-hook-form'
@@ -42,34 +42,32 @@ const PostComment = ( { file_id, display } ) => { // eslint-disable-line
   }
 
   return (
-    <>
-      <Text>Write a comment</Text>
-      <View style={ theme.inputContainer }>
-        <Controller
-          control={ control }
-          render={ ( { field: { onChange, onBlur, value } } ) => (
-            <TextInput
-              style={ theme.input }
-              onBlur={ onBlur }
-              onChangeText={ onChange }
-              value={ value }
-              placeholder='Your comment'
-            />
-          ) }
-          name='content'
-        />
-        { errors.content && <Text>{ errors.content.message }</Text> }
-      </View>
-      <View>
-        <Button
-          // disabled={ !imageSelected }
-          // loading={ loadingMediaUpload }
-          title='Post comment'
-          onPress={ handleSubmit( onSubmit ) }
-        />
-        <Button title='Clear' onPress={ () => reset() } />
-      </View>
-    </>
+      <>
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder="Your comment"
+              />
+            ) }
+            name="content"
+          />
+          { errors.content && <Text>{ errors.content.message }</Text> }
+        </View>
+        <View style={ theme.addCommentButtons }>
+          <TouchableOpacity style={ theme.generalBtn } onPress={ handleSubmit( onSubmit ) }>
+            <Text style={ theme.loginButtonText }>Post</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={ theme.generalBtn } title="Clear" onPress={ () => reset() }>
+            <Text style={ theme.loginButtonText }>Clear</Text>
+          </TouchableOpacity>
+        </View>
+      </>
   )
 }
 

@@ -19,6 +19,7 @@ const useMedia = () => {
   const getAllMedia = async () => {
     // console.log( 'called getAllMedia hook' )
 
+
     /*
      * inorder to get thumbnails for optimization
      * get all ids and fetch files
@@ -111,7 +112,8 @@ const useMedia = () => {
     try {
       const { data } = await axios.get( URL )
       if ( data ) {
-        data.description = JSON.parse( data.description )
+        data.description = JSON.parse( data.description );
+        data.description.ownerAvatar = await fetchAvatar( data.user_id );
         if ( returnObject ) {
           return data
         } else {

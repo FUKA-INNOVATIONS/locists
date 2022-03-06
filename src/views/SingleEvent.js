@@ -37,18 +37,17 @@ const SingleEvent = ( { navigation, route } ) => {
 
   return (
     <>
-      <Button title={ 'Go back' } onPress={ onModalCloseHandler } />
+      <Button title={'Go back'} onPress={onModalCloseHandler} />
       <SingleEventHeader eventDetails={ singleMedia } />
-      {/* <View style={theme.singleMediaComments}> */ }
+      {/* <View style={theme.singleMediaComments}> */}
       <FlatList
-        style={ theme.singleMediaComments }
+        style={ [theme.singleMediaComments, {maxHeight: 50}] }
         data={ mediaComments }
         ListEmptyComponent={ EmptyListMessage }
-        keyExtractor={ ( item ) => item.comment_id }
-        renderItem={ ( { item } ) => <Comment commentObj={ item }
-                                              avatar={ '' } /> }
+        keyExtractor={ (  item  ) => item.comment_id }
+        renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
       />
-      {/* </View> */ }
+      {/* </View> */}
     </>
   )
 }

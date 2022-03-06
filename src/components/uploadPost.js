@@ -75,15 +75,13 @@ const UploadPost = props => {
 
   return (
     <>
-      <Text>Create new post</Text>
-      { dummyImage !== imageSelected && <Image source={ { uri: image } }
-                                               style={ theme.addImage } /> }
-      <TouchableOpacity style={ [ theme.generalBtn, theme.createMediaButton ] }
-                        onPress={ pickImage }>
-        <Text style={ theme.loginButtonText }>Add an Image</Text>
+      { dummyImage !== imageSelected &&
+      <Image source={ { uri: image } }
+             style={ theme.addImage }/> }
+      <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ pickImage }>
+        <Text style={theme.loginButtonText}>Add an Image</Text>
       </TouchableOpacity>
-      <View style={ theme.createMediaForm }>
-
+      <View style={ theme.createMediaForm}>
         <View style={ theme.inputContainer }>
           <Controller
             control={ control }

@@ -16,6 +16,7 @@ import CreateEventScreen from '../views/CreateEvent'
 import CreatePostScreen from '../views/createPost'
 import SettingsScreen from '../views/Settings'
 import CreateScreen from '../views/Create'
+import ModifyAccount from '../views/ModifyAccount'
 import EventsListScreen from '../components/EventsList'
 import PostsListScreen from '../components/PostsList'
 
@@ -26,6 +27,7 @@ const HomeStack = createNativeStackNavigator()
 const ExploreStack = createNativeStackNavigator()
 const CreateStack = createNativeStackNavigator()
 const AuthenticationStack = createNativeStackNavigator()
+const SettingsStack = createNativeStackNavigator()
 
 const BottomTab = createBottomTabNavigator()
 // const AppStack = createNativeStackNavigator();
@@ -41,7 +43,6 @@ const HomeStackScreen = () => {
                           component={ SingleEventScreen } />
       </HomeStack.Group>
     </HomeStack.Navigator>
-
   )
 }
 
@@ -109,6 +110,19 @@ const AuthenticationStackScreen = () => {
   )
 }
 
+const SettingsStackScreen = () => {
+  return (
+    <SettingsStack.Navigator>
+      <SettingsStack.Screen name={ 'Settings' }
+                            component={ SettingsScreen } />
+      <SettingsStack.Group screenOptions={ { presentation: 'modal' } }>
+        <SettingsStack.Screen name={ 'ModifyAccount' }
+                              component={ ModifyAccount } />
+      </SettingsStack.Group>
+    </SettingsStack.Navigator>
+  )
+}
+
 /* const AppStackScreen = () => {
  const { user } = useAuthStorage();
  const viewIsFocused = useIsFocused(); //eslint-disable-line
@@ -147,37 +161,37 @@ const AppNavigator = ( props ) => {
   navTheme.colors.text = 'white'
 
   return (
-    <NavigationContainer theme={ DefaultTheme }>
-      <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props } /> }
-                           screenOptions={ ( { route } ) => ( {
-                               headerShown: false,
-                             }
-                           ) }
-      >
-        <BottomTab.Screen
-          // TODO Name "Home" conflicts with another screen
-          name={ 'HomeTab' }
-          component={ HomeStackScreen }
-        />
-        <BottomTab.Screen
-          name={ 'ExploreTab' }
-          component={ ExploreStackScreen }
-        />
-        <BottomTab.Screen
-          name={ 'CreateTab' }
-          component={ CreateStackScreen }
-        />
-        <BottomTab.Screen
-          name={ 'AccountTab' }
-          component={ AuthenticationStackScreen }
-        />
-        <BottomTab.Screen
-          name={ 'SettingsTab' }
-          component={ SettingsScreen }
-        />
-      </BottomTab.Navigator>
-    </NavigationContainer>
-  )
-}
+      <NavigationContainer theme={ DefaultTheme }>
+        <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props } /> }
+                             screenOptions={ ( { route } ) => ( {
+                                 headerShown: false,
+                               }
+                             ) }
+        >
+          <BottomTab.Screen
+              // TODO Name "Home" conflicts with another screen
+              name={ 'HomeTab' }
+              component={ HomeStackScreen }
+          />
+          <BottomTab.Screen
+              name={ 'ExploreTab' }
+              component={ ExploreStackScreen }
+          />
+          <BottomTab.Screen
+              name={ 'CreateTab' }
+              component={ CreateStackScreen }
+          />
+          <BottomTab.Screen
+              name={ 'AccountTab' }
+              component={ AuthenticationStackScreen }
+          />
+          <BottomTab.Screen
+              name={ 'SettingsTab' }
+              component={ SettingsStackScreen }
+          />
+        </BottomTab.Navigator>
+      </NavigationContainer>
+  );
+};
 
 export default AppNavigator
