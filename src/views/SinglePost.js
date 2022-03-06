@@ -25,27 +25,14 @@ const SinglePost = ( { navigation, route } ) => {
 
   if ( loading ) return <Loading />
 
-  const onModalCloseHandler = () => {
-    navigation.goBack()
-  }
-
     return (
-      <>
-        <Button title={'Go back'} onPress={onModalCloseHandler} />
-        <SinglePostHeader postDetails={ singleMedia } />
-        <View style={ singleMedia !== undefined && singleMedia.description.hasImage ?
-          [theme.singleMediaComments, {maxHeight: 250}]
-          :
-          [theme.singleMediaComments, {height: 430}]
-        }>
         <FlatList
+          ListHeaderComponent={<SinglePostHeader postDetails={ singleMedia } />}
           data={ mediaComments }
           ListEmptyComponent={ <EmptyListMessage /> }
           keyExtractor={ (  item  ) => item.comment_id }
-          renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
+          renderItem={ ( { item } ) => <Comment commentObj={ item } /> }
         />
-      </View>
-    </>
   )
 }
 

@@ -24,25 +24,15 @@ const SingleEvent = ( { navigation, route } ) => {
 
   if ( loading ) return <Loading />
 
-  const onModalCloseHandler = () => {
-    navigation.goBack()
-  }
-
   return (
-    <>
-      <Button title={ 'Go back' } onPress={ onModalCloseHandler } />
-      <SingleEventHeader eventDetails={ singleMedia } />
-      {/* <View style={theme.singleMediaComments}> */ }
       <FlatList
-        style={ [ theme.singleMediaComments, { maxHeight: 50 } ] }
+        ListHeaderComponent={<SingleEventHeader eventDetails={ singleMedia } />}
+        style={ [ theme.singleMediaComments ] }
         data={ mediaComments }
         ListEmptyComponent={ <EmptyListMessage /> }
         keyExtractor={ ( item ) => item.comment_id }
-        renderItem={ ( { item } ) => <Comment commentObj={ item }
-                                              avatar={ '' } /> }
+        renderItem={ ( { item } ) => <Comment commentObj={ item } /> }
       />
-      {/* </View> */ }
-    </>
   )
 }
 

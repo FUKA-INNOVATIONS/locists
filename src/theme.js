@@ -96,16 +96,17 @@ const theme = {
     alignSelf: 'flex-start',
   },
   singleMediaComments: {
-    marginTop: 5,
+    /* marginTop: 5,
     borderWidth: 3,
     alignSelf: 'center',
     minHeight: 250,
     paddingVertical: 5,
     width: width * 0.95,
-    position: 'relative',
+    position: 'relative', */
   },
   comment: {
     backgroundColor: general.colors.postBackground,
+    margin: 10,
     padding: 5,
     marginBottom: 5,
     borderWidth: 1,
@@ -233,9 +234,10 @@ const theme = {
   // Single Event Styles
   singleEventInfo: {
     backgroundColor: general.colors.postBackground,
-    paddingHorizontal: 5,
-    marginHorizontal: 5,
-    marginTop: 5,
+    // paddingHorizontal: 5,
+    // marginHorizontal: 5,
+    // marginTop: 5,
+    margin: 10,
     borderRadius: 10,
   },
   infoTop: {

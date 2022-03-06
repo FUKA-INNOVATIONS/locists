@@ -32,7 +32,6 @@ const Comment = ( { commentObj, avatar } ) => {
         <Text>{ commentObj.comment }</Text>
       </View>
       <View>
-        <Text>Likes</Text>
         <TimeAgo dateTo={ new Date( commentObj.time_added ) } />
         { isOwner && <Button title={ 'Delete' } onPress={ () => onDeleteHandler(
           commentObj.comment_id ) }>Delete</Button> }

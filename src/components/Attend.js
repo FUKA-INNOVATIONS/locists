@@ -1,9 +1,11 @@
 import { View, Text, Alert, TouchableOpacity } from 'react-native'
 import { useEffect, useState } from 'react'
 import useFavourite from '../hooks/useFavourite'
-import theme from "../theme";
+import theme from '../theme'
+import useAuthStorage from '../hooks/useAuthStorage'
 
 const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
+  const { user } = useAuthStorage()
   // console.log('attend.js')
   const {
     getMediaFavourites,
@@ -19,8 +21,8 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
       setMediaFavourites( mediaFavourites )
     } )
     /* return () => {
-      cancel = true
-    } */
+     cancel = true
+     } */
   }, [] )
 
   const likeHandler = async () => {
@@ -29,6 +31,12 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
       const disLiked = await deleteFavourite( file_id )
       disLiked.message && Alert.alert( disLiked.message )
     } else {
+
+      if ( !user.isLogged ) {
+        Alert.alert( 'You must login',
+          'Only logged in users are able to attend events, please login to your account and try again!' )
+      }
+
       const liked = await createFavourite( file_id )
       liked.file_id && Alert.alert( 'Successfully attended' )
     }
@@ -39,15 +47,16 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   }
 
   return (
-      <View style={ theme.attend } >
-        { displayIcon && <TouchableOpacity style={ [theme.generalBtn, theme.attendBtn] }
-                                           onPress={ likeHandler }>
-          <Text style={ theme.loginButtonText }>{ hasAttended()
-              ? 'can\'t attend'
-              : 'Attend' }</Text>
-        </TouchableOpacity> }
-        <Text>{ mediaFavourites.length } attending </Text>
-      </View>
+    <View style={ theme.attend }>
+      { displayIcon &&
+      <TouchableOpacity style={ [ theme.generalBtn, theme.attendBtn ] }
+                        onPress={ likeHandler }>
+        <Text style={ theme.loginButtonText }>{ hasAttended()
+          ? 'can\'t attend'
+          : 'Attend' }</Text>
+      </TouchableOpacity> }
+      <Text>{ mediaFavourites.length } attending </Text>
+    </View>
   )
 }
 
