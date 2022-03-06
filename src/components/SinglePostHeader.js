@@ -9,7 +9,7 @@ import UserInfo from './UserInfo'
 import Loading from './Loading'
 
 const SinglePostHeader = ( { postDetails } ) => {
-  if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>
+  if ( postDetails === undefined ) return <Loading />
   const [ isWriteComment, setIsWriteComment ] = useState( false )
 
   if ( !postDetails ) return <Loading />

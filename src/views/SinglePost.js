@@ -1,32 +1,29 @@
-import { View, Text, Button, FlatList } from 'react-native'
+import { View, Button, FlatList } from 'react-native'
 import useMedia from '../hooks/useMedia'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import theme from '../theme'
 import Comment from '../components/Comment'
 import SinglePostHeader from '../components/SinglePostHeader'
 import useComment from '../hooks/useComment'
+import Loading from '../components/Loading'
+import EmptyListMessage from '../components/EmptyListMessage'
 
 const SinglePost = ( { navigation, route } ) => {
   const { postId } = route.params
-  // const { getMediaById, getSingleMediaComments, singleMediaComments, singleMedia, loadingSingleMedia } = useMedia();
-  const { getMediaById, singleMedia, loading: loadingSingleMedia } = useMedia()
-  const {
-    getMediaComments,
-    mediaComments,
-    loading: loadingComments,
-  } = useComment()
+  const [ loading, setLoading ] = useState()
+  const [ mediaComments, setMediaComments ] = useState( [] )
+
+  const { getMediaById, singleMedia } = useMedia()
+  const { getMediaComments } = useComment()
 
   useEffect( async () => {
-    await getMediaById( postId )
-    await getMediaComments( postId )
+    setLoading( true )
+    await getMediaById( postId ).then( async () => {
+      await getMediaComments( postId ).then(comments => setMediaComments(comments))
+    } ).finally( () => setLoading( false ) )
   }, [ postId ] )
 
-  if ( loadingSingleMedia ) return <View><Text>Loading..</Text></View>
-  if ( loadingComments ) return <View><Text>Loading media
-    comments..</Text></View>
-
-  const EmptyListMessage = () => <Text style={ { color: 'white' } }>No
-    comments </Text>
+  if ( loading ) return <Loading />
 
   const onModalCloseHandler = () => {
     navigation.goBack()
@@ -43,7 +40,7 @@ const SinglePost = ( { navigation, route } ) => {
         }>
         <FlatList
           data={ mediaComments }
-          ListEmptyComponent={ EmptyListMessage }
+          ListEmptyComponent={ <EmptyListMessage /> }
           keyExtractor={ (  item  ) => item.comment_id }
           renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
         />

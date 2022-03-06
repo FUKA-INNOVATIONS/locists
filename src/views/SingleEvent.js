@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Button } from 'react-native'
+import { FlatList, Button } from 'react-native'
 import useMedia from '../hooks/useMedia'
 import { useEffect, useState } from 'react'
 import SingleEventHeader from '../components/SingleEventHeader'
