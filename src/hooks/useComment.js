@@ -2,7 +2,6 @@ import { baseUrl } from '../../config'
 import axios from 'axios'
 import doFetch from '../utils/doFetch'
 import useAuthStorage from './useAuthStorage'
-import { useState } from 'react'
 
 const useComment = () => {
   const authStorage = useAuthStorage()

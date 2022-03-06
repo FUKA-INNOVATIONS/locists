@@ -14,16 +14,16 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
-  useEffect( () => {
-    let cancel = true
-    getMediaFavourites( file_id ).
+  useEffect( async () => {
+    // let cancel = true
+    await getMediaFavourites( file_id ).
       then( favourites => {
-        if ( cancel ) return
+        // if ( cancel ) return
         setMediaFavourites( favourites )
       } )
-    return () => {
+    /* return () => {
       cancel = true
-    }
+    } */
   }, [] )
 
   const likeHandler = async () => {

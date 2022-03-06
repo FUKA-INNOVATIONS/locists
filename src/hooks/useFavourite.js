@@ -66,7 +66,7 @@ const useFavourite = () => {
       favourites = favourites.map( favourite => {
         return { ...favourite, isOwner: favourite.user_id === user.user_id }
       } )
-      // console.log('f', favourites)
+      // console.log('f', favourites.length)
       return favourites
     } catch ( error ) {
       console.log( 'error in getMediaFavourites hook', error )

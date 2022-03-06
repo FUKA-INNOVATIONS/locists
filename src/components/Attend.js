@@ -4,6 +4,7 @@ import useFavourite from '../hooks/useFavourite'
 import theme from "../theme";
 
 const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
+  // console.log('attend.js')
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -11,15 +12,15 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
-  useEffect( () => {
-    let cancel = true
-    getMediaFavourites( file_id ).then( mediaFavourites => {
-      if ( cancel ) return
+  useEffect( async () => {
+    // let cancel = true
+    await getMediaFavourites( file_id ).then( mediaFavourites => {
+      // if ( cancel ) return
       setMediaFavourites( mediaFavourites )
     } )
-    return () => {
+    /* return () => {
       cancel = true
-    }
+    } */
   }, [] )
 
   const likeHandler = async () => {
