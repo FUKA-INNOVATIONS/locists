@@ -1,4 +1,4 @@
-import { View, Text, Image, Alert, Button } from 'react-native'
+import { View, Text, Alert, Pressable } from 'react-native'
 import TimeAgo from '@andordavoti/react-native-timeago'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
@@ -7,7 +7,12 @@ import fetchAvatar from '../utils/fetchAvatar'
 import { useEffect, useState } from 'react'
 import UserInfo from './UserInfo'
 
-const Comment = ( { commentObj } ) => {
+const Comment = ( {
+  commentObj,
+  setUpdateSingleEventView,
+  setUpdateSinglePostView,
+  type,
+} ) => {
   const { user } = useAuthStorage()
   const { deleteComment } = useComment()
   const isOwner = commentObj.user_id === user.user_id
@@ -21,28 +26,36 @@ const Comment = ( { commentObj } ) => {
     deleteComment( id ).then( res => {
       if ( deleteComment ) {
         Alert.alert( res.message )
+        switch ( type ) {
+          case 'event':
+            setUpdateSingleEventView( true )
+            break
+          case 'post':
+            setUpdateSinglePostView( true )
+            break
+          default:
+            break
+        }
       }
     } )
   }
 
   return (
-    <View style={{margin: 10}}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View style={ { margin: 10 } }>
+      <View style={ { flexDirection: 'row', alignItems: 'center' } }>
         <UserInfo avatar={ avatar } username={ 'Username' } />
-          <TimeAgo style={{color: '#E9D6DB', left: 30}} dateTo={ new Date( commentObj.time_added ) } />
+        <TimeAgo style={ { color: '#E9D6DB', left: 30 } }
+                 dateTo={ new Date( commentObj.time_added ) } />
+        <View style={{marginLeft: 50}}>
+          { isOwner &&
+          <Pressable onPress={ () => onDeleteHandler(
+            commentObj.comment_id ) }><Text style={{color: '#c53e3e'}}>X Delete</Text></Pressable> }
+        </View>
       </View>
       <View style={ theme.comment }>
         <View style={ theme.commentInfo }>
           <Text>{ commentObj.comment }</Text>
         </View>
-        <View>
-          { isOwner &&
-          <Button title={ 'Delete' } onPress={ () => onDeleteHandler(
-            commentObj.comment_id ) }>Delete</Button> }
-        </View>
-
-        {/* <Text>comment_id: {commentObj.comment_id}</Text> */ }
-
       </View>
     </View>
   )

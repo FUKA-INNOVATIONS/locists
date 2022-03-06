@@ -5,6 +5,7 @@ import theme from '../theme'
 import useAuthStorage from '../hooks/useAuthStorage'
 
 const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
+  const [ updateView, setUpdateView ] = useState(false)
   const { user } = useAuthStorage()
   // console.log('attend.js')
   const {
@@ -20,16 +21,18 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
       // if ( cancel ) return
       setMediaFavourites( mediaFavourites )
     } )
+    setUpdateView(false)
     /* return () => {
      cancel = true
      } */
-  }, [] )
+  }, [updateView] )
 
   const likeHandler = async () => {
     console.log( 'Attend', file_id )
     if ( hasAttended() ) {
-      const disLiked = await deleteFavourite( file_id )
-      disLiked.message && Alert.alert( disLiked.message )
+      // const disLiked = await deleteFavourite( file_id )
+      // disLiked.message && Alert.alert( disLiked.message )
+      await deleteFavourite( file_id ).then(() => setUpdateView(true))
     } else {
 
       if ( !user.isLogged ) {
@@ -37,8 +40,9 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
           'Only logged in users are able to attend events, please login to your account and try again!' )
       }
 
-      const liked = await createFavourite( file_id )
-      liked.file_id && Alert.alert( 'Successfully attended' )
+      // const liked = await createFavourite( file_id )
+      // liked.file_id && Alert.alert( 'Successfully attended' )
+      await createFavourite( file_id ).then(() => setUpdateView(true))
     }
   }
 

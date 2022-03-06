@@ -4,13 +4,15 @@ import useAuthStorage from './useAuthStorage'
 
 const useFavourite = () => {
   const { user } = useAuthStorage()
+  const authStorage = useAuthStorage()
 
   const createFavourite = async ( file_id ) => {  // eslint-disable-line
+    const token = await authStorage.getToken()
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
       body: JSON.stringify( { file_id } ),
     }
@@ -24,10 +26,11 @@ const useFavourite = () => {
   }
 
   const deleteFavourite = async ( id ) => {
+    const token = await authStorage.getToken()
     const options = {
       method: 'DELETE',
       headers: {
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
     }
 
@@ -40,10 +43,11 @@ const useFavourite = () => {
   }
 
   const getCurrentUserFavourites = async () => {
+    const token = await authStorage.getToken()
     const options = {
       method: 'GET',
       headers: {
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
     }
     try {

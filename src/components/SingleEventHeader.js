@@ -7,7 +7,7 @@ import theme from '../theme'
 import AddComment from '../../assets/icons/AddComment.svg'
 import Loading from './Loading'
 
-const SingleEventHeader = ( { eventDetails } ) => {
+const SingleEventHeader = ( { eventDetails, setUpdateSingleEventView, type } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
 
   const onWriteCommentHandler = () => {
@@ -25,12 +25,12 @@ const SingleEventHeader = ( { eventDetails } ) => {
           <View style={ theme.infoTop}>
             <View>
               <Text style={ theme.mediaTitle }>{ eventDetails.description.name }</Text>
-              <Text>Location: { eventDetails.description.location }</Text>
+              <Text>{ eventDetails.description.location }</Text>
             </View>
             <Attend displayIcon file_id={eventDetails.file_id} single={true} />
             </View>
               <View style={ theme.infoBottom }>
-                <Text style={{width: '80%'}}>Description: { eventDetails.description.description }</Text>
+                <Text style={{width: '80%'}}>{ eventDetails.description.description }</Text>
                 <TouchableOpacity onPress={ onWriteCommentHandler }>
                 <AddComment width={32} height={32} />
                 </TouchableOpacity>
@@ -39,7 +39,10 @@ const SingleEventHeader = ( { eventDetails } ) => {
               {/* <Text>Media type: { eventDetails.description.mediaType }</Text> */}
         </View>
         <View style={ { alignItems: 'center' } }>
-          {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment}/>}
+          {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment} setUpdateSingleEventView={setUpdateSingleEventView} type={'event'}/>}
+        </View>
+        <View style={{marginTop: 10}}>
+          <Text style={{color: '#8d8082', fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>Comments</Text>
         </View>
       </View>
   )

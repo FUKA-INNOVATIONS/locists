@@ -8,15 +8,21 @@ import theme from '../theme'
 import { useState } from 'react'
 import Loading from './Loading'
 
-const PostComment = ( { file_id, display } ) => { // eslint-disable-line
-  const { user } = useAuthStorage() // eslint-disable-line
+const PostComment = ( {
+  file_id, // eslint-disable-line
+  display,
+  setUpdateSingleEventView,
+  type,
+  setUpdateSinglePostView,
+} ) => { // eslint-disable-line
+  const { user } = useAuthStorage()
   const { postComment } = useComment()
-  const [ loading, setLoading ] = useState(false)
+  const [ loading, setLoading ] = useState( false )
 
   const CommentSchema = Yup.object().shape( {
     content: Yup.string().
-      min( 5, 'Too Short!' ).
-      max( 50, 'Too Long!' ).
+      min( 5, 'Too Short comment!' ).
+      max( 50, 'Too Long comment!' ).
       required( 'Comment is required: 5-50 characters' ),
   } )
 
@@ -32,22 +38,32 @@ const PostComment = ( { file_id, display } ) => { // eslint-disable-line
   // const content = `Comment for id ${ file_id }`;
 
   const onSubmit = async ( data ) => {
-    setLoading(true)
+    setLoading( true )
     const { content } = data
     const comment = await postComment( file_id, content )
     if ( comment.comment_id ) {
-      Alert.alert( 'Comment added' )
+      // Alert.alert( 'Comment added' )
       reset()
       display( false )
-      setLoading(false)
+      setLoading( false )
+      switch ( type ) {
+        case 'event':
+          setUpdateSingleEventView( true )
+          break
+        case 'post':
+          setUpdateSinglePostView(true)
+          break
+        default:
+          break
+      }
     } else {
-      setLoading(false)
+      setLoading( false )
       Alert.alert( 'Comment not added', 'Please login and try again!' )
     }
     console.log( comment )
   }
 
-  if(loading) return <Loading />
+  if ( loading ) return <Loading />
 
   return (
     <>
@@ -61,20 +77,24 @@ const PostComment = ( { file_id, display } ) => { // eslint-disable-line
               onChangeText={ onChange }
               value={ value }
               placeholder='Your comment'
-              multiline={true}
+              multiline={ true }
+              maxLength={ 50 }
             />
           ) }
           name='content'
         />
-        { errors.content && <Text>{ errors.content.message }</Text> }
+        { errors.content && <Text style={ {
+          color: 'white',
+          textAlign: 'center',
+        } }>{ errors.content.message }</Text> }
       </View>
       <View style={ theme.addCommentButtons }>
-        <TouchableOpacity style={ {...theme.generalBtn, } } title='Clear'
+        <TouchableOpacity style={ { ...theme.generalBtn } } title='Clear'
                           onPress={ () => reset() }>
           <Text style={ theme.loginButtonText }>Clear</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={ {...theme.generalBtn, width: 200} }
+        <TouchableOpacity style={ { ...theme.generalBtn, width: 200 } }
                           onPress={ handleSubmit( onSubmit ) }>
           <Text style={ theme.loginButtonText }>Post</Text>
         </TouchableOpacity>
