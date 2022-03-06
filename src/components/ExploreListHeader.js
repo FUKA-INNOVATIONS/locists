@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { View, Platform } from 'react-native'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { useState, useEffect, useCallback } from 'react'
@@ -112,6 +112,7 @@ const EventListHeader = ( {
         setOpen={ setSortOpen }
         setValue={ setSortValue }
         setItems={ setSortItems }
+        listMode={ Platform.OS === 'android' ? 'MODAL' : 'SCROLLVIEW' }
         // onPress={ ( open ) => setCityFilterOpen( false ) }
         onOpen={ onSortOpen }
         onSelectItem={ ( item ) => sortHandler( item.value ) }
@@ -150,7 +151,7 @@ const EventListHeader = ( {
         onSelectItem={ ( item ) => filterCityHandler( item.value ) }
         zIndex={ 2000 }
         zIndexInverse={ 2000 }
-        listMode={ 'SCROLLVIEW' }
+        listMode={ Platform.OS === 'android' ? 'MODAL' : 'SCROLLVIEW' }
         searchable={ true }
         searchTextInputProps={ {
           maxLength: 25,
