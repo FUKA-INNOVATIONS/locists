@@ -122,11 +122,17 @@ const EventListHeader = ( {
           [
             theme.dropDownPicker,
             {
-            marginRight: 15,
+            marginRight: 0,
             alignSelf: 'flex-end',
             }
           ]
           }
+        dropDownContainerStyle={{
+          width: '45%',
+          alignSelf: 'flex-end',
+          borderColor: '#7b08a3',
+          borderWidth: 2,
+        }}
 
       />
       }
@@ -166,6 +172,13 @@ const EventListHeader = ( {
             }
             ]
         }
+        dropDownContainerStyle={{
+          width: '45%',
+          alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
+          marginLeft: mediaType === 'mixedMedia' ? 0 : 15,
+          borderColor: '#7b08a3',
+          borderWidth: 2,
+        }}
       />
     </View>
   )
