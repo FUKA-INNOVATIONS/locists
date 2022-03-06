@@ -50,7 +50,9 @@ const UploadAvatar = props => {
         <TouchableOpacity style={ theme.generalBtn }
                           disabled={ !imageSelected }
                           loading={ loadingMediaUpload }
-                          onPress={ handleSubmit( data => props.onSubmit( data, mediaDescription, imageSelected, image ) ) }>
+                          onPress={ handleSubmit(
+                              data => props.onSubmit( data, mediaDescription, imageSelected,
+                              image, type ) ) }>
           <Text style={ theme.loginButtonText }>Upload</Text>
         </TouchableOpacity>
       </View>
