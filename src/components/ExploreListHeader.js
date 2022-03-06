@@ -97,10 +97,11 @@ const EventListHeader = ( {
 
   return (
     <View style={ {
-      backgroundColor: theme.colors.backgroundColor,
+      flexDirection: 'row',
       justifyContent: 'center',
       padding: 0,
-
+      marginHorizontal: 10,
+      marginVertical: 5,
     } }>
       { ( mediaType === 'event' || mediaType === 'post' ) &&
       <DropDownPicker
@@ -117,6 +118,16 @@ const EventListHeader = ( {
         // onChangeValue={ ( value ) => setSortValue(value) }
         zIndex={ 3000 }
         zIndexInverse={ 3000 }
+        style={
+          [
+            theme.dropDownPicker,
+            {
+            marginRight: 15,
+            alignSelf: 'flex-end',
+            }
+          ]
+          }
+
       />
       }
 
@@ -146,6 +157,15 @@ const EventListHeader = ( {
         searchTextInputStyle={ {
           height: 35,
         } }
+        style={
+          [
+            theme.dropDownPicker,
+            {
+          marginLeft: 15,
+          alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
+            }
+            ]
+        }
       />
     </View>
   )

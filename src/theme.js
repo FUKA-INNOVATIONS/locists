@@ -152,6 +152,13 @@ const theme = {
     borderRadius: 100,
     marginVertical: 20,
   },
+  dropDownPicker: {
+    height: 40,
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#7b08a3',
+    width: '45%',
+  },
 
   // In List Post Styles
   post: {
