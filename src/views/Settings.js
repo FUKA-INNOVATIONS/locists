@@ -22,7 +22,6 @@ const Settings = ( { navigation } ) => {
 
   return (
     <>
-      <Button title={ 'Go back' } onPress={ onModalCloseHandler }/>
       <View style={ theme.settingsPage }>
         <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn] } onPress={ () => modifyProfile( 'details' ) }>
           <Text style={theme.loginButtonText}>Modify Account Details</Text>
