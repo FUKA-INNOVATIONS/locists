@@ -61,6 +61,19 @@ const theme = {
     borderColor: 'eee',
     // height: 70,
   },
+  commentContainer: {
+    // margin: 20,
+    width: '100%'
+  },
+  commentInput: {
+    // width: 400,
+    minHeight: 100,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingTop: 20,
+    padding: 20,
+  },
   inputErrorText: {
     color: general.colors.txtError,
     fontSize: 14,
@@ -107,6 +120,7 @@ const theme = {
   comment: {
     backgroundColor: general.colors.postBackground,
     // margin: 10,
+    minHeight: 75,
     padding: 10,
     marginVertical: 5,
     borderWidth: 1,
@@ -136,6 +150,7 @@ const theme = {
     marginHorizontal: 5,
   },
   addCommentButtons: {
+    marginTop: 10,
     width: width * 0.85,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -237,8 +252,10 @@ const theme = {
     // paddingHorizontal: 5,
     // marginHorizontal: 5,
     // marginTop: 5,
-    margin: 10,
+    // margin: 10,
+    top: -10,
     borderRadius: 10,
+    padding: 10
   },
   infoTop: {
     paddingTop: 10,

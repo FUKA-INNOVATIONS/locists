@@ -27,13 +27,15 @@ const Comment = ( { commentObj } ) => {
 
   return (
     <View style={{margin: 10}}>
-      <UserInfo avatar={ avatar } username={ 'Username' } />
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <UserInfo avatar={ avatar } username={ 'Username' } />
+          <TimeAgo style={{color: '#E9D6DB', left: 30}} dateTo={ new Date( commentObj.time_added ) } />
+      </View>
       <View style={ theme.comment }>
         <View style={ theme.commentInfo }>
           <Text>{ commentObj.comment }</Text>
         </View>
         <View>
-          <TimeAgo dateTo={ new Date( commentObj.time_added ) } />
           { isOwner &&
           <Button title={ 'Delete' } onPress={ () => onDeleteHandler(
             commentObj.comment_id ) }>Delete</Button> }
