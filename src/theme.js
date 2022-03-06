@@ -106,9 +106,9 @@ const theme = {
   },
   comment: {
     backgroundColor: general.colors.postBackground,
-    margin: 10,
-    padding: 5,
-    marginBottom: 5,
+    // margin: 10,
+    padding: 10,
+    marginVertical: 5,
     borderWidth: 1,
     borderRadius: 5,
     flexDirection: 'row',
