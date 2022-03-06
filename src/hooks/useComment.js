@@ -2,6 +2,7 @@ import { baseUrl } from '../../config'
 import axios from 'axios'
 import doFetch from '../utils/doFetch'
 import useAuthStorage from './useAuthStorage'
+import { useState } from 'react'
 
 const useComment = () => {
   const authStorage = useAuthStorage()
@@ -10,6 +11,7 @@ const useComment = () => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`
     try {
       const comments = await axios.get( URL )
+      // setMediaComments(comments)
       return comments.data
     } catch ( e ) {
       console.log( e )
