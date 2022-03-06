@@ -3,15 +3,18 @@ import TimeAgo from '@andordavoti/react-native-timeago'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
 import theme from '../theme'
+import fetchAvatar from '../utils/fetchAvatar'
+import { useEffect, useState } from 'react'
 
 const Comment = ( { commentObj, avatar } ) => {
   const { user } = useAuthStorage()
   const { deleteComment } = useComment()
   const isOwner = commentObj.user_id === user.user_id
+  const [ a, setA ] = useState()
 
-  // TODO: fetch avatar here
-
-  // console.log( 'comObj', commentObj, isOwner );
+  useEffect( async () => {
+    fetchAvatar( commentObj.user_id ).then( avatar => setA( avatar ) )
+  } )
 
   const onDeleteHandler = ( id ) => {
     deleteComment( id ).then( res => {
@@ -24,7 +27,7 @@ const Comment = ( { commentObj, avatar } ) => {
   return (
     <View style={ theme.comment }>
       <View style={ theme.commentInfo }>
-        <Image source={ { uri: 'http://placekitten.com/35/35' } }
+        <Image source={ { uri: a } }
                style={ theme.commentUser } />
         <Text>{ commentObj.comment }</Text>
       </View>
