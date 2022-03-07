@@ -1,4 +1,3 @@
-import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import AppNavigator from './src/navigator/AppNavigator'
 
@@ -7,7 +6,7 @@ import AuthStorageContext from './src/context/AuthStorageContext'
 import theme from './src/theme'
 import { SafeAreaView, View, Dimensions, StyleSheet } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen';
-import {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import { SplashScreenLogo, SplashBack } from './src/utils'
 
 // Create new instance of authentication storage
