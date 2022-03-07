@@ -4,8 +4,9 @@ import theme from '../theme'
 import Like from './Like'
 import DeleteMedia from './DeleteMedia'
 import UserInfo from './UserInfo'
-
 import AddComment from '../../assets/icons/AddComment.svg'
+import CommentsCounter from './CommentsCounter'
+
 
 const Post = ( { postMedia, ownProfile } ) => {
   // console.log('Post.js', postMedia)
@@ -37,8 +38,7 @@ const Post = ( { postMedia, ownProfile } ) => {
           <View style={ theme.postExtra }>
             <Like displayIcon={ true } file_id={ postMedia.file_id }
             />
-            <AddComment width={ 30 } height={ 30 }
-                        style={ { marginRight: 8 } } />
+            <CommentsCounter fileId={postMedia.file_id} />
             { postMedia.description.isOwner &&
             <DeleteMedia file_id={ postMedia.file_id } /> }
           </View>
