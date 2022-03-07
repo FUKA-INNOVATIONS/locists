@@ -27,9 +27,8 @@ const Post = ( { postMedia, ownProfile } ) => {
             postMedia.description.hasImage &&
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Like displayIcon={ true } file_id={ postMedia.file_id } />
-               <AddComment width={ 30 } height={ 30 }
-                          style={ { marginRight: 8 } } />
-               { postMedia.description.isOwner &&
+              <CommentsCounter fileId={postMedia.file_id} />
+              { postMedia.description.isOwner &&
               <DeleteMedia file_id={ postMedia.file_id } /> }
             </View>
           }
