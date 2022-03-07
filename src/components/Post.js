@@ -20,6 +20,7 @@ const Post = ( { postMedia, ownProfile } ) => {
         &&
         <View style={ { marginLeft: 15, marginVertical: 3 } }>
           <UserInfo username={ postMedia.description.owner }
+                    timeAdded={postMedia.time_added}
                     avatar={ postMedia.description.ownerAvatar } />
         </View>
       }

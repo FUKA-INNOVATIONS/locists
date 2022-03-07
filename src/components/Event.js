@@ -25,6 +25,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
         &&
         <View style={ { marginLeft: 10, marginVertical: 3 } }>
           <UserInfo username={ eventDetails.description.owner }
+                    timeAdded={eventDetails.time_added}
                     avatar={ eventDetails.description.ownerAvatar } />
         </View>
       }
