@@ -1,5 +1,5 @@
 import { FlatList, Pressable } from 'react-native'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Event from './Event'
 import Loading from './Loading'
 import useMedia from '../hooks/useMedia'

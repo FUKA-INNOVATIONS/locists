@@ -1,3 +1,4 @@
+import React from 'react'
 import UploadMedia from '../components/UploadMedia'
 import PropTypes from 'prop-types'
 

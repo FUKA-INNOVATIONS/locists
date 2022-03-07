@@ -1,5 +1,5 @@
 import useMedia from '../hooks/useMedia'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SingleEventHeader from '../components/SingleEventHeader'
 import Loading from '../components/Loading'
 import Comments from '../components/Comments'

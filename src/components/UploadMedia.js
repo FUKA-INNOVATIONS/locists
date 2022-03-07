@@ -7,7 +7,7 @@ import UploadAvatar from './UploadAvatar'
 import UploadEvent from './uploadEvent'
 import { postTag, eventTag, appId } from '../../config'
 import UploadPost from './uploadPost'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const UploadMedia = ( { mediaType, navigation } ) => {

@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react'
 import { Image, Text, TextInput, View, TouchableOpacity } from 'react-native'
 import { Controller, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -7,7 +8,6 @@ import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
-import { useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 const UploadPost = props => {

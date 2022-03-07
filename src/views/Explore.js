@@ -1,5 +1,5 @@
 import { View } from 'react-native'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import SwitchSelector from 'react-native-switch-selector'
 import theme from '../theme'
 import PostsList from '../components/PostsList'
@@ -22,7 +22,7 @@ const Explore = ( { navigation } ) => {
 
   return (
     <View style={ { paddingBottom: 90 } }>
-      <View style={{marginHorizontal: 10, marginBottom: 10}}>
+      <View style={ { marginHorizontal: 10, marginBottom: 10 } }>
         <SwitchSelector
           backgroundColor={ theme.colors.textPrimary }
           textColor={ theme.colors.white }

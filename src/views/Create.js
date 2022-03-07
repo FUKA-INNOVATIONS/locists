@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import Dialog, { DialogContent } from 'react-native-popup-dialog'
 import theme from '../theme'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import InfoButton from '../../assets/icons/InfoButton.svg'
 import PropTypes from 'prop-types'
 

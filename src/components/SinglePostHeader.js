@@ -1,6 +1,6 @@
+import React, { useState } from 'react'
 import { Image, Text, View } from 'react-native'
 import { uploadsUrl } from '../../config'
-import { useState } from 'react'
 import theme from '../theme'
 import PostComment from './PostComment'
 import Like from './Like'

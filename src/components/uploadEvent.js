@@ -15,7 +15,7 @@ import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 

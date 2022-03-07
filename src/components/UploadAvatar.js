@@ -1,3 +1,4 @@
+import React from 'react'
 import { Image, Text, View, TouchableOpacity } from 'react-native'
 import { useForm } from 'react-hook-form'
 import useDevice from '../hooks/useDevice'

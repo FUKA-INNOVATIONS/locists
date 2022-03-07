@@ -1,6 +1,6 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Tab from './Tab';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 
 const { width } = Dimensions.get( 'screen' );

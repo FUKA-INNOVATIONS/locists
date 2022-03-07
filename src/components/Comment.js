@@ -4,7 +4,7 @@ import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
 import theme from '../theme'
 import fetchAvatar from '../utils/fetchAvatar'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserInfo from './UserInfo'
 import PropTypes from 'prop-types'
 

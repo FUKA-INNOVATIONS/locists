@@ -1,7 +1,7 @@
 import { View, Platform } from 'react-native'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
   initCities,
   sortLatest, sortMostAttendees, sortMostCommented,

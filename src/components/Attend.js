@@ -1,5 +1,5 @@
 import { View, Text, Alert, TouchableOpacity } from 'react-native'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useFavourite from '../hooks/useFavourite'
 import theme from '../theme'
 import useAuthStorage from '../hooks/useAuthStorage'

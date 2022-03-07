@@ -8,7 +8,7 @@ import UserInfo from './UserInfo'
 
 import Location from '../../assets/icons/Location.svg'
 import Loading from './Loading'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 const Event = ( { eventDetails, ownProfile } ) => {

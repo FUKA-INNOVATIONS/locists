@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Image, Text, View} from 'react-native'
 import { uploadsUrl } from '../../config'
 import PostComment from './PostComment'
