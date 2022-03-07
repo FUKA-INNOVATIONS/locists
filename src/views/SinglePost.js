@@ -1,53 +1,26 @@
-import { View, Text, Button, FlatList } from 'react-native'
 import useMedia from '../hooks/useMedia'
-import { useEffect } from 'react'
-import theme from '../theme'
-import Comment from '../components/Comment'
+import { useEffect, useState } from 'react'
+import Loading from '../components/Loading'
+import Comments from '../components/Comments'
 import SinglePostHeader from '../components/SinglePostHeader'
-import useComment from '../hooks/useComment'
 
 const SinglePost = ( { navigation, route } ) => {
   const { postId } = route.params
-  // const { getMediaById, getSingleMediaComments, singleMediaComments, singleMedia, loadingSingleMedia } = useMedia();
-  const { getMediaById, singleMedia, loading: loadingSingleMedia } = useMedia()
-  const {
-    getMediaComments,
-    mediaComments,
-    loading: loadingComments,
-  } = useComment()
+  const [ loading, setLoading ] = useState()
+  const { getMediaById, singleMedia } = useMedia()
 
   useEffect( async () => {
-    await getMediaById( postId )
-    await getMediaComments( postId )
+    setLoading( true )
+    await getMediaById( postId ).then( async () => {
+    } ).finally( () => setLoading( false ) )
   }, [ postId ] )
 
-  if ( loadingSingleMedia ) return <View><Text>Loading..</Text></View>
-  if ( loadingComments ) return <View><Text>Loading media
-    comments..</Text></View>
+  if ( loading ) return <Loading />
 
-  const EmptyListMessage = () => <Text style={ { color: 'white' } }>No
-    comments </Text>
-
-  const onModalCloseHandler = () => {
-    navigation.goBack()
-  }
-
-    return (
-      <>
-        <Button title={'Go back'} onPress={onModalCloseHandler} />
-        <SinglePostHeader postDetails={ singleMedia } />
-        <View style={ singleMedia !== undefined && singleMedia.description.hasImage ?
-          [theme.singleMediaComments, {maxHeight: 250}]
-          :
-          [theme.singleMediaComments, {height: 430}]
-        }>
-        <FlatList
-          data={ mediaComments }
-          ListEmptyComponent={ EmptyListMessage }
-          keyExtractor={ (  item  ) => item.comment_id }
-          renderItem={ ( { item } ) => <Comment commentObj={ item } avatar={ '' }/> }
-        />
-      </View>
+  return (
+    <>
+      <SinglePostHeader postDetails={singleMedia} />
+      <Comments fileId={ postId } />
     </>
   )
 }

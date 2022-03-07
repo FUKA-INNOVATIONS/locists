@@ -39,8 +39,8 @@ const UploadAvatar = props => {
   return (
     <>
       <Image source={ { uri: image } }
-             style={ theme.changePicture }/>
-      <View>
+             style={ theme.changePicture } />
+      <View style={ { padding: 30 } }>
         <TouchableOpacity style={ theme.generalBtn } onPress={ pickImage }>
           <Text style={ theme.loginButtonText }>Choose Image</Text>
         </TouchableOpacity>
@@ -51,7 +51,8 @@ const UploadAvatar = props => {
                           disabled={ !imageSelected }
                           loading={ loadingMediaUpload }
                           onPress={ handleSubmit(
-                              data => props.onSubmit( data, mediaDescription, imageSelected,
+                            data => props.onSubmit( data, mediaDescription,
+                              imageSelected,
                               image, type ) ) }>
           <Text style={ theme.loginButtonText }>Upload</Text>
         </TouchableOpacity>

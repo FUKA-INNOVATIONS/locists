@@ -21,19 +21,21 @@ const Explore = ( { navigation } ) => {
 
   return (
     <View style={ { paddingBottom: 90 } }>
-      <SwitchSelector
-        backgroundColor={ theme.colors.textPrimary }
-        textColor={ theme.colors.white }
-        selectedColor={ theme.colors.primary }
-        buttonColor={ theme.colors.white }
-        borderColor={ theme.colors.primary }
-        valuePadding={ 3 }
-        hasPadding={ true }
-        bold={ true }
-        options={ exploreOptions }
-        initial={ 0 }
-        onPress={ value => setExplore( value.explore ) }
-      />
+      <View style={{marginHorizontal: 10, marginBottom: 10}}>
+        <SwitchSelector
+          backgroundColor={ theme.colors.textPrimary }
+          textColor={ theme.colors.white }
+          selectedColor={ theme.colors.primary }
+          buttonColor={ theme.colors.white }
+          borderColor={ theme.colors.primary }
+          valuePadding={ 3 }
+          hasPadding={ true }
+          bold={ true }
+          options={ exploreOptions }
+          initial={ 0 }
+          onPress={ value => setExplore( value.explore ) }
+        />
+      </View>
       { explore === 'events' && <EventsList navigation={ navigation } /> }
       { explore === 'posts' && <PostsList navigation={ navigation } /> }
     </View>

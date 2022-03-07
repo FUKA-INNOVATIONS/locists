@@ -18,17 +18,17 @@ import Loading from './Loading'
 
 const RegisterSchema = Yup.object().shape( {
   username: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 4, 'Too Short!' ).
       max( 10, 'Too Long!' ).
-      required( 'Username is required' ),
+      required( 'Username is required, 4-10 characters' ),
   password: Yup.string().required( 'Required' ),
   passwordConfirm: Yup.string().
-      min( 5, 'Too short' ).
-      max( 16, 'Too long' ).
+      min( 5, 'Too short, min 5 characters' ).
+      max( 16, 'Too long, max 16 characters' ).
       required( 'Password confirmation is required' ).
       oneOf( [ Yup.ref( 'password' ), null ], 'Passwords must match' ),
   email: Yup.string().email( 'Invalid email' ).required( 'Required' ),
-  fullName: Yup.string().required( 'Required' ),
+  city: Yup.string().required( 'Required' ),
 } );
 
 const Register = ( { navigation } ) => {
@@ -44,7 +44,7 @@ const Register = ( { navigation } ) => {
       username: '',
       password: '',
       email: '',
-      fullName: '',
+      city: '',
     },
     resolver: yupResolver( RegisterSchema ),
     mode: 'onBlur',
@@ -63,7 +63,7 @@ const Register = ( { navigation } ) => {
         data.username,
         data.password,
         data.email,
-        data.fullName,
+        data.city,
     );
 
     /*
@@ -107,6 +107,13 @@ const Register = ( { navigation } ) => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <ScrollView >
             <View style={theme.register}>
+
+              <View>
+                <Text style={theme.authTitle}>
+                  Some text
+                </Text>
+              </View>
+
           <View style={ theme.inputContainer }>
             <Controller
                 control={ control }
@@ -140,6 +147,23 @@ const Register = ( { navigation } ) => {
             />
             { errors.email && <Text style={theme.inputErrorText}>{ errors.email.message }</Text> }
           </View>
+
+              <View style={ theme.inputContainer }>
+                <Controller
+                  control={ control }
+                  render={ ( { field: { onChange, onBlur, value } } ) => (
+                    <TextInput
+                      style={ theme.input }
+                      onBlur={ onBlur }
+                      onChangeText={ onChange }
+                      value={ value }
+                      placeholder="City"
+                    />
+                  ) }
+                  name="city"
+                />
+                { errors.city && <Text style={theme.inputErrorText}>{ errors.city.message }</Text> }
+              </View>
 
           <View style={ theme.inputContainer }>
             <Controller
@@ -177,23 +201,6 @@ const Register = ( { navigation } ) => {
             { errors.passwordConfirm && (
                 <Text style={theme.inputErrorText}>{ errors.passwordConfirm.message }</Text>
             ) }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Full name"
-                    />
-                ) }
-                name="fullName"
-            />
-            { errors.fullName && <Text style={theme.inputErrorText}>{ errors.fullName.message }</Text> }
           </View>
 
           <TouchableOpacity style={theme.loginButton} onPress={ handleSubmit( onSubmit ) }>

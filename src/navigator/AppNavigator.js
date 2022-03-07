@@ -22,6 +22,7 @@ import PostsListScreen from '../components/PostsList'
 
 import useAuthStorage from '../hooks/useAuthStorage'
 import TabBar from '../components/nav/TabBar'
+import CloseModal from '../components/CloseModal'
 
 const HomeStack = createNativeStackNavigator()
 const ExploreStack = createNativeStackNavigator()
@@ -38,8 +39,24 @@ const HomeStackScreen = () => {
       <HomeStack.Screen name={ 'Home' } component={ HomeScreen } />
       <HomeStack.Group screenOptions={ { presentation: 'modal' } }>
         <HomeStack.Screen name={ 'SinglePostHomeStack' }
+                          options={ ( {
+                            route,
+                            navigation,
+                          } ) => ( {
+                            title: 'Post',
+                            headerRight: () => (
+                              <CloseModal navigation={navigation} /> ),
+                          } ) }
                           component={ SinglePostScreen } />
         <HomeStack.Screen name={ 'SingleEvent' }
+                          options={ ( {
+                            route,
+                            navigation,
+                          } ) => ( {
+                            title: 'Event',
+                            headerRight: () => (
+                              <CloseModal navigation={navigation} /> ),
+                          } ) }
                           component={ SingleEventScreen } />
       </HomeStack.Group>
     </HomeStack.Navigator>
@@ -55,8 +72,24 @@ const ExploreStackScreen = () => {
       <ExploreStack.Screen name={ 'PostList' } component={ PostsListScreen } />
       <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
         <ExploreStack.Screen name={ 'SingleEvent' }
+                             options={ ( {
+                               route,
+                               navigation,
+                             } ) => ( {
+                               title: 'Event',
+                               headerRight: () => (
+                                 <CloseModal navigation={navigation} /> ),
+                             } ) }
                              component={ SingleEventScreen } />
         <ExploreStack.Screen name={ 'SinglePost' }
+                             options={ ( {
+                               route,
+                               navigation,
+                             } ) => ( {
+                               title: 'Post',
+                               headerRight: () => (
+                                 <CloseModal navigation={navigation} /> ),
+                             } ) }
                              component={ SinglePostScreen } />
       </ExploreStack.Group>
     </ExploreStack.Navigator>
@@ -70,8 +103,24 @@ const CreateStackScreen = () => {
                           component={ CreateScreen } />
       <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
         <CreateStack.Screen name={ 'CreatePost' }
+                            options={ ( {
+                              route,
+                              navigation,
+                            } ) => ( {
+                              title: 'Create new post',
+                              headerRight: () => (
+                                <CloseModal navigation={navigation} /> ),
+                            } ) }
                             component={ CreatePostScreen } />
         <CreateStack.Screen name={ 'CreateEvent' }
+                            options={ ( {
+                              route,
+                              navigation,
+                            } ) => ( {
+                              title: 'Create new event',
+                              headerRight: () => (
+                                <CloseModal navigation={navigation} /> ),
+                            } ) }
                             component={ CreateEventScreen } />
       </CreateStack.Group>
     </CreateStack.Navigator>
@@ -101,6 +150,14 @@ const AuthenticationStackScreen = () => {
           <AuthenticationStack.Group
             screenOptions={ { presentation: 'modal' } }>
             <AuthenticationStack.Screen name={ 'ModifyAccount' }
+                                        options={ ( {
+                                          route,
+                                          navigation,
+                                        } ) => ( {
+                                          title: 'Update account details',
+                                          headerRight: () => (
+                                            <CloseModal navigation={navigation} /> ),
+                                        } ) }
                                         component={ SettingsScreen } />
           </AuthenticationStack.Group>
         </>
@@ -117,6 +174,14 @@ const SettingsStackScreen = () => {
                             component={ SettingsScreen } />
       <SettingsStack.Group screenOptions={ { presentation: 'modal' } }>
         <SettingsStack.Screen name={ 'ModifyAccount' }
+                              options={ ( {
+                                route,
+                                navigation,
+                              } ) => ( {
+                                title: 'Update account details',
+                                headerRight: () => (
+                                  <CloseModal navigation={navigation} /> ),
+                              } ) }
                               component={ ModifyAccount } />
       </SettingsStack.Group>
     </SettingsStack.Navigator>
@@ -161,37 +226,37 @@ const AppNavigator = ( props ) => {
   navTheme.colors.text = 'white'
 
   return (
-      <NavigationContainer theme={ DefaultTheme }>
-        <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props } /> }
-                             screenOptions={ ( { route } ) => ( {
-                                 headerShown: false,
-                               }
-                             ) }
-        >
-          <BottomTab.Screen
-              // TODO Name "Home" conflicts with another screen
-              name={ 'HomeTab' }
-              component={ HomeStackScreen }
-          />
-          <BottomTab.Screen
-              name={ 'ExploreTab' }
-              component={ ExploreStackScreen }
-          />
-          <BottomTab.Screen
-              name={ 'CreateTab' }
-              component={ CreateStackScreen }
-          />
-          <BottomTab.Screen
-              name={ 'AccountTab' }
-              component={ AuthenticationStackScreen }
-          />
-          <BottomTab.Screen
-              name={ 'SettingsTab' }
-              component={ SettingsStackScreen }
-          />
-        </BottomTab.Navigator>
-      </NavigationContainer>
-  );
-};
+    <NavigationContainer theme={ DefaultTheme }>
+      <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props } /> }
+                           screenOptions={ ( { route } ) => ( {
+                               headerShown: false,
+                             }
+                           ) }
+      >
+        <BottomTab.Screen
+          // TODO Name "Home" conflicts with another screen
+          name={ 'HomeTab' }
+          component={ HomeStackScreen }
+        />
+        <BottomTab.Screen
+          name={ 'ExploreTab' }
+          component={ ExploreStackScreen }
+        />
+        <BottomTab.Screen
+          name={ 'CreateTab' }
+          component={ CreateStackScreen }
+        />
+        <BottomTab.Screen
+          name={ 'AccountTab' }
+          component={ AuthenticationStackScreen }
+        />
+        <BottomTab.Screen
+          name={ 'SettingsTab' }
+          component={ SettingsStackScreen }
+        />
+      </BottomTab.Navigator>
+    </NavigationContainer>
+  )
+}
 
 export default AppNavigator

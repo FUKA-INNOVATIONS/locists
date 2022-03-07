@@ -8,9 +8,15 @@ import UserInfo from './UserInfo'
 
 import Location from '../../assets/icons/Location.svg'
 import Loading from './Loading'
+import { useEffect } from 'react'
 
 const Event = ( { eventDetails, ownProfile } ) => {
   // console.log('Event.js', eventDetails)
+
+
+  useEffect(async () => {
+
+  })
 
   if ( eventDetails === null ) return <Loading />
 
@@ -38,8 +44,6 @@ const Event = ( { eventDetails, ownProfile } ) => {
               { new Date( eventDetails.description.date ).toDateString() }
             </Text>
             <Text>{ eventDetails.description.price } €</Text>
-            {/* <Text>Comments: { eventDetails.description.commentsCount }</Text> */ }
-            {/* <Text>time_added: { eventDetails.time_added }</Text> */ }
           </View>
           <View style={ theme.eventAttend }>
             <Entypo name='users' size={ 20 } color='black' />
