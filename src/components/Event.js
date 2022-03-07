@@ -44,8 +44,6 @@ const Event = ( { eventDetails, ownProfile } ) => {
               { new Date( eventDetails.description.date ).toDateString() }
             </Text>
             <Text>{ eventDetails.description.price } €</Text>
-            {/* <Text>Comments: { eventDetails.description.commentsCount }</Text> */ }
-            {/* <Text>time_added: { eventDetails.time_added }</Text> */ }
           </View>
           <View style={ theme.eventAttend }>
             <Entypo name='users' size={ 20 } color='black' />

@@ -4,7 +4,6 @@ import theme from '../theme'
 import Like from './Like'
 import DeleteMedia from './DeleteMedia'
 import UserInfo from './UserInfo'
-import AddComment from '../../assets/icons/AddComment.svg'
 import CommentsCounter from './CommentsCounter'
 
 

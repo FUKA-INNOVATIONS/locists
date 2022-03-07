@@ -6,11 +6,12 @@ import { useEffect, useState } from 'react'
 const CommentsCounter = ( { fileId } ) => {
   const { getMediaComments } = useComment()
   const [ commentsCount, setCommentsCount ] = useState( 0 )
+
   useEffect( async () => {
-    // console.log(postMedia)
     await getMediaComments( fileId, true ).
       then( commentsCount => setCommentsCount( commentsCount ) )
   }, [] )
+
   return (
     <View style={ { flexDirection: 'row', alignItems: 'center' } }>
       <Text>{ commentsCount }</Text>

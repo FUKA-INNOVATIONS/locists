@@ -7,6 +7,7 @@ import Loading from './Loading'
 import { useEffect, useState } from 'react'
 import PostComment from './PostComment'
 import AddComment from '../../assets/icons/AddComment.svg'
+import { sortLatest } from '../utils/sortFilterHelpers'
 
 const Comments = ( { fileId } ) => {
   const [ loading, setLoading ] = useState()
@@ -35,7 +36,7 @@ const Comments = ( { fileId } ) => {
 
   if ( loading ) return <Loading />
 
-  console.log(mediaComments)
+  sortLatest(mediaComments)
 
   return (
     <>
