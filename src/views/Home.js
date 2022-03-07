@@ -2,6 +2,9 @@ import HomeList from '../components/HomeList'
 import useUser from '../hooks/useUser'
 import React, { useEffect, useMemo } from 'react'
 import useAuthStorage from '../hooks/useAuthStorage'
+import { View } from 'react-native'
+import AppName from '../../assets/AppName.svg'
+import theme from "../theme";
 import PropTypes from 'prop-types'
 
 const Home = ( { navigation } ) => {
@@ -22,7 +25,15 @@ const Home = ( { navigation } ) => {
     } )
   }, [] )
 
-  return <HomeList navigation={ navigation } />
+  return (
+      <>
+        <View style={ theme.appName }>
+          <AppName width={100} height={50}/>
+        </View>
+        <HomeList navigation={ navigation } />
+      </>
+
+  )
 }
 
 Home.propTypes = {
