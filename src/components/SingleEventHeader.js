@@ -31,17 +31,15 @@ const SingleEventHeader = ( { eventDetails, setUpdateSingleEventView, type } ) =
             </View>
               <View style={ theme.infoBottom }>
                 <Text style={{width: '80%'}}>{ eventDetails.description.description }</Text>
-                <TouchableOpacity onPress={ onWriteCommentHandler }>
+                {/* <TouchableOpacity onPress={ onWriteCommentHandler }>
                 <AddComment width={32} height={32} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
         </View>
         <View style={ { alignItems: 'center' } }>
           {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment} setUpdateSingleEventView={setUpdateSingleEventView} type={'event'}/>}
         </View>
-        <View style={{marginTop: 10}}>
-          <Text style={{color: '#8d8082', fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>Comments</Text>
-        </View>
+
       </View>
   )
 }

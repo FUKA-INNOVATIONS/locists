@@ -12,7 +12,6 @@ import AddComment from '../../assets/icons/AddComment.svg'
 
 const Comments = ( { fileId } ) => {
   const [ loading, setLoading ] = useState()
-  const { getMediaById, singleMedia } = useMedia()
   const { getMediaComments } = useComment()
   const [ mediaComments, setMediaComments ] = useState( [] )
   const [ updateView, setUpdateView ] = useState( false )
@@ -25,13 +24,12 @@ const Comments = ( { fileId } ) => {
 
   useEffect( async () => {
     setLoading( true )
-    await getMediaById( fileId ).then( async () => {
-      await getMediaComments( fileId ).
-        then( comments => setMediaComments( comments ) )
-    } ).finally( () => {
-      setUpdateView( false )
-      setLoading( false )
-    } )
+    await getMediaComments( fileId ).
+      then( comments => setMediaComments( comments ) ).
+      finally( () => {
+        setUpdateView( false )
+        setLoading( false )
+      } )
     setUpdateView( false )
   }, [ fileId, updateView ] )
 
@@ -42,9 +40,18 @@ const Comments = ( { fileId } ) => {
   return (
     <>
 
-      <TouchableOpacity onPress={ onWriteCommentHandler }>
+      <TouchableOpacity style={ { alignItems: 'center' } }
+                        onPress={ onWriteCommentHandler }>
         <AddComment width={ 32 } height={ 32 } />
       </TouchableOpacity>
+      <View>
+        <Text style={ {
+          color: '#8d8082',
+          fontSize: 20,
+          textAlign: 'center',
+          fontWeight: 'bold',
+        } }>Comments</Text>
+      </View>
       <View style={ { alignItems: 'center' } }>
         { isWriteComment &&
         <PostComment file_id={ fileId } display={ setIsWriteComment }

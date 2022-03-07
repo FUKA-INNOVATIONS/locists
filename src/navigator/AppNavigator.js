@@ -43,7 +43,7 @@ const HomeStackScreen = () => {
                             route,
                             navigation,
                           } ) => ( {
-                            title: 'Post details',
+                            title: 'Post',
                             headerRight: () => (
                               <CloseModal navigation={navigation} /> ),
                           } ) }
@@ -53,7 +53,7 @@ const HomeStackScreen = () => {
                             route,
                             navigation,
                           } ) => ( {
-                            title: 'Event details',
+                            title: 'Event',
                             headerRight: () => (
                               <CloseModal navigation={navigation} /> ),
                           } ) }
@@ -76,7 +76,7 @@ const ExploreStackScreen = () => {
                                route,
                                navigation,
                              } ) => ( {
-                               title: 'Event details',
+                               title: 'Event',
                                headerRight: () => (
                                  <CloseModal navigation={navigation} /> ),
                              } ) }
@@ -86,7 +86,7 @@ const ExploreStackScreen = () => {
                                route,
                                navigation,
                              } ) => ( {
-                               title: 'Post details',
+                               title: 'Post',
                                headerRight: () => (
                                  <CloseModal navigation={navigation} /> ),
                              } ) }
