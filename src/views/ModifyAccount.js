@@ -86,7 +86,7 @@ const ModifyAccount = ( { navigation, route } ) => {
 
           <View>
             <Text style={{...theme.authTitle, marginBottom: 30}}>
-              Fill only the details you want to update!
+              Keep account details up to date
             </Text>
           </View>
 
@@ -155,7 +155,7 @@ const ModifyAccount = ( { navigation, route } ) => {
           </View>
 
           <View style={ theme.inputContainer }>
-            <Text style={theme.inputTitle}>Password</Text>
+            <Text style={theme.inputTitle}>Password (optional)</Text>
             <Controller
               control={ control }
               rules={ {
