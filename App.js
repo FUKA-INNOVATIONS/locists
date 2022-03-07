@@ -4,13 +4,15 @@ import AppNavigator from './src/navigator/AppNavigator'
 import AuthStorage from './src/utils/authStorage'
 import AuthStorageContext from './src/context/AuthStorageContext'
 import theme from './src/theme'
-import { SafeAreaView, View, Text } from 'react-native'
+import { SafeAreaView, View, Dimensions, StyleSheet } from 'react-native'
 import * as SplashScreen from 'expo-splash-screen';
 import {useCallback, useEffect, useState} from 'react'
+import { SplashScreenLogo, SplashBack } from './src/utils'
 
 // Create new instance of authentication storage
 const authStorage = new AuthStorage()
-
+const dimensions = Dimensions.get( 'screen' )
+console.log(dimensions);
 export default function App() {
 
     const [appIsReady, setAppIsReady] = useState(false);
@@ -40,9 +42,13 @@ export default function App() {
     }, [appIsReady]);
 
     if (!appIsReady) {
-        return <View>
-            <Text>Test</Text>
-        </View>;
+        return (
+          <View style={ styles.splashScreen }>
+              <SplashBack width={'130%'} height={'120%'} position={'absolute'} />
+              <SplashScreenLogo width={dimensions.width * 0.7} height={dimensions.height * 0.8} />
+          </View>
+        )
+
     }
 
   console.log( 'App.js' )
@@ -58,3 +64,18 @@ export default function App() {
     </>
   )
 }
+
+const styles = StyleSheet.create({
+    splashScreen: {
+        width: dimensions.width,
+        height: dimensions.height,
+        backgroundColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    splashBack: {
+        width: dimensions.width,
+        height: dimensions.height,
+        position: 'absolute',
+    }
+})
