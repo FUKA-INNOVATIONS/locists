@@ -65,6 +65,9 @@ const SinglePostHeader = ( { postDetails, setUpdateSinglePostView } ) => {
       { isWriteComment && <PostComment file_id={ postDetails.file_id }
                                        display={ setIsWriteComment } setUpdateSinglePostView={setUpdateSinglePostView} type={'post'}/> }
     </View>
+      <View style={{marginTop: 10}}>
+        <Text style={{color: '#8d8082', fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>Comments</Text>
+      </View>
     </View>
   )
 }
