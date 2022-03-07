@@ -229,6 +229,41 @@ const theme = {
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
   },
+  generalListEvent: {
+    borderRadius: 10,
+    marginBottom: 10,
+    marginHorizontal: 10,
+    flex: 1,
+    borderWidth: 1,
+    backgroundColor: general.colors.postBackground,
+  },
+  eventListTitle: {
+    position: 'absolute',
+    alignItems: 'center',
+    width: '45%',
+    borderBottomRightRadius: 10,
+    padding: 5,
+    zIndex: 1,
+    backgroundColor: general.colors.btn
+  },
+  eventImage2: {
+    width: width * 0.94,
+    height: undefined,
+    aspectRatio: 1.4,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    position: 'relative',
+  },
+  eventExtra: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 5,
+  },
+  eventSection: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
   // Single Event Styles
   singleEventInfo: {
