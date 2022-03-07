@@ -3,11 +3,16 @@ import { View, Image, Text } from 'react-native'
 import PropTypes from 'prop-types'
 
 const UserInfo = ( { username, avatar } ) => {
+  const avatarUri = {
+    uri: avatar
+  }
+
+  const noAvatar = require('../../assets/defaultPic.jpg')
 
   return (
     <View
       style={ { flexDirection: 'row', alignItems: 'center', marginBottom: 5 } }>
-      <Image source={ { uri: avatar } } style={ {
+      <Image source={ !avatar ? noAvatar : avatarUri  } style={ {
         width: 40,
         height: 40,
         borderRadius: 20,
