@@ -74,6 +74,11 @@ const theme = {
   },
 
   // General Component Styles
+  appName: {
+    position: 'absolute',
+    left: 15,
+    zIndex: 5,
+  },
   generalBtn: {
     alignItems: 'center',
     borderColor: general.colors.btn,
