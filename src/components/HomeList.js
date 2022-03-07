@@ -14,7 +14,6 @@ const HomeList = ( { navigation } ) => {
   const [ mixedMedia, setMixedMedia ] = useState( [] )
   const [ activeList, setActiveList ] = useState( [] )
   const [ loading, setLoading ] = useState( false )
-  const [ updateView, setUpdateView ] = useState( false )
 
   useEffect( () => {
     console.log( 'HomeList.js useEffect' )
@@ -25,7 +24,7 @@ const HomeList = ( { navigation } ) => {
     } ).finally( () => {
       console.log( 'HomeList getAllMedia in useEffect ready' )
       setLoading( false )
-    }, [updateView])
+    }, [] )
 
     // To keep state up to date
     // TODO instead update app state on changes like add/delete new event/comment/attendee
@@ -35,7 +34,9 @@ const HomeList = ( { navigation } ) => {
       getAllMedia().then( mixedMedia => {
         setActiveList( mixedMedia )
         setMixedMedia( mixedMedia )
-      } ).finally( () => setLoading( false ) )
+      } ).finally( () => {
+        setLoading( false )
+      } )
     } )
   }, [] )
 
@@ -64,7 +65,7 @@ const HomeList = ( { navigation } ) => {
           loading={ loading }
         /> }
       stickyHeaderIndices={ [ 0 ] }
-      style={{marginBottom: 50}}
+      style={ { marginBottom: 50 } }
       ListEmptyComponent={ <EmptyListMessage /> }
       keyExtractor={ ( item ) => item.file_id }
       renderItem={ ( { item } ) => {
@@ -72,7 +73,8 @@ const HomeList = ( { navigation } ) => {
           item.description.mediaType === 'post' ?
             <Pressable
               onPress={ () => postPressHandler( item.file_id ) }>
-              <Post postMedia={ item } />
+              <Post postMedia={ item } home={ true }
+              />
             </Pressable>
             :
             <Pressable

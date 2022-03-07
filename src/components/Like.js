@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Alert } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { useEffect, useState } from 'react'
 
 import useFavourite from '../hooks/useFavourite'
@@ -6,13 +6,21 @@ import HeartEmpty from '../../assets/icons/HeartEmpty.svg'
 import HeartFull from '../../assets/icons/HeartFull.svg'
 import theme from '../theme'
 
-const Like = ( { file_id, displayIcon, single, setUpdateSinglePostView } ) => {  // eslint-disable-line
+const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   const {
     getMediaFavourites,
     deleteFavourite,
     createFavourite,
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
+
+  const fetchLikes = async () => {
+    await getMediaFavourites( file_id ).
+      then( favourites => {
+        setMediaFavourites( favourites )
+      } )
+  }
+
 
   useEffect( async () => {
     // let cancel = true
@@ -29,16 +37,10 @@ const Like = ( { file_id, displayIcon, single, setUpdateSinglePostView } ) => { 
   const likeHandler = async () => {
     console.log( 'Like', file_id )
     if ( hasLiked() ) {
-      // const disLiked = await deleteFavourite( file_id )
-      // disLiked.message && Alert.alert( disLiked.message )
-      await deleteFavourite( file_id )
+      await deleteFavourite( file_id ).then(async () => await fetchLikes())
     } else {
-      // const liked = await createFavourite( file_id )
-      // liked.file_id && Alert.alert( 'Successfully liked' )
-      await createFavourite( file_id )
+      await createFavourite( file_id ).then(async () => await fetchLikes())
     }
-
-    single && setUpdateSinglePostView( true )
 
   }
 
