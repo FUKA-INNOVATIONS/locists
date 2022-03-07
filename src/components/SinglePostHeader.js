@@ -14,7 +14,7 @@ const SinglePostHeader = ( { postDetails } ) => {
 
   return (
     <View style={ theme.singlePost }>
-      <View style={ theme.singleMediaAvatar }>
+      <View style={ {...theme.singleMediaAvatar, marginBottom: 5} }>
         <UserInfo username={ postDetails.description.owner }
                   avatar={ postDetails.description.ownerAvatar } />
       </View>
