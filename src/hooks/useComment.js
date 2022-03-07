@@ -2,12 +2,11 @@ import { baseUrl } from '../../config'
 import axios from 'axios'
 import doFetch from '../utils/doFetch'
 import useAuthStorage from './useAuthStorage'
-import fetchAvatar from '../utils/fetchAvatar'
 
 const useComment = () => {
   const authStorage = useAuthStorage()
 
-  const getMediaComments = async ( mediaId ) => {
+  const getMediaComments = async ( mediaId, returnLength = false ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`
     try {
       const { data } = await axios.get( URL )

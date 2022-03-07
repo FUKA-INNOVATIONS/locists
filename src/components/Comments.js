@@ -35,6 +35,8 @@ const Comments = ( { fileId } ) => {
 
   if ( loading ) return <Loading />
 
+  console.log(mediaComments)
+
   return (
     <>
 
@@ -48,7 +50,7 @@ const Comments = ( { fileId } ) => {
           fontSize: 20,
           textAlign: 'center',
           fontWeight: 'bold',
-        } }>Comments</Text>
+        } }>Comments ({ mediaComments.length })</Text>
       </View>
       <View style={ { alignItems: 'center' } }>
         { isWriteComment &&
@@ -59,10 +61,11 @@ const Comments = ( { fileId } ) => {
       <FlatList
         style={ [ theme.singleMediaComments ] }
         data={ mediaComments }
-        ListEmptyComponent={ <NoComments openCommentBox={onWriteCommentHandler} isWriteComment /> }
+        ListEmptyComponent={ <NoComments
+          openCommentBox={ onWriteCommentHandler } isWriteComment /> }
         keyExtractor={ ( item ) => item.comment_id }
         renderItem={ ( { item } ) => <Comment commentObj={ item }
-                                              updateComments={updateComments} /> }
+                                              updateComments={ updateComments } /> }
       />
     </>
   )

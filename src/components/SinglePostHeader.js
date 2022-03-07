@@ -1,10 +1,9 @@
-import { Image, Text, View, TouchableOpacity } from 'react-native'
+import { Image, Text, View } from 'react-native'
 import { uploadsUrl } from '../../config'
 import { useState } from 'react'
 import theme from '../theme'
 import PostComment from './PostComment'
 import Like from './Like'
-import AddComment from '../../assets/icons/AddComment.svg'
 import UserInfo from './UserInfo'
 import Loading from './Loading'
 
@@ -34,7 +33,8 @@ const SinglePostHeader = ( { postDetails } ) => {
               </View>
             </View>
             <View style={ { ...theme.singlePostText } }>
-              <Text style={ { padding: 5 } }>{ postDetails.description.description }</Text>
+              <Text
+                style={ { padding: 5 } }>{ postDetails.description.description }</Text>
             </View>
           </>
           :
@@ -50,9 +50,10 @@ const SinglePostHeader = ( { postDetails } ) => {
           </View>
       }
       <View style={ { alignItems: 'center' } }>
-      { isWriteComment && <PostComment file_id={ postDetails.file_id }
-                                       display={ setIsWriteComment } setUpdateSinglePostView={setUpdateSinglePostView} type={'post'}/> }
-    </View>
+        { isWriteComment && <PostComment file_id={ postDetails.file_id }
+                                         display={ setIsWriteComment }
+        /> }
+      </View>
     </View>
   )
 }

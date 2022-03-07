@@ -8,9 +8,15 @@ import UserInfo from './UserInfo'
 
 import Location from '../../assets/icons/Location.svg'
 import Loading from './Loading'
+import { useEffect } from 'react'
 
 const Event = ( { eventDetails, ownProfile } ) => {
   // console.log('Event.js', eventDetails)
+
+
+  useEffect(async () => {
+
+  })
 
   if ( eventDetails === null ) return <Loading />
 
