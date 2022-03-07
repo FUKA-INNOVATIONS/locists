@@ -28,7 +28,7 @@ const SingleEventHeader = ( { eventDetails } ) => {
               </View>
         </View>
         <View style={ { alignItems: 'center' } }>
-          {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment} setUpdateSingleEventView={setUpdateSingleEventView} type={'event'}/>}
+          {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment} type={'event'}/>}
         </View>
 
       </View>

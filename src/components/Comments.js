@@ -17,7 +17,7 @@ const Comments = ( { fileId } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
 
   const onWriteCommentHandler = () => {
-    console.log( 'onWriteCommentHandler' )
+    // console.log( 'onWriteCommentHandler' )
     setIsWriteComment( !isWriteComment )
   }
 
