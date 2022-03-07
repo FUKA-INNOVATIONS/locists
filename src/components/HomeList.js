@@ -14,6 +14,7 @@ const HomeList = ( { navigation } ) => {
   const [ mixedMedia, setMixedMedia ] = useState( [] )
   const [ activeList, setActiveList ] = useState( [] )
   const [ loading, setLoading ] = useState( false )
+  const [ updateView, setUpdateView ] = useState( false )
 
   useEffect( () => {
     console.log( 'HomeList.js useEffect' )
@@ -24,7 +25,7 @@ const HomeList = ( { navigation } ) => {
     } ).finally( () => {
       console.log( 'HomeList getAllMedia in useEffect ready' )
       setLoading( false )
-    } )
+    }, [updateView])
 
     // To keep state up to date
     // TODO instead update app state on changes like add/delete new event/comment/attendee

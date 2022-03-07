@@ -10,7 +10,7 @@ const general = {
     background: '#24292e',
     txtLight: '#ffffff',
     txtDark: '#000000',
-    txtError: '#d52d2d',
+    txtError: '#c53e3e',
     postBackground: '#E9D6DB',
   },
 }
@@ -78,6 +78,7 @@ const theme = {
     color: general.colors.txtError,
     fontSize: 14,
     alignSelf: 'center',
+    marginTop: 5
   },
 
   mediaTitle: {
@@ -344,6 +345,7 @@ const theme = {
     alignItems: 'center',
   },
   loginButton: {
+    marginTop: 20,
     width: 100,
     alignItems: 'center',
     borderRadius: 10,
