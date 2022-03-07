@@ -107,6 +107,13 @@ const Register = ( { navigation } ) => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <ScrollView >
             <View style={theme.register}>
+
+              <View>
+                <Text style={theme.authTitle}>
+                  Some text
+                </Text>
+              </View>
+
           <View style={ theme.inputContainer }>
             <Controller
                 control={ control }

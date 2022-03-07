@@ -50,6 +50,12 @@ const Login = ( { navigation } ) => {
       behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }
       style={ theme.login }>
 
+      <View>
+        <Text style={theme.authTitle}>
+          Some text
+        </Text>
+      </View>
+
       <View style={ theme.inputContainer }>
         <Controller
           control={ control }

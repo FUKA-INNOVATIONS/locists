@@ -22,6 +22,7 @@ const theme = {
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   colors: {
+    bgYellow: '#E9D6DB',
     textPrimary: '#24292e',
     textSecondary: '#586069',
     lightGray: '#eaeaea',
@@ -29,6 +30,12 @@ const theme = {
     white: 'white',
     mainBackground: '#e1e4e8',
     error: '#d73a4a',
+  },
+
+  authTitle: {
+    color: '#E9D6DB',
+    fontSize: 20,
+    marginBottom: 10
   },
   appBar: {
     backgroundColor: '#24292e',
