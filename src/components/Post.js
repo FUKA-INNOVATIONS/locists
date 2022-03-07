@@ -11,6 +11,8 @@ import PropTypes from 'prop-types'
 const Post = ( { postMedia, ownProfile } ) => {
   // console.log('Post.js', postMedia)
 
+  const hasThumbnails = ( postMedia.thumbnails !== undefined )
+
   return (
     <>
       {
@@ -26,7 +28,7 @@ const Post = ( { postMedia, ownProfile } ) => {
       <View style={ [ theme.generalListPost, theme.post ] }>
         {
           postMedia.description.hasImage && <Image
-            source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
+            source={ {uri: hasThumbnails ? (uploadsUrl + postMedia.thumbnails.w320) : (uploadsUrl + postMedia.filename) } }
             style={ theme.postImage }
           />
         }
