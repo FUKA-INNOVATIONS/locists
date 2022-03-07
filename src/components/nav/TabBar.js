@@ -1,6 +1,7 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Tab from './Tab';
 import { useState } from 'react';
+import useAuthStorage from "../../hooks/useAuthStorage";
 
 const { width } = Dimensions.get( 'screen' );
 
@@ -44,7 +45,7 @@ const styles = StyleSheet.create( {
   },
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     backgroundColor: '#24292e',
     width,
     paddingHorizontal: 20,
