@@ -11,7 +11,7 @@ const UserInfo = ( { username, avatar } ) => {
   return (
     <View
       style={ { flexDirection: 'row', alignItems: 'center', marginBottom: 5 } }>
-      <Image source={ avatar ? avatarObj : require('../../assets/defaultPic.jpg') } style={ {
+      <Image source={ avatar !== undefined ? avatarObj : require('../../assets/defaultPic.jpg') } style={ {
         width: 40,
         height: 40,
         borderRadius: 20,
