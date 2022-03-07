@@ -4,8 +4,6 @@ import Attend from './Attend'
 import DeleteMedia from './DeleteMedia'
 import theme from '../theme'
 import UserInfo from './UserInfo'
-
-import Location from '../../assets/icons/Location.svg'
 import Loading from './Loading'
 import { Location, Calendar, Price, Attendees } from '../utils'
 import React, { useEffect } from 'react'
@@ -20,6 +18,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
   if ( eventDetails === null ) return <Loading />
 
+  console.log(eventDetails)
   return (
     <>
       {
