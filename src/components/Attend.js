@@ -15,6 +15,10 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
+  const fetchAttendees = async () => {
+    await getMediaFavourites( file_id ).then( mediaFavourites => setMediaFavourites(mediaFavourites))
+  }
+
   useEffect( async () => {
     // let cancel = true
     await getMediaFavourites( file_id ).then( mediaFavourites => {
@@ -30,9 +34,8 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   const likeHandler = async () => {
     console.log( 'Attend', file_id )
     if ( hasAttended() ) {
-      // const disLiked = await deleteFavourite( file_id )
-      // disLiked.message && Alert.alert( disLiked.message )
-      await deleteFavourite( file_id ).then(() => setUpdateView(true))
+
+      await deleteFavourite( file_id ).then( async () => await fetchAttendees())
     } else {
 
       if ( !user.isLogged ) {
@@ -40,9 +43,7 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
           'Only logged in users are able to attend events, please login to your account and try again!' )
       }
 
-      // const liked = await createFavourite( file_id )
-      // liked.file_id && Alert.alert( 'Successfully attended' )
-      await createFavourite( file_id ).then(() => setUpdateView(true))
+      await createFavourite( file_id ).then( async () => await fetchAttendees())
     }
   }
 
