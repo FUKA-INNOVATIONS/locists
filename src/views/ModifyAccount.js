@@ -2,7 +2,6 @@ import {
   View,
   Text,
   Alert,
-  Button,
   TextInput,
   ScrollView,
   TouchableOpacity,
@@ -19,10 +18,6 @@ const ModifyAccount = ( { navigation, route } ) => {
   const { user } = useAuthStorage()
   const authStorage = useAuthStorage()
   const { modifyUser, isUsernameAvailable } = useUser()
-
-  const onModalCloseHandler = () => {
-    navigation.goBack()
-  }
 
   const {
     control,
