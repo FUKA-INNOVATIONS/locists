@@ -6,11 +6,12 @@ import useAuthStorage from './useAuthStorage'
 const useComment = () => {
   const authStorage = useAuthStorage()
 
-  const getMediaComments = async ( mediaId ) => {
+  const getMediaComments = async ( mediaId, onlyCount = false ) => {
     const URL = `${ baseUrl }comments/file/${ mediaId }`
     try {
-      const comments = await axios.get( URL )
-      return comments.data
+      const { data } = await axios.get( URL )
+      if (onlyCount) return data.length
+      return data
     } catch ( e ) {
       console.log( e )
     }

@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Alert } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import { useEffect, useState } from 'react'
 
 import useFavourite from '../hooks/useFavourite'
@@ -14,26 +14,32 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
-  useEffect( () => {
-    let cancel = true
-    getMediaFavourites( file_id ).
+  const fetchLikes = async () => {
+    await getMediaFavourites( file_id ).
       then( favourites => {
-        if ( cancel ) return
         setMediaFavourites( favourites )
       } )
-    return () => {
-      cancel = true
-    }
+  }
+
+
+  useEffect( async () => {
+    // let cancel = true
+    await getMediaFavourites( file_id ).
+      then( favourites => {
+        // if ( cancel ) return
+        setMediaFavourites( favourites )
+      } )
+    /* return () => {
+     cancel = true
+     } */
   }, [] )
 
   const likeHandler = async () => {
     console.log( 'Like', file_id )
     if ( hasLiked() ) {
-      const disLiked = await deleteFavourite( file_id )
-      disLiked.message && Alert.alert( disLiked.message )
+      await deleteFavourite( file_id ).then(async () => await fetchLikes())
     } else {
-      const liked = await createFavourite( file_id )
-      liked.file_id && Alert.alert( 'Successfully liked' )
+      await createFavourite( file_id ).then(async () => await fetchLikes())
     }
 
   }

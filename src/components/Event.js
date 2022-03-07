@@ -7,13 +7,17 @@ import { Entypo } from '@expo/vector-icons'
 import UserInfo from './UserInfo'
 import Loading from './Loading'
 import { Location, Calendar, Price, Attendees } from '../utils'
+import { useEffect } from 'react'
 
 const Event = ( { eventDetails, ownProfile } ) => {
   // console.log('Event.js', eventDetails)
 
-  if ( eventDetails === null ) return <Loading />
 
-  console.log(eventDetails)
+  useEffect(async () => {
+
+  })
+
+  if ( eventDetails === null ) return <Loading />
 
   return (
     <>
@@ -28,48 +32,40 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
       <View style={ [ theme.generalListEvent] }>
         <View style={ theme.eventListTitle }>
-        <Text
-            style={ [ theme.mediaTitle, { color: '#fff' } ] }>{ eventDetails.description.name }
-        </Text>
+          <Text
+              style={ [ theme.mediaTitle, { color: '#fff' } ] }>{ eventDetails.description.name }
+          </Text>
         </View>
-
         <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
                style={ theme.eventImage2 } />
-
         <View style={ theme.eventExtra }>
-
           <View style={ theme.eventSection }>
             <Location width={ 25 } height={ 40 } />
             <Text>{ eventDetails.description.location }</Text>
           </View>
-
           <View style={ theme.eventSection }>
             <Calendar width={ 30 } height={ 40 } />
             <Text>
               { new Date( eventDetails.description.date ).toLocaleDateString() }
             </Text>
           </View>
-
           <View style={ theme.eventSection }>
             <Price width={ 30 } height={ 40 } />
             <Text>
               {
                 eventDetails.description.price > 0
-                ?
-                eventDetails.description.price
-                :
+                    ?
+                    eventDetails.description.price
+                    :
                     'Free'
               }
             </Text>
           </View>
-
           <View style={ theme.eventSection }>
             <Attendees width={ 30 } height={ 40 } />
             <Attend file_id={ eventDetails.file_id } displayIcon={ false } />
           </View>
         </View>
-
-
         { eventDetails.description.isOwner &&
         <DeleteMedia file_id={ eventDetails.file_id } /> }
       </View>

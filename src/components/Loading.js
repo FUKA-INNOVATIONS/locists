@@ -4,9 +4,10 @@ const Loading = () => {
   // TODO: Add a spinner icon
   return (
     <View style={ {
+      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      marginVertical: 300,
+      // marginVertical: 300,
     } }>
       <Text style={ { color: 'white', fontSize: 30 } }>
         Loading..

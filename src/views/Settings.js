@@ -1,14 +1,10 @@
-import {View, Button, Text, TouchableOpacity} from 'react-native'
+import {View, Text, TouchableOpacity} from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
 
 const Settings = ( { navigation } ) => {
   const { user } = useAuthStorage()
   const authStorage = useAuthStorage()
-
-    const onModalCloseHandler = () => {
-        navigation.goBack();
-    }
 
     const modifyProfile = (type) => {
         navigation.navigate( 'ModifyAccount', { type: type } )
@@ -22,7 +18,6 @@ const Settings = ( { navigation } ) => {
 
   return (
     <>
-      <Button title={ 'Go back' } onPress={ onModalCloseHandler }/>
       <View style={ theme.settingsPage }>
         <TouchableOpacity style={ [theme.generalBtn, theme.settingsBtn] } onPress={ () => modifyProfile( 'details' ) }>
           <Text style={theme.loginButtonText}>Modify Account Details</Text>

@@ -10,7 +10,7 @@ const general = {
     background: '#24292e',
     txtLight: '#ffffff',
     txtDark: '#000000',
-    txtError: '#d52d2d',
+    txtError: '#c53e3e',
     postBackground: '#E9D6DB',
   },
 }
@@ -22,6 +22,7 @@ const theme = {
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   colors: {
+    bgYellow: '#E9D6DB',
     textPrimary: '#24292e',
     textSecondary: '#586069',
     lightGray: '#eaeaea',
@@ -29,6 +30,17 @@ const theme = {
     white: 'white',
     mainBackground: '#e1e4e8',
     error: '#d73a4a',
+  },
+
+  authTitle: {
+    color: '#E9D6DB',
+    fontSize: 20,
+    marginBottom: 10
+  },
+  inputTitle: {
+    color: '#E9D6DB',
+    fontSize: 17,
+    marginBottom: 10
   },
   appBar: {
     backgroundColor: '#24292e',
@@ -61,10 +73,24 @@ const theme = {
     borderColor: 'eee',
     // height: 70,
   },
+  commentContainer: {
+    // margin: 20,
+    width: '100%'
+  },
+  commentInput: {
+    // width: 400,
+    minHeight: 100,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingTop: 20,
+    padding: 20,
+  },
   inputErrorText: {
     color: general.colors.txtError,
     fontSize: 14,
     alignSelf: 'center',
+    marginTop: 5
   },
 
   mediaTitle: {
@@ -94,18 +120,20 @@ const theme = {
     alignSelf: 'flex-start',
   },
   singleMediaComments: {
-    marginTop: 5,
+    /* marginTop: 5,
     borderWidth: 3,
     alignSelf: 'center',
     minHeight: 250,
     paddingVertical: 5,
     width: width * 0.95,
-    position: 'relative',
+    position: 'relative', */
   },
   comment: {
     backgroundColor: general.colors.postBackground,
-    padding: 5,
-    marginBottom: 5,
+    // margin: 10,
+    minHeight: 75,
+    padding: 10,
+    marginVertical: 5,
     borderWidth: 1,
     borderRadius: 5,
     flexDirection: 'row',
@@ -133,6 +161,7 @@ const theme = {
     marginHorizontal: 5,
   },
   addCommentButtons: {
+    marginTop: 10,
     width: width * 0.85,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -297,10 +326,13 @@ const theme = {
   // Single Event Styles
   singleEventInfo: {
     backgroundColor: general.colors.postBackground,
-    paddingHorizontal: 5,
-    marginHorizontal: 5,
-    marginTop: 5,
+    // paddingHorizontal: 5,
+    // marginHorizontal: 5,
+    // marginTop: 5,
+    // margin: 10,
+    top: -10,
     borderRadius: 10,
+    padding: 10
   },
   infoTop: {
     paddingTop: 10,
@@ -389,6 +421,7 @@ const theme = {
     alignItems: 'center',
   },
   loginButton: {
+    marginTop: 20,
     width: 100,
     alignItems: 'center',
     borderRadius: 10,
