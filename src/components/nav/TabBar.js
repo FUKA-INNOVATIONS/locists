@@ -1,7 +1,6 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Tab from './Tab';
 import { useState } from 'react';
-import useAuthStorage from "../../hooks/useAuthStorage";
 
 const { width } = Dimensions.get( 'screen' );
 

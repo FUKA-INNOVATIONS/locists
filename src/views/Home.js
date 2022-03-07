@@ -2,7 +2,7 @@ import HomeList from '../components/HomeList'
 import useUser from '../hooks/useUser'
 import { useEffect, useMemo } from 'react'
 import useAuthStorage from '../hooks/useAuthStorage'
-import { View, Image } from 'react-native'
+import { View } from 'react-native'
 import AppName from '../../assets/AppName.svg'
 import theme from "../theme";
 
