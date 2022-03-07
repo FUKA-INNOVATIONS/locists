@@ -4,6 +4,7 @@ import useDevice from '../hooks/useDevice'
 import useMedia from '../hooks/useMedia'
 import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
+import PropTypes from 'prop-types'
 
 const UploadAvatar = props => {
   const { user } = useAuthStorage()
@@ -60,5 +61,10 @@ const UploadAvatar = props => {
     </>
   )
 }
+
+UploadAvatar.propTypes = {
+  onSubmit: PropTypes.func
+}
+
 
 export default UploadAvatar

@@ -6,6 +6,7 @@ import PostComment from './PostComment'
 import Like from './Like'
 import UserInfo from './UserInfo'
 import Loading from './Loading'
+import PropTypes from 'prop-types'
 
 const SinglePostHeader = ( { postDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
@@ -14,7 +15,7 @@ const SinglePostHeader = ( { postDetails } ) => {
 
   return (
     <View style={ theme.singlePost }>
-      <View style={ {...theme.singleMediaAvatar, marginBottom: 5} }>
+      <View style={ { ...theme.singleMediaAvatar, marginBottom: 5 } }>
         <UserInfo username={ postDetails.description.owner }
                   avatar={ postDetails.description.ownerAvatar } />
       </View>
@@ -56,6 +57,10 @@ const SinglePostHeader = ( { postDetails } ) => {
       </View>
     </View>
   )
+}
+
+SinglePostHeader.propTypes = {
+  postDetails: PropTypes.object,
 }
 
 export default SinglePostHeader

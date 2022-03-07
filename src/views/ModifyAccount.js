@@ -11,6 +11,7 @@ import useUser from '../hooks/useUser'
 import { Controller, useForm } from 'react-hook-form'
 import theme from '../theme'
 import UploadMedia from '../components/UploadMedia'
+import PropTypes from 'prop-types'
 
 const ModifyAccount = ( { navigation, route } ) => {
 
@@ -246,6 +247,11 @@ const ModifyAccount = ( { navigation, route } ) => {
 
       </ScrollView>
   )
+}
+
+ModifyAccount.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 }
 
 export default ModifyAccount

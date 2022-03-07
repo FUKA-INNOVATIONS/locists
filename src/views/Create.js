@@ -3,6 +3,7 @@ import Dialog, { DialogContent } from 'react-native-popup-dialog'
 import theme from '../theme'
 import { useState } from 'react'
 import InfoButton from '../../assets/icons/InfoButton.svg'
+import PropTypes from 'prop-types'
 
 const Create = ( { navigation } ) => {
   const [ visible, setVisible ] = useState( false )
@@ -74,6 +75,10 @@ const Create = ( { navigation } ) => {
       </View>
     </View>
   )
+}
+
+Create.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Create

@@ -5,7 +5,7 @@ import Like from './Like'
 import DeleteMedia from './DeleteMedia'
 import UserInfo from './UserInfo'
 import CommentsCounter from './CommentsCounter'
-
+import PropTypes from 'prop-types'
 
 const Post = ( { postMedia, ownProfile } ) => {
   // console.log('Post.js', postMedia)
@@ -37,7 +37,7 @@ const Post = ( { postMedia, ownProfile } ) => {
           <View style={ theme.postExtra }>
             <Like displayIcon={ true } file_id={ postMedia.file_id }
             />
-            <CommentsCounter fileId={postMedia.file_id} />
+            <CommentsCounter fileId={ postMedia.file_id } />
             { postMedia.description.isOwner &&
             <DeleteMedia file_id={ postMedia.file_id } /> }
           </View>
@@ -45,6 +45,11 @@ const Post = ( { postMedia, ownProfile } ) => {
       </View>
     </>
   )
+}
+
+Post.propTypes = {
+  postMedia: PropTypes.object,
+  ownProfile: PropTypes.bool,
 }
 
 export default Post

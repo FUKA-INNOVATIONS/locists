@@ -4,6 +4,7 @@ import SwitchSelector from 'react-native-switch-selector'
 import theme from '../theme'
 import PostsList from '../components/PostsList'
 import EventsList from '../components/EventsList'
+import PropTypes from 'prop-types'
 
 const Explore = ( { navigation } ) => {
   // console.log( 'Explore.js' )
@@ -40,6 +41,10 @@ const Explore = ( { navigation } ) => {
       { explore === 'posts' && <PostsList navigation={ navigation } /> }
     </View>
   )
+}
+
+Explore.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Explore

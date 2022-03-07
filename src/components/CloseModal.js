@@ -1,5 +1,6 @@
 import { Text, TouchableOpacity } from 'react-native'
 import theme from '../theme'
+import PropTypes from 'prop-types'
 
 const CloseModal = ( { navigation } ) => {
   const onModalCloseHandler = () => {
@@ -7,10 +8,14 @@ const CloseModal = ( { navigation } ) => {
   }
 
   return (
-    <TouchableOpacity onPress={onModalCloseHandler}>
-      <Text style={{color: theme.colors.bgYellow}}>X</Text>
+    <TouchableOpacity onPress={ onModalCloseHandler }>
+      <Text style={ { color: theme.colors.bgYellow } }>X</Text>
     </TouchableOpacity>
   )
+}
+
+CloseModal.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default CloseModal

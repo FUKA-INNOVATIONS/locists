@@ -1,39 +1,40 @@
 import {
-    View,
-    Text,
-    TextInput,
-    KeyboardAvoidingView,
-    ScrollView,
-    Alert,
-    TouchableOpacity,
-    Platform,
-} from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
-import * as Yup from 'yup';
+  View,
+  Text,
+  TextInput,
+  KeyboardAvoidingView,
+  ScrollView,
+  Alert,
+  TouchableOpacity,
+  Platform,
+} from 'react-native'
+import { useForm, Controller } from 'react-hook-form'
+import * as Yup from 'yup'
 
-import theme from '../theme';
-import useUser from '../hooks/useUser';
-import { yupResolver } from '@hookform/resolvers/yup';
+import theme from '../theme'
+import useUser from '../hooks/useUser'
+import { yupResolver } from '@hookform/resolvers/yup'
 import Loading from './Loading'
+import PropTypes from 'prop-types'
 
 const RegisterSchema = Yup.object().shape( {
   username: Yup.string().
-      min( 4, 'Too Short!' ).
-      max( 10, 'Too Long!' ).
-      required( 'Username is required, 4-10 characters' ),
+    min( 4, 'Too Short!' ).
+    max( 10, 'Too Long!' ).
+    required( 'Username is required, 4-10 characters' ),
   password: Yup.string().required( 'Required' ),
   passwordConfirm: Yup.string().
-      min( 5, 'Too short, min 5 characters' ).
-      max( 16, 'Too long, max 16 characters' ).
-      required( 'Password confirmation is required' ).
-      oneOf( [ Yup.ref( 'password' ), null ], 'Passwords must match' ),
+    min( 5, 'Too short, min 5 characters' ).
+    max( 16, 'Too long, max 16 characters' ).
+    required( 'Password confirmation is required' ).
+    oneOf( [ Yup.ref( 'password' ), null ], 'Passwords must match' ),
   email: Yup.string().email( 'Invalid email' ).required( 'Required' ),
   city: Yup.string().required( 'Required' ),
-} );
+} )
 
 const Register = ( { navigation } ) => {
   // eslint-disable-next-line
-  const { isUsernameAvailable, register, login, loading } = useUser();
+  const { isUsernameAvailable, register, login, loading } = useUser()
 
   const {
     control,
@@ -48,30 +49,30 @@ const Register = ( { navigation } ) => {
     },
     resolver: yupResolver( RegisterSchema ),
     mode: 'onBlur',
-  } );
+  } )
 
   // Submit registration form with given data
   const onSubmit = async ( data ) => {
     // Check, is username available ?
-    const { available } = await isUsernameAvailable( data.username );
+    const { available } = await isUsernameAvailable( data.username )
     !available && Alert.alert( 'Username is not available',
-        'Please choose another cool username and try again' );
+      'Please choose another cool username and try again' )
 
     // Username is available, Register user
 
     const registeredUser = await register(
-        data.username,
-        data.password,
-        data.email,
-        data.city,
-    );
+      data.username,
+      data.password,
+      data.email,
+      data.city,
+    )
 
     /*
      * Registration failed, alert user
      * */
 
     if ( !registeredUser.user_id ) {
-      Alert.alert( 'Registration failed' );
+      Alert.alert( 'Registration failed' )
     }
 
     /*
@@ -85,131 +86,141 @@ const Register = ( { navigation } ) => {
        password: data.password,
        }; */
 
-      const loginResponse = await login( data );
+      const loginResponse = await login( data )
       if ( loginResponse.token ) {
-        console.log( 'login succeeded' );  // User login succeeded
-        navigation.navigate( 'AccountTab', { Screen: 'Account' } ); // Redirect to account screen
+        console.log( 'login succeeded' )  // User login succeeded
+        navigation.navigate( 'AccountTab', { Screen: 'Account' } ) // Redirect to account screen
       } else {  // User login failed
-        console.log( 'login failed' );
+        console.log( 'login failed' )
         Alert.alert( 'Login failed',
-            'Please check your credentials and try again' );
+          'Please check your credentials and try again' )
       }
 
     }
 
-    console.log( 'registeredUser Register.js: ', registeredUser );
-  };
+    console.log( 'registeredUser Register.js: ', registeredUser )
+  }
 
   if ( loading ) return <Loading />
 
   return (
-      <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}>
-        <ScrollView >
-            <View style={theme.register}>
+    <KeyboardAvoidingView
+      behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }>
+      <ScrollView>
+        <View style={ theme.register }>
 
-              <View>
-                <Text style={theme.authTitle}>
-                  Some text
-                </Text>
-              </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Username"
-                    />
-                ) }
-                name="username"
-            />
-            { errors.username && <Text style={theme.inputErrorText}>{ errors.username.message }</Text> }
+          <View>
+            <Text style={ theme.authTitle }>
+              Some text
+            </Text>
           </View>
 
           <View style={ theme.inputContainer }>
             <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="email"
-                    />
-                ) }
-                name="email"
-            />
-            { errors.email && <Text style={theme.inputErrorText}>{ errors.email.message }</Text> }
-          </View>
-
-              <View style={ theme.inputContainer }>
-                <Controller
-                  control={ control }
-                  render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                      style={ theme.input }
-                      onBlur={ onBlur }
-                      onChangeText={ onChange }
-                      value={ value }
-                      placeholder="City"
-                    />
-                  ) }
-                  name="city"
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Username'
                 />
-                { errors.city && <Text style={theme.inputErrorText}>{ errors.city.message }</Text> }
-              </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Password"
-                        secureTextEntry={ true }
-                    />
-                ) }
-                name="password"
+              ) }
+              name='username'
             />
-            { errors.password && <Text style={theme.inputErrorText}>{ errors.password.message }</Text> }
+            { errors.username && <Text
+              style={ theme.inputErrorText }>{ errors.username.message }</Text> }
           </View>
 
           <View style={ theme.inputContainer }>
             <Controller
-                control={ control }
-                render={ ( { field: { onChange, onBlur, value } } ) => (
-                    <TextInput
-                        style={ theme.input }
-                        onBlur={ onBlur }
-                        onChangeText={ onChange }
-                        value={ value }
-                        placeholder="Password confirmation"
-                        secureTextEntry={ true }
-                    />
-                ) }
-                name="passwordConfirm"
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='email'
+                />
+              ) }
+              name='email'
+            />
+            { errors.email && <Text
+              style={ theme.inputErrorText }>{ errors.email.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='City'
+                />
+              ) }
+              name='city'
+            />
+            { errors.city && <Text
+              style={ theme.inputErrorText }>{ errors.city.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Password'
+                  secureTextEntry={ true }
+                />
+              ) }
+              name='password'
+            />
+            { errors.password && <Text
+              style={ theme.inputErrorText }>{ errors.password.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Password confirmation'
+                  secureTextEntry={ true }
+                />
+              ) }
+              name='passwordConfirm'
             />
             { errors.passwordConfirm && (
-                <Text style={theme.inputErrorText}>{ errors.passwordConfirm.message }</Text>
+              <Text
+                style={ theme.inputErrorText }>{ errors.passwordConfirm.message }</Text>
             ) }
           </View>
 
-          <TouchableOpacity style={theme.loginButton} onPress={ handleSubmit( onSubmit ) }>
-              <Text style={theme.loginButtonText}>Register</Text>
+          <TouchableOpacity style={ theme.loginButton }
+                            onPress={ handleSubmit( onSubmit ) }>
+            <Text style={ theme.loginButtonText }>Register</Text>
           </TouchableOpacity>
-            </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-  );
-};
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
+  )
+}
 
-export default Register;
+Register.propTypes = {
+  navigation: PropTypes.object,
+}
+
+export default Register

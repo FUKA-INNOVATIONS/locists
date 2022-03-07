@@ -1,4 +1,5 @@
 import UploadMedia from '../components/UploadMedia'
+import PropTypes from 'prop-types';
 
 const CreatePost = ( { navigation } ) => {
 
@@ -9,4 +10,7 @@ const CreatePost = ( { navigation } ) => {
   )
 }
 
+CreatePost.propTypes = {
+  navigation: PropTypes.object,
+};
 export default CreatePost

@@ -8,6 +8,7 @@ import theme from '../theme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
 import { useCallback } from 'react'
+import PropTypes from 'prop-types'
 
 const UploadPost = props => {
   const { user } = useAuthStorage()
@@ -141,6 +142,10 @@ const UploadPost = props => {
       </View>
     </>
   )
+}
+
+UploadPost.propTypes = {
+  onSubmit: PropTypes.func
 }
 
 export default UploadPost

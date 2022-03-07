@@ -11,6 +11,7 @@ import useComment from '../hooks/useComment'
 import useMedia from "../hooks/useMedia"
 import Post from '../components/Post'
 import Event from '../components/Event'
+import PropTypes from 'prop-types'
 
 
 const Account = ( { navigation } ) => {
@@ -80,6 +81,10 @@ const Account = ( { navigation } ) => {
       />
     </View>
   )
+}
+
+Account.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Account

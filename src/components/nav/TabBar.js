@@ -1,6 +1,7 @@
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Tab from './Tab';
 import { useState } from 'react';
+import PropTypes from 'prop-types'
 
 const { width } = Dimensions.get( 'screen' );
 
@@ -52,5 +53,10 @@ const styles = StyleSheet.create( {
     borderColor: '#7b08a3',
   },
 } );
+
+TabBar.propTypes = {
+  navigation: PropTypes.object,
+  state: PropTypes.object,
+}
 
 export default TabBar;

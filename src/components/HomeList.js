@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Loading from './Loading'
 import EmptyListMessage from './EmptyListMessage'
 import ExploreListHeader from './ExploreListHeader'
+import PropTypes from 'prop-types'
 
 const HomeList = ( { navigation } ) => {
   // console.log('HomeList.js')
@@ -86,6 +87,10 @@ const HomeList = ( { navigation } ) => {
       }
     />
   )
+}
+
+HomeList.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default HomeList

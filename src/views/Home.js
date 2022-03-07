@@ -2,6 +2,7 @@ import HomeList from '../components/HomeList'
 import useUser from '../hooks/useUser'
 import { useEffect, useMemo } from 'react'
 import useAuthStorage from '../hooks/useAuthStorage'
+import PropTypes from 'prop-types'
 
 const Home = ( { navigation } ) => {
   console.log( 'Home.js' )
@@ -22,6 +23,10 @@ const Home = ( { navigation } ) => {
   }, [] )
 
   return <HomeList navigation={ navigation } />
+}
+
+Home.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Home

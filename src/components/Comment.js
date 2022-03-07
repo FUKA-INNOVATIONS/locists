@@ -6,10 +6,11 @@ import theme from '../theme'
 import fetchAvatar from '../utils/fetchAvatar'
 import { useEffect, useState } from 'react'
 import UserInfo from './UserInfo'
+import PropTypes from 'prop-types'
 
 const Comment = ( {
   commentObj,
-  updateComments
+  updateComments,
 } ) => {
   const { user } = useAuthStorage()
   const { deleteComment } = useComment()
@@ -34,10 +35,11 @@ const Comment = ( {
         <UserInfo avatar={ avatar } username={ 'Username' } />
         <TimeAgo style={ { color: '#E9D6DB', left: 30 } }
                  dateTo={ new Date( commentObj.time_added ) } />
-        <View style={{marginLeft: 50}}>
+        <View style={ { marginLeft: 50 } }>
           { isOwner &&
           <Pressable onPress={ () => onDeleteHandler(
-            commentObj.comment_id ) }><Text style={{color: '#c53e3e'}}>X Delete</Text></Pressable> }
+            commentObj.comment_id ) }><Text style={ { color: '#c53e3e' } }>X
+            Delete</Text></Pressable> }
         </View>
       </View>
       <View style={ theme.comment }>
@@ -47,6 +49,11 @@ const Comment = ( {
       </View>
     </View>
   )
+}
+
+Comment.propTypes = {
+  commentObj: PropTypes.object,
+  updateComments: PropTypes.func,
 }
 
 export default Comment

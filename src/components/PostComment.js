@@ -6,13 +6,14 @@ import * as Yup from 'yup'
 import theme from '../theme'
 import { useState } from 'react'
 import Loading from './Loading'
+import PropTypes from 'prop-types'
 
 const PostComment = ( {
   file_id, // eslint-disable-line
   display,
-  updateComments
+  updateComments,
 } ) => { // eslint-disable-line
-  // const { user } = useAuthStorage()
+         // const { user } = useAuthStorage()
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 
@@ -86,6 +87,12 @@ const PostComment = ( {
       </View>
     </>
   )
+}
+
+PostComment.propTypes = {
+  file_id: PropTypes.number,
+  display: PropTypes.bool,
+  updateComments: PropTypes.func,
 }
 
 export default PostComment

@@ -4,6 +4,7 @@ import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
 import ExploreListHeader from './ExploreListHeader'
+import PropTypes from 'prop-types'
 
 const PostsList = ( { navigation } ) => {
   // console.log( 'PostsList.js rendered');
@@ -65,6 +66,10 @@ const PostsList = ( { navigation } ) => {
       } }
     />
   )
+}
+
+PostsList.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default PostsList

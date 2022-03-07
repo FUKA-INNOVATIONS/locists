@@ -5,6 +5,7 @@ import PostComment from './PostComment'
 import Attend from './Attend'
 import theme from '../theme'
 import Loading from './Loading'
+import PropTypes from 'prop-types'
 
 const SingleEventHeader = ( { eventDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
@@ -33,6 +34,10 @@ const SingleEventHeader = ( { eventDetails } ) => {
 
       </View>
   )
+}
+
+SingleEventHeader.propTypes = {
+  eventDetails: PropTypes.object,
 }
 
 export default SingleEventHeader

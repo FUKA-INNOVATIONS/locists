@@ -8,6 +8,7 @@ import UploadEvent from './uploadEvent'
 import { postTag, eventTag, appId } from '../../config'
 import UploadPost from './uploadPost'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 
 const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage()
@@ -24,7 +25,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
   const onSubmit = async (
     data, mediaDescription, imageSelected, image, type ) => {
-    console.log( 'TYPE', type )
+    // console.log( 'TYPE', type )
     const token = await authStorage.getToken()
 
     mediaDescription = JSON.stringify( mediaDescription )
@@ -107,6 +108,11 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     default:
       return <UploadPost onSubmit={ onSubmit } />
   }
+}
+
+UploadMedia.propTypes = {
+  navigation: PropTypes.object,
+  mediaType: PropTypes.string,
 }
 
 export default UploadMedia
