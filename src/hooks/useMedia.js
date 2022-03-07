@@ -10,6 +10,7 @@ import useFavourite from './useFavourite'
 const useMedia = () => {
   // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
+  const authStorage = useAuthStorage()
   const [ singleMedia, setSingleMedia ] = useState()
   const [ userMedia, setUserMedia ] = useState()
 
@@ -18,8 +19,6 @@ const useMedia = () => {
 
   const getAllMedia = async () => {
     // console.log( 'called getAllMedia hook' )
-
-
     /*
      * inorder to get thumbnails for optimization
      * get all ids and fetch files
@@ -125,30 +124,35 @@ const useMedia = () => {
     }
   }
 
-  const getUserMedia = async ( token ) => {
+  const getUserMedia = async () => {
+
+    const token = authStorage.getToken()
+    console.log('getUserMedia hook', user.token)
     const userMediaPE = []
     const URL = `${ baseUrl }media/user`
     const options = {
       method: 'GET',
       headers: {
-        'x-access-token': token,
+        'x-access-token': user.token,
       },
     }
     try {
-      const data = await doFetch( URL, options )
+      const { data } = await doFetch( URL, options )
       if ( data ) {
-        console.log( data.length )
-        for ( let i = 0; i < data.length; i++ ) {
+        console.log('files counter: ', data.length )
+        /* for ( let i = 0; i < data.length; i++ ) {
           data[ i ].description = JSON.parse( data[ i ].description )
           const type = data[ i ].description.mediaType;
           ( type === 'event' || type === 'post' ) &&
           userMediaPE.push( data[ i ] )
-        }
+        } */
+        console.log('files', data)
       }
-      setUserMedia( userMediaPE )
+      // setUserMedia( userMediaPE )
     } catch ( e ) {
       console.log( 'Error in getting user files', e.message )
     }
+
   }
 
   // TODO: get token here in the hook

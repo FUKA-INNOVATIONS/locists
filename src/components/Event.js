@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 
 const Event = ( { eventDetails, ownProfile } ) => {
   // console.log('Event.js', eventDetails)
+  // console.log('Event.js', ownProfile, eventDetails.eventDetails.thumbnails.w160)
 
   useEffect( async () => {
 
@@ -53,7 +54,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <DeleteMedia file_id={ eventDetails.file_id } /> }
           </View>
         </View>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w160 } }
+        <Image source={ { uri: uploadsUrl + ownProfile === false ? eventDetails.thumbnails.w160 : eventDetails.filename } }
                style={ theme.eventImage } />
       </View>
     </>
