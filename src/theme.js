@@ -37,6 +37,11 @@ const theme = {
     fontSize: 20,
     marginBottom: 10
   },
+  inputTitle: {
+    color: '#E9D6DB',
+    fontSize: 17,
+    marginBottom: 10
+  },
   appBar: {
     backgroundColor: '#24292e',
   },

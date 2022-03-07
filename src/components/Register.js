@@ -18,9 +18,9 @@ import Loading from './Loading'
 
 const RegisterSchema = Yup.object().shape( {
   username: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 4, 'Too Short!' ).
       max( 10, 'Too Long!' ).
-      required( 'Username is required, min. 5 characters' ),
+      required( 'Username is required, 4-10 characters' ),
   password: Yup.string().required( 'Required' ),
   passwordConfirm: Yup.string().
       min( 5, 'Too short, min 5 characters' ).
@@ -63,7 +63,7 @@ const Register = ( { navigation } ) => {
         data.username,
         data.password,
         data.email,
-        data.fullName,
+        data.city,
     );
 
     /*
