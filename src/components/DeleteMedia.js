@@ -1,3 +1,4 @@
+import React from 'react'
 import { View, Text, Pressable, Alert } from 'react-native'
 import useMedia from '../hooks/useMedia'
 

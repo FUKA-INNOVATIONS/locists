@@ -1,5 +1,5 @@
 import { View, Text, Pressable } from 'react-native'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import useFavourite from '../hooks/useFavourite'
 import HeartEmpty from '../../assets/icons/HeartEmpty.svg'

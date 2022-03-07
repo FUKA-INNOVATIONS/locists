@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   View,
   Text,
@@ -13,6 +14,7 @@ import * as Yup from 'yup'
 import theme from '../theme'
 import useUser from '../hooks/useUser'
 import { yupResolver } from '@hookform/resolvers/yup'
+import PropTypes from 'prop-types'
 
 const LoginSchema = Yup.object().shape( {
   username: Yup.string().required( 'Username is required' ),
@@ -51,7 +53,7 @@ const Login = ( { navigation } ) => {
       style={ theme.login }>
 
       <View>
-        <Text style={theme.authTitle}>
+        <Text style={ theme.authTitle }>
           Some text
         </Text>
       </View>
@@ -98,6 +100,10 @@ const Login = ( { navigation } ) => {
       </TouchableOpacity>
     </KeyboardAvoidingView>
   )
+}
+
+Login.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Login

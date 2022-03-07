@@ -1,8 +1,9 @@
 import useMedia from '../hooks/useMedia'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SingleEventHeader from '../components/SingleEventHeader'
 import Loading from '../components/Loading'
 import Comments from '../components/Comments'
+import PropTypes from 'prop-types'
 
 const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params
@@ -23,6 +24,11 @@ const SingleEvent = ( { navigation, route } ) => {
       <Comments fileId={ eventId } />
     </>
   )
+}
+
+SingleEvent.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 }
 
 export default SingleEvent
