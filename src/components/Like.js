@@ -6,7 +6,7 @@ import HeartEmpty from '../../assets/icons/HeartEmpty.svg'
 import HeartFull from '../../assets/icons/HeartFull.svg'
 import theme from '../theme'
 
-const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
+const Like = ( { file_id, displayIcon, single, setUpdateSinglePostView } ) => {  // eslint-disable-line
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -22,19 +22,23 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
         setMediaFavourites( favourites )
       } )
     /* return () => {
-      cancel = true
-    } */
+     cancel = true
+     } */
   }, [] )
 
   const likeHandler = async () => {
     console.log( 'Like', file_id )
     if ( hasLiked() ) {
-      const disLiked = await deleteFavourite( file_id )
-      disLiked.message && Alert.alert( disLiked.message )
+      // const disLiked = await deleteFavourite( file_id )
+      // disLiked.message && Alert.alert( disLiked.message )
+      await deleteFavourite( file_id )
     } else {
-      const liked = await createFavourite( file_id )
-      liked.file_id && Alert.alert( 'Successfully liked' )
+      // const liked = await createFavourite( file_id )
+      // liked.file_id && Alert.alert( 'Successfully liked' )
+      await createFavourite( file_id )
     }
+
+    single && setUpdateSinglePostView( true )
 
   }
 

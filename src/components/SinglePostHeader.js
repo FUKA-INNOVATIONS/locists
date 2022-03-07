@@ -36,6 +36,7 @@ const SinglePostHeader = ( { postDetails, setUpdateSinglePostView } ) => {
               />
               <View style={ { alignItems: 'flex-end' } }>
                 <Like displayIcon file_id={ postDetails.file_id }
+                      setUpdateSinglePostView={setUpdateSinglePostView}
                       single={ true } />
                 <TouchableOpacity onPress={ onWriteCommentHandler }>
                   <AddComment width={ 32 } height={ 32 } />
