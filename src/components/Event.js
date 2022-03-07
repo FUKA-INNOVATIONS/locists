@@ -16,6 +16,8 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
   if ( eventDetails === null ) return <Loading />
 
+  const hasThumbnails = ( eventDetails.thumbnails !== undefined )
+
   return (
     <>
       {
@@ -49,7 +51,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <DeleteMedia file_id={ eventDetails.file_id } /> }
           </View>
         </View>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w160 } }
+        <Image source={ { uri: hasThumbnails ? (uploadsUrl + eventDetails.thumbnails.w160) : (uploadsUrl + eventDetails.filename)} }
                style={ theme.eventImage } />
       </View>
     </>
