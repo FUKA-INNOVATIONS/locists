@@ -20,31 +20,46 @@ const Post = ( { postMedia, ownProfile } ) => {
         </View>
       }
 
+      <View style={ [ theme.generalListPost2] }>
+        <View style={ [ theme.postLeft, !postMedia.description.hasImage && {width: '75%'}] }>
+          <Text numberOfLines={ 5 }>{ postMedia.description.description }</Text>
 
-      <View style={ [ theme.generalListPost, theme.post ] }>
-        {
-          postMedia.description.hasImage && <Image
-            source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
-            style={ theme.postImage }
-          />
-        }
-        <View style={ theme.postInfo }>
-          <View style={ theme.postText }>
-            <Text>{ postMedia.description.description }</Text>
-          </View>
+          {
+            postMedia.description.hasImage &&
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Like displayIcon={ true } file_id={ postMedia.file_id } />
 
-          <View style={ theme.postExtra }>
-            <Like displayIcon={ true } file_id={ postMedia.file_id } />
+              <AddComment width={ 30 } height={ 30 }
+                          style={ { marginRight: 8 } } />
 
-
-            <AddComment width={ 30 } height={ 30 }
-                        style={ { marginRight: 8 } } />
-
-            { postMedia.description.isOwner &&
-            <DeleteMedia file_id={ postMedia.file_id } /> }
-          </View>
+              { postMedia.description.isOwner &&
+              <DeleteMedia file_id={ postMedia.file_id } /> }
+            </View>
+          }
         </View>
+
+        <View>
+          {
+            postMedia.description.hasImage ? <Image
+                source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
+                style={ theme.postImage }
+            />
+                :
+                <View style={ theme.postRight }>
+                  <Like single={false} displayIcon={ true } file_id={ postMedia.file_id } />
+
+                  <AddComment width={ 30 } height={ 30 }
+                              style={ { marginRight: 8 } } />
+
+                  { postMedia.description.isOwner &&
+                  <DeleteMedia file_id={ postMedia.file_id } /> }
+                </View>
+          }
+        </View>
+
+
       </View>
+
     </>
   )
 }
