@@ -1,6 +1,8 @@
+import React from 'react'
 import {View, Text, TouchableOpacity} from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
+import PropTypes from 'prop-types'
 
 const Settings = ( { navigation } ) => {
   const { user } = useAuthStorage()
@@ -33,5 +35,10 @@ const Settings = ( { navigation } ) => {
   )
 
 }
+
+Settings.propTypes = {
+  navigation: PropTypes.object,
+}
+
 
 export default Settings

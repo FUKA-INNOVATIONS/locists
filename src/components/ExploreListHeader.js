@@ -1,12 +1,13 @@
 import { View, Platform } from 'react-native'
 import theme from '../theme'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {
   initCities,
   sortLatest, sortMostAttendees, sortMostCommented,
   sortSoonestEvents,
 } from '../utils/sortFilterHelpers'
+import PropTypes from 'prop-types'
 
 const EventListHeader = ( {
   media,
@@ -185,5 +186,15 @@ const EventListHeader = ( {
     </View>
   )
 }
+
+EventListHeader.propTypes = {
+  media: PropTypes.object,
+  activeList: PropTypes.array,
+  setActiveList: PropTypes.func,
+  navigation: PropTypes.object,
+  loading: PropTypes.bool,
+  mediaType: PropTypes.string,
+}
+
 
 export default EventListHeader

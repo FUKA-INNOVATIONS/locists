@@ -15,8 +15,9 @@ import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
-import { useCallback, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
+import PropTypes from 'prop-types'
 
 const UploadEvent = props => {
   const { user } = useAuthStorage()
@@ -202,14 +203,17 @@ const UploadEvent = props => {
             }
 
             <View style={ { justifyContent: 'center' } }>
-              <Text style={ { color: 'white' } }>{getValues().date && dateTime.toLocaleString()}</Text>
-              <TouchableOpacity style={ theme.generalBtn } onPress={ showDatepicker }>
+              <Text style={ { color: 'white' } }>{ getValues().date &&
+              dateTime.toLocaleString() }</Text>
+              <TouchableOpacity style={ theme.generalBtn }
+                                onPress={ showDatepicker }>
                 <Text style={ theme.loginButtonText }>Select Date</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={ theme.generalBtn } onPress={ showTimepicker }>
+              <TouchableOpacity style={ theme.generalBtn }
+                                onPress={ showTimepicker }>
                 <Text style={ theme.loginButtonText }>Select Time</Text>
               </TouchableOpacity>
-             </View>
+            </View>
           </View>
 
           <View style={ theme.inputContainer }>
@@ -272,6 +276,10 @@ const UploadEvent = props => {
       </ScrollView>
     </>
   )
+}
+
+UploadEvent.propTypes = {
+  onSubmit: PropTypes.func,
 }
 
 export default UploadEvent

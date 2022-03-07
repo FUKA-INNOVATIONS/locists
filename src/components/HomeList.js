@@ -2,10 +2,11 @@ import { FlatList, Pressable } from 'react-native'
 import Post from './Post'
 import Event from './Event'
 import useMedia from '../hooks/useMedia'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Loading from './Loading'
 import EmptyListMessage from './EmptyListMessage'
 import ExploreListHeader from './ExploreListHeader'
+import PropTypes from 'prop-types'
 
 const HomeList = ( { navigation } ) => {
   // console.log('HomeList.js')
@@ -86,6 +87,10 @@ const HomeList = ( { navigation } ) => {
       }
     />
   )
+}
+
+HomeList.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default HomeList

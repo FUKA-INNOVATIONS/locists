@@ -1,8 +1,10 @@
+import React from 'react'
 import { View, Text, Pressable } from 'react-native'
 import theme from '../theme'
+import PropTypes from 'prop-types'
 
 const NoComments = ( { openCommentBox, isWriteComment } ) => {
-  console.log(isWriteComment)
+  console.log( isWriteComment )
   return (
     <View style={ { alignItems: 'center', padding: 25 } }>
       <Text style={ {
@@ -12,14 +14,20 @@ const NoComments = ( { openCommentBox, isWriteComment } ) => {
       } }>No one has yet commented</Text>
       <Text style={ { color: theme.colors.mainBackground } }>Be the first one to
         leave an interesting comment</Text>
-      <View style={{marginTop: 20}}>
+      <View style={ { marginTop: 20 } }>
         <Pressable onPress={ openCommentBox }>
-          <Text style={ { color:theme.colors.mainBackground, fontSize: 20 } }>Write a comment</Text>
+          <Text style={ { color: theme.colors.mainBackground, fontSize: 20 } }>Write
+            a comment</Text>
         </Pressable>
 
       </View>
     </View>
   )
+}
+
+NoComments.propTypes = {
+  openCommentBox: PropTypes.func,
+  isWriteComment: PropTypes.bool,
 }
 
 export default NoComments

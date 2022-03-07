@@ -1,10 +1,11 @@
 import HomeList from '../components/HomeList'
 import useUser from '../hooks/useUser'
-import { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import useAuthStorage from '../hooks/useAuthStorage'
 import { View } from 'react-native'
 import AppName from '../../assets/AppName.svg'
 import theme from "../theme";
+import PropTypes from 'prop-types'
 
 const Home = ( { navigation } ) => {
   console.log( 'Home.js' )
@@ -33,6 +34,10 @@ const Home = ( { navigation } ) => {
       </>
 
   )
+}
+
+Home.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Home

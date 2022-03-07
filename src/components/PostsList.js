@@ -1,9 +1,10 @@
+import React, { useEffect, useState } from 'react'
 import { FlatList, Pressable } from 'react-native'
-import { useEffect, useState } from 'react'
 import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
 import ExploreListHeader from './ExploreListHeader'
+import PropTypes from 'prop-types'
 
 const PostsList = ( { navigation } ) => {
   // console.log( 'PostsList.js rendered');
@@ -65,6 +66,10 @@ const PostsList = ( { navigation } ) => {
       } }
     />
   )
+}
+
+PostsList.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default PostsList

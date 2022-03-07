@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import SwitchSelector from 'react-native-switch-selector'
 
 import theme from '../theme'
 import Login from '../components/Login'
 import Register from '../components/Register'
+import PropTypes from 'prop-types'
 
 const Authenticate = ( { navigation } ) => {
   const [ activeView, setActiveView ] = useState( 'signIn' )
@@ -47,6 +48,10 @@ const Authenticate = ( { navigation } ) => {
       ) }
     </View>
   )
+}
+
+Authenticate.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Authenticate

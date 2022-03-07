@@ -1,9 +1,10 @@
 import { View } from 'react-native'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import SwitchSelector from 'react-native-switch-selector'
 import theme from '../theme'
 import PostsList from '../components/PostsList'
 import EventsList from '../components/EventsList'
+import PropTypes from 'prop-types'
 
 const Explore = ( { navigation } ) => {
   // console.log( 'Explore.js' )
@@ -21,7 +22,7 @@ const Explore = ( { navigation } ) => {
 
   return (
     <View style={ { paddingBottom: 90 } }>
-      <View style={{marginHorizontal: 10, marginBottom: 10}}>
+      <View style={ { marginHorizontal: 10, marginBottom: 10 } }>
         <SwitchSelector
           backgroundColor={ theme.colors.textPrimary }
           textColor={ theme.colors.white }
@@ -40,6 +41,10 @@ const Explore = ( { navigation } ) => {
       { explore === 'posts' && <PostsList navigation={ navigation } /> }
     </View>
   )
+}
+
+Explore.propTypes = {
+  navigation: PropTypes.object,
 }
 
 export default Explore

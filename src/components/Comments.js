@@ -4,10 +4,11 @@ import Comment from './Comment'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 import useComment from '../hooks/useComment'
 import Loading from './Loading'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PostComment from './PostComment'
 import AddComment from '../../assets/icons/AddComment.svg'
 import { sortLatest } from '../utils/sortFilterHelpers'
+import PropTypes from 'prop-types'
 
 const Comments = ( { fileId } ) => {
   const [ loading, setLoading ] = useState()
@@ -36,7 +37,7 @@ const Comments = ( { fileId } ) => {
 
   if ( loading ) return <Loading />
 
-  sortLatest(mediaComments)
+  sortLatest( mediaComments )
 
   return (
     <>
@@ -70,6 +71,10 @@ const Comments = ( { fileId } ) => {
       />
     </>
   )
+}
+
+Comments.propTypes = {
+  fileId: PropTypes.number,
 }
 
 export default Comments

@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   DefaultTheme,
   NavigationContainer,
@@ -45,7 +46,7 @@ const HomeStackScreen = () => {
                           } ) => ( {
                             title: 'Post',
                             headerRight: () => (
-                              <CloseModal navigation={navigation} /> ),
+                              <CloseModal navigation={ navigation } /> ),
                           } ) }
                           component={ SinglePostScreen } />
         <HomeStack.Screen name={ 'SingleEvent' }
@@ -55,7 +56,7 @@ const HomeStackScreen = () => {
                           } ) => ( {
                             title: 'Event',
                             headerRight: () => (
-                              <CloseModal navigation={navigation} /> ),
+                              <CloseModal navigation={ navigation } /> ),
                           } ) }
                           component={ SingleEventScreen } />
       </HomeStack.Group>
@@ -78,7 +79,7 @@ const ExploreStackScreen = () => {
                              } ) => ( {
                                title: 'Event',
                                headerRight: () => (
-                                 <CloseModal navigation={navigation} /> ),
+                                 <CloseModal navigation={ navigation } /> ),
                              } ) }
                              component={ SingleEventScreen } />
         <ExploreStack.Screen name={ 'SinglePost' }
@@ -88,7 +89,7 @@ const ExploreStackScreen = () => {
                              } ) => ( {
                                title: 'Post',
                                headerRight: () => (
-                                 <CloseModal navigation={navigation} /> ),
+                                 <CloseModal navigation={ navigation } /> ),
                              } ) }
                              component={ SinglePostScreen } />
       </ExploreStack.Group>
@@ -109,7 +110,7 @@ const CreateStackScreen = () => {
                             } ) => ( {
                               title: 'Create new post',
                               headerRight: () => (
-                                <CloseModal navigation={navigation} /> ),
+                                <CloseModal navigation={ navigation } /> ),
                             } ) }
                             component={ CreatePostScreen } />
         <CreateStack.Screen name={ 'CreateEvent' }
@@ -119,7 +120,7 @@ const CreateStackScreen = () => {
                             } ) => ( {
                               title: 'Create new event',
                               headerRight: () => (
-                                <CloseModal navigation={navigation} /> ),
+                                <CloseModal navigation={ navigation } /> ),
                             } ) }
                             component={ CreateEventScreen } />
       </CreateStack.Group>
@@ -156,7 +157,8 @@ const AuthenticationStackScreen = () => {
                                         } ) => ( {
                                           title: 'Update account details',
                                           headerRight: () => (
-                                            <CloseModal navigation={navigation} /> ),
+                                            <CloseModal
+                                              navigation={ navigation } /> ),
                                         } ) }
                                         component={ SettingsScreen } />
           </AuthenticationStack.Group>
@@ -180,7 +182,7 @@ const SettingsStackScreen = () => {
                               } ) => ( {
                                 title: 'Update account details',
                                 headerRight: () => (
-                                  <CloseModal navigation={navigation} /> ),
+                                  <CloseModal navigation={ navigation } /> ),
                               } ) }
                               component={ ModifyAccount } />
       </SettingsStack.Group>

@@ -1,3 +1,4 @@
+import React from 'react'
 import { View, Image, Text } from 'react-native'
 import { uploadsUrl } from '../../config'
 import theme from '../theme'
@@ -5,7 +6,7 @@ import Like from './Like'
 import DeleteMedia from './DeleteMedia'
 import UserInfo from './UserInfo'
 import CommentsCounter from './CommentsCounter'
-
+import PropTypes from 'prop-types'
 
 const Post = ( { postMedia, ownProfile } ) => {
   // console.log('Post.js', postMedia)
@@ -51,6 +52,11 @@ const Post = ( { postMedia, ownProfile } ) => {
       </View>
     </>
   )
+}
+
+Post.propTypes = {
+  postMedia: PropTypes.object,
+  ownProfile: PropTypes.bool,
 }
 
 export default Post
