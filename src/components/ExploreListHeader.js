@@ -188,7 +188,7 @@ const EventListHeader = ( {
 }
 
 EventListHeader.propTypes = {
-  media: PropTypes.object,
+  media: PropTypes.array,
   activeList: PropTypes.array,
   setActiveList: PropTypes.func,
   navigation: PropTypes.object,

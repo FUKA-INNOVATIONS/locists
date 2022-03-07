@@ -4,10 +4,14 @@ import PropTypes from 'prop-types'
 
 const UserInfo = ( { username, avatar } ) => {
 
+  const avatarObj = {
+    uri: avatar
+  }
+
   return (
     <View
       style={ { flexDirection: 'row', alignItems: 'center', marginBottom: 5 } }>
-      <Image source={ { uri: avatar } } style={ {
+      <Image source={ avatar ? avatarObj : require('../../assets/defaultPic.jpg') } style={ {
         width: 40,
         height: 40,
         borderRadius: 20,
@@ -20,7 +24,10 @@ const UserInfo = ( { username, avatar } ) => {
 }
 
 UserInfo.propTypes = {
-  username: PropTypes.string,
+  username: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   avatar: PropTypes.string,
 }
 
