@@ -20,7 +20,10 @@ const UserInfo = ( { username, avatar } ) => {
 }
 
 UserInfo.propTypes = {
-  username: PropTypes.string,
+  username: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   avatar: PropTypes.string,
 }
 

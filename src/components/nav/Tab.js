@@ -100,7 +100,7 @@ const styles = StyleSheet.create( {
 } )
 
 Tab.propTypes = {
-  selected: PropTypes.string,
+  selected: PropTypes.bool,
   tab: PropTypes.object,
   onPress: PropTypes.func,
 }

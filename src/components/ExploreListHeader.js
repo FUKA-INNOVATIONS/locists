@@ -9,7 +9,7 @@ import {
 } from '../utils/sortFilterHelpers'
 import PropTypes from 'prop-types'
 
-const EventListHeader = ( {
+const ExploreListHeader = ( {
   media,
   activeList,
   setActiveList,
@@ -187,8 +187,8 @@ const EventListHeader = ( {
   )
 }
 
-EventListHeader.propTypes = {
-  media: PropTypes.object,
+ExploreListHeader.propTypes = {
+  media: PropTypes.array,
   activeList: PropTypes.array,
   setActiveList: PropTypes.func,
   navigation: PropTypes.object,
@@ -196,5 +196,4 @@ EventListHeader.propTypes = {
   mediaType: PropTypes.string,
 }
 
-
-export default EventListHeader
+export default ExploreListHeader

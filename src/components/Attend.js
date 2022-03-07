@@ -20,15 +20,15 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   }
 
   useEffect( async () => {
-    // let cancel = true
+    let cancel = true
     await getMediaFavourites( file_id ).then( mediaFavourites => {
-      // if ( cancel ) return
+      if ( cancel ) return
       setMediaFavourites( mediaFavourites )
     } )
     setUpdateView(false)
-    /* return () => {
+    return () => {
      cancel = true
-     } */
+     }
   }, [updateView] )
 
   const likeHandler = async () => {
