@@ -35,8 +35,6 @@ const SingleEventHeader = ( { eventDetails, setUpdateSingleEventView, type } ) =
                 <AddComment width={32} height={32} />
                 </TouchableOpacity>
               </View>
-              {/* <Text>File_id: { eventDetails.file_id }</Text> */}
-              {/* <Text>Media type: { eventDetails.description.mediaType }</Text> */}
         </View>
         <View style={ { alignItems: 'center' } }>
           {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment} setUpdateSingleEventView={setUpdateSingleEventView} type={'event'}/>}

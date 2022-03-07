@@ -11,11 +11,10 @@ import Loading from './Loading'
 const PostComment = ( {
   file_id, // eslint-disable-line
   display,
-  setUpdateSingleEventView,
-  type,
-  setUpdateSinglePostView,
+  updateComments
+
 } ) => { // eslint-disable-line
-  const { user } = useAuthStorage()
+  // const { user } = useAuthStorage()
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 
@@ -46,7 +45,8 @@ const PostComment = ( {
       reset()
       display( false )
       setLoading( false )
-      switch ( type ) {
+      updateComments()
+      /* switch ( type ) {
         case 'event':
           setUpdateSingleEventView( true )
           break
@@ -55,10 +55,10 @@ const PostComment = ( {
           break
         default:
           break
-      }
+      } */
     } else {
       setLoading( false )
-      Alert.alert( 'Comment not added', 'Please login and try again!' )
+      // Alert.alert( 'Comment not added', 'Please login and try again!' )
     }
     console.log( comment )
   }
