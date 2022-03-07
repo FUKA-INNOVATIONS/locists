@@ -8,17 +8,10 @@ import AddComment from '../../assets/icons/AddComment.svg'
 import UserInfo from './UserInfo'
 import Loading from './Loading'
 
-const SinglePostHeader = ( { postDetails, setUpdateSinglePostView } ) => {
-  console.log( 'singlePost' )
-  if ( postDetails === undefined ) return <View><Text>Loading..</Text></View>
+const SinglePostHeader = ( { postDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
 
   if ( !postDetails ) return <Loading />
-
-  const onWriteCommentHandler = () => {
-    console.log( 'onWriteCommentHandler' )
-    setIsWriteComment( !isWriteComment )
-  }
 
   return (
     <View style={ theme.singlePost }>
@@ -36,11 +29,8 @@ const SinglePostHeader = ( { postDetails, setUpdateSinglePostView } ) => {
               />
               <View style={ { alignItems: 'flex-end' } }>
                 <Like displayIcon file_id={ postDetails.file_id }
-                      setUpdateSinglePostView={setUpdateSinglePostView}
                       single={ true } />
-                <TouchableOpacity onPress={ onWriteCommentHandler }>
-                  <AddComment width={ 32 } height={ 32 } />
-                </TouchableOpacity>
+
               </View>
             </View>
             <View style={ { ...theme.singlePostText } }>
@@ -56,9 +46,6 @@ const SinglePostHeader = ( { postDetails, setUpdateSinglePostView } ) => {
             <View style={ { alignItems: 'flex-end' } }>
               <Like displayIcon file_id={ postDetails.file_id }
                     single={ true } />
-              <TouchableOpacity onPress={ onWriteCommentHandler }>
-                <AddComment width={ 32 } height={ 32 } />
-              </TouchableOpacity>
             </View>
           </View>
       }
@@ -66,9 +53,6 @@ const SinglePostHeader = ( { postDetails, setUpdateSinglePostView } ) => {
       { isWriteComment && <PostComment file_id={ postDetails.file_id }
                                        display={ setIsWriteComment } setUpdateSinglePostView={setUpdateSinglePostView} type={'post'}/> }
     </View>
-      <View style={{marginTop: 10}}>
-        <Text style={{color: '#8d8082', fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>Comments</Text>
-      </View>
     </View>
   )
 }

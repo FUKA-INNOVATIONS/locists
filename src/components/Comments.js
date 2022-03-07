@@ -1,9 +1,7 @@
-import SingleEventHeader from './SingleEventHeader'
 import theme from '../theme'
 import NoComments from './NoComments'
 import Comment from './Comment'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
-import useMedia from '../hooks/useMedia'
 import useComment from '../hooks/useComment'
 import Loading from './Loading'
 import { useEffect, useState } from 'react'
@@ -61,11 +59,10 @@ const Comments = ( { fileId } ) => {
       <FlatList
         style={ [ theme.singleMediaComments ] }
         data={ mediaComments }
-        ListEmptyComponent={ <NoComments /> }
+        ListEmptyComponent={ <NoComments openCommentBox={onWriteCommentHandler} isWriteComment /> }
         keyExtractor={ ( item ) => item.comment_id }
         renderItem={ ( { item } ) => <Comment commentObj={ item }
-                                              setUpdateSingleEventView={ setUpdateView }
-                                              type={ 'event' } /> }
+                                              updateComments={updateComments} /> }
       />
     </>
   )

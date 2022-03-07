@@ -1,5 +1,4 @@
 import { Text, Alert, TextInput, View, TouchableOpacity } from 'react-native'
-import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,7 +11,6 @@ const PostComment = ( {
   file_id, // eslint-disable-line
   display,
   updateComments
-
 } ) => { // eslint-disable-line
   // const { user } = useAuthStorage()
   const { postComment } = useComment()
@@ -34,31 +32,18 @@ const PostComment = ( {
     resolver: yupResolver( CommentSchema ), mode: 'onBlur',
   } )
 
-  // const content = `Comment for id ${ file_id }`;
-
   const onSubmit = async ( data ) => {
     setLoading( true )
     const { content } = data
     const comment = await postComment( file_id, content )
     if ( comment.comment_id ) {
-      // Alert.alert( 'Comment added' )
       reset()
       display( false )
       setLoading( false )
       updateComments()
-      /* switch ( type ) {
-        case 'event':
-          setUpdateSingleEventView( true )
-          break
-        case 'post':
-          setUpdateSinglePostView(true)
-          break
-        default:
-          break
-      } */
     } else {
       setLoading( false )
-      // Alert.alert( 'Comment not added', 'Please login and try again!' )
+      Alert.alert( 'Comment not added', 'Please login and try again!' )
     }
     console.log( comment )
   }

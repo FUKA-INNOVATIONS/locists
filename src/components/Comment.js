@@ -1,4 +1,4 @@
-import { View, Text, Alert, Pressable } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import TimeAgo from '@andordavoti/react-native-timeago'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
@@ -9,9 +9,7 @@ import UserInfo from './UserInfo'
 
 const Comment = ( {
   commentObj,
-  setUpdateSingleEventView,
-  setUpdateSinglePostView,
-  type,
+  updateComments
 } ) => {
   const { user } = useAuthStorage()
   const { deleteComment } = useComment()
@@ -25,17 +23,7 @@ const Comment = ( {
   const onDeleteHandler = ( id ) => {
     deleteComment( id ).then( res => {
       if ( deleteComment ) {
-        Alert.alert( res.message )
-        switch ( type ) {
-          case 'event':
-            setUpdateSingleEventView( true )
-            break
-          case 'post':
-            setUpdateSinglePostView( true )
-            break
-          default:
-            break
-        }
+        updateComments()
       }
     } )
   }

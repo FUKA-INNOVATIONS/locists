@@ -1,19 +1,13 @@
 import { useState } from 'react'
-import { Image, Text, TouchableOpacity, View} from 'react-native'
+import { Image, Text, View} from 'react-native'
 import { uploadsUrl } from '../../config'
 import PostComment from './PostComment'
 import Attend from './Attend'
 import theme from '../theme'
-import AddComment from '../../assets/icons/AddComment.svg'
 import Loading from './Loading'
 
-const SingleEventHeader = ( { eventDetails, setUpdateSingleEventView, type } ) => {
+const SingleEventHeader = ( { eventDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
-
-  const onWriteCommentHandler = () => {
-    console.log( 'onWriteCommentHandler' )
-    setIsWriteComment(!isWriteComment)
-  }
 
   if ( !eventDetails ) return <Loading />
 
@@ -31,9 +25,6 @@ const SingleEventHeader = ( { eventDetails, setUpdateSingleEventView, type } ) =
             </View>
               <View style={ theme.infoBottom }>
                 <Text style={{width: '80%'}}>{ eventDetails.description.description }</Text>
-                {/* <TouchableOpacity onPress={ onWriteCommentHandler }>
-                <AddComment width={32} height={32} />
-                </TouchableOpacity> */}
               </View>
         </View>
         <View style={ { alignItems: 'center' } }>
