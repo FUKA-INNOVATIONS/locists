@@ -1,5 +1,4 @@
 import { View, Text, Pressable } from 'react-native'
-import TimeAgo from '@andordavoti/react-native-timeago'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
 import theme from '../theme'
