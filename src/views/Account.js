@@ -66,7 +66,7 @@ const Account = ( { navigation } ) => {
         <Text style={ { color: '#fff' } }>User status: { user.isLogged && 'logged in' }</Text>
         <Text style={ { color: '#fff' } }>Comments posted: { comments.length > 0 ? comments.length : 0 }</Text>
         <FlatList
-          data={ userMedia }
+          data={ [] } // TODO empty list provided
           ListEmptyComponent={ EmptyListMessage }
           keyExtractor={ ( item ) => item.file_id }
           renderItem={ ( { item } ) => {

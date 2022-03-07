@@ -5,9 +5,9 @@ import theme from '../theme'
 import useAuthStorage from '../hooks/useAuthStorage'
 
 const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
+  // console.log('Attend.js')
   const [ updateView, setUpdateView ] = useState(false)
   const { user } = useAuthStorage()
-  // console.log('attend.js')
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -20,15 +20,15 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   }
 
   useEffect( async () => {
-    let cancel = true
+    // let cancel = true
     await getMediaFavourites( file_id ).then( mediaFavourites => {
-      if ( cancel ) return
+      // if ( cancel ) return
       setMediaFavourites( mediaFavourites )
     } )
     setUpdateView(false)
-    return () => {
+    /* return () => {
      cancel = true
-     }
+     } */
   }, [updateView] )
 
   const likeHandler = async () => {

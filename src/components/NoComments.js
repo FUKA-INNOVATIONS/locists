@@ -19,7 +19,6 @@ const NoComments = ( { openCommentBox, isWriteComment } ) => {
           <Text style={ { color: theme.colors.mainBackground, fontSize: 20 } }>Write
             a comment</Text>
         </Pressable>
-
       </View>
     </View>
   )

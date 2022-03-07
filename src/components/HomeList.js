@@ -28,7 +28,6 @@ const HomeList = ( { navigation } ) => {
     }, [] )
 
     // To keep state up to date
-    // TODO instead update app state on changes like add/delete new event/comment/attendee
     return navigation.addListener( 'focus', async () => {
       console.log( 'HomeList.js focus' )
       setLoading( true )

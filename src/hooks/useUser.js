@@ -97,6 +97,7 @@ const useUser = () => {
         return uploadsUrl + avatar.filename
       }
     } catch ( error ) {
+      console.log('error in fetchAvatar hook')
       console.error( error.message )
     }
   }
