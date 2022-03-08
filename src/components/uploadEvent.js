@@ -95,6 +95,7 @@ const UploadEvent = props => {
   } )
 
   const mediaDescription = {
+    price: getValues().price,
     mediaType: 'event',
     owner: user.username,
     fileType: type,
@@ -102,7 +103,6 @@ const UploadEvent = props => {
     name: getValues().name,
     date: dateTime,
     description: getValues().description,
-    price: getValues().price,
   }
 
   const resetAll = () => {

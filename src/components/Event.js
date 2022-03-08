@@ -10,7 +10,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Event = ( { eventDetails, ownProfile } ) => {
-  // console.log('Event.js', eventDetails)
+  console.log('Event.js', eventDetails)
 
   if ( eventDetails === null ) return <Loading />
 

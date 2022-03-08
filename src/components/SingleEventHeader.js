@@ -6,6 +6,7 @@ import Attend from './Attend'
 import theme from '../theme'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
+import { Price } from '../utils'
 
 const SingleEventHeader = ( { eventDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
@@ -31,6 +32,10 @@ const SingleEventHeader = ( { eventDetails } ) => {
               <View style={ theme.infoBottom }>
                 <Text style={{width: '80%'}}>{ eventDetails.description.description }</Text>
               </View>
+          <View style={ {...theme.eventSection, flexDirection: 'row', justifyContent: 'flex-end', right: 12} }>
+            <Text style={{ fontSize: 20 }}>{ eventDetails.description.price > 0 ? eventDetails.description.price : 'Free' }</Text>
+            <Price width={ 30 } height={ 40 } marginLeft={5} />
+          </View>
         </View>
         <View style={ { alignItems: 'center' } }>
           {isWriteComment && <PostComment file_id={eventDetails.file_id} display={setIsWriteComment} type={'event'}/>}
