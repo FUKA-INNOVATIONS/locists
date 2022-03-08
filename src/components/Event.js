@@ -48,7 +48,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <Entypo name='users' size={ 20 } color='black' />
 
             <Attend file_id={ eventDetails.file_id } displayIcon={ false } />
-            { eventDetails.description.isOwner &&
+            { ( eventDetails.description.isOwner || ownProfile ) &&
             <DeleteMedia file_id={ eventDetails.file_id } /> }
           </View>
         </View>

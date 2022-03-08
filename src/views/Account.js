@@ -12,6 +12,7 @@ import Post from '../components/Post'
 import Event from '../components/Event'
 import PropTypes from 'prop-types'
 import Loading from '../components/Loading'
+import { sortLatest } from '../utils/sortFilterHelpers'
 
 const Account = ( { navigation } ) => {
   // console.log( 'Account.js' )
@@ -53,6 +54,7 @@ const Account = ( { navigation } ) => {
 
   if ( loading ) return <Loading />
 
+
   return (
     <>
       <View style={ { alignItems: 'center', height: '60%' } }>
@@ -87,7 +89,7 @@ const Account = ( { navigation } ) => {
         </View>
         <View style={{ width: '100%' }}>
           <FlatList
-            data={ userMedia }
+            data={ userMedia && sortLatest(userMedia) }
             ListEmptyComponent={ EmptyListMessage }
             keyExtractor={ ( item ) => item.file_id }
             renderItem={ ( { item } ) => {
@@ -95,13 +97,13 @@ const Account = ( { navigation } ) => {
                 item.description.mediaType === 'post' ?
                   <Pressable
                     onPress={ () => postPressHandler( item.file_id ) }>
-                    <Post postMedia={ item } home={ true }
+                    <Post postMedia={ item } ownProfile={true}
                     />
                   </Pressable>
                   :
                   <Pressable
                     onPress={ () => eventPressHandler( item.file_id ) }>
-                    <Event eventDetails={ item } />
+                    <Event eventDetails={ item } ownProfile={true} />
                   </Pressable>
               )
             }
