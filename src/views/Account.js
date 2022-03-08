@@ -3,7 +3,7 @@ import {
   Text,
   View,
   Image,
-  FlatList,
+  FlatList, Pressable,
 } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
@@ -38,6 +38,16 @@ const Account = ( { navigation } ) => {
     } )
   }, [] )
 
+  // Move user to single event view when tapping event card
+  const eventPressHandler = ( eventId ) => {
+    navigation.navigate( 'SingleEventOwn', { eventId: eventId } )
+  }
+
+  // Move user to single post view when tapping a post
+  const postPressHandler = ( postId ) => {
+    navigation.navigate( 'SinglePostOwn', { postId: postId } )
+  }
+
   const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not
     posted anything yet</Text>
 
@@ -45,9 +55,9 @@ const Account = ( { navigation } ) => {
 
   return (
     <>
-      <View style={ { alignItems: 'center', height: '90%' } }>
+      <View style={ { alignItems: 'center', height: '60%' } }>
 
-        <View style={ { marginBottom: 10 } }>
+        <View style={ { marginBottom: 10, height: '40%' } }>
           { user.avatar ?
             <Image
               source={ { uri: user.avatar } }
@@ -83,9 +93,16 @@ const Account = ( { navigation } ) => {
             renderItem={ ( { item } ) => {
               return (
                 item.description.mediaType === 'post' ?
-                  <Post postMedia={ item } ownProfile={ true } />
+                  <Pressable
+                    onPress={ () => postPressHandler( item.file_id ) }>
+                    <Post postMedia={ item } home={ true }
+                    />
+                  </Pressable>
                   :
-                  <Event eventDetails={ item } ownProfile={ true } />
+                  <Pressable
+                    onPress={ () => eventPressHandler( item.file_id ) }>
+                    <Event eventDetails={ item } />
+                  </Pressable>
               )
             }
             }
