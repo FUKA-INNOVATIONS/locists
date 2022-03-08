@@ -59,7 +59,7 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
           ? 'can\'t attend'
           : 'Attend' }</Text>
       </TouchableOpacity> }
-      <Text>{ mediaFavourites.length } attending </Text>
+      <Text style={{marginTop: 5}}>{ mediaFavourites.length } attending </Text>
     </View>
   )
 }

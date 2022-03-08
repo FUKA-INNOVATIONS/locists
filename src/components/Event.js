@@ -1,4 +1,4 @@
-import { View, Image, Text } from 'react-native'
+import { View, Image, Text, Dimensions } from 'react-native'
 import { uploadsUrl } from '../../config'
 import Attend from './Attend'
 import DeleteMedia from './DeleteMedia'
@@ -14,6 +14,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
   if ( eventDetails === null ) return <Loading />
 
+  const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( eventDetails.thumbnails !== undefined )
 
   return (
@@ -34,7 +35,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
             style={ [ theme.mediaTitle, { color: '#fff' } ] }>{ eventDetails.description.name }
           </Text>
         </View>
-        <Image source={ { uri: hasThumbnails ? (uploadsUrl + eventDetails.thumbnails.w320) : (uploadsUrl + eventDetails.filename)} }
+        <Image source={ { uri: (hasThumbnails && smallScreen) ? (uploadsUrl + eventDetails.thumbnails.w320) : (uploadsUrl + eventDetails.filename)} }
                style={ theme.eventImage2 } />
         <View style={ theme.eventExtra }>
           <View style={ theme.eventSection }>

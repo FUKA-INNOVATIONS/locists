@@ -183,7 +183,7 @@ const theme = {
     height: 40,
     backgroundColor: '#fff',
     borderWidth: 2,
-    borderColor: '#7b08a3',
+    // borderColor: '#7b08a3',
     width: '45%',
   },
 
@@ -305,8 +305,8 @@ const theme = {
     backgroundColor: general.colors.btn
   },
   eventImage2: {
-    width: width * 0.94,
-    height: undefined,
+    // width: width * 0.94,
+    // height: undefined,
     aspectRatio: 1.4,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,

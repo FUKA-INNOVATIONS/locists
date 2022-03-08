@@ -104,6 +104,7 @@ const ExploreListHeader = ( {
       marginHorizontal: 10,
       marginBottom: 10,
       marginTop: 5,
+      right: 5
     } }>
       { ( mediaType === 'event' || mediaType === 'post' ) &&
       <DropDownPicker
@@ -133,7 +134,7 @@ const ExploreListHeader = ( {
         dropDownContainerStyle={{
           width: '45%',
           alignSelf: 'flex-end',
-          borderColor: '#7b08a3',
+          // borderColor: '#7b08a3',
           borderWidth: 2,
         }}
 
@@ -179,7 +180,7 @@ const ExploreListHeader = ( {
           width: '45%',
           alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
           marginLeft: mediaType === 'mixedMedia' ? 0 : 15,
-          borderColor: '#7b08a3',
+          // borderColor: '#7b08a3',
           borderWidth: 2,
         }}
       />

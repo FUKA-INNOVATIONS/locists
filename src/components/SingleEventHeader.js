@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, Text, View} from 'react-native'
+import { Dimensions, Image, Text, View } from 'react-native'
 import { uploadsUrl } from '../../config'
 import PostComment from './PostComment'
 import Attend from './Attend'
@@ -11,16 +11,20 @@ const SingleEventHeader = ( { eventDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
 
   if ( !eventDetails ) return <Loading />
+  const smallScreen = Dimensions.get( 'screen' ).width <= 390
 
   return (
       <View>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
-               style={ { width: '100%', height: 200 } }/>
+        <Image source={ { uri: smallScreen ? uploadsUrl + eventDetails.thumbnails.w640 : uploadsUrl + eventDetails.filename } }
+               style={ { width: '100%', height: 250 } }/>
         <View style={ theme.singleEventInfo }>
           <View style={ theme.infoTop}>
             <View>
               <Text style={ theme.mediaTitle }>{ eventDetails.description.name }</Text>
-              <Text>{ eventDetails.description.location }</Text>
+              <Text>{ eventDetails.description.location } </Text>
+              <Text> </Text>
+              <Text>{new Date( eventDetails.description.date ).toLocaleDateString()}</Text>
+              <Text>{new Date(eventDetails.description.date).toTimeString()}</Text>
             </View>
             <Attend displayIcon file_id={eventDetails.file_id} single={true} />
             </View>

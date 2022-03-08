@@ -8,7 +8,7 @@ import AppName from '../../assets/AppName.svg'
 import theme from '../theme'
 
 const Home = ( { navigation } ) => {
-  console.log( 'Home.js' )
+  // console.log( 'Home.js', Platform.OS, Dimensions.get('screen').width )
   const authStorage = useAuthStorage()
   const { loginWithToken } = useUser()
 
@@ -25,10 +25,14 @@ const Home = ( { navigation } ) => {
     } )
   }, [] )
 
+  // const smallScreen = Dimensions.get( 'screen' ).width <= 390
+  // const bigScreenStyle = { maxWidth: 600, alignSelf: 'center' }
+  // const smallScreenStyle = { maxWidth: 400 }
+
   return (
     <>
       <View style={ theme.appName }>
-        <AppName width={100} height={50}/>
+        <AppName width={ 100 } height={ 50 } />
       </View>
       <HomeList navigation={ navigation } />
     </>
