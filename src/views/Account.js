@@ -24,14 +24,14 @@ const Account = ( { navigation } ) => {
   const [ loading, setLoading ] = useState( false )
 
   useEffect( async () => {
-    console.log( 'Account.js useEffect' )
+    // console.log( 'Account.js useEffect' )
     setLoading( true )
     getCurrentUserComments().then( comments => setComments( comments ) )
     await getUserMedia()
     setLoading( false )
 
     return navigation.addListener( 'focus', async () => {
-      console.log( 'Account.js focus' )
+      // console.log( 'Account.js focus' )
       setLoading( true )
       getCurrentUserComments().then( comments => setComments( comments ) )
       await getUserMedia()
@@ -57,9 +57,9 @@ const Account = ( { navigation } ) => {
 
   return (
     <>
-      <View style={ { alignItems: 'center', height: '60%' } }>
+      <View style={ { alignItems: 'center', height: '65%' } }>
 
-        <View style={ { marginBottom: 10, height: '40%' } }>
+        <View style={ { marginBottom: 10, height: '35%' } }>
           { user.avatar ?
             <Image
               source={ { uri: user.avatar } }
@@ -87,7 +87,7 @@ const Account = ( { navigation } ) => {
             : 0 } comments and { userMedia &&
           userMedia.length } events/posts</Text>
         </View>
-        <View style={{ width: '100%' }}>
+        <View style={{ width: '100%', height: '100%' }}>
           <FlatList
             data={ userMedia && sortLatest(userMedia) }
             ListEmptyComponent={ EmptyListMessage }

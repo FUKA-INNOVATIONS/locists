@@ -9,7 +9,7 @@ import CommentsCounter from './CommentsCounter'
 import PropTypes from 'prop-types'
 
 const Post = ( { postMedia, ownProfile } ) => {
-  console.log( 'Post.js', ownProfile )
+  // console.log( 'Post.js', ownProfile )
 
 
   const hasThumbnails = ( postMedia.thumbnails !== undefined )
