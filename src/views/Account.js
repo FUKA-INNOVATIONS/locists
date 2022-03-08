@@ -24,9 +24,9 @@ const Account = ( { navigation } ) => {
   const [ loading, setLoading ] = useState( false )
 
   /* const getMediaForUser = useMemo( async () => {
-    getCurrentUserComments().then( comments => setComments( comments ) )
-    await getUserMedia( user.token )
-  }, [] ) */
+   getCurrentUserComments().then( comments => setComments( comments ) )
+   await getUserMedia( user.token )
+   }, [] ) */
 
   /*  If user is logged in
    *   Hide Authentication view and move to Account view
@@ -43,12 +43,10 @@ const Account = ( { navigation } ) => {
       console.log( 'Account.js focus' )
       setLoading( true )
       getCurrentUserComments().then( comments => setComments( comments ) )
-      await getUserMedia(user.token)
+      await getUserMedia( user.token )
       setLoading( false )
     } )
   }, [] )
-
-
 
   const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not
     posted anything yet</Text>
@@ -57,34 +55,36 @@ const Account = ( { navigation } ) => {
 
   return (
     <>
-      <View style={ { ...theme.profile } }>
-        <View style={ theme.profilePicAndInfo }>
+      <View style={ { alignItems: 'center', height: '90%' } }>
+
+        <View style={ { marginBottom: 10 } }>
           { user.avatar ?
             <Image
               source={ { uri: user.avatar } }
-              style={ theme.profilePic }
+              style={ { width: 150, height: 150, borderRadius: 75 } }
+              // style={ theme.profilePic }
             />
             :
             <Image
               source={ require( '../../assets/defaultPic.jpg' ) }
-              style={ theme.profilePic }
+              style={ { width: 150, height: 150, borderRadius: 75 } }
+              // style={ theme.profilePic }
             />
           }
-          <View style={ theme.profileInfoCard }>
-            <Text>User: { user.username }</Text>
-            <Text>UserID: { user.user_id }</Text>
-            <Text>{ user.email }</Text>
-            <Text>{ user.full_name }</Text>
-          </View>
         </View>
-      </View>
 
-      <View>
-        <Text style={ { color: '#fff' } }>You are { user.isLogged &&
-        'logged in' }</Text>
-        <Text style={ { color: '#fff' } }>Comments posted: { comments.length > 0
-          ? comments.length
-          : 0 }</Text>
+        <View style={ { alignItems: 'center', marginBottom: 10 } }>
+          <Text style={ {
+            color: '#fff',
+            marginVertical: 5,
+          } }>Hello { user.username }, you are { user.isLogged &&
+          'logged in' }</Text>
+          <Text style={ { color: '#fff' } }>You have posted { comments.length >
+          0
+            ? comments.length
+            : 0 } comments and { userMedia &&
+          userMedia.length } events/posts</Text>
+        </View>
         <FlatList
           data={ userMedia }
           ListEmptyComponent={ EmptyListMessage }
