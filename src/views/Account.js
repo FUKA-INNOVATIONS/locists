@@ -23,6 +23,8 @@ const Account = ( { navigation } ) => {
   const { getUserMedia, userMedia } = useMedia()
   const [ loading, setLoading ] = useState( false )
 
+  // console.log('user in Account ', user)
+
   useEffect( async () => {
     // console.log( 'Account.js useEffect' )
     setLoading( true )

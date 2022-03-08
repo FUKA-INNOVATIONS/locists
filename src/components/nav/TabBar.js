@@ -1,8 +1,7 @@
 import { View, StyleSheet, Dimensions } from 'react-native'
 import Tab from './Tab'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import useAuthStorage from '../../hooks/useAuthStorage'
 import { useIsFocused } from '@react-navigation/native'
 
 const { width } = Dimensions.get( 'screen' )

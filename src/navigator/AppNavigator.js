@@ -49,7 +49,7 @@ const HomeStackScreen = () => {
                               <CloseModal navigation={ navigation } /> ),
                           } ) }
                           component={ SinglePostScreen } />
-        <HomeStack.Screen name={ 'SingleEvent' }
+        <HomeStack.Screen name={ 'SingleEventHomeStack' }
                           options={ ( {
                             route,
                             navigation,

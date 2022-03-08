@@ -10,6 +10,7 @@ import UploadPost from './uploadPost'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
+import fetchAvatar from '../utils/fetchAvatar'
 
 const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage()
@@ -21,7 +22,9 @@ const UploadMedia = ( { mediaType, navigation } ) => {
   const onSubmit = async (
     data, mediaDescription, imageSelected, image, type ) => {
 
-    setLoading(true)
+    setLoading( true )
+    navigation.goBack()
+
 
     const token = await authStorage.getToken()
 
@@ -29,7 +32,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' )
-      setLoading(false)
+      setLoading( false )
       return
     }
     // TODO: Handle too big image case
@@ -79,23 +82,40 @@ const UploadMedia = ( { mediaType, navigation } ) => {
      * */
 
     if ( fileResponse && tagResponse ) {
-      // TODO: close modal:
-      // Alert.alert(`${mediaType.toUpperCase()} uploaded!`)
-      setLoading(false)
-      navigation.goBack()
+
+      setLoading( false )
     }
 
     if ( !fileResponse || !tagResponse ) {
-      setLoading(false)
+      setLoading( false )
       Alert.alert( 'Sorry',
         `Something went wrong and ${ mediaType } creation failed\n please check media file size!` )
     }
 
-    setLoading(false)
+    // Update app user state with new avatar url
+    /* if ( mediaType === 'avatar' ) {
+     user.avatar = await fetchAvatar( user.user_id )
+     } */
 
+    setLoading( false )
+
+    // Move user to relevant view after successful upload
+
+    switch ( mediaType ) {
+      case 'avatar':
+        user.avatar = await fetchAvatar( user.user_id ) // Update app user state with new avatar url
+        navigation.navigate( 'AccountTab', { screen: 'Account' } )
+        break
+      case 'event':
+        navigation.navigate( 'ExploreTab', { screen: 'SingleEvent', params: { eventId: fileResponse.file_id }, } )
+        break
+      case 'post':
+        navigation.navigate( 'ExploreTab', { screen: 'SinglePost', params: { postId: fileResponse.file_id }, } )
+        break
+    }
   }
 
-  if ( loading ) return <Loading text={'Uploading media'} />
+  if ( loading ) return <Loading text={ 'Uploading media' } />
 
   switch ( mediaType ) {
     case 'avatar':
