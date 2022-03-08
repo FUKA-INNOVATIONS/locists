@@ -1,37 +1,41 @@
-import { View, StyleSheet, Dimensions } from 'react-native';
-import Tab from './Tab';
-import React, { useState } from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native'
+import Tab from './Tab'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import useAuthStorage from '../../hooks/useAuthStorage'
+import { useIsFocused } from '@react-navigation/native'
 
-const { width } = Dimensions.get( 'screen' );
+const { width } = Dimensions.get( 'screen' )
 
 const TabBar = ( { state, navigation } ) => {
-  const [ selected, setSelected ] = useState( 'HomeTab' );
-  const { routes } = state;
+  const [ selected, setSelected ] = useState( 'HomeTab' )
+  const { routes } = state
+
+  useIsFocused() // Workaround to get user status
 
   // Active/inactive color of icons
-  const isSelected = ( currentTab ) => currentTab === selected;
+  const isSelected = ( currentTab ) => currentTab === selected
 
   // Handles navigation on touch, ignores already selected
   const handlePress = ( activeTab, index ) => {
-    setSelected( activeTab );
+    setSelected( activeTab )
     if ( state.index !== index ) {
-      navigation.navigate( activeTab );
+      navigation.navigate( activeTab )
     }
-  };
+  }
 
   return <View style={ styles.wrapper }>
     <View style={ styles.container }>
       {
         routes.map( ( route, index ) => <Tab
-            tab={ route }
-            onPress={ () => handlePress( route.name, index ) }
-            selected={ isSelected( route.name ) }
-            key={ route.key }/> )
+          tab={ route }
+          onPress={ () => handlePress( route.name, index ) }
+          selected={ isSelected( route.name ) }
+          key={ route.key } /> )
       }
     </View>
-  </View>;
-};
+  </View>
+}
 
 const styles = StyleSheet.create( {
   wrapper: {
@@ -52,11 +56,11 @@ const styles = StyleSheet.create( {
     borderTopWidth: 2,
     borderColor: '#7b08a3',
   },
-} );
+} )
 
 TabBar.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object,
 }
 
-export default TabBar;
+export default TabBar

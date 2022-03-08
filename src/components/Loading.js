@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import LottieView from 'lottie-react-native'
+import PropTypes from 'prop-types'
 
-const Loading = () => {
-  const animation = React.createRef();
-  useEffect(() => {
-    animation.current?.play();
-  }, []);
+const Loading = ( { text } ) => {
+  const animation = React.createRef()
+  useEffect( () => {
+    animation.current?.play()
+  }, [] )
 
   return (
     <View style={ {
@@ -15,11 +16,12 @@ const Loading = () => {
       alignItems: 'center',
     } }>
       <LottieView
-        ref={animation}
-        source={require('../../assets/loadSpinner.json')}
-        style={styles.spinner}
-        loop={false}
+        ref={ animation }
+        source={ require( '../../assets/loadSpinner.json' ) }
+        style={ styles.spinner }
+        loop={ false }
       />
+      <Text style={ { color: 'white', fontSize: 20, marginTop: 20 } }>{!text ? 'Loaading media' : text}...</Text>
     </View>
   )
 }
@@ -35,6 +37,10 @@ const styles = StyleSheet.create( {
   },
   spinner: {
     width: 100,
-    height: 100
-  }
-} );
+    height: 100,
+  },
+} )
+
+Loading.propTypes = {
+  text: PropTypes.string,
+}

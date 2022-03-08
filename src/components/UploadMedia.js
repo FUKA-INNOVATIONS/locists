@@ -18,21 +18,18 @@ const UploadMedia = ( { mediaType, navigation } ) => {
   const { uploadMedia } = useMedia()
   const [ loading, setLoading ] = useState( false ) // eslint-disable-line
 
-  /* useFocusEffect(
-   useCallback( () => {
-   return () => reset();
-   }, [] ),
-   ); */
-
   const onSubmit = async (
     data, mediaDescription, imageSelected, image, type ) => {
-    // console.log( 'TYPE', type )
+
+    setLoading(true)
+
     const token = await authStorage.getToken()
 
     mediaDescription = JSON.stringify( mediaDescription )
 
     if ( !imageSelected ) {
       Alert.alert( 'Please, select a file' )
+      setLoading(false)
       return
     }
     // TODO: Handle too big image case
@@ -84,17 +81,21 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     if ( fileResponse && tagResponse ) {
       // TODO: close modal:
       // Alert.alert(`${mediaType.toUpperCase()} uploaded!`)
+      setLoading(false)
       navigation.goBack()
     }
 
     if ( !fileResponse || !tagResponse ) {
+      setLoading(false)
       Alert.alert( 'Sorry',
         `Something went wrong and ${ mediaType } creation failed\n please check media file size!` )
     }
 
+    setLoading(false)
+
   }
 
-  if ( loading ) return <Loading />
+  if ( loading ) return <Loading text={'Uploading media'} />
 
   switch ( mediaType ) {
     case 'avatar':

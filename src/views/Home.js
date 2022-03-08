@@ -1,21 +1,27 @@
 import HomeList from '../components/HomeList'
 import useUser from '../hooks/useUser'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import useAuthStorage from '../hooks/useAuthStorage'
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import AppName from '../../assets/AppName.svg'
 import theme from '../theme'
+import Loading from '../components/Loading'
 
 const Home = ( { navigation } ) => {
   // console.log( 'Home.js', Platform.OS, Dimensions.get('screen').width )
   const authStorage = useAuthStorage()
   const { loginWithToken } = useUser()
+  // const [ loading, setLoading ] = useState()
 
   const login = useMemo( async () => {
+    // setLoading(true)
     const token = await authStorage.getToken()
     await loginWithToken( token )
+    // setLoading(false)
   }, [] )
+
+  // if ( loading ) return <Loading text={ 'Authenticating' } />
 
   useEffect( async () => {
     await login
