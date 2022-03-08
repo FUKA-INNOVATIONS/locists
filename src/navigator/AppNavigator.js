@@ -37,7 +37,8 @@ const BottomTab = createBottomTabNavigator()
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name={ 'Home' } component={ HomeScreen } options={{title: 'Events & posts'}} />
+      <HomeStack.Screen name={ 'Home' } component={ HomeScreen }
+                        options={ { title: 'Events & posts' } } />
       <HomeStack.Group screenOptions={ { presentation: 'modal' } }>
         <HomeStack.Screen name={ 'SinglePostHomeStack' }
                           options={ ( {
@@ -101,7 +102,7 @@ const CreateStackScreen = () => {
   return (
     <CreateStack.Navigator>
       <CreateStack.Screen name={ 'Create' }
-                          options={{title: 'Create and publish'}}
+                          options={ { title: 'Create and publish' } }
                           component={ CreateScreen } />
       <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
         <CreateStack.Screen name={ 'CreatePost' }
@@ -244,7 +245,6 @@ const SettingsStackScreen = () => {
  } */
 
 const AppNavigator = ( props ) => {
-
   const navTheme = DefaultTheme
   navTheme.colors.background = '#24292e'
   navTheme.colors.card = '#24292e'

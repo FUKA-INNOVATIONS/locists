@@ -15,25 +15,9 @@ import {
 } from '../../utils'
 import useAuthStorage from '../../hooks/useAuthStorage'
 import PropTypes from 'prop-types'
-import { useNavigation } from '@react-navigation/native'
 
 const Tab = ( { selected, tab, onPress } ) => {
-  const [ isLogged, setIsLogged ] = useState( false )
   const { user } = useAuthStorage()
-  const userStatus = user.isLogged
-
-  const navigation = useNavigation()
-
-  useEffect( () => {
-    console.log('Tab.js useEffect')
-    setIsLogged(userStatus)
-
-    return navigation.addListener( 'focus', async () => {
-      console.log('Tab.js focus effect')
-
-    } )
-
-  }, [ userStatus ] )
 
   switch ( tab.name ) {
     case 'HomeTab':
@@ -60,7 +44,7 @@ const Tab = ( { selected, tab, onPress } ) => {
       )
     case 'CreateTab':
       // TODO fix create button visibility on app start
-      return ( isLogged &&
+      return ( user.isLogged &&
         <TouchableOpacity style={ { bottom: 20 } } onPress={ onPress }>
           { selected ?
             <View style={ styles.animationBack }>
@@ -90,7 +74,7 @@ const Tab = ( { selected, tab, onPress } ) => {
         </TouchableOpacity>
       )
     case 'SettingsTab':
-      return ( isLogged &&
+      return ( user.isLogged &&
         <TouchableOpacity style={ styles.container } onPress={ onPress }>
           { selected ? <SettingsFull width={ 25 } height={ 25 } /> :
             <SettingsEmpty width={ 25 } height={ 25 } /> }

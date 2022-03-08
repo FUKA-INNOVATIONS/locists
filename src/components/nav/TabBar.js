@@ -2,15 +2,12 @@ import { View, StyleSheet, Dimensions } from 'react-native'
 import Tab from './Tab'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useIsFocused } from '@react-navigation/native'
 
 const { width } = Dimensions.get( 'screen' )
 
 const TabBar = ( { state, navigation } ) => {
   const [ selected, setSelected ] = useState( 'HomeTab' )
   const { routes } = state
-
-  useIsFocused() // Workaround to get user status
 
   // Active/inactive color of icons
   const isSelected = ( currentTab ) => currentTab === selected

@@ -54,8 +54,7 @@ const Account = ( { navigation } ) => {
   const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not
     posted anything yet</Text>
 
-  if ( loading ) return <Loading />
-
+  if ( loading ) return <Loading text={ 'Loading your media' } />
 
   return (
     <>
@@ -89,9 +88,9 @@ const Account = ( { navigation } ) => {
             : 0 } comments and { userMedia &&
           userMedia.length } events/posts</Text>
         </View>
-        <View style={{ width: '100%', height: '100%' }}>
+        <View style={ { width: '100%', height: '100%' } }>
           <FlatList
-            data={ userMedia && sortLatest(userMedia) }
+            data={ userMedia && sortLatest( userMedia ) }
             ListEmptyComponent={ EmptyListMessage }
             keyExtractor={ ( item ) => item.file_id }
             renderItem={ ( { item } ) => {
@@ -99,20 +98,20 @@ const Account = ( { navigation } ) => {
                 item.description.mediaType === 'post' ?
                   <Pressable
                     onPress={ () => postPressHandler( item.file_id ) }>
-                    <Post postMedia={ item } ownProfile={true}
+                    <Post postMedia={ item } ownProfile={ true }
                     />
                   </Pressable>
                   :
                   <Pressable
                     onPress={ () => eventPressHandler( item.file_id ) }>
-                    <Event eventDetails={ item } ownProfile={true} />
+                    <Event eventDetails={ item } ownProfile={ true } />
                   </Pressable>
               )
             }
             }
           />
         </View>
-        </View>
+      </View>
     </>
   )
 }

@@ -19,7 +19,7 @@ const Loading = ( { text } ) => {
         ref={ animation }
         source={ require( '../../assets/loadSpinner.json' ) }
         style={ styles.spinner }
-        loop={ false }
+        loop={ true }
       />
       <Text style={ { color: 'white', fontSize: 20, marginTop: 20 } }>{!text ? 'Loaading media' : text}...</Text>
     </View>
