@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Text,
   View,
@@ -12,9 +12,10 @@ import useMedia from '../hooks/useMedia'
 import Post from '../components/Post'
 import Event from '../components/Event'
 import PropTypes from 'prop-types'
+import Loading from '../components/Loading'
 
 const Account = ( { navigation } ) => {
-  console.log( Account.js )
+  console.log( 'Account.js' )
 
   const { user } = useAuthStorage()
   const { getCurrentUserComments } = useComment()
@@ -22,68 +23,84 @@ const Account = ( { navigation } ) => {
   const { getUserMedia, userMedia } = useMedia()
   const [ loading, setLoading ] = useState( false )
 
-  const getMediaForUser = useMemo( async () => {
+  /* const getMediaForUser = useMemo( async () => {
     getCurrentUserComments().then( comments => setComments( comments ) )
     await getUserMedia( user.token )
-  }, [] )
+  }, [] ) */
 
   /*  If user is logged in
    *   Hide Authentication view and move to Account view
    * */
 
   useEffect( async () => {
+    console.log( 'Account.js useEffect' )
     setLoading( true )
-    await getMediaForUser
-    console.log( loading )
+    getCurrentUserComments().then( comments => setComments( comments ) )
+    await getUserMedia()
     setLoading( false )
-    console.log(userMedia)
+
+    return navigation.addListener( 'focus', async () => {
+      console.log( 'Account.js focus' )
+      setLoading( true )
+      getCurrentUserComments().then( comments => setComments( comments ) )
+      await getUserMedia(user.token)
+      setLoading( false )
+    } )
   }, [] )
+
+
 
   const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not
     posted anything yet</Text>
 
+  if ( loading ) return <Loading />
+
   return (
-    <View style={ theme.profile }>
-      <View style={ theme.profilePicAndInfo }>
-        { user.avatar ?
-          <Image
-            source={ { uri: user.avatar } }
-            style={ theme.profilePic }
-          />
-          :
-          <Image
-            source={ require( '../../assets/defaultPic.jpg' ) }
-            style={ theme.profilePic }
-          />
-        }
-        <View style={ theme.profileInfoCard }>
-          <Text>User: { user.username }</Text>
-          <Text>UserID: { user.user_id }</Text>
-          <Text>{ user.email }</Text>
-          <Text>{ user.full_name }</Text>
+    <>
+      <View style={ { ...theme.profile } }>
+        <View style={ theme.profilePicAndInfo }>
+          { user.avatar ?
+            <Image
+              source={ { uri: user.avatar } }
+              style={ theme.profilePic }
+            />
+            :
+            <Image
+              source={ require( '../../assets/defaultPic.jpg' ) }
+              style={ theme.profilePic }
+            />
+          }
+          <View style={ theme.profileInfoCard }>
+            <Text>User: { user.username }</Text>
+            <Text>UserID: { user.user_id }</Text>
+            <Text>{ user.email }</Text>
+            <Text>{ user.full_name }</Text>
+          </View>
         </View>
       </View>
 
-      <Text style={ { color: '#fff' } }>User status: { user.isLogged &&
-      'logged in' }</Text>
-      <Text style={ { color: '#fff' } }>Comments posted: { comments.length > 0
-        ? comments.length
-        : 0 }</Text>
-      <FlatList
-        data={ userMedia } // TODO empty list provided
-        ListEmptyComponent={ EmptyListMessage }
-        keyExtractor={ ( item ) => item.file_id }
-        renderItem={ ( { item } ) => {
-          return (
-            item.description.mediaType === 'post' ?
-              <Post postMedia={ item } ownProfile={ true } />
-              :
-              <Event eventDetails={ item } ownProfile={ true } />
-          )
-        }
-        }
-      />
-    </View>
+      <View>
+        <Text style={ { color: '#fff' } }>You are { user.isLogged &&
+        'logged in' }</Text>
+        <Text style={ { color: '#fff' } }>Comments posted: { comments.length > 0
+          ? comments.length
+          : 0 }</Text>
+        <FlatList
+          data={ userMedia }
+          ListEmptyComponent={ EmptyListMessage }
+          keyExtractor={ ( item ) => item.file_id }
+          renderItem={ ( { item } ) => {
+            return (
+              item.description.mediaType === 'post' ?
+                <Post postMedia={ item } ownProfile={ true } />
+                :
+                <Event eventDetails={ item } ownProfile={ true } />
+            )
+          }
+          }
+        />
+      </View>
+    </>
   )
 }
 
