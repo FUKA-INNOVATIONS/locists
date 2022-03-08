@@ -1,13 +1,13 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import AppNavigator from './src/navigator/AppNavigator'
 
 import AuthStorage from './src/utils/authStorage'
 import AuthStorageContext from './src/context/AuthStorageContext'
 import theme from './src/theme'
-import { SafeAreaView, View, Dimensions, StyleSheet} from 'react-native'
-import * as SplashScreen from 'expo-splash-screen';
-import { SplashScreenLogo } from './src/utils'
+import { SafeAreaView, View, Dimensions, StyleSheet, Image } from 'react-native'
+import * as SplashScreen from 'expo-splash-screen'
+import { SplashScreenLogo, SplashBack } from './src/utils'
 
 // Create new instance of authentication storage
 const authStorage = new AuthStorage()
@@ -15,31 +15,34 @@ const dimensions = Dimensions.get( 'screen' )
 
 export default function App() {
 
-  const [appIsReady, setAppIsReady] = useState(false);
+  const [ appIsReady, setAppIsReady ] = useState( false )
 
   useEffect( () => {
     async function prepare() {
       try {
-        await new Promise(resolve => setTimeout(resolve, 4000));
-      } catch (e) {
-        console.warn(e);
+        await new Promise( resolve => setTimeout( resolve, 4000 ) )
+      } catch ( e ) {
+        console.warn( e )
       } finally {
-        setAppIsReady(true);
+        setAppIsReady( true )
       }
     }
-    prepare();
-  }, [] );
 
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
+    prepare()
+  }, [] )
+
+  const onLayoutRootView = useCallback( async () => {
+    if ( appIsReady ) {
+      await SplashScreen.hideAsync()
     }
-  }, [appIsReady]);
+  }, [ appIsReady ] )
 
-  if (!appIsReady) {
+  if ( !appIsReady ) {
     return (
-      <View style={ styles.splashScreen}>
-        <SplashScreenLogo width={dimensions.width * 0.7} height={dimensions.height * 0.8} />
+      <View style={ styles.splashScreen }>
+        <Image style={{width: dimensions.width, height: dimensions.height, position: 'absolute'}} source={SplashBack} />
+        <SplashScreenLogo width={ dimensions.width * 0.7 }
+                          height={ dimensions.height * 0.8 } />
       </View>
     )
   }
@@ -58,7 +61,7 @@ export default function App() {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create( {
   splashScreen: {
     width: dimensions.width,
     height: dimensions.height,
@@ -70,5 +73,5 @@ const styles = StyleSheet.create({
     width: dimensions.width,
     height: dimensions.height,
     position: 'absolute',
-  }
-})
+  },
+} )

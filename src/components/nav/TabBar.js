@@ -36,10 +36,10 @@ const TabBar = ( { state, navigation } ) => {
 const styles = StyleSheet.create( {
   wrapper: {
     position: 'absolute',
-    bottom: -2,
-    paddingBottom: 5,
+    bottom: -6,
+    // paddingBottom: 5,
     width,
-    height: 50,
+    height: 100,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -51,6 +51,8 @@ const styles = StyleSheet.create( {
     paddingHorizontal: 20,
     borderTopWidth: 2,
     borderColor: '#7b08a3',
+    alignItems: 'center',
+    // bottom: 10
   },
 } )
 

@@ -95,6 +95,7 @@ const styles = StyleSheet.create( {
     justifyContent: 'center',
     padding: 5,
     position: 'relative',
+    marginVertical: 10
   },
   create: {
     position: 'absolute',
