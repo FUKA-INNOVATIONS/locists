@@ -94,9 +94,9 @@ const theme = {
   },
 
   mediaTitle: {
+    padding: 12,
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
 
   // General Component Styles
@@ -298,9 +298,10 @@ const theme = {
   eventListTitle: {
     position: 'absolute',
     alignItems: 'center',
-    width: '45%',
+    //maxWidth: '85%',
     borderBottomRightRadius: 10,
-    padding: 5,
+    // padding: 10,
+    // paddingHorizontal: 15,
     zIndex: 1,
     backgroundColor: general.colors.btn
   },

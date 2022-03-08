@@ -9,10 +9,21 @@ import Loading from './Loading'
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import {
+  useFonts,
+  Nunito_400Regular,
+  Nunito_300Light,
+} from '@expo-google-fonts/nunito'
+
 const Event = ( { eventDetails, ownProfile } ) => {
-  console.log('Event.js', eventDetails)
+  // console.log( 'Event.js', eventDetails )
 
   if ( eventDetails === null ) return <Loading />
+
+  const [ fontsLoaded ] = useFonts( {
+    Nunito_400Regular,
+    Nunito_300Light,
+  } )
 
   const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( eventDetails.thumbnails !== undefined )
@@ -24,18 +35,25 @@ const Event = ( { eventDetails, ownProfile } ) => {
         &&
         <View style={ { marginLeft: 10, marginVertical: 3 } }>
           <UserInfo username={ eventDetails.description.owner }
-                    timeAdded={eventDetails.time_added}
+                    timeAdded={ eventDetails.time_added }
                     avatar={ eventDetails.description.ownerAvatar } />
         </View>
       }
 
-      <View style={ [ theme.generalListEvent] }>
+      <View style={ [ theme.generalListEvent ] }>
         <View style={ theme.eventListTitle }>
           <Text
-            style={ [ theme.mediaTitle, { color: '#fff' } ] }>{ eventDetails.description.name }
+            style={ [
+              theme.mediaTitle,
+              { color: '#fff' },
+            ] }>{ eventDetails.description.name }
           </Text>
         </View>
-        <Image source={ { uri: (hasThumbnails && smallScreen) ? (uploadsUrl + eventDetails.thumbnails.w320) : (uploadsUrl + eventDetails.filename)} }
+        <Image source={ {
+          uri: ( hasThumbnails && smallScreen ) ? ( uploadsUrl +
+            eventDetails.thumbnails.w320 ) : ( uploadsUrl +
+            eventDetails.filename ),
+        } }
                style={ theme.eventImage2 } />
         <View style={ theme.eventExtra }>
           <View style={ theme.eventSection }>
