@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import LottieView from "lottie-react-native";
 
 import {
   HomeEmpty,
@@ -7,7 +8,6 @@ import {
   ExploreEmpty,
   ExploreFull,
   PlusButton,
-  PlusButtonSelected,
   ProfileEmpty,
   ProfileFull,
   SettingsEmpty,
@@ -48,11 +48,17 @@ const Tab = ( { selected, tab, onPress } ) => {
       return ( user.isLogged &&
         <TouchableOpacity style={ { bottom: 20 } } onPress={ onPress }>
           { selected ?
-            <PlusButtonSelected top={ 0 } width={ 60 } height={ 60 }
-                                bottom={ 20 } elevation={ 10 } />
+            <View style={ styles.animationBack}>
+              <LottieView
+                source={ require( '../../../assets/animations/plusButtonWhite.json' ) }
+                style={ styles.animation }
+                autoPlay
+              />
+            </View>
+
             :
-            <PlusButton top={ 0 } width={ 60 } height={ 60 } bottom={ 20 }
-                        elevation={ 10 } />
+            <PlusButton top={ 0 } width={ 60 } height={ 60 }
+                                bottom={ 20 } elevation={ 10 } />
           }
         </TouchableOpacity>
       )
@@ -97,6 +103,17 @@ const styles = StyleSheet.create( {
   iconText: {
     fontWeight: 'bold',
   },
+  animation: {
+    width: 60,
+    height: 60,
+    bottom: 20,
+    elevation: 10,
+    top: 0,
+  },
+  animationBack: {
+    backgroundColor: '#7b08a3',
+    borderRadius: 30,
+  }
 } )
 
 Tab.propTypes = {
