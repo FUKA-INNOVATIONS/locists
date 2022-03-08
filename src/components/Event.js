@@ -3,10 +3,8 @@ import { uploadsUrl } from '../../config'
 import Attend from './Attend'
 import DeleteMedia from './DeleteMedia'
 import theme from '../theme'
-import { Entypo } from '@expo/vector-icons'
+import { Location, Calendar, Price, Attendees } from '../utils'
 import UserInfo from './UserInfo'
-
-import Location from '../../assets/icons/Location.svg'
 import Loading from './Loading'
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -30,30 +28,44 @@ const Event = ( { eventDetails, ownProfile } ) => {
         </View>
       }
 
-      <View style={ [ theme.generalListPost, theme.event ] }>
-        <View style={ theme.eventInfo }>
+      <View style={ [ theme.generalListEvent] }>
+        <View style={ theme.eventListTitle }>
           <Text
-            style={ theme.mediaTitle }>{ eventDetails.description.name }</Text>
-          <Text>
-            <Location width={ 20 } height={ 20 } />
-            { eventDetails.description.location }
+            style={ [ theme.mediaTitle, { color: '#fff' } ] }>{ eventDetails.description.name }
           </Text>
-          <View style={ { paddingLeft: 5 } }>
-            <Text>
-              { new Date( eventDetails.description.date ).toDateString() }
-            </Text>
-            <Text>{ eventDetails.description.price } €</Text>
-          </View>
-          <View style={ theme.eventAttend }>
-            <Entypo name='users' size={ 20 } color='black' />
-
-            <Attend file_id={ eventDetails.file_id } displayIcon={ false } />
-            { eventDetails.description.isOwner &&
-            <DeleteMedia file_id={ eventDetails.file_id } /> }
-          </View>
         </View>
         <Image source={ { uri: hasThumbnails ? (uploadsUrl + eventDetails.thumbnails.w320) : (uploadsUrl + eventDetails.filename)} }
-               style={ theme.eventImage } />
+               style={ theme.eventImage2 } />
+        <View style={ theme.eventExtra }>
+          <View style={ theme.eventSection }>
+            <Location width={ 25 } height={ 40 } />
+            <Text>{ eventDetails.description.location }</Text>
+          </View>
+          <View style={ theme.eventSection }>
+            <Calendar width={ 30 } height={ 40 } />
+            <Text>
+              { new Date( eventDetails.description.date ).toLocaleDateString() }
+            </Text>
+          </View>
+          <View style={ theme.eventSection }>
+            <Price width={ 30 } height={ 40 } />
+            <Text>
+              {
+                eventDetails.description.price > 0
+                  ?
+                  eventDetails.description.price
+                  :
+                  'Free'
+              }
+            </Text>
+          </View>
+          <View style={ theme.eventSection }>
+            <Attendees width={ 30 } height={ 40 } />
+            <Attend file_id={ eventDetails.file_id } displayIcon={ false } />
+          </View>
+        </View>
+        { eventDetails.description.isOwner &&
+        <DeleteMedia file_id={ eventDetails.file_id } /> }
       </View>
     </>
   )

@@ -25,7 +25,6 @@ const Post = ( { postMedia, ownProfile } ) => {
         </View>
       }
 
-
       <View style={ [ theme.generalListPost2] }>
         <View style={ [ theme.postLeft, !postMedia.description.hasImage && {width: '75%'}] }>
           <Text numberOfLines={ 5 }>{ postMedia.description.description }</Text>
@@ -42,7 +41,7 @@ const Post = ( { postMedia, ownProfile } ) => {
         <View>
           {
             postMedia.description.hasImage ? <Image
-                source={ { uri: uploadsUrl + postMedia.thumbnails.w320 } }
+                source={ {uri: hasThumbnails ? (uploadsUrl + postMedia.thumbnails.w320) : (uploadsUrl + postMedia.filename) } }
                 style={ theme.postImage }
               />
               :
