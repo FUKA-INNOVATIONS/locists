@@ -29,7 +29,7 @@ const Post = ( { postMedia, ownProfile } ) => {
       <View style={ [ theme.generalListPost, theme.post ] }>
         {
           postMedia.description.hasImage && <Image
-            source={ {uri: hasThumbnails ? (uploadsUrl + postMedia.thumbnails.w320) : (uploadsUrl + postMedia.filename) } }
+            source={ {uri: hasThumbnails ? (uploadsUrl + postMedia.thumbnails.w160) : (uploadsUrl + postMedia.filename) } }
             style={ theme.postImage }
           />
         }

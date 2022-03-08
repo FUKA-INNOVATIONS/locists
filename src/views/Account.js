@@ -6,7 +6,6 @@ import {
   FlatList,
 } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
-import theme from '../theme'
 import useComment from '../hooks/useComment'
 import useMedia from '../hooks/useMedia'
 import Post from '../components/Post'
@@ -15,22 +14,13 @@ import PropTypes from 'prop-types'
 import Loading from '../components/Loading'
 
 const Account = ( { navigation } ) => {
-  console.log( 'Account.js' )
+  // console.log( 'Account.js' )
 
   const { user } = useAuthStorage()
   const { getCurrentUserComments } = useComment()
   const [ comments, setComments ] = useState( [] )
   const { getUserMedia, userMedia } = useMedia()
   const [ loading, setLoading ] = useState( false )
-
-  /* const getMediaForUser = useMemo( async () => {
-   getCurrentUserComments().then( comments => setComments( comments ) )
-   await getUserMedia( user.token )
-   }, [] ) */
-
-  /*  If user is logged in
-   *   Hide Authentication view and move to Account view
-   * */
 
   useEffect( async () => {
     console.log( 'Account.js useEffect' )
@@ -43,7 +33,7 @@ const Account = ( { navigation } ) => {
       console.log( 'Account.js focus' )
       setLoading( true )
       getCurrentUserComments().then( comments => setComments( comments ) )
-      await getUserMedia( user.token )
+      await getUserMedia()
       setLoading( false )
     } )
   }, [] )
@@ -85,21 +75,23 @@ const Account = ( { navigation } ) => {
             : 0 } comments and { userMedia &&
           userMedia.length } events/posts</Text>
         </View>
-        <FlatList
-          data={ userMedia }
-          ListEmptyComponent={ EmptyListMessage }
-          keyExtractor={ ( item ) => item.file_id }
-          renderItem={ ( { item } ) => {
-            return (
-              item.description.mediaType === 'post' ?
-                <Post postMedia={ item } ownProfile={ true } />
-                :
-                <Event eventDetails={ item } ownProfile={ true } />
-            )
-          }
-          }
-        />
-      </View>
+        <View style={{ width: '100%' }}>
+          <FlatList
+            data={ userMedia }
+            ListEmptyComponent={ EmptyListMessage }
+            keyExtractor={ ( item ) => item.file_id }
+            renderItem={ ( { item } ) => {
+              return (
+                item.description.mediaType === 'post' ?
+                  <Post postMedia={ item } ownProfile={ true } />
+                  :
+                  <Event eventDetails={ item } ownProfile={ true } />
+              )
+            }
+            }
+          />
+        </View>
+        </View>
     </>
   )
 }

@@ -14,7 +14,7 @@ const SingleEventHeader = ( { eventDetails } ) => {
 
   return (
       <View>
-        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w320 } }
+        <Image source={ { uri: uploadsUrl + eventDetails.thumbnails.w160 } }
                style={ { width: '100%', height: 200 } }/>
         <View style={ theme.singleEventInfo }>
           <View style={ theme.infoTop}>
