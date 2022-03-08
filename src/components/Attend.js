@@ -33,16 +33,15 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
 
   const likeHandler = async () => {
     console.log( 'Attend', file_id )
-    if ( hasAttended() ) {
 
+    if ( !user.isLogged ) {
+      Alert.alert( 'You must login',
+        'Only logged in users are able to attend events, please login to your account and participate in interesting events!' )
+    }
+
+    if ( hasAttended() ) {
       await deleteFavourite( file_id ).then( async () => await fetchAttendees())
     } else {
-
-      if ( !user.isLogged ) {
-        Alert.alert( 'You must login',
-          'Only logged in users are able to attend events, please login to your account and try again!' )
-      }
-
       await createFavourite( file_id ).then( async () => await fetchAttendees())
     }
   }

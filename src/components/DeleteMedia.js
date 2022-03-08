@@ -18,7 +18,7 @@ const DeleteMedia = ( { file_id } ) => { // eslint-disable-line
   return (
     <View>
       <Pressable onPress={ deleteHandler }>
-        <Text>Delete</Text>
+        <Text style={{ color: 'red' }}>X Delete</Text>
       </Pressable>
     </View>
   )

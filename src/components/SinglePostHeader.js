@@ -30,7 +30,6 @@ const SinglePostHeader = ( { postDetails } ) => {
               <View style={ { alignItems: 'flex-end' } }>
                 <Like displayIcon file_id={ postDetails.file_id }
                       single={ true } />
-
               </View>
             </View>
             <View style={ { ...theme.singlePostText } }>

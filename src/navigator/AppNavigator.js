@@ -162,6 +162,28 @@ const AuthenticationStackScreen = () => {
                                         } ) }
                                         component={ SettingsScreen } />
           </AuthenticationStack.Group>
+          <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
+            <ExploreStack.Screen name={ 'SingleEventOwn' }
+                                 options={ ( {
+                                   route,
+                                   navigation,
+                                 } ) => ( {
+                                   title: 'Event',
+                                   headerRight: () => (
+                                     <CloseModal navigation={ navigation } /> ),
+                                 } ) }
+                                 component={ SingleEventScreen } />
+            <ExploreStack.Screen name={ 'SinglePostOwn' }
+                                 options={ ( {
+                                   route,
+                                   navigation,
+                                 } ) => ( {
+                                   title: 'Post',
+                                   headerRight: () => (
+                                     <CloseModal navigation={ navigation } /> ),
+                                 } ) }
+                                 component={ SinglePostScreen } />
+          </ExploreStack.Group>
         </>
       )
       }

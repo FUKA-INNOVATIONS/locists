@@ -9,7 +9,8 @@ import CommentsCounter from './CommentsCounter'
 import PropTypes from 'prop-types'
 
 const Post = ( { postMedia, ownProfile } ) => {
-  // console.log('Post.js', postMedia)
+  // console.log( 'Post.js', ownProfile )
+
 
   const hasThumbnails = ( postMedia.thumbnails !== undefined )
 
@@ -20,7 +21,7 @@ const Post = ( { postMedia, ownProfile } ) => {
         &&
         <View style={ { marginLeft: 15, marginVertical: 3 } }>
           <UserInfo username={ postMedia.description.owner }
-                    timeAdded={postMedia.time_added}
+                    timeAdded={ postMedia.time_added }
                     avatar={ postMedia.description.ownerAvatar } />
         </View>
       }
@@ -48,7 +49,7 @@ const Post = ( { postMedia, ownProfile } ) => {
               <View style={ theme.postRight }>
                 <Like single={false} displayIcon={ true } file_id={ postMedia.file_id } />
                 <CommentsCounter fileId={postMedia.file_id} />
-                { postMedia.description.isOwner &&
+                { ( postMedia.description.isOwner || ownProfile ) &&
                 <DeleteMedia file_id={ postMedia.file_id } /> }
               </View>
           }
