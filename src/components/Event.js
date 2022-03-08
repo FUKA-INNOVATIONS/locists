@@ -57,7 +57,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
           <Text
             style={ [
               theme.mediaTitle,
-              { color: '#fff', fontFamily: 'Nunito_300Light'},
+              { color: '#fff', fontFamily: 'Nunito_400Regular'},
             ] }>{ eventDetails.description.name }
           </Text>
         </View>

@@ -298,7 +298,7 @@ const theme = {
   eventListTitle: {
     position: 'absolute',
     alignItems: 'center',
-    //maxWidth: '85%',
+    // maxWidth: '85%',
     borderBottomRightRadius: 10,
     // padding: 10,
     // paddingHorizontal: 15,
