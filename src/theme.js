@@ -94,8 +94,8 @@ const theme = {
   },
 
   mediaTitle: {
-    padding: 12,
-    fontSize: 20,
+    // padding: 5,
+    fontSize: 15,
     fontWeight: 'bold',
   },
 

@@ -15,10 +15,7 @@ const NoComments = ( { openCommentBox, isWriteComment } ) => {
       <Text style={ { color: theme.colors.mainBackground } }>Be the first one to
         leave an interesting comment</Text>
       <View style={ { marginTop: 20 } }>
-        <Pressable onPress={ openCommentBox }>
-          <Text style={ { color: theme.colors.mainBackground, fontSize: 20 } }>Write
-            a comment</Text>
-        </Pressable>
+
       </View>
     </View>
   )

@@ -59,6 +59,7 @@ const styles = StyleSheet.create( {
 TabBar.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object,
+  route: PropTypes.object,
 }
 
 export default TabBar

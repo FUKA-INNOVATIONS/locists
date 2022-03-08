@@ -77,12 +77,12 @@ const ModifyAccount = ( { navigation, route } ) => {
     type === 'picture' ?
       <UploadMedia mediaType={ 'avatar' } navigation={ navigation } />
       :
-      <ScrollView style={ { marginHorizontal: 10 } }>
+      <ScrollView style={ { marginHorizontal: 10, marginBottom: 100 } }>
 
-        <View style={{alignItems: 'center', marginTop: 20}}>
+        <View style={{alignItems: 'center', marginTop: 10}}>
 
           <View>
-            <Text style={{...theme.authTitle, marginBottom: 30}}>
+            <Text style={{...theme.authTitle, marginBottom: 10}}>
               Keep account details up to date
             </Text>
           </View>
