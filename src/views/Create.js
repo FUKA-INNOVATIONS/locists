@@ -42,11 +42,11 @@ const Create = ( { navigation } ) => {
       <View>
         <TouchableOpacity style={ [ theme.generalBtn, theme.createBtn ] }
                           onPress={ createEventHandler }>
-          <Text style={ theme.loginButtonText }>New Event</Text>
+          <Text style={ theme.loginButtonText }>Create new Event</Text>
         </TouchableOpacity>
         <TouchableOpacity style={ [ theme.generalBtn, theme.createBtn ] }
                           onPress={ createPostHandler }>
-          <Text style={ theme.loginButtonText }>New Post</Text>
+          <Text style={ theme.loginButtonText }>Publish a Post</Text>
         </TouchableOpacity>
       </View>
       <View>

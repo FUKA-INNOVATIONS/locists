@@ -61,7 +61,7 @@ const theme = {
     bold: '700',
   },
   input: {
-    width: 300,
+    width: width * 0.8,
     backgroundColor: '#ffffff',
     padding: 10,
     borderRadius: 10,

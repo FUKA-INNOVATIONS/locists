@@ -9,6 +9,7 @@ import { postTag, eventTag, appId } from '../../config'
 import UploadPost from './uploadPost'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
 
 const UploadMedia = ( { mediaType, navigation } ) => {
   const { user } = useAuthStorage()
@@ -93,11 +94,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
   }
 
-  if ( loading ) {
-    return (
-      <View><Text>Loading..</Text></View>
-    )
-  }
+  if ( loading ) return <Loading />
 
   switch ( mediaType ) {
     case 'avatar':
