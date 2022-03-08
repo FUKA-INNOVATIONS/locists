@@ -53,6 +53,7 @@ const Tab = ( { selected, tab, onPress } ) => {
                   '../../../assets/animations/plusButtonWhite.json' ) }
                 style={ styles.animation }
                 autoPlay
+                loop={false}
               />
             </View>
 
