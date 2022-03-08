@@ -68,7 +68,7 @@ const Tab = ( { selected, tab, onPress } ) => {
         </TouchableOpacity>
       )
     case 'SettingsTab':
-      return (
+      return ( user.isLogged &&
         <TouchableOpacity style={ styles.container } onPress={ onPress }>
           { selected ? <SettingsFull width={ 25 } height={ 25 } /> :
             <SettingsEmpty width={ 25 } height={ 25 } /> }
