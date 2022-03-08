@@ -1,20 +1,40 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, StyleSheet } from 'react-native'
+import LottieView from 'lottie-react-native'
 
 const Loading = () => {
-  // TODO: Add a spinner icon
+  const animation = React.createRef();
+  useEffect(() => {
+    animation.current?.play();
+  }, []);
+
   return (
     <View style={ {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      // marginVertical: 300,
     } }>
-      <Text style={ { color: 'white', fontSize: 30 } }>
-        Loading..
-      </Text>
+      <LottieView
+        ref={animation}
+        source={require('../../assets/loadSpinner.json')}
+        style={styles.spinner}
+        loop={false}
+      />
     </View>
   )
 }
 
 export default Loading
+
+const styles = StyleSheet.create( {
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  spinner: {
+    width: 100,
+    height: 100
+  }
+} );
