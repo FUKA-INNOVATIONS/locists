@@ -6,24 +6,36 @@ import theme from '../theme'
 import { Location, Calendar, Price, Attendees } from '../utils'
 import UserInfo from './UserInfo'
 import Loading from './Loading'
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import * as Font from 'expo-font'
 
 import {
   useFonts,
   Nunito_400Regular,
   Nunito_300Light,
+  Nunito_700Bold,
+  Nunito_800ExtraBold,
+  Nunito_600SemiBold,
+  Nunito_500Medium,
 } from '@expo-google-fonts/nunito'
 
 const Event = ( { eventDetails, ownProfile } ) => {
   // console.log( 'Event.js', eventDetails )
-
-  if ( eventDetails === null ) return <Loading />
-
   const [ fontsLoaded ] = useFonts( {
     Nunito_400Regular,
     Nunito_300Light,
+    Nunito_700Bold,
+    Nunito_800ExtraBold,
+    Nunito_600SemiBold,
+    Nunito_500Medium,
   } )
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  if ( eventDetails === null) return <Loading />
 
   const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( eventDetails.thumbnails !== undefined )
@@ -45,7 +57,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
           <Text
             style={ [
               theme.mediaTitle,
-              { color: '#fff' },
+              { color: '#fff', fontFamily: 'Nunito_300Light'},
             ] }>{ eventDetails.description.name }
           </Text>
         </View>
