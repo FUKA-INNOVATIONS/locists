@@ -7,7 +7,7 @@ import AuthStorageContext from './src/context/AuthStorageContext'
 import theme from './src/theme'
 import { SafeAreaView, View, Dimensions, StyleSheet} from 'react-native'
 import * as SplashScreen from 'expo-splash-screen';
-import { SplashScreenLogo, SplashBack } from './src/utils'
+import { SplashScreenLogo } from './src/utils'
 
 // Create new instance of authentication storage
 const authStorage = new AuthStorage()

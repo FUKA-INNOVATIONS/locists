@@ -6,7 +6,6 @@ import {
   FlatList,
 } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
-import theme from '../theme'
 import useComment from '../hooks/useComment'
 import useMedia from '../hooks/useMedia'
 import Post from '../components/Post'
