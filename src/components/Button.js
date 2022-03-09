@@ -9,7 +9,7 @@ const Button = ( { title, onPress, style } ) => {
   if (!fontsLoaded) {return null}
 
   return (
-    <TouchableOpacity style={ { ...styles.buttonContainer, ...style } } onPress={ () => onPress() }>
+    <TouchableOpacity style={ { ...styles.buttonContainer, fontFamily: 'Nunito', width: '100%', ...style } } onPress={ () => onPress() }>
       <Text style={ styles.buttonText }>{ title }</Text>
     </TouchableOpacity>
   )

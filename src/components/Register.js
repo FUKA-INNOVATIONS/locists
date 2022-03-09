@@ -3,11 +3,9 @@ import {
   View,
   Text,
   TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
   Alert,
-  TouchableOpacity,
-  Platform,
+  StyleSheet,
+  ScrollView,
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -17,6 +15,9 @@ import useUser from '../hooks/useUser'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Button from './Button'
+import Title from './Title'
 
 const RegisterSchema = Yup.object().shape( {
   username: Yup.string().
@@ -105,118 +106,111 @@ const Register = ( { navigation } ) => {
   if ( loading ) return <Loading />
 
   return (
-    <KeyboardAvoidingView
-      behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }>
-      <ScrollView>
-        <View style={ theme.register }>
+    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                             enableOnAndroid={ true }
+                             viewIsInsideTabBar={ true }>
 
-          <View>
-            <Text style={ theme.authTitle }>
-              Some text
-            </Text>
-          </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Username'
-                />
-              ) }
-              name='username'
-            />
-            { errors.username && <Text
-              style={ theme.inputErrorText }>{ errors.username.message }</Text> }
-          </View>
+      <View style={ theme.formContainer }>
+        <Title text={ 'Words and animation' } />
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='email'
-                />
-              ) }
-              name='email'
-            />
-            { errors.email && <Text
-              style={ theme.inputErrorText }>{ errors.email.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='City'
-                />
-              ) }
-              name='city'
-            />
-            { errors.city && <Text
-              style={ theme.inputErrorText }>{ errors.city.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Password'
-                  secureTextEntry={ true }
-                />
-              ) }
-              name='password'
-            />
-            { errors.password && <Text
-              style={ theme.inputErrorText }>{ errors.password.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Password confirmation'
-                  secureTextEntry={ true }
-                />
-              ) }
-              name='passwordConfirm'
-            />
-            { errors.passwordConfirm && (
-              <Text
-                style={ theme.inputErrorText }>{ errors.passwordConfirm.message }</Text>
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Username'
+              />
             ) }
-          </View>
-
-          <TouchableOpacity style={ theme.loginButton }
-                            onPress={ handleSubmit( onSubmit ) }>
-            <Text style={ theme.loginButtonText }>Register</Text>
-          </TouchableOpacity>
+            name='username'
+          />
+          { errors.username && <Text
+            style={ theme.inputErrorText }>{ errors.username.message }</Text> }
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='email'
+              />
+            ) }
+            name='email'
+          />
+          { errors.email && <Text
+            style={ theme.inputErrorText }>{ errors.email.message }</Text> }
+        </View>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='City'
+              />
+            ) }
+            name='city'
+          />
+          { errors.city && <Text
+            style={ theme.inputErrorText }>{ errors.city.message }</Text> }
+        </View>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Password'
+                secureTextEntry={ true }
+              />
+            ) }
+            name='password'
+          />
+          { errors.password && <Text
+            style={ theme.inputErrorText }>{ errors.password.message }</Text> }
+        </View>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Password confirmation'
+                secureTextEntry={ true }
+              />
+            ) }
+            name='passwordConfirm'
+          />
+          { errors.passwordConfirm && (
+            <Text
+              style={ theme.inputErrorText }>{ errors.passwordConfirm.message }</Text>
+          ) }
+        </View>
+        <Button onPress={ handleSubmit( onSubmit ) } title={ 'Register' }
+                style={ { width: 200 } } />
+      </View>
+    </KeyboardAwareScrollView>
   )
 }
 

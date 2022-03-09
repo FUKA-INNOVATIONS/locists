@@ -250,9 +250,14 @@ const AppNavigator = ( props ) => {
   navTheme.colors.card = '#24292e'
   navTheme.colors.text = 'white'
 
+  /*
+  * tabBar={ ( props ) => <TabBar { ...props } /> }
+  *
+  * */
+
   return (
     <NavigationContainer theme={ DefaultTheme }>
-      <BottomTab.Navigator tabBar={ ( props ) => <TabBar { ...props } /> }
+      <BottomTab.Navigator
                            screenOptions={ ( { route } ) => ( {
                                headerShown: false,
                              }

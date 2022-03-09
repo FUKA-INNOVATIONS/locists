@@ -16,7 +16,7 @@ import {
   Nunito_700Bold,// eslint-disable-line
   Nunito_800ExtraBold,// eslint-disable-line
   Nunito_600SemiBold,// eslint-disable-line
-  Nunito_500Medium,// eslint-disable-line
+  Nunito_500Medium as Nunito,// eslint-disable-line
 } from '@expo-google-fonts/nunito'
 
 const Event = ( { eventDetails, ownProfile } ) => {
@@ -27,7 +27,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
     Nunito_700Bold,
     Nunito_800ExtraBold,
     Nunito_600SemiBold,
-    Nunito_500Medium,
+    Nunito,
   } )
 
   if (!fontsLoaded) {
@@ -56,7 +56,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
           <Text
             style={ [
               theme.mediaTitle,
-              { color: '#fff', fontFamily: 'Nunito_400Regular'},
+              { color: '#fff', fontFamily: 'Nunito'},
             ] }>{ eventDetails.description.name }
           </Text>
         </View>

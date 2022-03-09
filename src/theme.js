@@ -61,7 +61,7 @@ const theme = {
     bold: '700',
   },
   input: {
-    width: width * 0.8,
+    width: width * 0.9,
     backgroundColor: '#ffffff',
     padding: 10,
     borderRadius: 10,
@@ -70,8 +70,6 @@ const theme = {
   inputContainer: {
     borderRadius: 10,
     marginVertical: 10,
-    borderColor: 'eee',
-    // height: 70,
   },
   commentContainer: {
     // margin: 20,
@@ -442,8 +440,13 @@ const theme = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 70,
-    paddingBottom: 180,
+  },
+
+  formContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    justifyItems: 'center'
   },
 
   // Create Media Styles
