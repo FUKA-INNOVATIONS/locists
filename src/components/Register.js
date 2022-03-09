@@ -17,7 +17,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Button from './Button'
 import Title from './Title'
 
-const RegisterSchema = Yup.object().shape( {
+const RegisterSchema = Yup.object().shape( {  // Form validation
   username: Yup.string().
     min( 4, 'Too Short!' ).
     max( 10, 'Too Long!' ).
@@ -32,7 +32,7 @@ const RegisterSchema = Yup.object().shape( {
   city: Yup.string().required( 'Required' ),
 } )
 
-const Register = ( { navigation } ) => {
+const Register = ( { navigation } ) => {  // Handle new user registration
   // eslint-disable-next-line
   const { isUsernameAvailable, register, login, loading } = useUser()
 
@@ -53,40 +53,26 @@ const Register = ( { navigation } ) => {
 
   // Submit registration form with given data
   const onSubmit = async ( data ) => {
-    // Check, is username available ?
-    const { available } = await isUsernameAvailable( data.username )
+
+    const { available } = await isUsernameAvailable( data.username )   // Check, is username available ?
     !available && Alert.alert( 'Username is not available',
       'Please choose another cool username and try again' )
 
-    // Username is available, Register user
-
-    const registeredUser = await register(
+    const registeredUser = await register(  // Username is available, Register user
       data.username,
       data.password,
       data.email,
       data.city,
     )
 
-    /*
-     * Registration failed, alert user
-     * */
-
-    if ( !registeredUser.user_id ) {
+    if ( !registeredUser.user_id ) {  // Registration failed, alert user
       Alert.alert( 'Registration failed' )
     }
 
-    /*
-     * Registration succeeded, login user
-     * */
+    if ( registeredUser.user_id ) { // Registration succeeded, login user
 
-    if ( registeredUser.user_id ) {
+      const loginResponse = await login( data ) // Login user upon successful registration
 
-      /* const loginCredentials = {
-       username: data.username,
-       password: data.password,
-       }; */
-
-      const loginResponse = await login( data )
       if ( loginResponse.token ) {
         console.log( 'login succeeded' )  // User login succeeded
         navigation.navigate( 'AccountTab', { Screen: 'Account' } ) // Redirect to account screen
