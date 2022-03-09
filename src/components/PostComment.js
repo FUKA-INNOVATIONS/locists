@@ -91,7 +91,7 @@ const PostComment = ( {
 
 PostComment.propTypes = {
   file_id: PropTypes.number,
-  display: PropTypes.bool,
+  display: PropTypes.func,
   updateComments: PropTypes.func,
 }
 
