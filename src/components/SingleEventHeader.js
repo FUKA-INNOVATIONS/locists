@@ -17,7 +17,7 @@ const SingleEventHeader = ( { eventDetails } ) => {
   return (
       <View>
         <Image source={ { uri: smallScreen ? uploadsUrl + eventDetails.thumbnails.w640 : uploadsUrl + eventDetails.filename } }
-               style={ { width: '100%', height: Platform.OS === 'android' ? 150 : 200 } }/>
+               style={ { width: '100%', height: 250 } }/>
         <View style={ theme.singleEventInfo }>
           <View style={ theme.infoTop}>
             <View>
