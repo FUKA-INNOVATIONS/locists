@@ -9,6 +9,8 @@ import theme from '../theme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
 import PropTypes from 'prop-types'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 const UploadPost = props => {
   const { user } = useAuthStorage()
@@ -75,7 +77,9 @@ const UploadPost = props => {
   !imageSelected && setImageSelected( dummyImage )
 
   return (
-    <>
+    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                             enableOnAndroid={ true }
+                             viewIsInsideTabBar={ true }>
       { dummyImage !== imageSelected &&
       <Image source={ { uri: image } }
              style={ theme.addImage }/> }
@@ -140,7 +144,7 @@ const UploadPost = props => {
           <Text style={ theme.loginButtonText }>Reset Form</Text>
         </TouchableOpacity>
       </View>
-    </>
+      </KeyboardAwareScrollView>
   )
 }
 

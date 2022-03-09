@@ -7,6 +7,8 @@ import theme from '../theme'
 import React, { useState } from 'react'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 const PostComment = ( {
   file_id, // eslint-disable-line
@@ -52,7 +54,9 @@ const PostComment = ( {
   if ( loading ) return <Loading />
 
   return (
-    <>
+    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                             enableOnAndroid={ true }
+                             viewIsInsideTabBar={ true }>
       <View style={ theme.commentContainer }>
         <Controller
           control={ control }
@@ -85,7 +89,7 @@ const PostComment = ( {
           <Text style={ theme.loginButtonText }>Post</Text>
         </TouchableOpacity>
       </View>
-    </>
+    </KeyboardAwareScrollView>
   )
 }
 

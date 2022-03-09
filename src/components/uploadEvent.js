@@ -19,7 +19,6 @@ import RNDateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
 const UploadEvent = props => {
   const { user } = useAuthStorage()
   const [ dateTime, setDateTime ] = useState( new Date() )
@@ -81,7 +80,7 @@ const UploadEvent = props => {
       max( 250, 'Too Long!' ).
       required( 'Description is required: 25-250 characters' ),
     price: Yup.number().
-      required( 'Price is required in number format' ),
+      required( 'Price is  required in number format' ),
   } )
 
   const {
@@ -120,14 +119,12 @@ const UploadEvent = props => {
       {
         // TODO Replace Default image with custom component
       }
-      <Image
-        source={ { uri: image } }
-        style={ theme.addImage }
-      />
       <TouchableOpacity
-        style={ [ theme.generalBtn, theme.createMediaButton ] }
         onPress={ pickImage }>
-        <Text style={ theme.loginButtonText }>Choose Image</Text>
+        <Image
+          source={ { uri: image } }
+          style={ theme.addImage }
+        />
       </TouchableOpacity>
 
       <View style={ theme.createMediaForm }>
@@ -169,25 +166,8 @@ const UploadEvent = props => {
         </View>
 
         <View style={ theme.inputContainer }>
-
-          {/* <Controller
-           control={ control }
-           render={ ( { field: { onChange, onBlur, value } } ) => (
-           <TextInput
-           style={ theme.input }
-           onBlur={ onBlur }
-           onChangeText={ onChange }
-           value={ value }
-           defaultValue={ date }
-           placeholder='Date & time'
-           disabled={true}
-           />
-           ) }
-           name='date'
-           /> */ }
           { errors.date && <Text
             style={ theme.inputErrorText }>{ errors.date.message }</Text> }
-
           { show &&
           <View style={ { ...theme.inputContainer } }>
             {
