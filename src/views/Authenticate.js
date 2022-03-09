@@ -13,7 +13,6 @@ const Authenticate = ( { navigation } ) => {
     {
       label: 'Sign In',
       value: { view: 'signIn' },
-      // imageIcon: images.feminino //images.feminino = require('./path_to/assets/img/feminino.png')
     },
     {
       label: 'Register',
@@ -26,7 +25,7 @@ const Authenticate = ( { navigation } ) => {
   }
 
   return (
-    <View style={ { marginHorizontal: 10 } }>
+    <View style={ { marginHorizontal: 0 } }>
       <SwitchSelector
         backgroundColor={ theme.colors.textPrimary }
         textColor={ theme.colors.white }

@@ -35,7 +35,7 @@ const theme = {
   authTitle: {
     color: '#E9D6DB',
     fontSize: 20,
-    marginBottom: 10
+   // marginBottom: 10
   },
   inputTitle: {
     color: '#E9D6DB',
@@ -61,7 +61,7 @@ const theme = {
     bold: '700',
   },
   input: {
-    width: width * 0.8,
+    // width: width * 0.8,
     backgroundColor: '#ffffff',
     padding: 10,
     borderRadius: 10,
@@ -442,8 +442,8 @@ const theme = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 70,
-    paddingBottom: 180,
+    // marginTop: 70,
+    // paddingBottom: 180,
   },
 
   // Create Media Styles

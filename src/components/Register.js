@@ -3,11 +3,9 @@ import {
   View,
   Text,
   TextInput,
-  KeyboardAvoidingView,
-  ScrollView,
   Alert,
   TouchableOpacity,
-  Platform,
+  StyleSheet, Button,
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -17,6 +15,8 @@ import useUser from '../hooks/useUser'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const RegisterSchema = Yup.object().shape( {
   username: Yup.string().
@@ -105,120 +105,140 @@ const Register = ( { navigation } ) => {
   if ( loading ) return <Loading />
 
   return (
-    <KeyboardAvoidingView
-      behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }>
-      <ScrollView>
-        <View style={ theme.register }>
 
-          <View>
-            <Text style={ theme.authTitle }>
-              Some text
-            </Text>
-          </View>
+    <KeyboardAwareScrollView>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Username'
-                />
-              ) }
-              name='username'
+      <View  style={styles.container}>
+        <Text style={ theme.authTitle }>
+          Some text
+        </Text>
+      </View>
+
+      <View style={ styles.inputContainer }>
+        <Controller
+          control={ control }
+          render={ ( { field: { onChange, onBlur, value } } ) => (
+            <TextInput
+              style={ styles.input }
+              onBlur={ onBlur }
+              onChangeText={ onChange }
+              value={ value }
+              placeholder='Username'
             />
-            { errors.username && <Text
-              style={ theme.inputErrorText }>{ errors.username.message }</Text> }
-          </View>
+          ) }
+          name='username'
+        />
+        { errors.username && <Text
+          style={ styles.inputErrorText }>{ errors.username.message }</Text> }
+      </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='email'
-                />
-              ) }
-              name='email'
+      <View style={ styles.inputContainer }>
+        <Controller
+          control={ control }
+          render={ ( { field: { onChange, onBlur, value } } ) => (
+            <TextInput
+              style={ styles.input }
+              onBlur={ onBlur }
+              onChangeText={ onChange }
+              value={ value }
+              placeholder='email'
             />
-            { errors.email && <Text
-              style={ theme.inputErrorText }>{ errors.email.message }</Text> }
-          </View>
+          ) }
+          name='email'
+        />
+        { errors.email && <Text
+          style={ styles.inputErrorText }>{ errors.email.message }</Text> }
+      </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='City'
-                />
-              ) }
-              name='city'
+      <View style={ styles.inputContainer }>
+        <Controller
+          control={ control }
+          render={ ( { field: { onChange, onBlur, value } } ) => (
+            <TextInput
+              style={ styles.input }
+              onBlur={ onBlur }
+              onChangeText={ onChange }
+              value={ value }
+              placeholder='City'
             />
-            { errors.city && <Text
-              style={ theme.inputErrorText }>{ errors.city.message }</Text> }
-          </View>
+          ) }
+          name='city'
+        />
+        { errors.city && <Text
+          style={ styles.inputErrorText }>{ errors.city.message }</Text> }
+      </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Password'
-                  secureTextEntry={ true }
-                />
-              ) }
-              name='password'
+      <View style={ styles.inputContainer }>
+        <Controller
+          control={ control }
+          render={ ( { field: { onChange, onBlur, value } } ) => (
+            <TextInput
+              style={ styles.input }
+              onBlur={ onBlur }
+              onChangeText={ onChange }
+              value={ value }
+              placeholder='Password'
+              secureTextEntry={ true }
             />
-            { errors.password && <Text
-              style={ theme.inputErrorText }>{ errors.password.message }</Text> }
-          </View>
+          ) }
+          name='password'
+        />
+        { errors.password && <Text
+          style={ styles.inputErrorText }>{ errors.password.message }</Text> }
+      </View>
 
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Password confirmation'
-                  secureTextEntry={ true }
-                />
-              ) }
-              name='passwordConfirm'
+      <View style={ styles.inputContainer }>
+        <Controller
+          control={ control }
+          render={ ( { field: { onChange, onBlur, value } } ) => (
+            <TextInput
+              style={ styles.input }
+              onBlur={ onBlur }
+              onChangeText={ onChange }
+              value={ value }
+              placeholder='Password confirmation'
+              secureTextEntry={ true }
             />
-            { errors.passwordConfirm && (
-              <Text
-                style={ theme.inputErrorText }>{ errors.passwordConfirm.message }</Text>
-            ) }
-          </View>
+          ) }
+          name='passwordConfirm'
+        />
+        { errors.passwordConfirm && (
+          <Text
+            style={ styles.inputErrorText }>{ errors.passwordConfirm.message }</Text>
+        ) }
+      </View>
 
-          <TouchableOpacity style={ theme.loginButton }
-                            onPress={ handleSubmit( onSubmit ) }>
-            <Text style={ theme.loginButtonText }>Register</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      <Button title={'Register'} onPress={handleSubmit( onSubmit ) } />
+
+    </KeyboardAwareScrollView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    // flex: 1,
+    alignItems: 'center'
+  },
+  input: {
+    // width: width * 0.8,
+    backgroundColor: '#ffffff',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  inputContainer: {
+    borderRadius: 10,
+    marginVertical: 10,
+    // borderColor: 'eee',
+    // height: 70,
+  },
+  inputErrorText: {
+    color: '#e1e4e8',
+    fontSize: 14,
+    alignSelf: 'center',
+    marginTop: 5
+  },
+})
 
 Register.propTypes = {
   navigation: PropTypes.object,

@@ -1,4 +1,11 @@
-import { Text, Alert, TextInput, View, TouchableOpacity } from 'react-native'
+import {
+  Text,
+  Alert,
+  TextInput,
+  View,
+  TouchableOpacity,
+  KeyboardAvoidingViewComponent,
+} from 'react-native'
 import useComment from '../hooks/useComment'
 import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,12 +15,15 @@ import React, { useState } from 'react'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Button from '../components/Button'
+
 const PostComment = ( {
   file_id, // eslint-disable-line
   display,
   updateComments,
 } ) => { // eslint-disable-line
-         // const { user } = useAuthStorage()
+  // const { user } = useAuthStorage()
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 
@@ -52,8 +62,8 @@ const PostComment = ( {
   if ( loading ) return <Loading />
 
   return (
-    <>
-      <View style={ theme.commentContainer }>
+    <KeyboardAwareScrollView>
+      <View style={{flex: 1}}>
         <Controller
           control={ control }
           render={ ( { field: { onChange, onBlur, value } } ) => (
@@ -69,29 +79,23 @@ const PostComment = ( {
           ) }
           name='content'
         />
-        { errors.content && <Text style={ {
-          color: 'white',
-          textAlign: 'center',
-        } }>{ errors.content.message }</Text> }
+        { errors.content && <Text style={ { color: 'white', textAlign: 'center', } }>{ errors.content.message }</Text> }
       </View>
-      <View style={ theme.addCommentButtons }>
-        <TouchableOpacity style={ { ...theme.generalBtn } } title='Clear'
-                          onPress={ () => reset() }>
-          <Text style={ theme.loginButtonText }>Clear</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity style={ { ...theme.generalBtn, width: 200 } }
-                          onPress={ handleSubmit( onSubmit ) }>
-          <Text style={ theme.loginButtonText }>Post</Text>
-        </TouchableOpacity>
+      <View style={ { flexDirection: 'row' } }>
+        <Button title={ 'Post comment' } style={ { width: 50 } }
+                onPress={ handleSubmit( onSubmit ) } />
+        <Button title={ 'Clear' } style={ { width: 80 } }
+                onPress={ reset } />
       </View>
-    </>
+
+    </KeyboardAwareScrollView>
   )
 }
 
 PostComment.propTypes = {
   file_id: PropTypes.number,
-  display: PropTypes.bool,
+  display: PropTypes.func,
   updateComments: PropTypes.func,
 }
 
