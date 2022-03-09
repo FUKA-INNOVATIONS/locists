@@ -2,12 +2,18 @@ import { View, StyleSheet, Dimensions } from 'react-native'
 import Tab from './Tab'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import {
+  getFocusedRouteNameFromRoute,
+  useFocusEffect,
+} from '@react-navigation/native'
 
 const { width } = Dimensions.get( 'screen' )
 
-const TabBar = ( { state, navigation } ) => {
+const TabBar = ( props ) => {
   const [ selected, setSelected ] = useState( 'HomeTab' )
-  const { routes } = state
+  const { routes } = props.state
+
+
 
   // Active/inactive color of icons
   const isSelected = ( currentTab ) => currentTab === selected
@@ -15,8 +21,8 @@ const TabBar = ( { state, navigation } ) => {
   // Handles navigation on touch, ignores already selected
   const handlePress = ( activeTab, index ) => {
     setSelected( activeTab )
-    if ( state.index !== index ) {
-      navigation.navigate( activeTab )
+    if ( props.state.index !== index ) {
+      props.navigation.navigate( activeTab )
     }
   }
 

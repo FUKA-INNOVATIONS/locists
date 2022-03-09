@@ -22,8 +22,9 @@ const PostComment = ( {
   file_id, // eslint-disable-line
   display,
   updateComments,
+  isWriteComment
 } ) => { // eslint-disable-line
-  // const { user } = useAuthStorage()
+         // const { user } = useAuthStorage()
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 
@@ -62,8 +63,13 @@ const PostComment = ( {
   if ( loading ) return <Loading />
 
   return (
-    <KeyboardAwareScrollView>
-      <View style={{flex: 1}}>
+    <KeyboardAwareScrollView enableOnAndroid={ true } >
+      {isWriteComment && <View style={ {
+        flex: 1,
+        flexDirection: 'column',
+        width: theme.device.screenWidth,
+      } }>
+
         <Controller
           control={ control }
           render={ ( { field: { onChange, onBlur, value } } ) => (
@@ -79,16 +85,21 @@ const PostComment = ( {
           ) }
           name='content'
         />
-        { errors.content && <Text style={ { color: 'white', textAlign: 'center', } }>{ errors.content.message }</Text> }
-      </View>
+        { errors.content && <Text style={ {
+          color: 'white',
+          textAlign: 'center',
+        } }>{ errors.content.message }</Text> }
 
-      <View style={ { flexDirection: 'row' } }>
-        <Button title={ 'Post comment' } style={ { width: 50 } }
-                onPress={ handleSubmit( onSubmit ) } />
-        <Button title={ 'Clear' } style={ { width: 80 } }
-                onPress={ reset } />
-      </View>
 
+        <View style={ { flexDirection: 'row', justifyContent: 'flex-end' } }>
+          <Button title={ 'Clear' } style={ { width: '30%' } }
+                  onPress={ reset } />
+          <Button title={ 'Post comment' }
+                  style={ { flex: 1 } }
+                  onPress={ handleSubmit( onSubmit ) } />
+        </View>
+
+      </View> }
     </KeyboardAwareScrollView>
   )
 }

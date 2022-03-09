@@ -41,27 +41,17 @@ const Comments = ( { fileId } ) => {
   return (
     <>
 
-      <TouchableOpacity
-        style={ { justifyContent: 'center', flexDirection: 'row' } }
-        onPress={ onWriteCommentHandler }>
-        <Text style={ {
-          color: '#8d8082',
-          fontSize: 15,
-          textAlign: 'center',
-          fontWeight: 'bold',
-        } }>Comments ({ mediaComments.length })</Text>
+      <TouchableOpacity style={ { justifyContent: 'center', flexDirection: 'row' } } onPress={ onWriteCommentHandler }>
+        <Text style={ { color: '#8d8082', fontSize: 15, textAlign: 'center', fontWeight: 'bold', } }>Comments ({ mediaComments.length })</Text>
         <AddComment width={ 32 } height={ 32 } />
       </TouchableOpacity>
 
-      <View style={ { alignItems: 'center' } }>
-        { isWriteComment &&
-        <PostComment file_id={ fileId } display={ setIsWriteComment }
-                     updateComments={ updateComments }
-        /> }
-      </View>
       <FlatList
-        style={ [ theme.singleMediaComments ] }
+        horizontal={true}
         data={ mediaComments }
+        ListHeaderComponent={ <PostComment isWriteComment={isWriteComment} file_id={ fileId } display={ setIsWriteComment } updateComments={ updateComments } /> }
+        stickyHeaderIndices={ [ 0 ] }
+        style={ [ theme.singleMediaComments ] }
         // ListFooterComponent={({ item }) => <NoComments />}
         ListEmptyComponent={ <NoComments
           openCommentBox={ onWriteCommentHandler } isWriteComment /> }

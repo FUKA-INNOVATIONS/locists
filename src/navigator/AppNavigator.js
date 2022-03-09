@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useLayoutEffect } from 'react'
 import {
-  DefaultTheme,
+  DefaultTheme, getFocusedRouteNameFromRoute,
   NavigationContainer,
   useIsFocused,
 } from '@react-navigation/native'
@@ -131,6 +131,7 @@ const CreateStackScreen = () => {
 }
 
 const AuthenticationStackScreen = () => {
+
   const { user } = useAuthStorage()
   // TODO: test useFocusEffect
   // eslint-disable-next-line
@@ -193,12 +194,20 @@ const AuthenticationStackScreen = () => {
   )
 }
 
-const SettingsStackScreen = () => {
+const SettingsStackScreen = ({route, navigation}) => {
+
+  useLayoutEffect(() => {
+    const routeName = getFocusedRouteNameFromRoute(route)
+    console.log('route name', routeName)
+    console.log('nav', navigation.getState())
+    if ( routeName === 'ModifyAccount' ) {navigation.setOptions( { tabBarVisible: false } )}
+  }, [route, navigation])
+
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen name={ 'Settings' }
                             component={ SettingsScreen } />
-      <SettingsStack.Group screenOptions={ { presentation: 'modal' } }>
+      <SettingsStack.Group screenOptions={ { presentation: 'fullScreenModal' } }>
         <SettingsStack.Screen name={ 'ModifyAccount' }
                               options={ ( {
                                 route,
@@ -249,6 +258,18 @@ const AppNavigator = ( props ) => {
   navTheme.colors.background = '#24292e'
   navTheme.colors.card = '#24292e'
   navTheme.colors.text = 'white'
+
+
+  /* useFocusEffect(
+   React.useCallback(() => {
+   console.log( 'routeName', routeName)
+   // console.log('navigation', navigation)
+   if ( routeName === 'ModifyAccount' ) {navigation.setOptions( { tabBarVisible: false } )}
+   }, [routes, props.navigation])
+   ); */
+
+
+
 
   return (
     <NavigationContainer theme={ DefaultTheme }>
