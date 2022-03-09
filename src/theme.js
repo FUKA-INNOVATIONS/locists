@@ -1,7 +1,7 @@
 import { Platform, Dimensions, StatusBar } from 'react-native'
 
-export const { width } = Dimensions.get( 'screen' )
-export const { height } = Dimensions.get( 'screen' )
+const { width } = Dimensions.get( 'screen' )
+const { height } = Dimensions.get( 'screen' )
 
 const general = {
   colors: {
@@ -16,10 +16,6 @@ const general = {
 }
 
 const theme = {
-  device: {
-    screenWidth: width,
-    screenHeight: height,
-  },
   AndroidSafeArea: {
     flex: 1,
     backgroundColor: '#24292e',
@@ -39,12 +35,12 @@ const theme = {
   authTitle: {
     color: '#E9D6DB',
     fontSize: 20,
-    // marginBottom: 10
+    marginBottom: 10
   },
   inputTitle: {
     color: '#E9D6DB',
     fontSize: 17,
-    marginBottom: 10,
+    marginBottom: 10
   },
   appBar: {
     backgroundColor: '#24292e',
@@ -65,7 +61,7 @@ const theme = {
     bold: '700',
   },
   input: {
-    // width: width * 0.8,
+    width: width * 0.8,
     backgroundColor: '#ffffff',
     padding: 10,
     borderRadius: 10,
@@ -79,7 +75,7 @@ const theme = {
   },
   commentContainer: {
     // margin: 20,
-    width: '100%',
+    width: '100%'
   },
   commentInput: {
     // width: 400,
@@ -94,7 +90,7 @@ const theme = {
     color: general.colors.txtError,
     fontSize: 14,
     alignSelf: 'center',
-    marginTop: 5,
+    marginTop: 5
   },
 
   mediaTitle: {
@@ -225,7 +221,7 @@ const theme = {
     height: 120,
     flexDirection: 'column',
     justifyContent: 'space-around',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   postImage: {
     width: undefined,
@@ -308,7 +304,7 @@ const theme = {
     // padding: 10,
     // paddingHorizontal: 15,
     zIndex: 1,
-    backgroundColor: general.colors.btn,
+    backgroundColor: general.colors.btn
   },
   eventImage2: {
     // width: width * 0.94,
@@ -326,7 +322,7 @@ const theme = {
   eventSection: {
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   // Single Event Styles
@@ -338,13 +334,13 @@ const theme = {
     // margin: 10,
     top: -10,
     borderRadius: 10,
-    padding: 10,
+    padding: 10
   },
   infoTop: {
     paddingTop: 10,
     paddingHorizontal: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   infoBottom: {
     width: width * 0.85,
@@ -446,8 +442,8 @@ const theme = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // marginTop: 70,
-    // paddingBottom: 180,
+    marginTop: 70,
+    paddingBottom: 180,
   },
 
   // Create Media Styles

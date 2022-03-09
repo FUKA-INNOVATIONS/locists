@@ -2,18 +2,12 @@ import { View, StyleSheet, Dimensions } from 'react-native'
 import Tab from './Tab'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import {
-  getFocusedRouteNameFromRoute,
-  useFocusEffect,
-} from '@react-navigation/native'
 
 const { width } = Dimensions.get( 'screen' )
 
 const TabBar = ( props ) => {
   const [ selected, setSelected ] = useState( 'HomeTab' )
   const { routes } = props.state
-
-
 
   // Active/inactive color of icons
   const isSelected = ( currentTab ) => currentTab === selected
@@ -41,9 +35,9 @@ const TabBar = ( props ) => {
 
 const styles = StyleSheet.create( {
   wrapper: {
-    // position: 'absolute',
+    position: 'absolute',
     bottom: -6,
-    // paddingBottom: 5,
+    paddingBottom: 5,
     width,
     // height: 100,
     alignItems: 'center',
