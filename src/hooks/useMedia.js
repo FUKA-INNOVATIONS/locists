@@ -10,6 +10,7 @@ import useFavourite from './useFavourite'
 const useMedia = () => {
   // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
+  const authStorage = useAuthStorage()
   const [ singleMedia, setSingleMedia ] = useState()
   const [ userMedia, setUserMedia ] = useState()
 
@@ -125,8 +126,9 @@ const useMedia = () => {
     }
   }
 
-  const getUserMedia = async ( token ) => {
+  const getUserMedia = async ( ) => {
     const userMediaPE = []
+    const token = await authStorage.getToken()
     const URL = `${ baseUrl }media/user`
     const options = {
       method: 'GET',
@@ -139,13 +141,19 @@ const useMedia = () => {
       if ( data ) {
         console.log( data.length )
         for ( let i = 0; i < data.length; i++ ) {
-          data[ i ].description = JSON.parse( data[ i ].description )
+          try {
+            data[ i ].description = JSON.parse( data[ i ].description )
+          } catch (e) {
+            console.log('error in parsing user data desc to json')
+          }
           const type = data[ i ].description.mediaType;
           ( type === 'event' || type === 'post' ) &&
           userMediaPE.push( data[ i ] )
         }
       }
+      // console.log(data)
       setUserMedia( userMediaPE )
+      // return userMediaPE
     } catch ( e ) {
       console.log( 'Error in getting user files', e.message )
     }

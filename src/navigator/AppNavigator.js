@@ -37,7 +37,8 @@ const BottomTab = createBottomTabNavigator()
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name={ 'Home' } component={ HomeScreen } />
+      <HomeStack.Screen name={ 'Home' } component={ HomeScreen }
+                        options={ { title: 'Events & posts' } } />
       <HomeStack.Group screenOptions={ { presentation: 'modal' } }>
         <HomeStack.Screen name={ 'SinglePostHomeStack' }
                           options={ ( {
@@ -49,7 +50,7 @@ const HomeStackScreen = () => {
                               <CloseModal navigation={ navigation } /> ),
                           } ) }
                           component={ SinglePostScreen } />
-        <HomeStack.Screen name={ 'SingleEvent' }
+        <HomeStack.Screen name={ 'SingleEventHomeStack' }
                           options={ ( {
                             route,
                             navigation,
@@ -101,6 +102,7 @@ const CreateStackScreen = () => {
   return (
     <CreateStack.Navigator>
       <CreateStack.Screen name={ 'Create' }
+                          options={ { title: 'Create and publish' } }
                           component={ CreateScreen } />
       <CreateStack.Group screenOptions={ { presentation: 'modal' } }>
         <CreateStack.Screen name={ 'CreatePost' }
@@ -162,6 +164,28 @@ const AuthenticationStackScreen = () => {
                                         } ) }
                                         component={ SettingsScreen } />
           </AuthenticationStack.Group>
+          <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
+            <ExploreStack.Screen name={ 'SingleEventOwn' }
+                                 options={ ( {
+                                   route,
+                                   navigation,
+                                 } ) => ( {
+                                   title: 'Event',
+                                   headerRight: () => (
+                                     <CloseModal navigation={ navigation } /> ),
+                                 } ) }
+                                 component={ SingleEventScreen } />
+            <ExploreStack.Screen name={ 'SinglePostOwn' }
+                                 options={ ( {
+                                   route,
+                                   navigation,
+                                 } ) => ( {
+                                   title: 'Post',
+                                   headerRight: () => (
+                                     <CloseModal navigation={ navigation } /> ),
+                                 } ) }
+                                 component={ SinglePostScreen } />
+          </ExploreStack.Group>
         </>
       )
       }
@@ -221,7 +245,6 @@ const SettingsStackScreen = () => {
  } */
 
 const AppNavigator = ( props ) => {
-
   const navTheme = DefaultTheme
   navTheme.colors.background = '#24292e'
   navTheme.colors.card = '#24292e'

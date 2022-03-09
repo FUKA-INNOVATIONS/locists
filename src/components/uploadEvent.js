@@ -95,6 +95,7 @@ const UploadEvent = props => {
   } )
 
   const mediaDescription = {
+    price: getValues().price,
     mediaType: 'event',
     owner: user.username,
     fileType: type,
@@ -102,7 +103,6 @@ const UploadEvent = props => {
     name: getValues().name,
     date: dateTime,
     description: getValues().description,
-    price: getValues().price,
   }
 
   const resetAll = () => {
@@ -187,32 +187,32 @@ const UploadEvent = props => {
               style={ theme.inputErrorText }>{ errors.date.message }</Text> }
 
             { show &&
-            <View style={ theme.inputContainer }>
+            <View style={ {...theme.inputContainer} }>
               {
                 <RNDateTimePicker
-                  style={ { ...theme.inputContainer, width: 150 } }
+                  // style={ { ...theme.inputContainer, backgroundColor: '#fff', color: 'red' } }
                   testID='dateTimePicker'
                   value={ dateTime }
                   mode={ mode }
                   is24Hour={ true }
                   display='default'
                   onChange={ onChange }
+                  themeVariant={'dark'}
                 />
               }
             </View>
             }
 
-            <View style={ { justifyContent: 'center' } }>
-              <Text style={ { color: 'white' } }>{ getValues().date &&
-              dateTime.toLocaleString() }</Text>
-              <TouchableOpacity style={ theme.generalBtn }
-                                onPress={ showDatepicker }>
-                <Text style={ theme.loginButtonText }>Select Date</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={ theme.generalBtn }
-                                onPress={ showTimepicker }>
-                <Text style={ theme.loginButtonText }>Select Time</Text>
-              </TouchableOpacity>
+            <View style={ { justifyContent: 'center', flexDirection: 'column'} }>
+              <View style={{alignSelf: 'flex-start'}}><Text style={ { color: 'white' } }>{ getValues().date && dateTime.toLocaleString() }</Text></View>
+              <View style={{flexDirection: 'row', width: 300, justifyContent: 'space-between', marginTop: 10}}>
+                <TouchableOpacity style={ {...theme.generalBtn, width: 140} } onPress={ showDatepicker }>
+                  <Text style={ theme.loginButtonText }>Select Date</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={ {...theme.generalBtn, width: 140} } onPress={ showTimepicker }>
+                  <Text style={ theme.loginButtonText }>Select Time</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
 

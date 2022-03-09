@@ -9,7 +9,7 @@ import {
 } from '../utils/sortFilterHelpers'
 import PropTypes from 'prop-types'
 
-const EventListHeader = ( {
+const ExploreListHeader = ( {
   media,
   activeList,
   setActiveList,
@@ -104,6 +104,7 @@ const EventListHeader = ( {
       marginHorizontal: 10,
       marginBottom: 10,
       marginTop: 5,
+      right: 5
     } }>
       { ( mediaType === 'event' || mediaType === 'post' ) &&
       <DropDownPicker
@@ -133,7 +134,7 @@ const EventListHeader = ( {
         dropDownContainerStyle={{
           width: '45%',
           alignSelf: 'flex-end',
-          borderColor: '#7b08a3',
+          // borderColor: '#7b08a3',
           borderWidth: 2,
         }}
 
@@ -179,7 +180,7 @@ const EventListHeader = ( {
           width: '45%',
           alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
           marginLeft: mediaType === 'mixedMedia' ? 0 : 15,
-          borderColor: '#7b08a3',
+          // borderColor: '#7b08a3',
           borderWidth: 2,
         }}
       />
@@ -187,8 +188,8 @@ const EventListHeader = ( {
   )
 }
 
-EventListHeader.propTypes = {
-  media: PropTypes.object,
+ExploreListHeader.propTypes = {
+  media: PropTypes.array,
   activeList: PropTypes.array,
   setActiveList: PropTypes.func,
   navigation: PropTypes.object,
@@ -196,5 +197,4 @@ EventListHeader.propTypes = {
   mediaType: PropTypes.string,
 }
 
-
-export default EventListHeader
+export default ExploreListHeader

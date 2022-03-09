@@ -1,5 +1,4 @@
 import { View, Text, Pressable } from 'react-native'
-import TimeAgo from '@andordavoti/react-native-timeago'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
 import theme from '../theme'
@@ -32,9 +31,7 @@ const Comment = ( {
   return (
     <View style={ { margin: 10 } }>
       <View style={ { flexDirection: 'row', alignItems: 'center' } }>
-        <UserInfo avatar={ avatar } username={ 'Username' } />
-        <TimeAgo style={ { color: '#E9D6DB', left: 30 } }
-                 dateTo={ new Date( commentObj.time_added ) } />
+        <UserInfo avatar={ avatar } username={ 'Username' } timeAdded={commentObj.time_added} />
         <View style={ { marginLeft: 50 } }>
           { isOwner &&
           <Pressable onPress={ () => onDeleteHandler(

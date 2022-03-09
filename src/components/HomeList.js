@@ -18,17 +18,16 @@ const HomeList = ( { navigation } ) => {
 
   useEffect( () => {
     console.log( 'HomeList.js useEffect' )
-    setLoading( true )
+    /* setLoading( true )
     getAllMedia().then( mixedMedia => {
       setActiveList( mixedMedia )
       setMixedMedia( mixedMedia )
     } ).finally( () => {
       console.log( 'HomeList getAllMedia in useEffect ready' )
       setLoading( false )
-    }, [] )
+    } ) */
 
     // To keep state up to date
-    // TODO instead update app state on changes like add/delete new event/comment/attendee
     return navigation.addListener( 'focus', async () => {
       console.log( 'HomeList.js focus' )
       setLoading( true )
@@ -43,7 +42,7 @@ const HomeList = ( { navigation } ) => {
 
   // Move user to single event view when tapping event card
   const eventPressHandler = ( eventId ) => {
-    navigation.navigate( 'SingleEvent', { eventId: eventId } )
+    navigation.navigate( 'SingleEventHomeStack', { eventId: eventId } )
   }
 
   // Move user to single post view when tapping a post

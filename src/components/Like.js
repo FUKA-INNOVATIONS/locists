@@ -1,12 +1,14 @@
-import { View, Text, Pressable } from 'react-native'
+import { View, Text, Pressable, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import useFavourite from '../hooks/useFavourite'
 import HeartEmpty from '../../assets/icons/HeartEmpty.svg'
 import HeartFull from '../../assets/icons/HeartFull.svg'
 import theme from '../theme'
+import useAuthStorage from '../hooks/useAuthStorage'
 
 const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
+  const { user } = useAuthStorage()
   const {
     getMediaFavourites,
     deleteFavourite,
@@ -36,6 +38,13 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
 
   const likeHandler = async () => {
     console.log( 'Like', file_id )
+
+    if ( !user.isLogged ) {
+      Alert.alert( 'You must login',
+        'Only logged in users are able to like posts, please login to your account and try again!' )
+      return
+    }
+
     if ( hasLiked() ) {
       await deleteFavourite( file_id ).then(async () => await fetchLikes())
     } else {

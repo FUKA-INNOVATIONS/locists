@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Dimensions, Image, Text, View } from 'react-native'
 import { uploadsUrl } from '../../config'
 import theme from '../theme'
 import PostComment from './PostComment'
@@ -11,10 +11,17 @@ import PropTypes from 'prop-types'
 const SinglePostHeader = ( { postDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )
 
+  const smallScreen = Dimensions.get( 'screen' ).width <= 390
+
   if ( !postDetails ) return <Loading />
 
+  const imageSource = {
+    uri: smallScreen ? uploadsUrl + postDetails.thumbnails.w320 : uploadsUrl +
+      postDetails.filename,
+  }
+
   return (
-    <View style={ theme.singlePost }>
+    <View style={ {...theme.singlePost} }>
       <View style={ { ...theme.singleMediaAvatar, marginBottom: 5 } }>
         <UserInfo username={ postDetails.description.owner }
                   avatar={ postDetails.description.ownerAvatar } />
@@ -22,17 +29,14 @@ const SinglePostHeader = ( { postDetails } ) => {
       {
         postDetails.description.hasImage ?
           <>
-            <View style={ theme.imageAndLikes }>
-              <Image
-                source={ { uri: uploadsUrl + postDetails.thumbnails.w320 } }
-                style={ theme.singlePostImage }
-              />
+            <View style={ { ...theme.imageAndLikes, alignSelf: 'flex-start' } }>
+              <Image source={ imageSource } style={ theme.singlePostImage } />
               <View style={ { alignItems: 'flex-end' } }>
                 <Like displayIcon file_id={ postDetails.file_id }
                       single={ true } />
-
               </View>
             </View>
+
             <View style={ { ...theme.singlePostText } }>
               <Text
                 style={ { padding: 5 } }>{ postDetails.description.description }</Text>
