@@ -6,7 +6,6 @@ import Attend from './Attend'
 import theme from '../theme'
 import Loading from './Loading'
 import PropTypes from 'prop-types'
-import { Price } from '../utils'
 
 const SingleEventHeader = ( { eventDetails } ) => {
   const [ isWriteComment, setIsWriteComment ] = useState( false )

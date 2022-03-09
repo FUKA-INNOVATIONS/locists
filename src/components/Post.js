@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, Dimensions } from 'react-native'
+import { View, Image, Text } from 'react-native'
 import { uploadsUrl } from '../../config'
 import theme from '../theme'
 import Like from './Like'
@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 const Post = ( { postMedia, ownProfile } ) => {
   // console.log( 'Post.js', ownProfile )
 
-  const smallScreen = Dimensions.get( 'screen' ).width <= 390
+  // const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( postMedia.thumbnails !== undefined )
 
   return (

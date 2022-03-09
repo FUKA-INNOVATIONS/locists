@@ -1,4 +1,4 @@
-import { Alert, View, Text } from 'react-native'
+import { Alert } from 'react-native'
 import useMedia from '../hooks/useMedia'
 
 import useAuthStorage from '../hooks/useAuthStorage'

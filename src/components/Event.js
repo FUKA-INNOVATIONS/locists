@@ -6,18 +6,17 @@ import theme from '../theme'
 import { Location, Calendar, Price, Attendees } from '../utils'
 import UserInfo from './UserInfo'
 import Loading from './Loading'
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import * as Font from 'expo-font'
 
 import {
   useFonts,
-  Nunito_400Regular,
-  Nunito_300Light,
-  Nunito_700Bold,
-  Nunito_800ExtraBold,
-  Nunito_600SemiBold,
-  Nunito_500Medium,
+  Nunito_400Regular, // eslint-disable-line
+  Nunito_300Light,// eslint-disable-line
+  Nunito_700Bold,// eslint-disable-line
+  Nunito_800ExtraBold,// eslint-disable-line
+  Nunito_600SemiBold,// eslint-disable-line
+  Nunito_500Medium,// eslint-disable-line
 } from '@expo-google-fonts/nunito'
 
 const Event = ( { eventDetails, ownProfile } ) => {

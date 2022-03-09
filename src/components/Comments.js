@@ -62,6 +62,7 @@ const Comments = ( { fileId } ) => {
       <FlatList
         style={ [ theme.singleMediaComments ] }
         data={ mediaComments }
+        // ListFooterComponent={({ item }) => <NoComments />}
         ListEmptyComponent={ <NoComments
           openCommentBox={ onWriteCommentHandler } isWriteComment /> }
         keyExtractor={ ( item ) => item.comment_id }

@@ -296,6 +296,7 @@ const theme = {
     backgroundColor: general.colors.postBackground,
   },
   eventListTitle: {
+    padding: 10,
     position: 'absolute',
     alignItems: 'center',
     // maxWidth: '85%',

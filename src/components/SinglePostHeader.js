@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Dimensions, Image, Text, View, ImageBackground } from 'react-native'
+import { Dimensions, Image, Text, View } from 'react-native'
 import { uploadsUrl } from '../../config'
 import theme from '../theme'
 import PostComment from './PostComment'
