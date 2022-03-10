@@ -65,7 +65,6 @@ const HomeList = ( { navigation } ) => {
           loading={ loading }
         /> }
       stickyHeaderIndices={ [ 0 ] }
-      style={ { marginBottom: 50 } }
       ListEmptyComponent={ <EmptyListMessage /> }
       keyExtractor={ ( item ) => item.file_id }
       renderItem={ ( { item } ) => {

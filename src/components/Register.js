@@ -33,7 +33,6 @@ const RegisterSchema = Yup.object().shape( {  // Form validation
 } )
 
 const Register = ( { navigation } ) => {  // Handle new user registration
-  // eslint-disable-next-line
   const { isUsernameAvailable, register, login, loading } = useUser()
 
   const {
