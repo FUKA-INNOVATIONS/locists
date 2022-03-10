@@ -21,8 +21,8 @@ const Explore = ( { navigation } ) => {
   ]
 
   return (
-    <View style={ { paddingBottom: 90 } }>
-      <View style={ { marginHorizontal: 10, marginBottom: 10 } }>
+    <View>
+      <View>
         <SwitchSelector
           backgroundColor={ theme.colors.textPrimary }
           textColor={ theme.colors.white }
