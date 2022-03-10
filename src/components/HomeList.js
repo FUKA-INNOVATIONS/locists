@@ -7,6 +7,7 @@ import Loading from './Loading'
 import EmptyListMessage from './EmptyListMessage'
 import ExploreListHeader from './ExploreListHeader'
 import PropTypes from 'prop-types'
+import FooterMarginWorkAround from './ListFooterMarginWorAround'
 
 const HomeList = ( { navigation } ) => {
   // console.log('HomeList.js')
@@ -54,6 +55,7 @@ const HomeList = ( { navigation } ) => {
 
   return (
     <FlatList
+      ListFooterComponent={<FooterMarginWorkAround />}
       data={ activeList }
       ListHeaderComponent={
         <ExploreListHeader
@@ -65,7 +67,6 @@ const HomeList = ( { navigation } ) => {
           loading={ loading }
         /> }
       stickyHeaderIndices={ [ 0 ] }
-      style={ { marginBottom: 50 } }
       ListEmptyComponent={ <EmptyListMessage /> }
       keyExtractor={ ( item ) => item.file_id }
       renderItem={ ( { item } ) => {

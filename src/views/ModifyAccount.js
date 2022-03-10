@@ -1,11 +1,8 @@
 import React from 'react'
 import {
   View,
-  Text,
   Alert,
   TextInput,
-  ScrollView,
-  TouchableOpacity,
 } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useUser from '../hooks/useUser'
@@ -13,6 +10,9 @@ import { Controller, useForm } from 'react-hook-form'
 import theme from '../theme'
 import UploadMedia from '../components/UploadMedia'
 import PropTypes from 'prop-types'
+import Title from '../components/Title'
+import Button from '../components/Button'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const ModifyAccount = ( { navigation, route } ) => {
 
@@ -77,18 +77,14 @@ const ModifyAccount = ( { navigation, route } ) => {
     type === 'picture' ?
       <UploadMedia mediaType={ 'avatar' } navigation={ navigation } />
       :
-      <ScrollView style={ { marginHorizontal: 10, marginBottom: 100 } }>
+      <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                               enableOnAndroid={ true }
+                               viewIsInsideTabBar={ true }>
 
-        <View style={{alignItems: 'center', marginTop: 10}}>
-
-          <View>
-            <Text style={{...theme.authTitle, marginBottom: 10}}>
-              Keep account details up to date
-            </Text>
-          </View>
-
+        <View style={ { alignItems: 'center', marginTop: 10 } }>
+          <Title text={ 'Keep account details up to date' } style={{fontSize: 15}} />
           <View style={ theme.inputContainer }>
-            <Text style={theme.inputTitle}>Username</Text>
+            <Title text={'Username'} />
             <Controller
               control={ control }
               rules={ {
@@ -126,7 +122,7 @@ const ModifyAccount = ( { navigation, route } ) => {
           </View>
 
           <View style={ theme.inputContainer }>
-            <Text style={theme.inputTitle}>City</Text>
+            <Title text={'City'} />
             <Controller
               style={ theme.input }
               control={ control }
@@ -152,7 +148,7 @@ const ModifyAccount = ( { navigation, route } ) => {
           </View>
 
           <View style={ theme.inputContainer }>
-            <Text style={theme.inputTitle}>Password (optional)</Text>
+            <Title text={'Password (optional)'} />
             <Controller
               control={ control }
               rules={ {
@@ -183,7 +179,7 @@ const ModifyAccount = ( { navigation, route } ) => {
             />
           </View>
           <View style={ theme.inputContainer }>
-            <Text style={theme.inputTitle}>Confirm password</Text>
+            <Title text={'Confirm password'} />
             <Controller
               control={ control }
               rules={ {
@@ -215,7 +211,7 @@ const ModifyAccount = ( { navigation, route } ) => {
           </View>
 
           <View style={ theme.inputContainer }>
-            <Text style={theme.inputTitle}>Email</Text>
+            <Title text={'Email'} />
             <Controller
               control={ control }
               rules={ {
@@ -239,14 +235,11 @@ const ModifyAccount = ( { navigation, route } ) => {
               name='email'
             />
           </View>
-          <TouchableOpacity style={ {...theme.generalBtn, marginTop: 10} }
-                            onPress={ handleSubmit( onSubmit ) }>
-            <Text style={ theme.loginButtonText }>Update Details</Text>
-          </TouchableOpacity>
+          <Button onPress={ handleSubmit( onSubmit ) } title={ 'Update Details' }
+                  style={ { width: 200 } } />
 
         </View>
-
-      </ScrollView>
+      </KeyboardAwareScrollView>
   )
 }
 

@@ -5,9 +5,10 @@ import Loading from './Loading'
 import useMedia from '../hooks/useMedia'
 import ExploreListHeader from './ExploreListHeader'
 import PropTypes from 'prop-types'
+import FooterMarginWorkAround from './ListFooterMarginWorAround'
 
 const EventsList = ( { navigation } ) => {
-  console.log( 'EventsList.js')
+  console.log( 'EventsList.js' )
 
   const { getEventsWithThumbnails } = useMedia()
   const [ loading, setLoading ] = useState( false )
@@ -17,10 +18,10 @@ const EventsList = ( { navigation } ) => {
   useEffect( () => {
     // console.log( 'EventsList.js useEffect' )
     /* setLoading( true )
-    getEventsWithThumbnails().then( events => {
-      setEvents( events )
-      setActiveList( events )
-    } ).finally( () => setLoading( false ) ) */
+     getEventsWithThumbnails().then( events => {
+     setEvents( events )
+     setActiveList( events )
+     } ).finally( () => setLoading( false ) ) */
 
     // To keep state up to date
     // TODO instead update app state on changes like add/delete new event/comment/attendee
@@ -42,6 +43,7 @@ const EventsList = ( { navigation } ) => {
 
   return (
     <FlatList
+      ListFooterComponent={ <FooterMarginWorkAround /> }
       ListHeaderComponent={
         <ExploreListHeader
           mediaType={ 'event' }
@@ -70,6 +72,5 @@ const EventsList = ( { navigation } ) => {
 EventsList.propTypes = {
   navigation: PropTypes.object,
 }
-
 
 export default EventsList

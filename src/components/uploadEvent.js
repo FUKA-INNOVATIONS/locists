@@ -3,7 +3,6 @@ import {
   Text,
   TextInput,
   View,
-  ScrollView,
   TouchableOpacity,
   Platform,
 } from 'react-native'
@@ -18,6 +17,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import React, { useCallback, useState } from 'react'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import PropTypes from 'prop-types'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const UploadEvent = props => {
   const { user } = useAuthStorage()
@@ -70,17 +70,17 @@ const UploadEvent = props => {
       max( 20, 'Too Long!' ).
       required( 'Location is required: 3-20 characters' ),
     name: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 3, 'Too Short!' ).
       max( 15, 'Too Long!' ).
-      required( 'Name is required: 5-15 characters' ),
+      required( 'Name is required: 3-15 characters' ),
     date: Yup.date().
       required( 'Date and time is required' ),
     description: Yup.string().
-      min( 25, 'Too Short!' ).
+      min( 5, 'Too Short!' ).
       max( 250, 'Too Long!' ).
-      required( 'Description is required: 25-250 characters' ),
+      required( 'Description is required: 5-250 characters' ),
     price: Yup.number().
-      required( 'Price is required in number format' ),
+      required( 'Price is  required in number format' ),
   } )
 
   const {
@@ -95,14 +95,14 @@ const UploadEvent = props => {
   } )
 
   const mediaDescription = {
+    description: getValues().description,
+    name: getValues().name,
+    location: getValues().location,
     price: getValues().price,
     mediaType: 'event',
     owner: user.username,
     fileType: type,
-    location: getValues().location,
-    name: getValues().name,
     date: dateTime,
-    description: getValues().description,
   }
 
   const resetAll = () => {
@@ -113,168 +113,157 @@ const UploadEvent = props => {
   }
 
   return (
-    <>
-      <ScrollView>
-        {
-          // TODO Replace Default image with custom component
-        }
+    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                             enableOnAndroid={ true }
+                             viewIsInsideTabBar={ true }>
+      {
+        // TODO Replace Default image with custom component
+      }
+      <TouchableOpacity
+        onPress={ pickImage }>
         <Image
           source={ { uri: image } }
           style={ theme.addImage }
         />
+      </TouchableOpacity>
+
+      <View style={ theme.createMediaForm }>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Location'
+              />
+            ) }
+            name='location'
+          />
+          { errors.location && <Text
+            style={ theme.inputErrorText }>{ errors.location.message }</Text> }
+        </View>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Event name'
+              />
+            ) }
+            name='name'
+          />
+          { errors.name && <Text
+            style={ theme.inputErrorText }>{ errors.name.message }</Text> }
+        </View>
+
+        <View style={ theme.inputContainer }>
+          { errors.date && <Text
+            style={ theme.inputErrorText }>{ errors.date.message }</Text> }
+          { show &&
+          <View style={ { ...theme.inputContainer } }>
+            {
+              <RNDateTimePicker
+                // style={ { ...theme.inputContainer, backgroundColor: '#fff', color: 'red' } }
+                testID='dateTimePicker'
+                value={ dateTime }
+                mode={ mode }
+                is24Hour={ true }
+                display='default'
+                onChange={ onChange }
+                themeVariant={ 'dark' }
+              />
+            }
+          </View>
+          }
+
+          <View style={ { justifyContent: 'center', flexDirection: 'column' } }>
+            <View style={ { alignSelf: 'flex-start' } }><Text
+              style={ { color: 'white' } }>{ getValues().date &&
+            dateTime.toLocaleString() }</Text></View>
+            <View style={ {
+              flexDirection: 'column',
+              width: 300,
+              justifyContent: 'space-between',
+              marginTop: 10,
+            } }>
+              <TouchableOpacity style={[ theme.generalBtn, theme.createMediaButton ]}
+                                onPress={ showDatepicker }>
+                <Text style={ theme.loginButtonText }>Select Date</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[ theme.generalBtn, theme.createMediaButton ]}
+                                onPress={ showTimepicker }>
+                <Text style={ theme.loginButtonText }>Select Time</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ { ...theme.input, height: 100 } }
+                multiline={ true }
+                numberOfLines={ 5 }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Event description'
+              />
+            ) }
+            name='description'
+          />
+          { errors.description &&
+          <Text
+            style={ theme.inputErrorText }>{ errors.description.message }</Text> }
+        </View>
+
+        <View style={ theme.inputContainer }>
+          <Controller
+            control={ control }
+            render={ ( { field: { onChange, onBlur, value } } ) => (
+              <TextInput
+                style={ theme.input }
+                onBlur={ onBlur }
+                onChangeText={ onChange }
+                value={ value }
+                placeholder='Price'
+              />
+            ) }
+            name='price'
+          />
+          { errors.price && <Text
+            style={ theme.inputErrorText }>{ errors.price.message }</Text> }
+        </View>
+
         <TouchableOpacity
           style={ [ theme.generalBtn, theme.createMediaButton ] }
-          onPress={ pickImage }>
-          <Text style={ theme.loginButtonText }>Choose Image</Text>
+          disabled={ !imageSelected }
+          loading={ loadingMediaUpload }
+          title='Create event'
+          onPress={ handleSubmit(
+            data => props.onSubmit( data, mediaDescription, imageSelected,
+              image, type ) ) }
+        >
+          <Text style={ theme.loginButtonText }>Create Event</Text>
         </TouchableOpacity>
-
-        <View style={ theme.createMediaForm }>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Location'
-                />
-              ) }
-              name='location'
-            />
-            { errors.location && <Text
-              style={ theme.inputErrorText }>{ errors.location.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Event name'
-                />
-              ) }
-              name='name'
-            />
-            { errors.name && <Text
-              style={ theme.inputErrorText }>{ errors.name.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-
-            {/* <Controller
-             control={ control }
-             render={ ( { field: { onChange, onBlur, value } } ) => (
-             <TextInput
-             style={ theme.input }
-             onBlur={ onBlur }
-             onChangeText={ onChange }
-             value={ value }
-             defaultValue={ date }
-             placeholder='Date & time'
-             disabled={true}
-             />
-             ) }
-             name='date'
-             /> */ }
-            { errors.date && <Text
-              style={ theme.inputErrorText }>{ errors.date.message }</Text> }
-
-            { show &&
-            <View style={ {...theme.inputContainer} }>
-              {
-                <RNDateTimePicker
-                  // style={ { ...theme.inputContainer, backgroundColor: '#fff', color: 'red' } }
-                  testID='dateTimePicker'
-                  value={ dateTime }
-                  mode={ mode }
-                  is24Hour={ true }
-                  display='default'
-                  onChange={ onChange }
-                  themeVariant={'dark'}
-                />
-              }
-            </View>
-            }
-
-            <View style={ { justifyContent: 'center', flexDirection: 'column'} }>
-              <View style={{alignSelf: 'flex-start'}}><Text style={ { color: 'white' } }>{ getValues().date && dateTime.toLocaleString() }</Text></View>
-              <View style={{flexDirection: 'row', width: 300, justifyContent: 'space-between', marginTop: 10}}>
-                <TouchableOpacity style={ {...theme.generalBtn, width: 140} } onPress={ showDatepicker }>
-                  <Text style={ theme.loginButtonText }>Select Date</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={ {...theme.generalBtn, width: 140} } onPress={ showTimepicker }>
-                  <Text style={ theme.loginButtonText }>Select Time</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ { ...theme.input, height: 100 } }
-                  multiline={ true }
-                  numberOfLines={ 5 }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Event description'
-                />
-              ) }
-              name='description'
-            />
-            { errors.description &&
-            <Text
-              style={ theme.inputErrorText }>{ errors.description.message }</Text> }
-          </View>
-
-          <View style={ theme.inputContainer }>
-            <Controller
-              control={ control }
-              render={ ( { field: { onChange, onBlur, value } } ) => (
-                <TextInput
-                  style={ theme.input }
-                  onBlur={ onBlur }
-                  onChangeText={ onChange }
-                  value={ value }
-                  placeholder='Price'
-                />
-              ) }
-              name='price'
-            />
-            { errors.price && <Text
-              style={ theme.inputErrorText }>{ errors.price.message }</Text> }
-          </View>
-
-
-          <TouchableOpacity
-            style={ [ theme.generalBtn, theme.createMediaButton ] }
-            disabled={ !imageSelected }
-            loading={ loadingMediaUpload }
-            title='Create event'
-            onPress={ handleSubmit(
-              data => props.onSubmit( data, mediaDescription, imageSelected,
-                image, type ) ) }
-          >
-            <Text style={ theme.loginButtonText }>Create Event</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={ [ theme.generalBtn, theme.createMediaButton ] }
-            title='Reset form' onPress={ resetAll }>
-            <Text style={ theme.loginButtonText }>Reset Form</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </>
+        <TouchableOpacity
+          style={ [ theme.generalBtn, theme.createMediaButton ] }
+          title='Reset form' onPress={ resetAll }>
+          <Text style={ theme.loginButtonText }>Reset Form</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAwareScrollView>
   )
 }
 

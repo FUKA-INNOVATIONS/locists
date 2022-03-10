@@ -16,7 +16,7 @@ import {
   Nunito_700Bold,// eslint-disable-line
   Nunito_800ExtraBold,// eslint-disable-line
   Nunito_600SemiBold,// eslint-disable-line
-  Nunito_500Medium,// eslint-disable-line
+  Nunito_500Medium as Nunito,// eslint-disable-line
 } from '@expo-google-fonts/nunito'
 
 const Event = ( { eventDetails, ownProfile } ) => {
@@ -27,14 +27,14 @@ const Event = ( { eventDetails, ownProfile } ) => {
     Nunito_700Bold,
     Nunito_800ExtraBold,
     Nunito_600SemiBold,
-    Nunito_500Medium,
+    Nunito,
   } )
 
-  if (!fontsLoaded) {
-    return null;
+  if ( !fontsLoaded ) {
+    return null
   }
 
-  if ( eventDetails === null) return <Loading />
+  if ( eventDetails === null ) return <Loading />
 
   const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( eventDetails.thumbnails !== undefined )
@@ -44,19 +44,32 @@ const Event = ( { eventDetails, ownProfile } ) => {
       {
         !ownProfile
         &&
-        <View style={ { marginLeft: 10, marginVertical: 3 } }>
+        <View
+          style={ {
+            marginLeft: 10,
+            marginVertical: 3,
+            flexDirection: 'row',
+            position: 'relative',
+          } }>
           <UserInfo username={ eventDetails.description.owner }
                     timeAdded={ eventDetails.time_added }
                     avatar={ eventDetails.description.ownerAvatar } />
+
+          <View style={ { right: 0, position: 'absolute', alignSelf: 'center', opacity: 0.5 } }>
+            { (eventDetails.description.isOwner || ownProfile ) &&
+            <DeleteMedia file_id={ eventDetails.file_id } /> }
+          </View>
+
         </View>
       }
+
 
       <View style={ [ theme.generalListEvent ] }>
         <View style={ theme.eventListTitle }>
           <Text
             style={ [
               theme.mediaTitle,
-              { color: '#fff', fontFamily: 'Nunito_400Regular'},
+              { color: '#fff', fontFamily: 'Nunito' },
             ] }>{ eventDetails.description.name }
           </Text>
         </View>
@@ -94,9 +107,8 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <Attend file_id={ eventDetails.file_id } displayIcon={ false } />
           </View>
         </View>
-        { eventDetails.description.isOwner &&
-        <DeleteMedia file_id={ eventDetails.file_id } /> }
       </View>
+
     </>
   )
 }

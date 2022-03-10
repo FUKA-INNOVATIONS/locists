@@ -9,6 +9,8 @@ import theme from '../theme'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useFocusEffect } from '@react-navigation/native'
 import PropTypes from 'prop-types'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 const UploadPost = props => {
   const { user } = useAuthStorage()
@@ -35,9 +37,9 @@ const UploadPost = props => {
       max( 20, 'Too Long!' ).
       required( 'Location is required: 5-20 characters' ),
     description: Yup.string().
-      min( 25, 'Too Short!' ).
+      min( 10, 'Too Short!' ).
       max( 250, 'Too Long!' ).
-      required( 'Description is required: 25-250 characters' ),
+      required( 'Description is required: 10-250 characters' ),
 
   } )
 
@@ -54,11 +56,11 @@ const UploadPost = props => {
   const dummyImage = require( '../../assets/dummy_image.gif' )
 
   const mediaDescription = {
+    location: getValues().location,
+    description: getValues().description,
     mediaType: 'post',
     owner: user.username,
     fileType: type,
-    location: getValues().location,
-    description: getValues().description,
     hasImage: imageSelected !== dummyImage,
   }
 
@@ -75,12 +77,14 @@ const UploadPost = props => {
   !imageSelected && setImageSelected( dummyImage )
 
   return (
-    <>
+    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                             enableOnAndroid={ true }
+                             viewIsInsideTabBar={ true }>
       { dummyImage !== imageSelected &&
       <Image source={ { uri: image } }
              style={ theme.addImage }/> }
       <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ pickImage }>
-        <Text style={theme.loginButtonText}>Add an Image</Text>
+        <Text style={theme.loginButtonText}>Add an Image (optional)</Text>
       </TouchableOpacity>
       <View style={ theme.createMediaForm}>
         <View style={ theme.inputContainer }>
@@ -113,7 +117,7 @@ const UploadPost = props => {
                 onBlur={ onBlur }
                 onChangeText={ onChange }
                 value={ value }
-                placeholder='Enter post text here..'
+                placeholder='Post description'
               />
             ) }
             name='description'
@@ -140,7 +144,7 @@ const UploadPost = props => {
           <Text style={ theme.loginButtonText }>Reset Form</Text>
         </TouchableOpacity>
       </View>
-    </>
+      </KeyboardAwareScrollView>
   )
 }
 

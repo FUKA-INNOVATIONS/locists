@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   View,
   Text,
   TextInput,
   Alert,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -15,6 +12,10 @@ import theme from '../theme'
 import useUser from '../hooks/useUser'
 import { yupResolver } from '@hookform/resolvers/yup'
 import PropTypes from 'prop-types'
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Button from './Button'
+import LottieView from 'lottie-react-native'
 
 const LoginSchema = Yup.object().shape( {
   username: Yup.string().required( 'Username is required' ),
@@ -35,6 +36,13 @@ const Login = ( { navigation } ) => {
     resolver: yupResolver( LoginSchema ),
     mode: 'onBlur',
   } )
+
+  const animation = React.createRef()
+  useEffect( () => {
+    animation.current?.play()
+  }, [] )
+
+
   const onSubmit = async ( data ) => {
     const loginResponse = await login( data )
     if ( loginResponse.token ) {
@@ -48,16 +56,21 @@ const Login = ( { navigation } ) => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={ Platform.OS === 'ios' ? 'padding' : 'height' }
-      style={ theme.login }>
+    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                             enableOnAndroid={ true }
+                             viewIsInsideTabBar={ true }>
 
-      <View>
-        <Text style={ theme.authTitle }>
-          Some text
-        </Text>
+
+      <View style={ { marginVertical: 30, alignSelf: 'center' } }>
+        <LottieView
+          ref={ animation }
+          source={ require( '../../assets/animations/account.json' ) }
+          style={ { width: 200, height: 200 } }
+          loop={ false }
+        />
       </View>
 
+      <View style={ theme.formContainer }>
       <View style={ theme.inputContainer }>
         <Controller
           control={ control }
@@ -94,11 +107,10 @@ const Login = ( { navigation } ) => {
         { errors.password && <Text
           style={ theme.inputErrorText }>{ errors.password.message }</Text> }
       </View>
-      <TouchableOpacity style={ theme.loginButton }
-                        onPress={ handleSubmit( onSubmit ) }>
-        <Text style={ theme.loginButtonText }>Login</Text>
-      </TouchableOpacity>
-    </KeyboardAvoidingView>
+      <Button onPress={ handleSubmit( onSubmit ) } title={ 'Sign in' }
+              style={ { width: 200 } } />
+      </View>
+    </KeyboardAwareScrollView>
   )
 }
 

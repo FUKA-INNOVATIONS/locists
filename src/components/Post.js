@@ -19,10 +19,22 @@ const Post = ( { postMedia, ownProfile } ) => {
       {
         !ownProfile
         &&
-        <View style={ { marginLeft: 15, marginVertical: 3 } }>
+        <View
+          style={ {
+            marginLeft: 10,
+            marginVertical: 3,
+            flexDirection: 'row',
+            position: 'relative',
+          } }>
           <UserInfo username={ postMedia.description.owner }
                     timeAdded={ postMedia.time_added }
                     avatar={ postMedia.description.ownerAvatar } />
+
+          <View style={ { right: 0, position: 'absolute', alignSelf: 'center', opacity: 0.5 } }>
+            { ( postMedia.description.isOwner || ownProfile ) &&
+            <DeleteMedia file_id={ postMedia.file_id } /> }
+          </View>
+
         </View>
       }
 
@@ -34,8 +46,6 @@ const Post = ( { postMedia, ownProfile } ) => {
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <Like displayIcon={ true } file_id={ postMedia.file_id } />
               <CommentsCounter fileId={postMedia.file_id} />
-              { postMedia.description.isOwner &&
-              <DeleteMedia file_id={ postMedia.file_id } /> }
             </View>
           }
         </View>
@@ -49,8 +59,7 @@ const Post = ( { postMedia, ownProfile } ) => {
               <View style={ theme.postRight }>
                 <Like single={false} displayIcon={ true } file_id={ postMedia.file_id } />
                 <CommentsCounter fileId={postMedia.file_id} />
-                { ( postMedia.description.isOwner || ownProfile ) &&
-                <DeleteMedia file_id={ postMedia.file_id } /> }
+
               </View>
           }
         </View>

@@ -17,11 +17,11 @@ const Loading = ( { text } ) => {
     } }>
       <LottieView
         ref={ animation }
-        source={ require( '../../assets/loadSpinner.json' ) }
+        source={ require( '../../assets/animations/loadSpinner.json' ) }
         style={ styles.spinner }
         loop={ true }
       />
-      <Text style={ { color: 'white', fontSize: 20, marginTop: 20 } }>{!text ? 'Loaading media' : text}...</Text>
+      <Text style={ { color: 'white', fontSize: 20, marginTop: 20 } }>{!text ? 'Loading media' : text}...</Text>
     </View>
   )
 }

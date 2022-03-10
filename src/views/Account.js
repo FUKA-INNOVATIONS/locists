@@ -13,6 +13,7 @@ import Event from '../components/Event'
 import PropTypes from 'prop-types'
 import Loading from '../components/Loading'
 import { sortLatest } from '../utils/sortFilterHelpers'
+import FooterMarginWorkAround from '../components/ListFooterMarginWorAround'
 
 const Account = ( { navigation } ) => {
   // console.log( 'Account.js' )
@@ -51,26 +52,26 @@ const Account = ( { navigation } ) => {
     navigation.navigate( 'SinglePostOwn', { postId: postId } )
   }
 
-  const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not
-    posted anything yet</Text>
+  const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not posted anything yet</Text>
 
   if ( loading ) return <Loading text={ 'Loading your media' } />
 
   return (
-    <>
-      <View style={ { alignItems: 'center', height: '65%' } }>
+    <View style={{flex: 1}}>
 
-        <View style={ { marginBottom: 10, height: '35%' } }>
+
+      <View style={{height: '30%'}}>
+        <View>
           { user.avatar ?
             <Image
               source={ { uri: user.avatar } }
-              style={ { width: 150, height: 150, borderRadius: 75 } }
+              style={ { width: 150, height: 150, borderRadius: 75, alignSelf: 'center' } }
               // style={ theme.profilePic }
             />
             :
             <Image
               source={ require( '../../assets/defaultPic.jpg' ) }
-              style={ { width: 150, height: 150, borderRadius: 75 } }
+              style={ { width: 150, height: 150, borderRadius: 75, alignSelf: 'center' } }
               // style={ theme.profilePic }
             />
           }
@@ -88,8 +89,12 @@ const Account = ( { navigation } ) => {
             : 0 } comments and { userMedia &&
           userMedia.length } events/posts</Text>
         </View>
-        <View style={ { width: '100%', height: '100%' } }>
+      </View>
+
+
+        <View style={{ height: '70%'}}>
           <FlatList
+            ListFooterComponent={<FooterMarginWorkAround />}
             data={ userMedia && sortLatest( userMedia ) }
             ListEmptyComponent={ EmptyListMessage }
             keyExtractor={ ( item ) => item.file_id }
@@ -111,8 +116,7 @@ const Account = ( { navigation } ) => {
             }
           />
         </View>
-      </View>
-    </>
+    </View>
   )
 }
 
