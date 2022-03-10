@@ -60,7 +60,7 @@ const Account = ( { navigation } ) => {
     <View style={{flex: 1}}>
 
 
-      <View style={{height: '30%', flexGrow: 'shrink'}}>
+      <View style={{height: '30%'}}>
         <View>
           { user.avatar ?
             <Image
@@ -92,7 +92,7 @@ const Account = ( { navigation } ) => {
       </View>
 
 
-        <View style={{flexGrow: 'grow', height: '70%'}}>
+        <View style={{ height: '70%'}}>
           <FlatList
             ListFooterComponent={<FooterMarginWorkAround />}
             data={ userMedia && sortLatest( userMedia ) }

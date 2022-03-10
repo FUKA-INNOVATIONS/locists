@@ -127,6 +127,7 @@ const theme = {
     position: 'relative', */
   },
   comment: {
+    // opacity: 0.7,
     backgroundColor: general.colors.postBackground,
     // margin: 10,
     minHeight: 75,
