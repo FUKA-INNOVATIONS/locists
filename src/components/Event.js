@@ -55,8 +55,8 @@ const Event = ( { eventDetails, ownProfile } ) => {
                     timeAdded={ eventDetails.time_added }
                     avatar={ eventDetails.description.ownerAvatar } />
 
-          <View style={ { right: 0, position: 'absolute', alignSelf: 'center' } }>
-            { eventDetails.description.isOwner &&
+          <View style={ { right: 0, position: 'absolute', alignSelf: 'center', opacity: 0.5 } }>
+            { (eventDetails.description.isOwner || ownProfile ) &&
             <DeleteMedia file_id={ eventDetails.file_id } /> }
           </View>
 
