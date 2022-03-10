@@ -30,11 +30,11 @@ const Event = ( { eventDetails, ownProfile } ) => {
     Nunito,
   } )
 
-  if (!fontsLoaded) {
-    return null;
+  if ( !fontsLoaded ) {
+    return null
   }
 
-  if ( eventDetails === null) return <Loading />
+  if ( eventDetails === null ) return <Loading />
 
   const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( eventDetails.thumbnails !== undefined )
@@ -44,19 +44,32 @@ const Event = ( { eventDetails, ownProfile } ) => {
       {
         !ownProfile
         &&
-        <View style={ { marginLeft: 10, marginVertical: 3 } }>
+        <View
+          style={ {
+            marginLeft: 10,
+            marginVertical: 3,
+            flexDirection: 'row',
+            position: 'relative',
+          } }>
           <UserInfo username={ eventDetails.description.owner }
                     timeAdded={ eventDetails.time_added }
                     avatar={ eventDetails.description.ownerAvatar } />
+
+          <View style={ { right: 0, position: 'absolute', alignSelf: 'center' } }>
+            { eventDetails.description.isOwner &&
+            <DeleteMedia file_id={ eventDetails.file_id } /> }
+          </View>
+
         </View>
       }
+
 
       <View style={ [ theme.generalListEvent ] }>
         <View style={ theme.eventListTitle }>
           <Text
             style={ [
               theme.mediaTitle,
-              { color: '#fff', fontFamily: 'Nunito'},
+              { color: '#fff', fontFamily: 'Nunito' },
             ] }>{ eventDetails.description.name }
           </Text>
         </View>
@@ -94,9 +107,8 @@ const Event = ( { eventDetails, ownProfile } ) => {
             <Attend file_id={ eventDetails.file_id } displayIcon={ false } />
           </View>
         </View>
-        { eventDetails.description.isOwner &&
-        <DeleteMedia file_id={ eventDetails.file_id } /> }
       </View>
+
     </>
   )
 }
