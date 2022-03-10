@@ -84,7 +84,7 @@ const UploadPost = props => {
       <Image source={ { uri: image } }
              style={ theme.addImage }/> }
       <TouchableOpacity style={[theme.generalBtn, theme.createMediaButton]} onPress={ pickImage }>
-        <Text style={theme.loginButtonText}>Add an Image</Text>
+        <Text style={theme.loginButtonText}>Add an Image (optional)</Text>
       </TouchableOpacity>
       <View style={ theme.createMediaForm}>
         <View style={ theme.inputContainer }>

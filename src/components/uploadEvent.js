@@ -190,16 +190,16 @@ const UploadEvent = props => {
               style={ { color: 'white' } }>{ getValues().date &&
             dateTime.toLocaleString() }</Text></View>
             <View style={ {
-              flexDirection: 'row',
+              flexDirection: 'column',
               width: 300,
               justifyContent: 'space-between',
               marginTop: 10,
             } }>
-              <TouchableOpacity style={ { ...theme.generalBtn, width: 140 } }
+              <TouchableOpacity style={[ theme.generalBtn, theme.createMediaButton ]}
                                 onPress={ showDatepicker }>
                 <Text style={ theme.loginButtonText }>Select Date</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={ { ...theme.generalBtn, width: 140 } }
+              <TouchableOpacity style={[ theme.generalBtn, theme.createMediaButton ]}
                                 onPress={ showTimepicker }>
                 <Text style={ theme.loginButtonText }>Select Time</Text>
               </TouchableOpacity>
