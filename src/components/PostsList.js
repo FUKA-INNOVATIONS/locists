@@ -5,6 +5,7 @@ import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
 import ExploreListHeader from './ExploreListHeader'
 import PropTypes from 'prop-types'
+import FooterMarginWorkAround from './ListFooterMarginWorAround'
 
 const PostsList = ( { navigation } ) => {
   // console.log( 'PostsList.js rendered');
@@ -41,6 +42,7 @@ const PostsList = ( { navigation } ) => {
 
   return (
     <FlatList
+      ListFooterComponent={<FooterMarginWorkAround />}
       ListHeaderComponent={
         <ExploreListHeader
           mediaType={ 'post' }

@@ -1,10 +1,11 @@
-import { FlatList, Pressable } from 'react-native'
+import { FlatList, Pressable, View, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Event from './Event'
 import Loading from './Loading'
 import useMedia from '../hooks/useMedia'
 import ExploreListHeader from './ExploreListHeader'
 import PropTypes from 'prop-types'
+import FooterMarginWorkAround from './ListFooterMarginWorAround'
 
 const EventsList = ( { navigation } ) => {
   console.log( 'EventsList.js')
@@ -40,8 +41,10 @@ const EventsList = ( { navigation } ) => {
 
   if ( loading ) return <Loading />
 
+
   return (
     <FlatList
+      ListFooterComponent={<FooterMarginWorkAround />}
       ListHeaderComponent={
         <ExploreListHeader
           mediaType={ 'event' }

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import AppNavigator from './src/navigator/AppNavigator'
-
 import AuthStorage from './src/utils/authStorage'
 import AuthStorageContext from './src/context/AuthStorageContext'
 import theme from './src/theme'
