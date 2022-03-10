@@ -126,6 +126,28 @@ const CreateStackScreen = () => {
                             } ) }
                             component={ CreateEventScreen } />
       </CreateStack.Group>
+      <ExploreStack.Group screenOptions={ { presentation: 'modal' } }>
+        <ExploreStack.Screen name={ 'SingleEventOnCreate' }
+                             options={ ( {
+                               route,
+                               navigation,
+                             } ) => ( {
+                               title: 'Event',
+                               headerRight: () => (
+                                 <CloseModal navigation={ navigation } /> ),
+                             } ) }
+                             component={ SingleEventScreen } />
+        <ExploreStack.Screen name={ 'SinglePostOnCreate' }
+                             options={ ( {
+                               route,
+                               navigation,
+                             } ) => ( {
+                               title: 'Post',
+                               headerRight: () => (
+                                 <CloseModal navigation={ navigation } /> ),
+                             } ) }
+                             component={ SinglePostScreen } />
+      </ExploreStack.Group>
     </CreateStack.Navigator>
   )
 }

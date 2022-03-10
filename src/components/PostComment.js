@@ -15,7 +15,7 @@ const PostComment = ( {
   display,
   updateComments,
 } ) => { // eslint-disable-line
-         // const { user } = useAuthStorage()
+  // const { user } = useAuthStorage()
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 

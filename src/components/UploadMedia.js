@@ -21,23 +21,17 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
   const onSubmit = async (
     data, mediaDescription, imageSelected, image, type ) => {
-
     setLoading( true )
-    navigation.goBack()
-
-
     const token = await authStorage.getToken()
-
     mediaDescription = JSON.stringify( mediaDescription )
 
-    if ( !imageSelected ) {
+    if ( !imageSelected ) { // User did not choose media
       Alert.alert( 'Please, select a file' )
       setLoading( false )
       return
     }
-    // TODO: Handle too big image case
 
-    const formData = new FormData()  // eslint-disable-line
+    const formData = new FormData()
     data.location &&
     formData.append( 'title', `${ appId } ${ data.location }` )
     formData.append( 'description', mediaDescription )
@@ -50,12 +44,9 @@ const UploadMedia = ( { mediaType, navigation } ) => {
       type: type + '/' + fileExtension,
     } )
 
-    // Upload media
-    const fileResponse = await uploadMedia( formData, token )
+    const fileResponse = await uploadMedia( formData, token ) // Upload media
 
-    // Create new tag and associate it with uploaded media
-
-    let tag = ''
+    let tag = ''  // Create new tag and associate it with uploaded media
     switch ( mediaType ) {
       case 'avatar':
         tag = `avatar_${ user.user_id }`
@@ -67,52 +58,50 @@ const UploadMedia = ( { mediaType, navigation } ) => {
         tag = postTag
     }
 
-    const tagResponse = await createTag(
+    const tagResponse = await createTag(  // Create new tag and associate it with uploaded media
       {
         file_id: fileResponse.file_id,
         tag,
       },
       token,
     )
-    console.log( 'new tag res in onSubmit', tagResponse )
-    console.log( 'upload res in onSubmit', fileResponse )
 
-    /*
-     * Upload succeeded, close modal
-     * */
-
-    if ( fileResponse && tagResponse ) {
-
-      setLoading( false )
-    }
-
-    if ( !fileResponse || !tagResponse ) {
+    if ( !fileResponse || !tagResponse ) {  // Upload failed, alert user
       setLoading( false )
       Alert.alert( 'Sorry',
         `Something went wrong and ${ mediaType } creation failed\n please check media file size!` )
     }
 
-    // Update app user state with new avatar url
-    /* if ( mediaType === 'avatar' ) {
-     user.avatar = await fetchAvatar( user.user_id )
-     } */
+    if ( fileResponse && tagResponse ) { // Upload succeeded, close modal
+      console.log( 'new tag', tagResponse )
+      console.log( 'new file', fileResponse )
 
-    setLoading( false )
+      switch ( mediaType ) {  // Close modal and move user to relevant view after successful upload
+        case 'avatar':
+          user.avatar = await fetchAvatar( user.user_id ).finally(() => setLoading( false )) // Update app user state with new avatar url
 
-    // Move user to relevant view after successful upload
+          // navigation.goBack()
+          navigation.navigate( 'AccountTab', { screen: 'Account' } )
+          break
+        case 'event':
+          setLoading( false )
+          navigation.goBack()
+          navigation.navigate( 'SingleEventOnCreate', { eventId: fileResponse.file_id } )
+          break
+        case 'post':
+          setLoading( false )
+          navigation.goBack()
+          navigation.navigate( 'SinglePostOnCreate', { postId: fileResponse.file_id } )
+          break
+      }
 
-    switch ( mediaType ) {
-      case 'avatar':
-        user.avatar = await fetchAvatar( user.user_id ) // Update app user state with new avatar url
+      /* setTimeout( () => {
+        setLoading( false )
         navigation.navigate( 'AccountTab', { screen: 'Account' } )
-        break
-      case 'event':
-        navigation.navigate( 'ExploreTab', { screen: 'SingleEvent', params: { eventId: fileResponse.file_id }, } )
-        break
-      case 'post':
-        navigation.navigate( 'ExploreTab', { screen: 'SinglePost', params: { postId: fileResponse.file_id }, } )
-        break
+      }, 3000 ) */
+
     }
+
   }
 
   if ( loading ) return <Loading text={ 'Uploading media' } />
@@ -120,7 +109,6 @@ const UploadMedia = ( { mediaType, navigation } ) => {
   switch ( mediaType ) {
     case 'avatar':
       return <UploadAvatar onSubmit={ onSubmit } />
-
     case 'event':
       return <UploadEvent onSubmit={ onSubmit } />
     default:

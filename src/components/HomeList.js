@@ -43,12 +43,12 @@ const HomeList = ( { navigation } ) => {
 
   // Move user to single event view when tapping event card
   const eventPressHandler = ( eventId ) => {
-    navigation.navigate( 'SingleEventHomeStack', { eventId: eventId } )
+    navigation.navigate( 'SingleEventOnCreate', { eventId: eventId } )
   }
 
   // Move user to single post view when tapping a post
   const postPressHandler = ( postId ) => {
-    navigation.navigate( 'SinglePostHomeStack', { postId: postId } )
+    navigation.navigate( 'SinglePostOnCreate', { postId: postId } )
   }
 
   if ( loading ) return <Loading />

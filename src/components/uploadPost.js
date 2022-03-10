@@ -56,11 +56,11 @@ const UploadPost = props => {
   const dummyImage = require( '../../assets/dummy_image.gif' )
 
   const mediaDescription = {
+    description: getValues().description,
+    location: getValues().location,
     mediaType: 'post',
     owner: user.username,
     fileType: type,
-    location: getValues().location,
-    description: getValues().description,
     hasImage: imageSelected !== dummyImage,
   }
 
