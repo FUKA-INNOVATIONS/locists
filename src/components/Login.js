@@ -15,7 +15,6 @@ import PropTypes from 'prop-types'
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Button from './Button'
-import Title from './Title'
 import LottieView from 'lottie-react-native'
 
 const LoginSchema = Yup.object().shape( {
@@ -62,14 +61,14 @@ const Login = ( { navigation } ) => {
                              viewIsInsideTabBar={ true }>
 
 
-      <View style={{marginVertical: 30, alignSelf: 'center'}}>
-      <LottieView
-      ref={ animation }
-      source={ require( '../../assets/animations/account.json' ) }
-      style={ {width: 200, height: 200} }
-      loop={ false }
-      />
-    </View>
+      <View style={ { marginVertical: 30, alignSelf: 'center' } }>
+        <LottieView
+          ref={ animation }
+          source={ require( '../../assets/animations/account.json' ) }
+          style={ { width: 200, height: 200 } }
+          loop={ false }
+        />
+      </View>
 
       <View style={ theme.formContainer }>
       <View style={ theme.inputContainer }>
