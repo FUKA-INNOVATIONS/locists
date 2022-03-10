@@ -70,15 +70,15 @@ const UploadEvent = props => {
       max( 20, 'Too Long!' ).
       required( 'Location is required: 3-20 characters' ),
     name: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 3, 'Too Short!' ).
       max( 15, 'Too Long!' ).
-      required( 'Name is required: 5-15 characters' ),
+      required( 'Name is required: 3-15 characters' ),
     date: Yup.date().
       required( 'Date and time is required' ),
     description: Yup.string().
-      min( 25, 'Too Short!' ).
+      min( 5, 'Too Short!' ).
       max( 250, 'Too Long!' ).
-      required( 'Description is required: 25-250 characters' ),
+      required( 'Description is required: 5-250 characters' ),
     price: Yup.number().
       required( 'Price is  required in number format' ),
   } )

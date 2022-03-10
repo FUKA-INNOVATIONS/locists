@@ -37,9 +37,9 @@ const UploadPost = props => {
       max( 20, 'Too Long!' ).
       required( 'Location is required: 5-20 characters' ),
     description: Yup.string().
-      min( 25, 'Too Short!' ).
+      min( 10, 'Too Short!' ).
       max( 250, 'Too Long!' ).
-      required( 'Description is required: 25-250 characters' ),
+      required( 'Description is required: 10-250 characters' ),
 
   } )
 
@@ -56,8 +56,8 @@ const UploadPost = props => {
   const dummyImage = require( '../../assets/dummy_image.gif' )
 
   const mediaDescription = {
-    description: getValues().description,
     location: getValues().location,
+    description: ''+getValues().description,
     mediaType: 'post',
     owner: user.username,
     fileType: type,
@@ -117,7 +117,7 @@ const UploadPost = props => {
                 onBlur={ onBlur }
                 onChangeText={ onChange }
                 value={ value }
-                placeholder='Enter post text here..'
+                placeholder='Post description'
               />
             ) }
             name='description'

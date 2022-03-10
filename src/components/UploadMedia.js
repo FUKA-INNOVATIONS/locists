@@ -31,6 +31,8 @@ const UploadMedia = ( { mediaType, navigation } ) => {
       return
     }
 
+    console.log('desc',mediaDescription)
+
     const formData = new FormData()
     data.location &&
     formData.append( 'title', `${ appId } ${ data.location }` )
