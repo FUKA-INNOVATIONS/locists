@@ -10,11 +10,6 @@ const SingleEvent = ( { navigation, route } ) => {
   const [ loading, setLoading ] = useState()
   const { getMediaById, singleMedia } = useMedia()
 
-  useEffect(() => {
-    // navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" });
-    return () => navigation.getParent()?.setOptions({ tabBarVisible:false });
-  }, [navigation])
-
   useEffect( async () => {
     setLoading( true )
     await getMediaById( eventId ).then( async () => {
