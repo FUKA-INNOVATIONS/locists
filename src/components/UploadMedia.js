@@ -78,27 +78,30 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
       switch ( mediaType ) {  // Close modal and move user to relevant view after successful upload
         case 'avatar':
-          user.avatar = await fetchAvatar( user.user_id ).finally(() => setLoading( false )) // Update app user state with new avatar url
-
-          // navigation.goBack()
-          navigation.navigate( 'AccountTab', { screen: 'Account' } )
+          navigation.goBack()
+          user.avatar = await fetchAvatar( user.user_id ).finally( () => { // Update app user state with new avatar url
+            setLoading( false )
+            navigation.navigate( 'AccountTab', { screen: 'Account' } )
+          } )
           break
         case 'event':
           setLoading( false )
           navigation.goBack()
-          navigation.navigate( 'SingleEventOnCreate', { eventId: fileResponse.file_id } )
+          navigation.navigate( 'SingleEventOnCreate',
+            { eventId: fileResponse.file_id } )
           break
         case 'post':
           setLoading( false )
           navigation.goBack()
-          navigation.navigate( 'SinglePostOnCreate', { postId: fileResponse.file_id } )
+          navigation.navigate( 'SinglePostOnCreate',
+            { postId: fileResponse.file_id } )
           break
       }
 
       /* setTimeout( () => {
-        setLoading( false )
-        navigation.navigate( 'AccountTab', { screen: 'Account' } )
-      }, 3000 ) */
+       setLoading( false )
+       navigation.navigate( 'AccountTab', { screen: 'Account' } )
+       }, 3000 ) */
 
     }
 
