@@ -13,6 +13,7 @@ import Event from '../components/Event'
 import PropTypes from 'prop-types'
 import Loading from '../components/Loading'
 import { sortLatest } from '../utils/sortFilterHelpers'
+import FooterMarginWorkAround from '../components/ListFooterMarginWorAround'
 
 const Account = ( { navigation } ) => {
   // console.log( 'Account.js' )
@@ -56,9 +57,10 @@ const Account = ( { navigation } ) => {
   if ( loading ) return <Loading text={ 'Loading your media' } />
 
   return (
-    <>
-      <View>
+    <View style={{flex: 1}}>
 
+
+      <View style={{height: '30%', flexGrow: 'shrink'}}>
         <View>
           { user.avatar ?
             <Image
@@ -87,8 +89,12 @@ const Account = ( { navigation } ) => {
             : 0 } comments and { userMedia &&
           userMedia.length } events/posts</Text>
         </View>
-        <View>
+      </View>
+
+
+        <View style={{flexGrow: 'grow', height: '70%'}}>
           <FlatList
+            ListFooterComponent={<FooterMarginWorkAround />}
             data={ userMedia && sortLatest( userMedia ) }
             ListEmptyComponent={ EmptyListMessage }
             keyExtractor={ ( item ) => item.file_id }
@@ -110,8 +116,7 @@ const Account = ( { navigation } ) => {
             }
           />
         </View>
-      </View>
-    </>
+    </View>
   )
 }
 
