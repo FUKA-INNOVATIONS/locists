@@ -57,7 +57,7 @@ const UploadPost = props => {
 
   const mediaDescription = {
     location: getValues().location,
-    description: ''+getValues().description,
+    description: getValues().description,
     mediaType: 'post',
     owner: user.username,
     fileType: type,

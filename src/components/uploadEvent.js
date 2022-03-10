@@ -95,14 +95,14 @@ const UploadEvent = props => {
   } )
 
   const mediaDescription = {
+    description: getValues().description,
+    name: getValues().name,
+    location: getValues().location,
     price: getValues().price,
     mediaType: 'event',
     owner: user.username,
     fileType: type,
-    location: getValues().location,
-    name: getValues().name,
     date: dateTime,
-    description: getValues().description,
   }
 
   const resetAll = () => {
@@ -245,7 +245,6 @@ const UploadEvent = props => {
           { errors.price && <Text
             style={ theme.inputErrorText }>{ errors.price.message }</Text> }
         </View>
-
 
         <TouchableOpacity
           style={ [ theme.generalBtn, theme.createMediaButton ] }

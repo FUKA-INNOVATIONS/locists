@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import Loading from './Loading'
 import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Button from './Button'
-import Title from './Title'
+import LottieView from 'lottie-react-native'
 
 const RegisterSchema = Yup.object().shape( {  // Form validation
   username: Yup.string().
@@ -49,6 +49,11 @@ const Register = ( { navigation } ) => {  // Handle new user registration
     resolver: yupResolver( RegisterSchema ),
     mode: 'onBlur',
   } )
+
+  const animation = React.createRef()
+  useEffect( () => {
+    animation.current?.play()
+  }, [] )
 
   // Submit registration form with given data
   const onSubmit = async ( data ) => {
@@ -94,9 +99,17 @@ const Register = ( { navigation } ) => {  // Handle new user registration
                              viewIsInsideTabBar={ true }>
 
 
-      <View style={ theme.formContainer }>
-        <Title text={ 'Words and animation' } />
+      <View style={{marginVertical: 30, alignSelf: 'center'}}>
+        <LottieView
+          ref={ animation }
+          source={ require( '../../assets/animations/party-cat.json' ) }
+          style={ {width: 200, height: 200} }
+          loop={ false }
+        />
+      </View>
 
+
+      <View style={ theme.formContainer }>
         <View style={ theme.inputContainer }>
           <Controller
             control={ control }

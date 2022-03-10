@@ -17,7 +17,7 @@ const Loading = ( { text } ) => {
     } }>
       <LottieView
         ref={ animation }
-        source={ require( '../../assets/loadSpinner.json' ) }
+        source={ require( '../../assets/animations/loadSpinner.json' ) }
         style={ styles.spinner }
         loop={ true }
       />

@@ -1,12 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   View,
   Text,
   TextInput,
   Alert,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
@@ -19,6 +16,7 @@ import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Button from './Button'
 import Title from './Title'
+import LottieView from 'lottie-react-native'
 
 const LoginSchema = Yup.object().shape( {
   username: Yup.string().required( 'Username is required' ),
@@ -39,6 +37,13 @@ const Login = ( { navigation } ) => {
     resolver: yupResolver( LoginSchema ),
     mode: 'onBlur',
   } )
+
+  const animation = React.createRef()
+  useEffect( () => {
+    animation.current?.play()
+  }, [] )
+
+
   const onSubmit = async ( data ) => {
     const loginResponse = await login( data )
     if ( loginResponse.token ) {
@@ -57,7 +62,15 @@ const Login = ( { navigation } ) => {
                              viewIsInsideTabBar={ true }>
 
 
-      <Title text={'Words and animation'} />
+      <View style={{marginVertical: 30, alignSelf: 'center'}}>
+      <LottieView
+      ref={ animation }
+      source={ require( '../../assets/animations/account.json' ) }
+      style={ {width: 200, height: 200} }
+      loop={ false }
+      />
+    </View>
+
       <View style={ theme.formContainer }>
       <View style={ theme.inputContainer }>
         <Controller
