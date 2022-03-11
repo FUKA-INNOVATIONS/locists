@@ -19,13 +19,12 @@ import LottieView from 'lottie-react-native'
 
 const RegisterSchema = Yup.object().shape( {  // Form validation
   username: Yup.string().
-    min( 4, 'Too Short!' ).
-    max( 10, 'Too Long!' ).
-    required( 'Username is required, 4-10 characters' ),
+    min( 4, 'Too Short, min 4 characters!' ).
+    max( 16, 'Too Long, max 16 characters!!' ).
+    required( 'Username is required, 4-16 characters' ),
   password: Yup.string().required( 'Required' ),
   passwordConfirm: Yup.string().
-    min( 5, 'Too short, min 5 characters' ).
-    max( 16, 'Too long, max 16 characters' ).
+    min( 8, 'Too short, min 8 characters' ).
     required( 'Password confirmation is required' ).
     oneOf( [ Yup.ref( 'password' ), null ], 'Passwords must match' ),
   email: Yup.string().email( 'Invalid email' ).required( 'Required' ),
@@ -94,119 +93,119 @@ const Register = ( { navigation } ) => {  // Handle new user registration
   if ( loading ) return <Loading />
 
   return (
-    <KeyboardAwareScrollView enableAutomaticScroll={ false }
-                             enableOnAndroid={ true }
-                             viewIsInsideTabBar={ true }>
+      <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                               enableOnAndroid={ true }
+                               viewIsInsideTabBar={ true }>
 
 
-      <View style={{marginVertical: 30, alignSelf: 'center'}}>
-        <LottieView
-          ref={ animation }
-          source={ require( '../../assets/animations/party-cat.json' ) }
-          style={ {width: 200, height: 200} }
-          loop={ false }
-        />
-      </View>
-
-
-      <View style={ theme.formContainer }>
-        <View style={ theme.inputContainer }>
-          <Controller
-            control={ control }
-            render={ ( { field: { onChange, onBlur, value } } ) => (
-              <TextInput
-                style={ theme.input }
-                onBlur={ onBlur }
-                onChangeText={ onChange }
-                value={ value }
-                placeholder='Username'
-              />
-            ) }
-            name='username'
+        <View style={{marginVertical: 30, alignSelf: 'center'}}>
+          <LottieView
+            ref={ animation }
+            source={ require( '../../assets/animations/party-cat.json' ) }
+            style={ {width: 200, height: 200} }
+            loop={ false }
           />
-          { errors.username && <Text
-            style={ theme.inputErrorText }>{ errors.username.message }</Text> }
         </View>
 
-        <View style={ theme.inputContainer }>
-          <Controller
-            control={ control }
-            render={ ( { field: { onChange, onBlur, value } } ) => (
-              <TextInput
-                style={ theme.input }
-                onBlur={ onBlur }
-                onChangeText={ onChange }
-                value={ value }
-                placeholder='email'
-              />
-            ) }
-            name='email'
-          />
-          { errors.email && <Text
-            style={ theme.inputErrorText }>{ errors.email.message }</Text> }
-        </View>
 
-        <View style={ theme.inputContainer }>
-          <Controller
-            control={ control }
-            render={ ( { field: { onChange, onBlur, value } } ) => (
-              <TextInput
-                style={ theme.input }
-                onBlur={ onBlur }
-                onChangeText={ onChange }
-                value={ value }
-                placeholder='City'
-              />
-            ) }
-            name='city'
-          />
-          { errors.city && <Text
-            style={ theme.inputErrorText }>{ errors.city.message }</Text> }
-        </View>
+        <View style={ theme.formContainer }>
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Username'
+                />
+              ) }
+              name='username'
+            />
+            { errors.username && <Text
+              style={ theme.inputErrorText }>{ errors.username.message }</Text> }
+          </View>
 
-        <View style={ theme.inputContainer }>
-          <Controller
-            control={ control }
-            render={ ( { field: { onChange, onBlur, value } } ) => (
-              <TextInput
-                style={ theme.input }
-                onBlur={ onBlur }
-                onChangeText={ onChange }
-                value={ value }
-                placeholder='Password'
-                secureTextEntry={ true }
-              />
-            ) }
-            name='password'
-          />
-          { errors.password && <Text
-            style={ theme.inputErrorText }>{ errors.password.message }</Text> }
-        </View>
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='email'
+                />
+              ) }
+              name='email'
+            />
+            { errors.email && <Text
+              style={ theme.inputErrorText }>{ errors.email.message }</Text> }
+          </View>
 
-        <View style={ theme.inputContainer }>
-          <Controller
-            control={ control }
-            render={ ( { field: { onChange, onBlur, value } } ) => (
-              <TextInput
-                style={ theme.input }
-                onBlur={ onBlur }
-                onChangeText={ onChange }
-                value={ value }
-                placeholder='Password confirmation'
-                secureTextEntry={ true }
-              />
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='City'
+                />
+              ) }
+              name='city'
+            />
+            { errors.city && <Text
+              style={ theme.inputErrorText }>{ errors.city.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Password'
+                  secureTextEntry={ true }
+                />
+              ) }
+              name='password'
+            />
+            { errors.password && <Text
+              style={ theme.inputErrorText }>{ errors.password.message }</Text> }
+          </View>
+
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Password confirmation'
+                  secureTextEntry={ true }
+                />
+              ) }
+              name='passwordConfirm'
+            />
+            { errors.passwordConfirm && (
+              <Text
+                style={ theme.inputErrorText }>{ errors.passwordConfirm.message }</Text>
             ) }
-            name='passwordConfirm'
-          />
-          { errors.passwordConfirm && (
-            <Text
-              style={ theme.inputErrorText }>{ errors.passwordConfirm.message }</Text>
-          ) }
+          </View>
+          <Button onPress={ handleSubmit( onSubmit ) } title={ 'Register' }
+                  style={ { width: 200 } } />
         </View>
-        <Button onPress={ handleSubmit( onSubmit ) } title={ 'Register' }
-                style={ { width: 200 } } />
-      </View>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
   )
 }
 

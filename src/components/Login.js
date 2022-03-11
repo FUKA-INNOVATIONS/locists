@@ -56,61 +56,61 @@ const Login = ( { navigation } ) => {
   }
 
   return (
-    <KeyboardAwareScrollView enableAutomaticScroll={ false }
-                             enableOnAndroid={ true }
-                             viewIsInsideTabBar={ true }>
+      <KeyboardAwareScrollView enableAutomaticScroll={ false }
+                               enableOnAndroid={ true }
+                               viewIsInsideTabBar={ true }>
 
 
-      <View style={ { marginVertical: 30, alignSelf: 'center' } }>
-        <LottieView
-          ref={ animation }
-          source={ require( '../../assets/animations/account.json' ) }
-          style={ { width: 200, height: 200 } }
-          loop={ false }
-        />
-      </View>
+        <View style={ { marginVertical: 30, alignSelf: 'center' } }>
+          <LottieView
+            ref={ animation }
+            source={ require( '../../assets/animations/account.json' ) }
+            style={ { width: 200, height: 200 } }
+            loop={ false }
+          />
+        </View>
 
-      <View style={ theme.formContainer }>
-      <View style={ theme.inputContainer }>
-        <Controller
-          control={ control }
-          render={ ( { field: { onChange, onBlur, value } } ) => (
-            <TextInput
-              style={ theme.input }
-              onBlur={ onBlur }
-              onChangeText={ onChange }
-              value={ value }
-              placeholder='Username'
+        <View style={ theme.formContainer }>
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Username'
+                />
+              ) }
+              name='username'
             />
-          ) }
-          name='username'
-        />
-        { errors.username && <Text
-          style={ theme.inputErrorText }>{ errors.username.message }</Text> }
-      </View>
+            { errors.username && <Text
+              style={ theme.inputErrorText }>{ errors.username.message }</Text> }
+          </View>
 
-      <View style={ theme.inputContainer }>
-        <Controller
-          control={ control }
-          render={ ( { field: { onChange, onBlur, value } } ) => (
-            <TextInput
-              style={ theme.input }
-              onBlur={ onBlur }
-              onChangeText={ onChange }
-              value={ value }
-              placeholder='Password'
-              secureTextEntry={ true }
+          <View style={ theme.inputContainer }>
+            <Controller
+              control={ control }
+              render={ ( { field: { onChange, onBlur, value } } ) => (
+                <TextInput
+                  style={ theme.input }
+                  onBlur={ onBlur }
+                  onChangeText={ onChange }
+                  value={ value }
+                  placeholder='Password'
+                  secureTextEntry={ true }
+                />
+              ) }
+              name='password'
             />
-          ) }
-          name='password'
-        />
-        { errors.password && <Text
-          style={ theme.inputErrorText }>{ errors.password.message }</Text> }
-      </View>
-      <Button onPress={ handleSubmit( onSubmit ) } title={ 'Sign in' }
-              style={ { width: 200 } } />
-      </View>
-    </KeyboardAwareScrollView>
+            { errors.password && <Text
+              style={ theme.inputErrorText }>{ errors.password.message }</Text> }
+          </View>
+          <Button onPress={ handleSubmit( onSubmit ) } title={ 'Sign in' }
+                  style={ { width: 200 } } />
+        </View>
+      </KeyboardAwareScrollView>
   )
 }
 
