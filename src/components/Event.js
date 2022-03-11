@@ -62,8 +62,6 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
         </View>
       }
-
-
       <View style={ [ theme.generalListEvent ] }>
         <View style={ theme.eventListTitle }>
           <Text
