@@ -219,7 +219,7 @@ const UploadEvent = props => {
                 onBlur={ onBlur }
                 onChangeText={ onChange }
                 value={ value }
-                placeholder='Event description'
+                placeholder='Event description: Please be descriptive! '
               />
             ) }
             name='description'
