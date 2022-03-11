@@ -8,15 +8,13 @@ import UserInfo from './UserInfo'
 import CommentsCounter from './CommentsCounter'
 import PropTypes from 'prop-types'
 
-const Post = ( { postMedia, ownProfile } ) => {
+const Post = ( { postMedia, ownProfile } ) => { // Displays event card on HomeList, PostsList, Account List
   // console.log( 'Post.js', ownProfile )
 
-  // const smallScreen = Dimensions.get( 'screen' ).width <= 390
   const hasThumbnails = ( postMedia.thumbnails !== undefined )
 
   return (
     <>
-
         <View
           style={ {
             marginLeft: 10,
@@ -34,8 +32,6 @@ const Post = ( { postMedia, ownProfile } ) => {
           </View>
 
         </View>
-
-
       <View style={ [ theme.generalListPost2] }>
         <View style={ [ theme.postLeft, !postMedia.description.hasImage && {width: '75%'}] }>
           <Text numberOfLines={ 5 }>{ postMedia.description.description }</Text>
@@ -57,7 +53,6 @@ const Post = ( { postMedia, ownProfile } ) => {
               <View style={ theme.postRight }>
                 <Like single={false} displayIcon={ true } file_id={ postMedia.file_id } />
                 <CommentsCounter fileId={postMedia.file_id} />
-
               </View>
           }
         </View>

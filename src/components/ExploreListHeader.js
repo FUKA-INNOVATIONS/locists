@@ -9,7 +9,7 @@ import {
 } from '../utils/sortFilterHelpers'
 import PropTypes from 'prop-types'
 
-const ExploreListHeader = ( {
+const ExploreListHeader = ( { // Handles, sort, filter and search on HomeList, EventsList, PostsList
   media,
   activeList,
   setActiveList,
@@ -22,14 +22,14 @@ const ExploreListHeader = ( {
   const [ cityFilterValue, setCityFilterValue ] = useState( 'all' )
   const [ cityItems, setCityItems ] = useState( [] )
 
-  const eventSortItems = [
+  const eventSortItems = [  // Events sorting dropdown option
     { label: 'Freshest events', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
     { label: 'Most attendees', value: 'mostAttendees' },
     { label: 'Upcoming events', value: 'soonest' },
   ]
 
-  const postSortItems = [
+  const postSortItems = [ // Posts sorting dropdown option
     { label: 'Freshest posts', value: 'latest' },
     { label: 'Most commented', value: 'mostCommented' },
     { label: 'Most likes', value: 'mostLikes' },
@@ -40,14 +40,14 @@ const ExploreListHeader = ( {
   const [ sortItems, setSortItems ] = useState(
     mediaType === 'event' ? eventSortItems : postSortItems )
 
-  useEffect( () => {
+  useEffect( () => {  // Initialize location dropdown options
     initCities( media, setCityItems )
     return navigation.addListener( 'focus', async () => {
       initCities( media, setCityItems )
     } )
   }, [] )
 
-  useEffect( () => {
+  useEffect( () => {  // Sort by latest by default
     sortHandler( sortValue )
   }, [ sortValue ] )
 
@@ -78,7 +78,7 @@ const ExploreListHeader = ( {
     }
   }
 
-  const filterCityHandler = ( city ) => {
+  const filterCityHandler = ( city ) => { // Handles location dropdown
     if ( city === 'all' ) {
       setActiveList( media )
     } else {
@@ -88,11 +88,11 @@ const ExploreListHeader = ( {
     }
   }
 
-  const onSortOpen = useCallback( () => {
+  const onSortOpen = useCallback( () => {   // Close location dropdown when sorting is open, avoid overlap issue
     setCityFilterOpen( false )
   }, [] )
 
-  const onCityFilterOpen = useCallback( () => {
+  const onCityFilterOpen = useCallback( () => { // Close sorting dropdown when location is open, avoid overlap issue
     setSortOpen( false )
   }, [] )
 
@@ -104,7 +104,7 @@ const ExploreListHeader = ( {
       marginHorizontal: 10,
       marginBottom: 10,
       marginTop: 5,
-      right: 5
+      right: 5,
     } }>
       { ( mediaType === 'event' || mediaType === 'post' ) &&
       <DropDownPicker
@@ -126,17 +126,17 @@ const ExploreListHeader = ( {
           [
             theme.dropDownPicker,
             {
-            marginRight: 0,
-            alignSelf: 'flex-end',
-            }
+              marginRight: 0,
+              alignSelf: 'flex-end',
+            },
           ]
-          }
-        dropDownContainerStyle={{
+        }
+        dropDownContainerStyle={ {
           width: '45%',
           alignSelf: 'flex-end',
           // borderColor: '#7b08a3',
           borderWidth: 2,
-        }}
+        } }
 
       />
       }
@@ -171,18 +171,18 @@ const ExploreListHeader = ( {
           [
             theme.dropDownPicker,
             {
-          marginLeft: 15,
-          alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
-            }
-            ]
+              marginLeft: 15,
+              alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
+            },
+          ]
         }
-        dropDownContainerStyle={{
+        dropDownContainerStyle={ {
           width: '45%',
           alignSelf: mediaType === 'mixedMedia' ? 'flex-end' : 'flex-start',
           marginLeft: mediaType === 'mixedMedia' ? 0 : 15,
           // borderColor: '#7b08a3',
           borderWidth: 2,
-        }}
+        } }
       />
     </View>
   )

@@ -9,13 +9,11 @@ import Loading from './Loading'
 import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-
-const PostComment = ( {
+const PostComment = ( { // Post new comment on single event/post screen
   file_id, // eslint-disable-line
   display,
   updateComments,
 } ) => { // eslint-disable-line
-  // const { user } = useAuthStorage()
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 

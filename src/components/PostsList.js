@@ -23,8 +23,7 @@ const PostsList = ( { navigation } ) => {
       setActiveList( posts )
     } ).finally( () => setLoading( false ) )
 
-    // To keep state up to date
-    return navigation.addListener( 'focus', async () => {
+    return navigation.addListener( 'focus', async () => { // To keep state up to date
       // console.log( 'PostList.js focus' )
       setLoading( true )
       getPostsWithThumbnails().then( posts => {

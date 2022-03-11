@@ -4,7 +4,7 @@ import useComment from '../hooks/useComment'
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-const CommentsCounter = ( { fileId } ) => {
+const CommentsCounter = ( { fileId } ) => {   // Display amount of comments related to fileId prop
   const { getMediaComments } = useComment()
   const [ commentsCount, setCommentsCount ] = useState( 0 )
 
@@ -23,7 +23,7 @@ const CommentsCounter = ( { fileId } ) => {
 }
 
 CommentsCounter.propTypes = {
-  fileId: PropTypes.number
+  fileId: PropTypes.number,
 }
 
 export default CommentsCounter
