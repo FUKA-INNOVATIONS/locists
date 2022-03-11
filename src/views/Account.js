@@ -74,13 +74,13 @@ const Account = ( { navigation } ) => {
           { user.avatar ?
             <Image
               source={ { uri: user.avatar } }
-              style={ { width: 140, height: 140, borderRadius: 70, alignSelf: 'center' } }
+              style={ { width: 140, height: 140, borderRadius: 70, top: 10, alignSelf: 'center' } }
               // style={ theme.profilePic }
             />
             :
             <Image
               source={ require( '../../assets/defaultPic.jpg' ) }
-              style={ { width: 140, height: 140, borderRadius: 70, top: 30, alignSelf: 'center' } }
+              style={ { width: 140, height: 140, borderRadius: 70, top: 10, alignSelf: 'center' } }
               // style={ theme.profilePic }
             />
           }
@@ -101,7 +101,7 @@ const Account = ( { navigation } ) => {
       </View>
 
 
-        <View style={ { height: '60%', marginTop: 20 } }>
+        <View style={ { height: '60%', marginTop: 10 } }>
           <FlatList
             ListFooterComponent={<FooterMarginWorkAround />}
             data={ userMedia && sortLatest( userMedia ) }

@@ -109,7 +109,17 @@ const UploadMedia = ( { mediaType, navigation } ) => {
 
   }
 
-  if ( loading ) return <Loading text={ 'Uploading media' } />
+  if ( loading ) {
+    switch ( mediaType ) {
+      case 'avatar':
+        return <Loading text={'Uploading avatar'} />
+      case 'event':
+        return <Loading text={'Publishing event'} />
+      default:
+        return  <Loading text={'Publishing post'} />
+    }
+  }
+
 
   switch ( mediaType ) {
     case 'avatar':
