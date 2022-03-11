@@ -2,6 +2,7 @@ import {
   Image,
   Text,
   TextInput,
+  NumberInput,
   View,
   TouchableOpacity,
   Platform,
@@ -237,7 +238,9 @@ const UploadEvent = props => {
                 onBlur={ onBlur }
                 onChangeText={ onChange }
                 value={ value }
-                placeholder='Price'
+                placeholder='Price ( type 0 for free)'
+                keyboardType={'numeric'}
+               // defaultValue={'0'}
               />
             ) }
             name='price'

@@ -30,18 +30,18 @@ const Comment = ( {
 
   return (
     <View style={ { margin: 10 } }>
-      <View style={ { flexDirection: 'row', alignItems: 'center' } }>
+      <View style={ { flexDirection: 'row', alignItems: 'center', justifyItems: 'center' } }>
         <UserInfo avatar={ avatar } username={ 'Username' } timeAdded={commentObj.time_added} />
-        <View style={ { marginLeft: 50 } }>
+        <View style={ { position: 'absolute', right: 0, marginRight: 5 } }>
           { isOwner &&
           <Pressable onPress={ () => onDeleteHandler(
-            commentObj.comment_id ) }><Text style={ { color: '#c53e3e' } }>X
+            commentObj.comment_id ) }><Text style={ { color: '#c53e3e' } }>
             Delete</Text></Pressable> }
         </View>
       </View>
-      <View style={ theme.comment }>
+      <View style={ {...theme.comment} }>
         <View style={ theme.commentInfo }>
-          <Text>{ commentObj.comment }</Text>
+          <Text style={{color: 'rgb(233,214,219)',}}>{ commentObj.comment }</Text>
         </View>
       </View>
     </View>
