@@ -448,6 +448,7 @@ const theme = {
     justifyContent: 'center',
     alignItems: 'center',
     justifyItems: 'center',
+    marginBottom: 200 // workaround to fix keyboard issue
   },
 
   // Create Media Styles
