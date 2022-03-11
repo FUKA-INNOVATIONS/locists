@@ -1,4 +1,4 @@
-import { FlatList, Pressable } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Event from './Event'
 import Loading from './Loading'
@@ -32,7 +32,7 @@ const EventsList = ( { navigation } ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } )
   }
 
-  if ( loading ) return <Loading />
+  if ( loading ) return <View style={{top: 300}}><Loading text={'Loading events'} /></View>
 
   return (
     <FlatList

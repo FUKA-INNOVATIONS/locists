@@ -21,7 +21,7 @@ const Loading = ( { text } ) => {
         style={ styles.spinner }
         loop={ true }
       />
-      <Text style={ { color: 'white', fontSize: 20, marginTop: 20 } }>{!text ? 'Loading media' : text}...</Text>
+      <Text style={ styles.text }>{ !text ? 'Loading media' : text }...</Text>
     </View>
   )
 }
@@ -34,11 +34,14 @@ const styles = StyleSheet.create( {
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    height: '100%'
   },
   spinner: {
     width: 100,
     height: 100,
   },
+  text: { color: 'white', fontSize: 20, marginTop: 20 },
 } )
 
 Loading.propTypes = {
