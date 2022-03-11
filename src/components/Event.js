@@ -41,9 +41,7 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
   return (
     <>
-      {
-        !ownProfile
-        &&
+
         <View
           style={ {
             marginLeft: 10,
@@ -61,7 +59,6 @@ const Event = ( { eventDetails, ownProfile } ) => {
           </View>
 
         </View>
-      }
       <View style={ [ theme.generalListEvent ] }>
         <View style={ theme.eventListTitle }>
           <Text

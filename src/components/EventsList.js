@@ -1,4 +1,4 @@
-import { FlatList, Pressable } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Event from './Event'
 import Loading from './Loading'
@@ -16,17 +16,10 @@ const EventsList = ( { navigation } ) => {
   const [ activeList, setActiveList ] = useState( events )
 
   useEffect( () => {
-    // console.log( 'EventsList.js useEffect' )
-    /* setLoading( true )
-     getEventsWithThumbnails().then( events => {
-     setEvents( events )
-     setActiveList( events )
-     } ).finally( () => setLoading( false ) ) */
-
     // To keep state up to date
     // TODO instead update app state on changes like add/delete new event/comment/attendee
     return navigation.addListener( 'focus', async () => {
-      // console.log( 'EventsList.js focus' )
+      console.log( 'EventsList.js focus' )
       setLoading( true )
       getEventsWithThumbnails().then( events => {
         setEvents( events )
@@ -39,7 +32,7 @@ const EventsList = ( { navigation } ) => {
     navigation.navigate( 'SingleEvent', { eventId: eventId } )
   }
 
-  if ( loading ) return <Loading />
+  if ( loading ) return <View style={{top: 300}}><Loading text={'Loading events'} /></View>
 
   return (
     <FlatList

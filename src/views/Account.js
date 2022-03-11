@@ -57,7 +57,7 @@ const Account = ( { navigation } ) => {
     navigation.navigate( 'SinglePostOwn', { postId: postId } )
   }
 
-  const EmptyListMessage = () => <Text style={ { color: '#fff' } }>You Have not posted anything yet</Text>
+  const EmptyListMessage = () => <Text style={ { color: '#fff', textAlign: 'center' } }>You Have not posted anything yet</Text>
 
   if ( loading ) return <Loading text={ 'Loading your media' } />
 
@@ -69,7 +69,7 @@ const Account = ( { navigation } ) => {
         style={ { width:dimensions.width, height: 100, position: 'absolute' } }
       />
 
-      <View style={{height: '30%'}}>
+      <View style={{height: '30%', marginBottom: 30}}>
         <View>
           { user.avatar ?
             <Image
