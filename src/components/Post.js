@@ -16,9 +16,7 @@ const Post = ( { postMedia, ownProfile } ) => {
 
   return (
     <>
-      {
-        !ownProfile
-        &&
+
         <View
           style={ {
             marginLeft: 10,
@@ -36,7 +34,7 @@ const Post = ( { postMedia, ownProfile } ) => {
           </View>
 
         </View>
-      }
+
 
       <View style={ [ theme.generalListPost2] }>
         <View style={ [ theme.postLeft, !postMedia.description.hasImage && {width: '75%'}] }>

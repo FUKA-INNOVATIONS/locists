@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, Pressable } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 import Post from './Post'
 import useMedia from '../hooks/useMedia'
 import Loading from './Loading'
@@ -38,7 +38,7 @@ const PostsList = ( { navigation } ) => {
     navigation.navigate( 'SinglePost', { postId: postId } )
   }
 
-  if ( loading ) return <Loading />
+  if ( loading ) return <View style={{top: 300}}><Loading text={'Loading events'} /></View>
 
   return (
     <FlatList

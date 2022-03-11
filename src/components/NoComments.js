@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const NoComments = ( { openCommentBox, isWriteComment } ) => {
   console.log( isWriteComment )
   return (
-    <View style={ { alignItems: 'center', padding: 25 } }>
+    <View style={ { alignItems: 'center', padding: 25, marginTop: 20 } }>
       <Text style={ {
         color: theme.colors.mainBackground,
         fontWeight: 'bold',
