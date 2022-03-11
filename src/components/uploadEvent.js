@@ -2,7 +2,6 @@ import {
   Image,
   Text,
   TextInput,
-  NumberInput,
   View,
   TouchableOpacity,
   Platform,

@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   Alert,
-  ScrollView
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import * as Yup from 'yup'
