@@ -33,13 +33,13 @@ const UploadPost = props => {
 
   const PostSchema = Yup.object().shape( {
     location: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 3, 'Too Short!' ).
       max( 20, 'Too Long!' ).
-      required( 'Location is required: 5-20 characters' ),
+      required( 'Location is required: 3-20 characters' ),
     description: Yup.string().
-      min( 10, 'Too Short!' ).
+      min( 5, 'Too Short!' ).
       max( 250, 'Too Long!' ).
-      required( 'Description is required: 10-250 characters' ),
+      required( 'Description is required: 5-250 characters' ),
 
   } )
 

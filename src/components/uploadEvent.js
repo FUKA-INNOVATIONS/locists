@@ -81,7 +81,7 @@ const UploadEvent = props => {
       max( 250, 'Too Long!' ).
       required( 'Description is required: 5-250 characters' ),
     price: Yup.number().
-      required( 'Price is  required in number format' ),
+      required( 'Price is required, type 0 for Free' ),
   } )
 
   const {
