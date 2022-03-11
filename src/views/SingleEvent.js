@@ -10,6 +10,8 @@ const SingleEvent = ( { navigation, route } ) => {
   const [ loading, setLoading ] = useState()
   const { getMediaById, singleMedia } = useMedia()
 
+  console.log('singleMedia',singleMedia)
+
   useEffect( async () => {
     setLoading( true )
     await getMediaById( eventId ).then( async () => {

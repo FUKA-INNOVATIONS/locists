@@ -115,6 +115,7 @@ const useMedia = () => {
       if ( data ) {
         data.description = JSON.parse( data.description );
         data.description.ownerAvatar = await fetchAvatar( data.user_id );
+        data.description.isOwner = ( data.user_id === user.user_id )
         if ( returnObject ) {
           return data
         } else {
