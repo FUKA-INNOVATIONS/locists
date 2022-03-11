@@ -3,7 +3,9 @@ import {
   Text,
   View,
   Image,
-  FlatList, Pressable,
+  FlatList,
+  Pressable,
+  Dimensions,
 } from 'react-native'
 import useAuthStorage from '../hooks/useAuthStorage'
 import useComment from '../hooks/useComment'
@@ -14,9 +16,12 @@ import PropTypes from 'prop-types'
 import Loading from '../components/Loading'
 import { sortLatest } from '../utils/sortFilterHelpers'
 import FooterMarginWorkAround from '../components/ListFooterMarginWorAround'
+import { CityBanner } from '../utils'
 
 const Account = ( { navigation } ) => {
   // console.log( 'Account.js' )
+
+  const dimensions = Dimensions.get( 'screen' )
 
   const { user } = useAuthStorage()
   const { getCurrentUserComments } = useComment()
@@ -59,25 +64,29 @@ const Account = ( { navigation } ) => {
   return (
     <View style={{flex: 1}}>
 
+      <Image
+        source={ CityBanner }
+        style={ { width:dimensions.width, height: 100, position: 'absolute' } }
+      />
 
       <View style={{height: '30%'}}>
         <View>
           { user.avatar ?
             <Image
               source={ { uri: user.avatar } }
-              style={ { width: 150, height: 150, borderRadius: 75, alignSelf: 'center' } }
+              style={ { width: 140, height: 140, borderRadius: 70, alignSelf: 'center' } }
               // style={ theme.profilePic }
             />
             :
             <Image
               source={ require( '../../assets/defaultPic.jpg' ) }
-              style={ { width: 150, height: 150, borderRadius: 75, alignSelf: 'center' } }
+              style={ { width: 140, height: 140, borderRadius: 70, top: 30, alignSelf: 'center' } }
               // style={ theme.profilePic }
             />
           }
         </View>
 
-        <View style={ { alignItems: 'center', marginBottom: 10 } }>
+        <View style={ { alignItems: 'center', marginVertical: 30 } }>
           <Text style={ {
             color: '#fff',
             marginVertical: 5,
@@ -92,7 +101,7 @@ const Account = ( { navigation } ) => {
       </View>
 
 
-        <View style={{ height: '70%'}}>
+        <View style={ { height: '60%', marginTop: 20 } }>
           <FlatList
             ListFooterComponent={<FooterMarginWorkAround />}
             data={ userMedia && sortLatest( userMedia ) }
