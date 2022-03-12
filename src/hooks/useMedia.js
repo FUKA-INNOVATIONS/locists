@@ -27,8 +27,6 @@ const useMedia = () => {
   const getAllMedia = async () => {
     // console.log( 'called getAllMedia hook' )
 
-
-
     const events = await getEventsWithThumbnails()
     const posts = await getPostsWithThumbnails()
 
@@ -41,7 +39,13 @@ const useMedia = () => {
     return await fetchWithThumbnails(idEvents, 'event')
   }
 
-  const fetchWithThumbnails = async (objArr, type, ) => {
+  const getPostsWithThumbnails = async () => { // Helper
+    const idPosts = await getPosts().
+      then( posts => posts.map( post => post.file_id ) )
+    return await fetchWithThumbnails(idPosts, 'post')
+  }
+
+  const fetchWithThumbnails = async (idArr, type, ) => {
     /* API WORKAROUND
      * inorder to get thumbnails and other details for optimization
      * get all ids and fetch files
@@ -49,11 +53,8 @@ const useMedia = () => {
 
       const newArr = []
 
-      const idObjects = await getEvents().
-        then( objects => objects.map( object => object.file_id ) )
-
-      for ( let i = 0; i < idObjects.length; i++ ) {
-        const object = await getMediaById( idObjects[ i ], true )
+      for ( let i = 0; i < idArr.length; i++ ) {
+        const object = await getMediaById( idArr[ i ], true )
         object.description.isOwner = ( object.user_id === user.user_id )
         object.description.ownerAvatar = await fetchAvatar( object.user_id )  // Set owner avatar url
 
@@ -80,12 +81,6 @@ const useMedia = () => {
         newArr.push( object )
       }
       return newArr
-  }
-
-  const getPostsWithThumbnails = async () => { // Helper
-    const idPosts = await getPosts().
-      then( posts => posts.map( post => post.file_id ) )
-    return await fetchWithThumbnails(idPosts, 'post')
   }
 
   const getEvents = async () => {
