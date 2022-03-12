@@ -48,7 +48,6 @@ const PostComment = ( { // Post new comment on single event/post screen
       Alert.alert( 'Comment not added', 'Please login and try again!' )
     }
     displayHeader()
-    console.log( comment )
   }
 
   if ( loading ) return <Loading />

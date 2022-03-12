@@ -16,7 +16,7 @@ const useDevice = () => {
       allowsEditing: true,
       quality: 0.5,
     } )
-    console.log( 'picked img: ', result )
+    // console.log( 'picked img: ', result )
     if ( !result.cancelled ) {
       setImage( result.uri )
       setImageSelected( true )

@@ -15,7 +15,6 @@ import useFavourite from './useFavourite'
 
 
 const useMedia = () => {
-  // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
   const authStorage = useAuthStorage()
   const [ singleMedia, setSingleMedia ] = useState()
@@ -87,7 +86,6 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ eventTag }`
     try {
       const events = await axios.get( URL )
-      // setEvents( events.data )
       return events.data
     } catch ( e ) {
       console.log( e )
@@ -98,7 +96,6 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ postTag }`
     try {
       const posts = await axios.get( URL )
-      // setPosts( posts.data )
       return posts.data
     } catch ( e ) {
       console.log( e )
@@ -149,17 +146,14 @@ const useMedia = () => {
           userMediaPE.push( data[ i ] )
         }
       }
-      // console.log(data)
       setUserMedia( userMediaPE )
-      // return userMediaPE
     } catch ( e ) {
       console.log( 'Error in getting user files', e.message )
     }
   }
 
-  // TODO: get token here in the hook
-  const uploadMedia = async ( formData, token ) => {
-    console.log( 'token', token )
+  const uploadMedia = async ( formData ) => {
+    const token = await authStorage.getToken()
     const options = {
       method: 'POST',
       headers: {
@@ -170,10 +164,7 @@ const useMedia = () => {
     }
 
     try {
-      // setLoading(true);
       const result = await doFetch( baseUrl + 'media', options )
-      // console.log('url', baseUrl)
-      // result && setLoading(false);
       return result
     } catch ( e ) {
       console.log( 'error in uploadMedia hook', e.message )
@@ -183,11 +174,12 @@ const useMedia = () => {
   }
 
   const deleteMedia = async ( id ) => {
+    const token = await authStorage.getToken()
     console.log( 'DELETE' )
     const options = {
       method: 'DELETE',
       headers: {
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
     }
 
