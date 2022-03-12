@@ -22,7 +22,7 @@ const Explore = ( { navigation } ) => {
 
   return (
     <View>
-      <View>
+      <View style={{marginHorizontal: 10, marginBottom: 5}}>
         <SwitchSelector
           backgroundColor={ theme.colors.textPrimary }
           textColor={ theme.colors.white }
