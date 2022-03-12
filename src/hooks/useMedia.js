@@ -7,8 +7,14 @@ import fetchAvatar from '../utils/fetchAvatar'
 import useComment from './useComment'
 import useFavourite from './useFavourite'
 
+
+/* Weired and strange issues : Ilkka saw the issue
+ * Keeping state here and returning it to caller created unlimited re-rendering issue
+ * Above issue was solved by  returning state to caller and not the state it self
+ * **/
+
+
 const useMedia = () => {
-  // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
   const authStorage = useAuthStorage()
   const [ singleMedia, setSingleMedia ] = useState()
@@ -20,77 +26,66 @@ const useMedia = () => {
   const getAllMedia = async () => {
     // console.log( 'called getAllMedia hook' )
 
-
-    /*
-     * inorder to get thumbnails for optimization
-     * get all ids and fetch files
-     * */
-
     const events = await getEventsWithThumbnails()
     const posts = await getPostsWithThumbnails()
 
     return [ ...events, ...posts ]
   }
 
-  const getEventsWithThumbnails = async () => {
-    const eventArr = []
+  const getEventsWithThumbnails = async () => { // Helper
     const idEvents = await getEvents().
       then( events => events.map( event => event.file_id ) )
-
-    for ( let i = 0; i < idEvents.length; i++ ) {
-      let event = await getMediaById( idEvents[ i ], true ) // eslint-disable-line
-      event.description.isOwner = ( event.user_id === user.user_id )
-
-      // Set owner avatar url
-      event.description.ownerAvatar = await fetchAvatar( event.user_id )
-
-      // Set comments count for sorting
-      event.description.commentsCount = await getMediaComments( event.file_id ).
-        then( e => e.length )
-
-      // Set attendees count for sorting
-      event.description.attendeesCount = await getMediaFavourites(
-        event.file_id ).then( favs => favs.length )
-
-      event.eventId = i + 1 // Set internal id for list opt
-
-      eventArr.push( event )
-    }
-    return eventArr
+    return await fetchWithThumbnails(idEvents, 'event')
   }
 
-  const getPostsWithThumbnails = async () => {
-    const postArr = []
+  const getPostsWithThumbnails = async () => { // Helper
     const idPosts = await getPosts().
       then( posts => posts.map( post => post.file_id ) )
+    return await fetchWithThumbnails(idPosts, 'post')
+  }
 
-    for ( let i = 0; i < idPosts.length; i++ ) {
-      let post = await getMediaById( idPosts[ i ], true ) // eslint-disable-line
-      post.description.isOwner = ( post.user_id === user.user_id )
+  const fetchWithThumbnails = async (idArr, type, ) => {
+    /* API WORKAROUND
+     * inorder to get thumbnails and other details for optimization
+     * get all ids and fetch files
+     * */
 
-      // Set owner avatar url
-      post.description.ownerAvatar = await fetchAvatar( post.user_id )
+      const newArr = []
 
-      // Set comments count for sorting
-      post.description.commentsCount = await getMediaComments( post.file_id ).
-        then( e => e.length )
+      for ( let i = 0; i < idArr.length; i++ ) {
+        const object = await getMediaById( idArr[ i ], true )
+        object.description.isOwner = ( object.user_id === user.user_id )
+        object.description.ownerAvatar = await fetchAvatar( object.user_id )  // Set owner avatar url
 
-      // Set attendees count for sorting
-      post.description.likesCount = await getMediaFavourites( post.file_id ).
-        then( likes => likes.length )
+        object.description.commentsCount = await getMediaComments( object.file_id ).   // Set comments count for sorting
+          then( e => e.length )
 
-      post.postId = i + 1 // Set internal id for list opt
+        switch ( type ) { // Set attendees or likes count
+          case 'event':
+            object.description.attendeesCount = await getMediaFavourites(
+              object.file_id ).then( attendees => attendees.length )
+            break
+          case 'post':
+            object.description.likesCount = await getMediaFavourites( object.file_id ).
+              then( likes => likes.length )
+            break
+          default:
+            return
+        }
 
-      postArr.push( post )
-    }
-    return postArr
+        // Set internal id for list opt // this was not implemented, would have been used to fetch limited objects for FlatList and
+        // fetching more objects when user scrolled the list, usually this is handled by backend
+        // Existing API endpoint was not an option for app requirements
+        object.eventId = i + 1
+        newArr.push( object )
+      }
+      return newArr
   }
 
   const getEvents = async () => {
     const URL = `${ baseUrl }tags/${ eventTag }`
     try {
       const events = await axios.get( URL )
-      // setEvents( events.data )
       return events.data
     } catch ( e ) {
       console.log( e )
@@ -101,7 +96,6 @@ const useMedia = () => {
     const URL = `${ baseUrl }tags/${ postTag }`
     try {
       const posts = await axios.get( URL )
-      // setPosts( posts.data )
       return posts.data
     } catch ( e ) {
       console.log( e )
@@ -152,17 +146,14 @@ const useMedia = () => {
           userMediaPE.push( data[ i ] )
         }
       }
-      // console.log(data)
       setUserMedia( userMediaPE )
-      // return userMediaPE
     } catch ( e ) {
       console.log( 'Error in getting user files', e.message )
     }
   }
 
-  // TODO: get token here in the hook
-  const uploadMedia = async ( formData, token ) => {
-    console.log( 'token', token )
+  const uploadMedia = async ( formData ) => {
+    const token = await authStorage.getToken()
     const options = {
       method: 'POST',
       headers: {
@@ -173,10 +164,7 @@ const useMedia = () => {
     }
 
     try {
-      // setLoading(true);
       const result = await doFetch( baseUrl + 'media', options )
-      // console.log('url', baseUrl)
-      // result && setLoading(false);
       return result
     } catch ( e ) {
       console.log( 'error in uploadMedia hook', e.message )
@@ -186,11 +174,12 @@ const useMedia = () => {
   }
 
   const deleteMedia = async ( id ) => {
+    const token = await authStorage.getToken()
     console.log( 'DELETE' )
     const options = {
       method: 'DELETE',
       headers: {
-        'x-access-token': user.token,
+        'x-access-token': token,
       },
     }
 

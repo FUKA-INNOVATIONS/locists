@@ -15,7 +15,7 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
-  const fetchAttendees = async () => {
+  const fetchAttendees = async () => {  // Count attendees
     await getMediaFavourites( file_id ).then( mediaFavourites => setMediaFavourites(mediaFavourites))
   }
 
@@ -31,22 +31,22 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
      } */
   }, [updateView] )
 
-  const likeHandler = async () => {
-    console.log( 'Attend', file_id )
+  const attendHandler = async () => { // Handle Attend button on single event screen
 
-    if ( !user.isLogged ) {
+    if ( !user.isLogged ) { // Alert un-authenticated users
       Alert.alert( 'You must login',
         'Only logged in users are able to attend events, please login to your account and participate in interesting events!' )
     }
 
-    if ( hasAttended() ) {
-      await deleteFavourite( file_id ).then( async () => await fetchAttendees())
-    } else {
-      await createFavourite( file_id ).then( async () => await fetchAttendees())
+    if ( hasAttended() ) {  // If user has attended the event
+      await deleteFavourite( file_id ).then( async () => await fetchAttendees())  // Remove attendance
+    } else {  // Otherwise
+      await createFavourite( file_id ).then( async () => await fetchAttendees())  // Add attending
     }
+
   }
 
-  const hasAttended = () => {
+  const hasAttended = () => { // Check if user has has attended the event, returns boolean
     return mediaFavourites.filter( f => f.isOwner ).length > 0
   }
 
@@ -54,7 +54,7 @@ const Attend = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
     <View style={ theme.attend }>
       { displayIcon &&
       <TouchableOpacity style={ [ theme.generalBtn, theme.attendBtn ] }
-                        onPress={ likeHandler }>
+                        onPress={ attendHandler }>
         <Text style={ theme.loginButtonText }>{ hasAttended()
           ? 'can\'t attend'
           : 'Attend' }</Text>

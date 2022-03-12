@@ -17,19 +17,9 @@ const HomeList = ( { navigation } ) => {
   const [ activeList, setActiveList ] = useState( [] )
   const [ loading, setLoading ] = useState( false )
 
-  useEffect( () => {
-    console.log( 'HomeList.js useEffect' )
-    /* setLoading( true )
-    getAllMedia().then( mixedMedia => {
-      setActiveList( mixedMedia )
-      setMixedMedia( mixedMedia )
-    } ).finally( () => {
-      console.log( 'HomeList getAllMedia in useEffect ready' )
-      setLoading( false )
-    } ) */
-
-    // To keep state up to date
-    return navigation.addListener( 'focus', async () => {
+  useEffect( () => {  // Fetch events and posts
+    // console.log( 'HomeList.js useEffect' )
+    return navigation.addListener( 'focus', async () => { // To keep state up to date, fetch posts and events on screen focus
       console.log( 'HomeList.js focus' )
       setLoading( true )
       getAllMedia().then( mixedMedia => {
@@ -41,13 +31,11 @@ const HomeList = ( { navigation } ) => {
     } )
   }, [] )
 
-  // Move user to single event view when tapping event card
-  const eventPressHandler = ( eventId ) => {
+  const eventPressHandler = ( eventId ) => {  // Move user to single event screen when tapping event card
     navigation.navigate( 'SingleEventHomeStack', { eventId: eventId } )
   }
 
-  // Move user to single post view when tapping a post
-  const postPressHandler = ( postId ) => {
+  const postPressHandler = ( postId ) => {  // Move user to single post screen when tapping a post card
     navigation.navigate( 'SinglePostHomeStack', { postId: postId } )
   }
 

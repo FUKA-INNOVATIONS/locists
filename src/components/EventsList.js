@@ -8,18 +8,16 @@ import PropTypes from 'prop-types'
 import FooterMarginWorkAround from './ListFooterMarginWorAround'
 
 const EventsList = ( { navigation } ) => {
-  console.log( 'EventsList.js' )
+  // console.log( 'EventsList.js' )
 
   const { getEventsWithThumbnails } = useMedia()
   const [ loading, setLoading ] = useState( false )
   const [ events, setEvents ] = useState( [] )
   const [ activeList, setActiveList ] = useState( events )
 
-  useEffect( () => {
-    // To keep state up to date
-    // TODO instead update app state on changes like add/delete new event/comment/attendee
-    return navigation.addListener( 'focus', async () => {
-      console.log( 'EventsList.js focus' )
+  useEffect( () => {  // To keep app state up to date
+    return navigation.addListener( 'focus', async () => { // Fetch events from API on screen focus
+      // console.log( 'EventsList.js focus' )
       setLoading( true )
       getEventsWithThumbnails().then( events => {
         setEvents( events )
@@ -28,11 +26,12 @@ const EventsList = ( { navigation } ) => {
     } )
   }, [] )
 
-  const eventPressHandler = ( eventId ) => {
+  const eventPressHandler = ( eventId ) => {  // Move to event details screen when user presses an event
     navigation.navigate( 'SingleEvent', { eventId: eventId } )
   }
 
-  if ( loading ) return <View style={{top: 300}}><Loading text={'Loading events'} /></View>
+  if ( loading ) return <View style={ { top: 300 } }><Loading
+    text={ 'Loading events' } /></View>
 
   return (
     <FlatList

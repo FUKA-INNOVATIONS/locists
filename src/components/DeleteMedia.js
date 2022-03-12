@@ -8,14 +8,14 @@ const DeleteMedia = ( { file_id, display } ) => { // eslint-disable-line
   const { deleteMedia } = useMedia()
   const [ loading, setLoading ] = useState()
 
-  const deleteHandler = async () => {
+  const deleteHandler = async () => { // Handle Delete button
     setLoading( true )
-    console.log( 'delete event', file_id )
-    const mediaDeleted = await deleteMedia( file_id )
-    if ( mediaDeleted.message ) {
+    // console.log( 'delete event', file_id )
+    const mediaDeleted = await deleteMedia( file_id )   // Try to delete post / event
+    if ( mediaDeleted.message ) { // Deletion succeeded, alert the user
       setLoading( false )
       Alert.alert( mediaDeleted.message )
-    } else {
+    } else {  // Deletion failed, alert the user
       setLoading( false )
       Alert.alert( 'Deletion failed', mediaDeleted )
     }
@@ -30,7 +30,7 @@ const DeleteMedia = ( { file_id, display } ) => { // eslint-disable-line
           <Text style={ styles.icon }>X</Text>
         </Pressable>
       </View>
-      {display && <Text style={ styles.text }>Delete</Text> }
+      { display && <Text style={ styles.text }>Delete</Text> }
     </View>
   )
 }
@@ -44,7 +44,7 @@ const styles = StyleSheet.create( {
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   iconContainer: {
     width: 30,

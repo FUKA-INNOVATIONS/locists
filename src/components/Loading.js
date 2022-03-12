@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import LottieView from 'lottie-react-native'
 import PropTypes from 'prop-types'
 
-const Loading = ( { text } ) => {
+const Loading = ( { text } ) => { // Loading indicator, displays loading spinner animation with a text
   const animation = React.createRef()
   useEffect( () => {
     animation.current?.play()

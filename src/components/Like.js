@@ -1,11 +1,12 @@
 import { View, Text, Pressable, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-
 import useFavourite from '../hooks/useFavourite'
 import HeartEmpty from '../../assets/icons/HeartEmpty.svg'
 import HeartFull from '../../assets/icons/HeartFull.svg'
 import theme from '../theme'
 import useAuthStorage from '../hooks/useAuthStorage'
+
+// Post's like button and likes counter
 
 const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   const { user } = useAuthStorage()
@@ -16,7 +17,7 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   } = useFavourite()
   const [ mediaFavourites, setMediaFavourites ] = useState( [] )
 
-  const fetchLikes = async () => {
+  const fetchLikes = async () => {  // Helper to re-fetch likes
     await getMediaFavourites( file_id ).
       then( favourites => {
         setMediaFavourites( favourites )
@@ -24,7 +25,7 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
   }
 
 
-  useEffect( async () => {
+  useEffect( async () => {  // Fetch likes
     // let cancel = true
     await getMediaFavourites( file_id ).
       then( favourites => {
@@ -36,24 +37,24 @@ const Like = ( { file_id, displayIcon, single } ) => {  // eslint-disable-line
      } */
   }, [] )
 
-  const likeHandler = async () => {
-    console.log( 'Like', file_id )
+  const likeHandler = async () => { // Handles like button (heart)
+    // console.log( 'Like', file_id )
 
-    if ( !user.isLogged ) {
+    if ( !user.isLogged ) { // Alert un-authorized users on like button press
       Alert.alert( 'You must login',
         'Only logged in users are able to like posts, please login to your account and try again!' )
       return
     }
 
-    if ( hasLiked() ) {
-      await deleteFavourite( file_id ).then(async () => await fetchLikes())
-    } else {
-      await createFavourite( file_id ).then(async () => await fetchLikes())
+    if ( hasLiked() ) {   // If user has already liked
+      await deleteFavourite( file_id ).then(async () => await fetchLikes())   // Delete like
+    } else {  // Otherwise
+      await createFavourite( file_id ).then(async () => await fetchLikes()) // Add like
     }
 
   }
 
-  const hasLiked = () => {
+  const hasLiked = () => {  // Helper that checks if user has already liked the post
     return mediaFavourites.filter( f => f.isOwner ).length > 0
   }
 

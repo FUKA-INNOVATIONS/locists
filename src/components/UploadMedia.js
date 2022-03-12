@@ -19,19 +19,17 @@ const UploadMedia = ( { mediaType, navigation } ) => {
   const { uploadMedia } = useMedia()
   const [ loading, setLoading ] = useState( false ) // eslint-disable-line
 
-  const onSubmit = async (
+  const onSubmit = async (  // Handles uploading features for multiple cases: Post, Event, Avatar
     data, mediaDescription, imageSelected, image, type ) => {
     setLoading( true )
     const token = await authStorage.getToken()
-    mediaDescription = JSON.stringify( mediaDescription )
+    mediaDescription = JSON.stringify( mediaDescription ) // API workaround, Helper Object that will be saved in media description filed as json string
 
     if ( !imageSelected ) { // User did not choose media
       Alert.alert( 'Please, select a file' )
       setLoading( false )
       return
     }
-
-    console.log('desc',mediaDescription)
 
     const formData = new FormData()
     data.location &&
@@ -78,7 +76,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
       console.log( 'new tag', tagResponse )
       console.log( 'new file', fileResponse )
 
-      switch ( mediaType ) {  // Close modal and move user to relevant view after successful upload
+      switch ( mediaType ) {  // Close modal and move user to relevant screen after successful upload
         case 'avatar':
           navigation.goBack()
           user.avatar = await fetchAvatar( user.user_id ).finally( () => { // Update app user state with new avatar url
@@ -100,16 +98,11 @@ const UploadMedia = ( { mediaType, navigation } ) => {
           break
       }
 
-      /* setTimeout( () => {
-       setLoading( false )
-       navigation.navigate( 'AccountTab', { screen: 'Account' } )
-       }, 3000 ) */
-
     }
 
   }
 
-  if ( loading ) {
+  if ( loading ) {  // Display Loading screen specific loading indicator
     switch ( mediaType ) {
       case 'avatar':
         return <Loading text={'Uploading avatar'} />
@@ -120,8 +113,7 @@ const UploadMedia = ( { mediaType, navigation } ) => {
     }
   }
 
-
-  switch ( mediaType ) {
+  switch ( mediaType ) {  // Return relevant view, based on mediaType prop
     case 'avatar':
       return <UploadAvatar onSubmit={ onSubmit } />
     case 'event':

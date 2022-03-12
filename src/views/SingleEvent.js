@@ -9,8 +9,13 @@ const SingleEvent = ( { navigation, route } ) => {
   const { eventId } = route.params
   const [ loading, setLoading ] = useState()
   const { getMediaById, singleMedia } = useMedia()
+  const [ isHeaderVisible, setIsHeaderVisible ] = useState( true )
 
-  console.log('singleMedia',singleMedia)
+  // console.log('singleMedia',singleMedia)
+
+  const displayHeaderHandler = () => { // Helper (workaround) to fix comment and keyboard  issue
+    setIsHeaderVisible(!isHeaderVisible)
+  }
 
   useEffect( async () => {
     setLoading( true )
@@ -18,12 +23,12 @@ const SingleEvent = ( { navigation, route } ) => {
     } ).finally( () => setLoading( false ) )
   }, [ eventId ] )
 
-  if ( loading ) return <Loading />
+  if ( loading ) return <Loading text={ 'Loading event details' } />
 
   return (
     <>
-      <SingleEventHeader eventDetails={ singleMedia } />
-      <Comments fileId={ eventId } />
+      {isHeaderVisible && <SingleEventHeader eventDetails={ singleMedia } /> }
+      <Comments fileId={ eventId } displayHeader={displayHeaderHandler} />
     </>
   )
 }

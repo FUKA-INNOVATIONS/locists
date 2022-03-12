@@ -24,7 +24,6 @@ const UploadEvent = props => {
   const [ dateTime, setDateTime ] = useState( new Date() )
   const [ mode, setMode ] = useState( 'date' )
   const [ show, setShow ] = useState( true )
-  // const android = Platform.OS === 'android'
 
   useFocusEffect(
     useCallback( () => {
@@ -66,21 +65,21 @@ const UploadEvent = props => {
 
   const EventSchema = Yup.object().shape( {
     location: Yup.string().
-      min( 3, 'Too Short!' ).
-      max( 20, 'Too Long!' ).
-      required( 'Location is required: 3-20 characters' ),
+      min( 3, 'Too Short, min 3 characters!' ).
+      max( 20, 'Too Long, max 20 characters!' ).
+      required( 'Event location is required: 3-20 characters' ),
     name: Yup.string().
-      min( 3, 'Too Short!' ).
-      max( 15, 'Too Long!' ).
-      required( 'Name is required: 3-15 characters' ),
+      min( 3, 'Too Short, min 3 characters!' ).
+      max( 15, 'Too Long, max 15 characters!' ).
+      required( 'Event name is required: 3-15 characters' ),
     date: Yup.date().
       required( 'Date and time is required' ),
     description: Yup.string().
-      min( 5, 'Too Short!' ).
+      min( 5, 'Too Short, min 5 characters!' ).
       max( 250, 'Too Long!' ).
       required( 'Description is required: 5-250 characters' ),
     price: Yup.number().
-      required( 'Price is required, type 0 for Free' ),
+      required( 'Price is required, type 0 for "Free"' ),
   } )
 
   const {
@@ -138,7 +137,7 @@ const UploadEvent = props => {
                 onBlur={ onBlur }
                 onChangeText={ onChange }
                 value={ value }
-                placeholder='Location'
+                placeholder='Event location'
               />
             ) }
             name='location'

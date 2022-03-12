@@ -30,10 +30,6 @@ const Home = ( { navigation } ) => {
     } )
   }, [] )
 
-  // const smallScreen = Dimensions.get( 'screen' ).width <= 390
-  // const bigScreenStyle = { maxWidth: 600, alignSelf: 'center' }
-  // const smallScreenStyle = { maxWidth: 400 }
-
   return (
     <>
       <View style={ theme.appName }>

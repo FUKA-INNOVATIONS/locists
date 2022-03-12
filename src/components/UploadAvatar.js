@@ -7,7 +7,7 @@ import useAuthStorage from '../hooks/useAuthStorage'
 import theme from '../theme'
 import PropTypes from 'prop-types'
 
-const UploadAvatar = props => {
+const UploadAvatar = props => { // Handle uploading registered user avatar
   const { user } = useAuthStorage()
 
   const {

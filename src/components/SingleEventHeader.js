@@ -13,7 +13,6 @@ const SingleEventHeader = ( { eventDetails } ) => {
   if ( !eventDetails ) return <Loading />
   const smallScreen = Dimensions.get( 'screen' ).width <= 390
 
-
   return (
       <View>
         <Image source={ { uri: smallScreen ? uploadsUrl + eventDetails.thumbnails.w640 : uploadsUrl + eventDetails.filename } }

@@ -236,7 +236,7 @@ const SettingsStackScreen = () => {
   )
 }
 
-/* const AppStackScreen = () => {
+/* const AppStackScreen = () => { // Another way to handle navigation
  const { user } = useAuthStorage();
  const viewIsFocused = useIsFocused(); //eslint-disable-line
 

@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import axios from 'axios'
-
-// TODO: use appId
 import { baseUrl, uploadsUrl } from '../../config'
 import useAuthStorage from './useAuthStorage'
 import useTag from './useTag'

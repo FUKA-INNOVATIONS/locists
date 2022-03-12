@@ -1,7 +1,7 @@
 import { uploadsUrl } from '../../config'
 import useTag from '../hooks/useTag'
 
-const fetchAvatar = async ( userId ) => {
+const fetchAvatar = async ( userId ) => { // Fetch user avatar image
   // console.log('fetchA')
   const { getFilesByTag } = useTag()
   try {

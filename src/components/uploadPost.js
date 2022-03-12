@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
-const UploadPost = props => {
+const UploadPost = props => {   // Handle post creation
   const { user } = useAuthStorage()
 
   useFocusEffect(
@@ -33,12 +33,12 @@ const UploadPost = props => {
 
   const PostSchema = Yup.object().shape( {
     location: Yup.string().
-      min( 3, 'Too Short!' ).
-      max( 20, 'Too Long!' ).
+      min( 3, 'Too Short, min 3 characters!' ).
+      max( 20, 'Too Long, max 20 characters!' ).
       required( 'Location is required: 3-20 characters' ),
     description: Yup.string().
-      min( 5, 'Too Short!' ).
-      max( 250, 'Too Long!' ).
+      min( 5, 'Too Short, min 5 characters!' ).
+      max( 250, 'Too Long, max 250 characters!' ).
       required( 'Description is required: 5-250 characters' ),
 
   } )
@@ -70,11 +70,7 @@ const UploadPost = props => {
     setType( 'image' )
   }
 
-  /*
-   * Upload dummy image if user doesnt select and image
-   * */
-
-  !imageSelected && setImageSelected( dummyImage )
+  !imageSelected && setImageSelected( dummyImage )  // Upload dummy image if user doesnt select and image
 
   return (
     <KeyboardAwareScrollView enableAutomaticScroll={ false }

@@ -11,22 +11,12 @@ import PropTypes from 'prop-types'
 
 import {
   useFonts,
-  Nunito_400Regular, // eslint-disable-line
-  Nunito_300Light,// eslint-disable-line
-  Nunito_700Bold,// eslint-disable-line
-  Nunito_800ExtraBold,// eslint-disable-line
-  Nunito_600SemiBold,// eslint-disable-line
   Nunito_500Medium as Nunito,// eslint-disable-line
 } from '@expo-google-fonts/nunito'
 
-const Event = ( { eventDetails, ownProfile } ) => {
+const Event = ( { eventDetails, ownProfile } ) => { // Event card used in HomeList, EventsList, Account List
   // console.log( 'Event.js', eventDetails )
   const [ fontsLoaded ] = useFonts( {
-    Nunito_400Regular,
-    Nunito_300Light,
-    Nunito_700Bold,
-    Nunito_800ExtraBold,
-    Nunito_600SemiBold,
     Nunito,
   } )
 
@@ -41,24 +31,27 @@ const Event = ( { eventDetails, ownProfile } ) => {
 
   return (
     <>
-
-        <View
-          style={ {
-            marginLeft: 10,
-            marginVertical: 3,
-            flexDirection: 'row',
-            position: 'relative',
-          } }>
-          <UserInfo username={ eventDetails.description.owner }
-                    timeAdded={ eventDetails.time_added }
-                    avatar={ eventDetails.description.ownerAvatar } />
-
-          <View style={ { right: 0, position: 'absolute', alignSelf: 'center', opacity: 0.5 } }>
-            { (eventDetails.description.isOwner || ownProfile ) &&
-            <DeleteMedia file_id={ eventDetails.file_id } /> }
-          </View>
-
+      <View
+        style={ {
+          marginLeft: 10,
+          marginVertical: 3,
+          flexDirection: 'row',
+          position: 'relative',
+        } }>
+        <UserInfo username={ eventDetails.description.owner }
+                  timeAdded={ eventDetails.time_added }
+                  avatar={ eventDetails.description.ownerAvatar } />
+        <View style={ {
+          right: 0,
+          position: 'absolute',
+          alignSelf: 'center',
+          opacity: 0.5,
+          bottom: 15
+        } }>
+          { ( eventDetails.description.isOwner || ownProfile ) &&
+          <DeleteMedia file_id={ eventDetails.file_id } /> }
         </View>
+      </View>
       <View style={ [ theme.generalListEvent ] }>
         <View style={ theme.eventListTitle }>
           <Text
