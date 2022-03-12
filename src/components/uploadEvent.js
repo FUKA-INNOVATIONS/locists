@@ -24,7 +24,6 @@ const UploadEvent = props => {
   const [ dateTime, setDateTime ] = useState( new Date() )
   const [ mode, setMode ] = useState( 'date' )
   const [ show, setShow ] = useState( true )
-  // const android = Platform.OS === 'android'
 
   useFocusEffect(
     useCallback( () => {

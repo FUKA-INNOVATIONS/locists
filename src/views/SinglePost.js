@@ -9,6 +9,7 @@ const SinglePost = ( { navigation, route } ) => {
   const { postId } = route.params
   const [ loading, setLoading ] = useState()
   const { getMediaById, singleMedia } = useMedia()
+  const [ isHeaderVisible, setIsHeaderVisible ] = useState( true )
 
   useEffect( async () => {
     setLoading( true )
@@ -16,12 +17,16 @@ const SinglePost = ( { navigation, route } ) => {
     } ).finally( () => setLoading( false ) )
   }, [ postId ] )
 
-  if ( loading ) return <Loading />
+  const displayHeaderHandler = () => { // Helper (workaround) to fix comment and keyboard  issue, ILE i fixed it this way =D
+    setIsHeaderVisible(!isHeaderVisible)
+  }
+
+  if ( loading ) return <Loading text={'Loading post details'} />
 
   return (
     <>
-      <SinglePostHeader postDetails={ singleMedia } />
-      <Comments fileId={ postId } />
+      {isHeaderVisible && <SinglePostHeader postDetails={singleMedia}/> }
+      <Comments fileId={ postId } displayHeader={displayHeaderHandler} />
     </>
   )
 }

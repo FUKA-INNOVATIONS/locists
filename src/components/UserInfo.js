@@ -3,7 +3,7 @@ import { View, Image, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import TimeAgo from '@andordavoti/react-native-timeago'
 
-const UserInfo = ( { username, avatar, timeAdded } ) => {
+const UserInfo = ( { username, avatar, timeAdded } ) => { // Display details about user, Post/event/comment owner
   const avatarUri = {
     uri: avatar,
   }

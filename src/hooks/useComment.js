@@ -6,7 +6,7 @@ import useAuthStorage from './useAuthStorage'
 const useComment = () => {
   const authStorage = useAuthStorage()
 
-  const getMediaComments = async ( mediaId, onlyCount = false ) => {
+  const getMediaComments = async ( mediaId, onlyCount = false ) => {  // Fetch media comments
     const URL = `${ baseUrl }comments/file/${ mediaId }`
     try {
       const { data } = await axios.get( URL )
@@ -17,6 +17,7 @@ const useComment = () => {
     }
   }
 
+  // Create new comment
   const postComment = async ( file_id, content ) => { // eslint-disable-line
     const token = await authStorage.getToken()
     const newComment = {
@@ -41,7 +42,7 @@ const useComment = () => {
 
   }
 
-  const deleteComment = async ( id ) => {
+  const deleteComment = async ( id ) => { // Delete media comment
     const token = await authStorage.getToken()
     const options = {
       method: 'DELETE',
@@ -58,7 +59,7 @@ const useComment = () => {
     }
   }
 
-  const getCurrentUserComments = async () => {
+  const getCurrentUserComments = async () => { // Get currently authenticated user's comments
     const token = await authStorage.getToken()
     const options = {
       method: 'GET',

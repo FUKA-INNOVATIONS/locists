@@ -7,7 +7,7 @@ import ExploreListHeader from './ExploreListHeader'
 import PropTypes from 'prop-types'
 import FooterMarginWorkAround from './ListFooterMarginWorAround'
 
-const PostsList = ( { navigation } ) => {
+const PostsList = ( { navigation } ) => { // Views a list of posts
   // console.log( 'PostsList.js rendered');
 
   const { getPostsWithThumbnails } = useMedia()
@@ -23,7 +23,7 @@ const PostsList = ( { navigation } ) => {
       setActiveList( posts )
     } ).finally( () => setLoading( false ) )
 
-    return navigation.addListener( 'focus', async () => { // To keep state up to date
+    return navigation.addListener( 'focus', async () => { // To keep List state up to date
       // console.log( 'PostList.js focus' )
       setLoading( true )
       getPostsWithThumbnails().then( posts => {

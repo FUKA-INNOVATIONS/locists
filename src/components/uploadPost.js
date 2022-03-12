@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
-const UploadPost = props => {
+const UploadPost = props => {   // Handle post creation
   const { user } = useAuthStorage()
 
   useFocusEffect(

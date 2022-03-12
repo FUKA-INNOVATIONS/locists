@@ -1,7 +1,7 @@
 import theme from '../theme'
 import NoComments from './NoComments'
 import Comment from './Comment'
-import { Alert, FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Text, TouchableOpacity, View } from 'react-native'
 import useComment from '../hooks/useComment'
 import Loading from './Loading'
 import React, { useEffect, useState } from 'react'
@@ -10,8 +10,12 @@ import AddComment from '../../assets/icons/AddComment.svg'
 import { sortLatest } from '../utils/sortFilterHelpers'
 import PropTypes from 'prop-types'
 import useAuthStorage from '../hooks/useAuthStorage'
+import {
+  KeyboardAwareFlatList,
+  KeyboardAwareScrollView,
+} from 'react-native-keyboard-aware-scroll-view'
 
-const Comments = ( { fileId } ) => {
+const Comments = ( { fileId, displayHeader } ) => {
   const { user } = useAuthStorage()
   const [ loading, setLoading ] = useState()
   const { getMediaComments } = useComment()
@@ -25,6 +29,7 @@ const Comments = ( { fileId } ) => {
       Alert.alert( 'Login to comment!' )
     } else {
       setIsWriteComment( !isWriteComment )
+      displayHeader()
     }
   }
 
@@ -39,7 +44,7 @@ const Comments = ( { fileId } ) => {
     setUpdateView( false )
   }, [ fileId, updateView ] )
 
-  const updateComments = () => setUpdateView( true )  // Util function to re-render comments to keep state up to date
+  const updateComments = () => setUpdateView( true )
 
   if ( loading ) return <Loading />
 
@@ -54,22 +59,25 @@ const Comments = ( { fileId } ) => {
   } }>Comments ({ mediaComments.length })</Text>
 
   return (
-    <>
+    <View>
+      <KeyboardAwareScrollView>
+        <TouchableOpacity
+          style={ { justifyContent: 'center', flexDirection: 'row' } }
+          onPress={ onWriteCommentHandler }>
 
-      <TouchableOpacity
-        style={ { justifyContent: 'center', flexDirection: 'row' } }
-        onPress={ onWriteCommentHandler }>
+          <AddComment width={ 32 } height={ 32 } />
+        </TouchableOpacity>
 
-        <AddComment width={ 32 } height={ 32 } />
-      </TouchableOpacity>
 
-      <View style={ { alignItems: 'center' } }>
         { isWriteComment &&
-        <PostComment file_id={ fileId } display={ setIsWriteComment }
-                     updateComments={ updateComments }
-        /> }
-      </View>
-      <FlatList
+        <View style={ { alignItems: 'center', minHeight: 250 } }>
+          <PostComment file_id={ fileId } display={ setIsWriteComment }
+                       updateComments={ updateComments } displayHeader={displayHeader}
+          />
+        </View> }
+
+      </KeyboardAwareScrollView>
+      <KeyboardAwareFlatList
         ListHeaderComponent={ <CommentsHeader /> }
         horizontal={ false }
         style={ [ theme.singleMediaComments ] }
@@ -80,12 +88,13 @@ const Comments = ( { fileId } ) => {
         renderItem={ ( { item } ) => <Comment commentObj={ item }
                                               updateComments={ updateComments } /> }
       />
-    </>
+    </View>
   )
 }
 
 Comments.propTypes = {
   fileId: PropTypes.number,
+  displayHeader: PropTypes.func,
 }
 
 export default Comments

@@ -13,7 +13,8 @@ const PostComment = ( { // Post new comment on single event/post screen
   file_id, // eslint-disable-line
   display,
   updateComments,
-} ) => { // eslint-disable-line
+  displayHeader
+} ) => {
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 
@@ -33,26 +34,27 @@ const PostComment = ( { // Post new comment on single event/post screen
     resolver: yupResolver( CommentSchema ), mode: 'onBlur',
   } )
 
-  const onSubmit = async ( data ) => {
+  const onSubmit = async ( data ) => { // Handle create comment button press
     setLoading( true )
     const { content } = data
-    const comment = await postComment( file_id, content )
-    if ( comment.comment_id ) {
+    const comment = await postComment( file_id, content ) // Try to create new comment
+    if ( comment.comment_id ) { // Comment creation succeeded
       reset()
-      display( false )
+      display( false )  // Hide comment view
       setLoading( false )
-      updateComments()
-    } else {
+      updateComments()  // Re-render comments List to keep it up to date
+    } else {  // Comment creation failed
       setLoading( false )
       Alert.alert( 'Comment not added', 'Please login and try again!' )
     }
+    displayHeader()
     console.log( comment )
   }
 
   if ( loading ) return <Loading />
 
   return (
-    <KeyboardAwareScrollView enableAutomaticScroll={ false }
+    <KeyboardAwareScrollView enableAutomaticScroll={ true }
                              enableOnAndroid={ true }
                              viewIsInsideTabBar={ true }>
       <View style={ theme.commentContainer }>
@@ -95,6 +97,7 @@ PostComment.propTypes = {
   file_id: PropTypes.number,
   display: PropTypes.func,
   updateComments: PropTypes.func,
+  displayHeader: PropTypes.func,
 }
 
 export default PostComment

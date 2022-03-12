@@ -31,7 +31,7 @@ const RegisterSchema = Yup.object().shape( {  // Form validation
   city: Yup.string().required( 'Required' ),
 } )
 
-const Register = ( { navigation } ) => {  // Handle new user registration
+const Register = ( { navigation } ) => {  // Handle new user registration on register screen
   const { isUsernameAvailable, register, login, loading } = useUser()
 
   const {
@@ -57,7 +57,7 @@ const Register = ( { navigation } ) => {  // Handle new user registration
   // Submit registration form with given data
   const onSubmit = async ( data ) => {
 
-    const { available } = await isUsernameAvailable( data.username )   // Check, is username available ?
+    const { available } = await isUsernameAvailable( data.username )   // Check, is username available ? and alert user in case it is already taken
     !available && Alert.alert( 'Username is not available',
       'Please choose another cool username and try again' )
 
@@ -106,7 +106,6 @@ const Register = ( { navigation } ) => {  // Handle new user registration
             loop={ false }
           />
         </View>
-
 
         <View style={ theme.formContainer }>
           <View style={ theme.inputContainer }>
