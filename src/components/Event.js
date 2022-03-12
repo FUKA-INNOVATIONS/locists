@@ -46,6 +46,7 @@ const Event = ( { eventDetails, ownProfile } ) => { // Event card used in HomeLi
           position: 'absolute',
           alignSelf: 'center',
           opacity: 0.5,
+          bottom: 15
         } }>
           { ( eventDetails.description.isOwner || ownProfile ) &&
           <DeleteMedia file_id={ eventDetails.file_id } /> }

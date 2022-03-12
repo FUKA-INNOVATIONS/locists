@@ -26,7 +26,7 @@ const Post = ( { postMedia, ownProfile } ) => { // Displays event card on HomeLi
                     timeAdded={ postMedia.time_added }
                     avatar={ postMedia.description.ownerAvatar } />
 
-          <View style={ { right: 0, position: 'absolute', alignSelf: 'center', opacity: 0.5 } }>
+          <View style={ { right: 0, position: 'absolute', alignSelf: 'center', opacity: 0.5, bottom: 15 } }>
             { ( postMedia.description.isOwner || ownProfile ) &&
             <DeleteMedia file_id={ postMedia.file_id } /> }
           </View>
