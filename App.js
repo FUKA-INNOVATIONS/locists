@@ -16,7 +16,7 @@ export default function App() {
 
   const [ appIsReady, setAppIsReady ] = useState( false )
 
-  useEffect( async () => {
+  useEffect( async () => {  // Handle splashScreen
     async function prepare() {
       try {
         await new Promise( resolve => setTimeout( resolve, 4000 ) )
@@ -35,7 +35,7 @@ export default function App() {
     }
   }, [ appIsReady ] )
 
-  if ( !appIsReady ) {
+  if ( !appIsReady ) {  // Display splashScreen
     return (
       <View style={ styles.splashScreen }>
         <Image style={{width: dimensions.width, height: dimensions.height, position: 'absolute'}} source={SplashBack} />
