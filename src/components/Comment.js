@@ -35,7 +35,7 @@ const Comment = ( {
         alignItems: 'center',
         justifyItems: 'center',
       } }>
-        <UserInfo avatar={ avatar } username={ 'Username' }
+        <UserInfo avatar={ avatar } username={ 'Username' } // API requires token, un-authorized user are allowed to explore the app, use fake username
                   timeAdded={ commentObj.time_added } />
         <View style={ { position: 'absolute', right: 0, marginRight: 5 } }>
           { isOwner &&

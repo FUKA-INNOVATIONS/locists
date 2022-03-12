@@ -16,7 +16,7 @@ export default function App() {
 
   const [ appIsReady, setAppIsReady ] = useState( false )
 
-  useEffect( () => {
+  useEffect( async () => {
     async function prepare() {
       try {
         await new Promise( resolve => setTimeout( resolve, 4000 ) )
@@ -26,8 +26,7 @@ export default function App() {
         setAppIsReady( true )
       }
     }
-
-    prepare()
+    await prepare()
   }, [] )
 
   const onLayoutRootView = useCallback( async () => {

@@ -3,6 +3,12 @@ import axios from 'axios'
 import doFetch from '../utils/doFetch'
 import useAuthStorage from './useAuthStorage'
 
+/* Weired and strange issues : Ilkka saw the issue
+ * Keeping state here and returning it to caller created unlimited re-rendering issue
+ * Above issue was solved by  returning state to caller and not the state it self
+ * **/
+
+
 const useComment = () => {
   const authStorage = useAuthStorage()
 

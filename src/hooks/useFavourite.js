@@ -2,7 +2,12 @@ import doFetch from '../utils/doFetch'
 import { baseUrl } from '../../config'
 import useAuthStorage from './useAuthStorage'
 
-const useFavourite = () => {
+/* Weired and strange issues : Ilkka saw the issue
+ * Keeping state here and returning it to caller created unlimited re-rendering issue
+ * Above issue was solved by  returning state to caller and not the state it self
+ * **/
+
+const useFavourite = () => { // Handles likes and attending related API calls
   const { user } = useAuthStorage()
   const authStorage = useAuthStorage()
 

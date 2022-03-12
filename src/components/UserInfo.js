@@ -19,7 +19,6 @@ const UserInfo = ( { username, avatar, timeAdded } ) => { // Display details abo
         borderRadius: 20,
         borderWidth: 1,
         borderColor: '#fff',
-        // opacity: 0.5,
       } } />
       <Text style={ { color: '#E9D6DB', marginLeft: 10 } }>{ username }</Text>
       { timeAdded && <TimeAgo style={ { color: '#e9d6db', left: 30 } }

@@ -7,6 +7,13 @@ import fetchAvatar from '../utils/fetchAvatar'
 import useComment from './useComment'
 import useFavourite from './useFavourite'
 
+
+/* Weired and strange issues : Ilkka saw the issue
+ * Keeping state here and returning it to caller created unlimited re-rendering issue
+ * Above issue was solved by  returning state to caller and not the state it self
+ * **/
+
+
 const useMedia = () => {
   // TODO: get token here, not in views, fix
   const { user } = useAuthStorage()
@@ -21,10 +28,6 @@ const useMedia = () => {
     // console.log( 'called getAllMedia hook' )
 
 
-    /*
-     * inorder to get thumbnails for optimization
-     * get all ids and fetch files
-     * */
 
     const events = await getEventsWithThumbnails()
     const posts = await getPostsWithThumbnails()
@@ -32,58 +35,57 @@ const useMedia = () => {
     return [ ...events, ...posts ]
   }
 
-  const getEventsWithThumbnails = async () => {
-    const eventArr = []
+  const getEventsWithThumbnails = async () => { // Helper
     const idEvents = await getEvents().
       then( events => events.map( event => event.file_id ) )
-
-    for ( let i = 0; i < idEvents.length; i++ ) {
-      let event = await getMediaById( idEvents[ i ], true ) // eslint-disable-line
-      event.description.isOwner = ( event.user_id === user.user_id )
-
-      // Set owner avatar url
-      event.description.ownerAvatar = await fetchAvatar( event.user_id )
-
-      // Set comments count for sorting
-      event.description.commentsCount = await getMediaComments( event.file_id ).
-        then( e => e.length )
-
-      // Set attendees count for sorting
-      event.description.attendeesCount = await getMediaFavourites(
-        event.file_id ).then( favs => favs.length )
-
-      event.eventId = i + 1 // Set internal id for list opt
-
-      eventArr.push( event )
-    }
-    return eventArr
+    return await fetchWithThumbnails(idEvents, 'event')
   }
 
-  const getPostsWithThumbnails = async () => {
-    const postArr = []
+  const fetchWithThumbnails = async (objArr, type, ) => {
+    /* API WORKAROUND
+     * inorder to get thumbnails and other details for optimization
+     * get all ids and fetch files
+     * */
+
+      const newArr = []
+
+      const idObjects = await getEvents().
+        then( objects => objects.map( object => object.file_id ) )
+
+      for ( let i = 0; i < idObjects.length; i++ ) {
+        const object = await getMediaById( idObjects[ i ], true )
+        object.description.isOwner = ( object.user_id === user.user_id )
+        object.description.ownerAvatar = await fetchAvatar( object.user_id )  // Set owner avatar url
+
+        object.description.commentsCount = await getMediaComments( object.file_id ).   // Set comments count for sorting
+          then( e => e.length )
+
+        switch ( type ) { // Set attendees or likes count
+          case 'event':
+            object.description.attendeesCount = await getMediaFavourites(
+              object.file_id ).then( attendees => attendees.length )
+            break
+          case 'post':
+            object.description.likesCount = await getMediaFavourites( object.file_id ).
+              then( likes => likes.length )
+            break
+          default:
+            return
+        }
+
+        // Set internal id for list opt // this was not implemented, would have been used to fetch limited objects for FlatList and
+        // fetching more objects when user scrolled the list, usually this is handled by backend
+        // Existing API endpoint was not an option for app requirements
+        object.eventId = i + 1
+        newArr.push( object )
+      }
+      return newArr
+  }
+
+  const getPostsWithThumbnails = async () => { // Helper
     const idPosts = await getPosts().
       then( posts => posts.map( post => post.file_id ) )
-
-    for ( let i = 0; i < idPosts.length; i++ ) {
-      let post = await getMediaById( idPosts[ i ], true ) // eslint-disable-line
-      post.description.isOwner = ( post.user_id === user.user_id )
-
-      // Set owner avatar url
-      post.description.ownerAvatar = await fetchAvatar( post.user_id )
-
-      // Set comments count for sorting
-      post.description.commentsCount = await getMediaComments( post.file_id ).
-        then( e => e.length )
-
-      // Set attendees count for sorting
-      post.description.likesCount = await getMediaFavourites( post.file_id ).
-        then( likes => likes.length )
-
-      post.postId = i + 1 // Set internal id for list opt
-
-      postArr.push( post )
-    }
-    return postArr
+    return await fetchWithThumbnails(idPosts, 'post')
   }
 
   const getEvents = async () => {

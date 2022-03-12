@@ -13,16 +13,16 @@ const PostComment = ( { // Post new comment on single event/post screen
   file_id, // eslint-disable-line
   display,
   updateComments,
-  displayHeader
+  displayHeader,
 } ) => {
   const { postComment } = useComment()
   const [ loading, setLoading ] = useState( false )
 
   const CommentSchema = Yup.object().shape( {
     content: Yup.string().
-      min( 5, 'Too Short comment!' ).
-      max( 50, 'Too Long comment!' ).
-      required( 'Comment is required: 5-50 characters' ),
+      min( 3, 'Too Short comment, min 3 characters!' ).
+      max( 50, 'Too Long comment, max 50 characters!' ).
+      required( 'Comment is required: 3-50 characters' ),
   } )
 
   const {
