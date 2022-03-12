@@ -40,7 +40,7 @@ const Comment = ( {
         <View style={ { position: 'absolute', right: 0, marginRight: 5 } }>
           { isOwner &&
           <Pressable onPress={ () => onDeleteHandler(
-            commentObj.comment_id ) }><Text style={ { color: '#c53e3e' } }>
+            commentObj.comment_id ) }><Text style={ { color: '#c53e3e', bottom: -8 } }>
             Delete</Text></Pressable> }
         </View>
       </View>
