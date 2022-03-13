@@ -36,6 +36,8 @@ Developed, built and published with Trello, Figma, React Native and Expo for And
 
 ## Documentation / other
 
+[Github issues](https://github.com/FUKA-INNOVATIONS/locists/issues?q=is%3Aissue+is%3Aclosed)
+
 [Trello - Kanban](https://trello.com/b/ncliokcT/local-social-media-locists)
 
 [Ad video](https://www.youtube.com/watch?v=562t53vidhQ)
