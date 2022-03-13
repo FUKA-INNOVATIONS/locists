@@ -34,9 +34,24 @@ Developed, built and published with Trello, Figma, React Native and Expo for And
 ### Known Issues
 - Pre-existing comments and after logging in the users city was marked as "gibberish" in their account details. This issue is caused when a user logs into our application with an account they set up in a different application which is using the same API.
 
+## Documentation / other
 
 [Trello - Kanban](https://trello.com/b/ncliokcT/local-social-media-locists)
 
+[Add video](https://www.youtube.com/watch?v=562t53vidhQ)
+
+[App demo video](https://users.metropolia.fi/~fuwadk/WBMA/app-demo.mov)
+
+## ATTENTION!
+App loading speed is slow which is not a code related issue. 
+Used API was not originally designed for this purpose and speed issue is caused by API calls.
+API CALLS is designed and customized in such way to fulfill app requirements.
+
+[API documentation](https://media.mw.metropolia.fi/wbma/docs/#api-Media-GetSpecificMediaFile)
+
+# Time Accounting
+[Fuwad Kalhori](#)
+[David Fallow](#)
 
 ## Screenshots
 
