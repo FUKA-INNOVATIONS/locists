@@ -34,6 +34,10 @@ Developed, built and published with Trello, Figma, React Native and Expo for And
 ### Known Issues
 - Pre-existing comments and after logging in the users city was marked as "gibberish" in their account details. This issue is caused when a user logs into our application with an account they set up in a different application which is using the same API.
 
+
+[Trello - Kanban](https://trello.com/b/ncliokcT/local-social-media-locists)
+
+
 ## Screenshots
 
 <img src="./screenshots/ScreenShot1.jpg" width="250" height="600"> <img src="./screenshots/ScreenShot2.jpg" width="250" height="600"> <img src="./screenshots/ScreenShot3.jpg" width="250" height="600"> 
