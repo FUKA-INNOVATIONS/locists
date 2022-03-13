@@ -54,8 +54,8 @@ API CALLS is designed and customized in such way to fulfill app requirements.
 [API documentation](https://media.mw.metropolia.fi/wbma/docs/#api-Media-GetSpecificMediaFile)
 
 # Time Accounting
-[Fuwad Kalhori](#)
-[David Fallow](https://docs.google.com/document/d/1EXbJgu_B-QlssTCRnfq5rcCQjixfbUBaaHxafMMShFk/edit)
+[Fuwad Kalhori](https://docs.google.com/document/d/1EXbJgu_B-QlssTCRnfq5rcCQjixfbUBaaHxafMMShFk/edit)
+[David fallow](#)
 
 ## Screenshots
 
