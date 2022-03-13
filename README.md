@@ -3,9 +3,7 @@ Members: Fuwad Kalhori and  David Fallow
 
 Locists is a social media app centered around connecting users within the cities they live, users can make friends and share the bars/events they enjoy going to, posts can also benefit tourists who visit the city.
 
-Developed, built and published with Trello, Figma, React Native and Expo for Android and iOS mobile devices.
-
-3rd party libraries:
+Developed, built and published with Git, Trello, Figma, React Native and Expo for Android and iOS mobile devices.
 
 ## Features of Application
 - Login/SingUp
@@ -34,6 +32,10 @@ Developed, built and published with Trello, Figma, React Native and Expo for And
 ### Known Issues
 - Pre-existing comments and after logging in the users city was marked as "gibberish" in their account details. This issue is caused when a user logs into our application with an account they set up in a different application which is using the same API.
 
+## APP RUNNING ON EXPO
+[Expo link](https://expo.dev/@fuka/locists)
+
+
 ## Documentation / other
 
 [Github issues](https://github.com/FUKA-INNOVATIONS/locists/issues?q=is%3Aissue+is%3Aclosed)
@@ -47,7 +49,7 @@ Developed, built and published with Trello, Figma, React Native and Expo for And
 [Figma prototype (original)](https://www.figma.com/file/EK3ip251gHwOp1nJYMYION/Locists-Prototype?node-id=0%3A1)
 
 ## ATTENTION!
-App loading speed is slow which is not a code related issue. 
+App data loading speed is slow which is not a code related issue. 
 Used API was not originally designed for this purpose and speed issue is caused by API calls.
 API CALLS is designed and customized in such way to fulfill app requirements.
 
