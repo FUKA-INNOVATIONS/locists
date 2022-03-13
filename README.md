@@ -38,9 +38,11 @@ Developed, built and published with Trello, Figma, React Native and Expo for And
 
 [Trello - Kanban](https://trello.com/b/ncliokcT/local-social-media-locists)
 
-[Add video](https://www.youtube.com/watch?v=562t53vidhQ)
+[Ad video](https://www.youtube.com/watch?v=562t53vidhQ)
 
 [App demo video](https://users.metropolia.fi/~fuwadk/WBMA/app-demo.mov)
+
+[Figma prototype (original)](https://www.figma.com/file/EK3ip251gHwOp1nJYMYION/Locists-Prototype?node-id=0%3A1)
 
 ## ATTENTION!
 App loading speed is slow which is not a code related issue. 
