@@ -20,7 +20,7 @@ Developed, built and published with Git, Trello, Figma, React Native and Expo fo
 - Fixed issues concerning scrolling whilst the keyboard was open
 - Fixed single event view to display image and other info correctly
 - Before in single post, the post text could be mistaken for a comment, this has been fixed by changing the stlying of comments in order to differentiate the two
-- Post creation view has been altered to be clearer for the user
+- Post and Event creation views have been altered to be clearer for the user, placeholders and error messages have become clearer
 - Added more animations thoughout the application and improved the design for the profile page by adding a banner photo
 - Removed the previously instated max limit for password when registering an account
 
