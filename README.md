@@ -55,11 +55,6 @@ API CALLS is designed and customized in such way to fulfill app requirements.
 
 [API documentation](https://media.mw.metropolia.fi/wbma/docs/#api-Media-GetSpecificMediaFile)
 
-## Time Accounting
-[Fuwad Kalhori](https://docs.google.com/document/d/1EXbJgu_B-QlssTCRnfq5rcCQjixfbUBaaHxafMMShFk/edit)
-
-[David fallow](#)
-
 ## Screenshots
 
 <img src="./screenshots/ScreenShot1.jpg" width="250" height="600"> <img src="./screenshots/ScreenShot2.jpg" width="250" height="600"> <img src="./screenshots/ScreenShot3.jpg" width="250" height="600"> 
